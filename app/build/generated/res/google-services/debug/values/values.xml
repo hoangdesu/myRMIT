@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">173878740291-f7974fn7fjv7dd1e4pvrg7gs736bv0ln.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">173878740291</string>
+    <string name="google_api_key" translatable="false">AIzaSyBUUKAQ0fEH5u7xGZvHKZAbSYbJgO0xgzM</string>
+    <string name="google_app_id" translatable="false">1:173878740291:android:e35e6e55b2d5cb9f1f9bf6</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBUUKAQ0fEH5u7xGZvHKZAbSYbJgO0xgzM</string>
+    <string name="google_storage_bucket" translatable="false">myrmit-c2020.appspot.com</string>
+    <string name="project_id" translatable="false">myrmit-c2020</string>
+</resources>
