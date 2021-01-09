@@ -2,7 +2,9 @@ package com.example.myrmit;
 
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ public class HomeFragment extends Fragment {
     ViewPager viewPager;
     NewsAdapter newsAdapter;
     List<News> newsList;
+    CardView fragment_home_cardview_clubs;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -94,6 +97,18 @@ public class HomeFragment extends Fragment {
             @Override
             public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+
+        fragment_home_cardview_clubs = view.findViewById(R.id.fragment_home_cardview_clubs);
+        fragment_home_cardview_clubs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment clubsFragment = new ClubsFragment();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_home, clubsFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 

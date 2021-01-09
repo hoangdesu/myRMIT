@@ -1,57 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:background="@drawable/ic_wave_bg_header">
-        </View>
+            android:background="@drawable/ic_wave_bg_header"></View>
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_marginBottom="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/museo_500"
                     android:padding="10dp"
+                    android:text="Hello, Ovilee! "
                     android:textColor="@color/white"
                     android:textSize="25sp"
-                    android:text="Hello, Ovilee! "
-                    android:fontFamily="@font/museo_500"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
                 <androidx.cardview.widget.CardView
-                    app:cardCornerRadius="100dp"
-                    app:cardElevation="0dp"
-                    android:layout_alignParentRight="true"
                     android:layout_width="50dp"
-                    android:layout_height="50dp">
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    app:cardCornerRadius="100dp"
+                    app:cardElevation="0dp">
 
                     <ImageView
-                        android:src="@drawable/temp_avatar"
-                        android:scaleType="centerCrop"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/temp_avatar" />
 
 
                 </androidx.cardview.widget.CardView>
@@ -62,240 +61,234 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop ="20dp"
-                android:layout_marginLeft ="30dp"
-                android:textColor="@color/app_secondary"
-                android:textStyle="bold"
-                android:textSize="20sp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/museo_500"
-                android:text="Events"/>
+                android:text="Events"
+                android:textColor="@color/app_secondary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"
-                android:foregroundGravity="center"
-                android:overScrollMode="never"
-                android:clipToPadding="false"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_centerInParent="true">
+                android:layout_centerInParent="true"
+                android:clipToPadding="false"
+                android:foregroundGravity="center"
+                android:overScrollMode="never">
 
             </androidx.viewpager.widget.ViewPager>
 
             <GridLayout
-                android:columnCount="3"
-                android:rowCount="3"
-                android:columnOrderPreserved="false"
-                android:alignmentMode="alignMargins"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:alignmentMode="alignMargins"
+                android:columnCount="3"
+                android:columnOrderPreserved="false"
+                android:rowCount="3">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    app:cardElevation="10dp"
-                    app:cardCornerRadius="18dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    >
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="10dp">
 
                     <LinearLayout
-                        android:orientation="vertical"
-                        android:padding="16dp"
-                        android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
                         <ImageView
-                            android:src="@drawable/maps_icon"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            />
+                            android:src="@drawable/maps_icon" />
 
                         <TextView
-                            android:layout_marginTop="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
+                            android:layout_marginTop="16dp"
                             android:fontFamily="@font/museo_500"
+                            android:text="Maps"
                             android:textColor="@color/app_secondary"
-                            android:text="Maps"/>
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    app:cardElevation="10dp"
-                    app:cardCornerRadius="18dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="30dp"
-                    >
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="10dp">
 
                     <LinearLayout
-                        android:orientation="vertical"
-                        android:padding="16dp"
-                        android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
                         <ImageView
-                            android:src="@drawable/library_icon"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            />
+                            android:src="@drawable/library_icon" />
 
                         <TextView
-                            android:layout_marginTop="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:textColor="@color/app_secondary"
+                            android:layout_marginTop="16dp"
                             android:fontFamily="@font/museo_500"
-                            android:text="Library"/>
+                            android:text="Library"
+                            android:textColor="@color/app_secondary"
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    app:cardElevation="10dp"
-                    app:cardCornerRadius="18dp"
                     android:layout_marginLeft="-20dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="50dp"
-                    >
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="10dp">
 
                     <LinearLayout
-                        android:orientation="vertical"
-                        android:padding="16dp"
-                        android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
                         <ImageView
-                            android:src="@drawable/course_icon"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            />
+                            android:src="@drawable/course_icon" />
 
                         <TextView
-                            android:layout_marginTop="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:textColor="@color/app_secondary"
+                            android:layout_marginTop="16dp"
                             android:fontFamily="@font/museo_500"
-                            android:text="Courses"/>
+                            android:text="Courses"
+                            android:textColor="@color/app_secondary"
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/fragment_home_cardview_clubs"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    app:cardElevation="10dp"
-                    app:cardCornerRadius="18dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="20dp"
-                    >
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="10dp">
 
                     <LinearLayout
-                        android:orientation="vertical"
-                        android:padding="16dp"
-                        android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
                         <ImageView
-                            android:src="@drawable/club_icon"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            />
+                            android:src="@drawable/club_icon" />
 
                         <TextView
-                            android:layout_marginTop="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
+                            android:layout_marginTop="16dp"
                             android:fontFamily="@font/museo_500"
+                            android:text="Club"
                             android:textColor="@color/app_secondary"
-                            android:text="Club"/>
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    app:cardElevation="10dp"
-                    app:cardCornerRadius="18dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="30dp"
                     android:layout_marginBottom="20dp"
-                    >
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="10dp">
 
                     <LinearLayout
-                        android:orientation="vertical"
-                        android:padding="16dp"
-                        android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
                         <ImageView
-                            android:src="@drawable/service_icon"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            />
+                            android:src="@drawable/service_icon" />
 
                         <TextView
-                            android:layout_marginTop="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:textColor="@color/app_secondary"
+                            android:layout_marginTop="16dp"
                             android:fontFamily="@font/museo_500"
-                            android:text="Services"/>
+                            android:text="Services"
+                            android:textColor="@color/app_secondary"
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    app:cardElevation="10dp"
-                    app:cardCornerRadius="18dp"
                     android:layout_marginLeft="-20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="50dp"
                     android:layout_marginBottom="20dp"
-                    >
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="10dp">
 
                     <LinearLayout
-                        android:orientation="vertical"
-                        android:padding="16dp"
-                        android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
                         <ImageView
-                            android:src="@drawable/news_icon"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            />
+                            android:src="@drawable/news_icon" />
 
                         <TextView
-                            android:layout_marginTop="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:textColor="@color/app_secondary"
+                            android:layout_marginTop="16dp"
                             android:fontFamily="@font/museo_500"
-                            android:text="News"/>
+                            android:text="News"
+                            android:textColor="@color/app_secondary"
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 
