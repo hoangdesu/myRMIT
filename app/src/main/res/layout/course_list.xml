@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF">
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="1dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_toStartOf="@+id/checkBox"
+        android:layout_toLeftOf="@+id/checkBox"
+        android:background="#DCDCDC"
+        android:textColor="#575656" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="30dp"
+        android:layout_height="26dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:buttonTint="#08780C"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textSize="12sp"
+        tools:targetApi="lollipop" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="30dp"
+        android:layout_height="26dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="38dp"
+        android:layout_marginRight="38dp"
+        android:buttonTint="#08780C"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textSize="12sp"
+        tools:targetApi="lollipop" />
+
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:background="@drawable/circle"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="12"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="30dp"
+        android:layout_height="26dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="73dp"
+        android:layout_marginRight="73dp"
+        android:buttonTint="#08780C"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textSize="12sp"
+        app:useMaterialThemeColors="false"
+        tools:targetApi="lollipop" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="258dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginLeft="13dp"
+        android:layout_toEndOf="@+id/id"
+        android:layout_toRightOf="@+id/id"
+        android:text="Sudarshan Mondal"
+        android:textColor="#000000"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="1dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/id"
+        android:layout_toRightOf="@+id/id"
+        android:background="#DCDCDC"
+        android:textColor="#575656" />
+</RelativeLayout>
+
+
+

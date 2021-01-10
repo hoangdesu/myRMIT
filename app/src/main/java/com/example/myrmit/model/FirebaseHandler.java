@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
@@ -31,5 +32,11 @@ public class FirebaseHandler {
         return db;
     }
 
+    public DocumentReference getProgramOfStudent(String username){
+        return db.collection("users").document(username).collection("programCode").document("program");
+    }
 
+    public DocumentReference getProgram(String programID){
+        return db.collection("rmitprograms").document(programID);
+    }
 }
