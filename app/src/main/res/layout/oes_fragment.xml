@@ -21,16 +21,6 @@
         android:layout_marginBottom="484dp"
         android:background="@drawable/capture" />
 
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="match_parent"
-        android:layout_height="484dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
-        android:dividerHeight="1dp" >
-
-    </ListView>
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
@@ -50,6 +40,36 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="200dp"
         android:src="@drawable/loading" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:text="Save Enrolment !"
+        android:textSize="12sp"
+        app:backgroundTint="#590B0B" />
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="438dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="46dp"
+        android:dividerHeight="1dp">
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="45dp"
+        android:background="#575656" />
 
 
 </RelativeLayout>
