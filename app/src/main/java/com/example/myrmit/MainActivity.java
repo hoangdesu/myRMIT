@@ -14,8 +14,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
-import com.example.myrmit.model.MyService;
+import com.example.myrmit.model.*;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
@@ -118,6 +119,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void onCoursesClick(View view){
+        Intent courses =  new Intent(MainActivity.this, Courses.class);
+        startActivity(courses);
+    }
     // Call once to add 14 clubs to "clubs" collection
     private String clubName;
     Map<String, Object> club;
