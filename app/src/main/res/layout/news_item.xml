@@ -16,42 +16,42 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/news_image"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:scaleType="centerCrop"/>
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp"
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/news_title"
-                android:textColor="@color/black"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_height="271dp"
+                android:layout_alignParentTop="true"
                 android:layout_marginLeft="20dp"
-                android:layout_below="@+id/news_image"
-                android:text="Title"
+                android:layout_marginTop="156dp"
                 android:fontFamily="@font/museo_500"
-                android:textStyle="bold"
-                android:textSize="16sp">
-            </TextView>
+                android:text="Title"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"></TextView>
 
             <TextView
                 android:id="@+id/description"
-                android:layout_below="@+id/news_title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="183dp"
+                android:layout_alignParentTop="true"
                 android:layout_marginLeft="20dp"
-                android:layout_marginBottom="10dp"
-                android:textSize="14sp"
+                android:layout_marginTop="188dp"
+                android:layout_marginRight="20dp"
                 android:ellipsize="end"
-                android:textColor="@color/black"
+                android:maxLines="2"
                 android:text="Description"
-                android:maxLines="2"/>
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
 
         </RelativeLayout>

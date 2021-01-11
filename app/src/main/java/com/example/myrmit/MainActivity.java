@@ -17,10 +17,14 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.myrmit.model.*;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     private RecordFragment recordFragment;
     private ClubsFragment clubsFragment;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         initialSetting();
         viewPager = findViewById(R.id.pager);
         tabLayout = findViewById(R.id.tab_layout);
-
         // addClubs();
 
         homeFragment = new HomeFragment();
@@ -57,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(homeFragment, "");
         viewPagerAdapter.addFragment(recordFragment, "");
         viewPager.setAdapter(viewPagerAdapter);
-
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_baseline_home_24);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_baseline_record_24);
     }

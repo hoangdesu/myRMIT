@@ -77,7 +77,7 @@ public class Courses extends AppCompatActivity {
                     isMove[0] = true;
                     int x_cord = (int) event.getRawX();
                     int y_cord = (int) event.getRawY();
-                    canvas.setX(Math.max(x_cord - 75, 0));
+                    canvas.setX(x_cord - 75);
                     if (y_cord - 115 > 0 && y_cord - 155 < viewPager.getHeight()){
                         canvas.setY(y_cord - 115);
                     }
