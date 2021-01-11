@@ -7,26 +7,29 @@
     tools:context=".OES_Fragment">
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="133dp"
+        android:layout_height="135dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="526dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="524dp"
         android:background="@drawable/a" />
 
     <View
         android:id="@+id/view3"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="484dp"
+        android:layout_alignTop="@id/listview"
+        android:layout_marginTop="-40dp"
         android:background="@drawable/capture" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="482dp"
+        android:layout_height="227dp"
+        android:layout_alignTop="@+id/listview"
+        android:layout_marginTop="-135dp"
         android:gravity="center_vertical"
         android:text="      Id                                                      Course Name                                               Feb        Jun        Nov"
         android:textColor="#040101"
@@ -37,7 +40,9 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="277dp"
         android:layout_marginBottom="200dp"
         android:src="@drawable/loading" />
 
@@ -57,7 +62,9 @@
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="438dp"
+        android:layout_below="@+id/view"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="-485dp"
         android:layout_marginBottom="46dp"
         android:dividerHeight="1dp">
 
