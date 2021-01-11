@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.pager);
         tabLayout = findViewById(R.id.tab_layout);
         // addClubs();
-
         homeFragment = new HomeFragment();
         recordFragment = new RecordFragment();
         clubsFragment = new ClubsFragment();

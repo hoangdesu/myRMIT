@@ -9,13 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.myrmit.model.Course;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.example.myrmit.model.*;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +35,8 @@ public class OES_Fragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private ListView listView;
+    private ArrayList<Course> courses = new ArrayList<>();
+    private Button confirm;
     private ImageView loading;
     public OES_Fragment() {
         // Required empty public constructor
@@ -67,7 +72,6 @@ public class OES_Fragment extends Fragment {
         firebaseHandler.getProgramOfStudent("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                System.out.println((String)task.getResult().get("code"));
                 firebaseHandler.getProgram((String)task.getResult().get("code")).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -79,16 +83,54 @@ public class OES_Fragment extends Fragment {
                         ArrayList<Boolean> isJun = new ArrayList<>();
                         ArrayList<Boolean> isNov = new ArrayList<>();
                         assert courseList != null;
-                        List<Course> list = new ArrayList<Course>();
-                        for (int i = 0 ; i < courseList.size(); i++){
-                            list.add(get(courseList.get(i)));
-                            isFeb.add(feb.get(i).equals("1"));
-                            isJun.add(jun.get(i).equals("1"));
-                            isNov.add(nov.get(i).equals("1"));
-                        }
-                        ArrayAdapter<Course> adapter = new com.example.myrmit.model.ArrayAdapter(getActivity(), list, isFeb, isJun, isNov);
-                        listView.setAdapter(adapter);
-                        loading.setVisibility(View.INVISIBLE);
+                        firebaseHandler.getCompletedCourses("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                ArrayList<String> completedCourses = (ArrayList<String>) task.getResult().get("courseList");
+                                List<Course> list = new ArrayList<Course>();
+                                for (int i = 0; i < courseList.size(); i++) {
+                                    list.add(get(courseList.get(i)));
+                                    boolean isExist = false;
+                                    for (String course: completedCourses){
+                                        if (course.equals(courseList.get(i))){
+                                            isExist = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!isExist) {
+                                        isFeb.add(feb.get(i).equals("1"));
+                                        isJun.add(jun.get(i).equals("1"));
+                                        isNov.add(nov.get(i).equals("1"));
+                                    }
+                                    else {
+                                        isFeb.add(false);
+                                        isJun.add(false);
+                                        isNov.add(false);
+                                    }
+                                }
+                                firebaseHandler.getEnrolledCourses("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        ArrayList<String> courseList = (ArrayList<String>) task.getResult().get("list");
+                                        ArrayList<String> sem = (ArrayList<String>) task.getResult().get("semester");
+                                        for (int i = 0; i < courseList.size(); i++) {
+                                            for (Course course : list) {
+                                                if (course.getName().equals(courseList.get(i))) {
+                                                    if (sem.get(i).equals("feb")) {
+                                                        course.setFeb(true);
+                                                    } else if (sem.get(i).equals("jun")) {
+                                                        course.setFeb(true);
+                                                    } else course.setNov(true);
+                                                }
+                                            }
+                                        }
+                                        ArrayAdapter<Course> adapter = new com.example.myrmit.model.ArrayAdapter(getActivity(), list, isFeb, isJun, isNov);
+                                        listView.setAdapter(adapter);
+                                        loading.setVisibility(View.INVISIBLE);
+                                    }
+                                });
+                            }
+                        });
                     }
                 });
             }
@@ -96,7 +138,9 @@ public class OES_Fragment extends Fragment {
     }
 
     private Course get(String s) {
-        return new Course(s);
+        Course course = new Course(s);
+        courses.add(course);
+        return course;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -104,8 +148,33 @@ public class OES_Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.oes_fragment, container, false);
         loading = view.findViewById(R.id.imageView);
+        confirm = view.findViewById(R.id.button2);
         listView = view.findViewById(R.id.listview);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<String> list = new ArrayList<>();
+                ArrayList<String> semester = new ArrayList<>();
+                for (Course course: courses){
+                    if (course.isFeb() || course.isJun() || course.isNov()){
+                        list.add(course.getName());
+                        if (course.isFeb()){
+                            semester.add("feb");
+                        }
+                        else if (course.isJun()){
+                            semester.add("jun");
+                        }
+                        else if (course.isNov()){
+                            semester.add("nov");
+                        }
+                    }
+                }
+                firebaseHandler.confirmEnrolment("s3740819@rmit.edu.vn", list, semester);
+                Toast.makeText(view.getContext(), "Save Successful!", Toast.LENGTH_SHORT).show();
+            }
+        });
         setList();
         return view;
     }
+
 }

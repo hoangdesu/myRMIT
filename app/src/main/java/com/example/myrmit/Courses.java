@@ -150,4 +150,5 @@ public class Courses extends AppCompatActivity {
             return fragmentName.get(position);
         }
     }
+
 }

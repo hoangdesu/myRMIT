@@ -36,6 +36,20 @@ public class FirebaseHandler {
         return db.collection("users").document(username).collection("programCode").document("program");
     }
 
+    public void confirmEnrolment(String username, ArrayList<String> list, ArrayList<String> semester){
+        db.collection("users").document(username).collection("programCode").document("program").collection("data").document("enrolledCourse").update("list", list);
+        db.collection("users").document(username).collection("programCode").document("program").collection("data").document("enrolledCourse").update("semester", semester);
+
+    }
+
+    public DocumentReference getEnrolledCourses(String username){
+        return db.collection("users").document(username).collection("programCode").document("program").collection("data").document("enrolledCourse");
+    }
+
+    public DocumentReference getCompletedCourses(String username){
+        return db.collection("users").document(username).collection("programCode").document("program").collection("data").document("finishCourses");
+    }
+
     public DocumentReference getProgram(String programID){
         return db.collection("rmitprograms").document(programID);
     }

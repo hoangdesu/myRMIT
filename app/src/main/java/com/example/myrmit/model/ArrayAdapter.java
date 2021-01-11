@@ -11,14 +11,15 @@ import android.widget.TextView;
 
 import com.example.myrmit.R;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ArrayAdapter extends android.widget.ArrayAdapter<Course> {
     private final List<Course> list;
     private final Activity context;
-    private List<Boolean> isFeb;
-    private List<Boolean> isJun;
-    private List<Boolean> isNov;
+    private final List<Boolean> isFeb;
+    private final List<Boolean> isJun;
+    private final List<Boolean> isNov;
     public ArrayAdapter(Activity context, List<Course> list, List<Boolean> isFeb, List<Boolean> isJun, List<Boolean> isNov) {
         super(context, R.layout.course_list, list);
         this.context = context;
@@ -31,6 +32,7 @@ public class ArrayAdapter extends android.widget.ArrayAdapter<Course> {
         protected TextView id;
         protected TextView name;
         protected CheckBox feb;
+        protected TextView finish;
         protected CheckBox jun;
         protected CheckBox nov;
     }
@@ -40,26 +42,16 @@ public class ArrayAdapter extends android.widget.ArrayAdapter<Course> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
         if (convertView == null) {
+            System.out.println("no");
             LayoutInflater inflator = context.getLayoutInflater();
             view = inflator.inflate(R.layout.course_list, null);
             final ViewHolder viewHolder = new ViewHolder();
             viewHolder.id = (TextView) view.findViewById(R.id.id);
             viewHolder.name = (TextView) view.findViewById(R.id.description);
-            viewHolder.feb = (CheckBox) view.findViewById(R.id.checkBox3);
+            viewHolder.nov = (CheckBox) view.findViewById(R.id.checkBox3);
             viewHolder.jun = (CheckBox) view.findViewById(R.id.checkBox2);
-            viewHolder.nov = (CheckBox) view.findViewById(R.id.checkBox);
-            if (!isFeb.get(position)){
-                viewHolder.feb.setVisibility(View.INVISIBLE);
-                viewHolder.feb.setEnabled(false);
-            }
-            if (!isJun.get(position)){
-                viewHolder.jun.setVisibility(View.INVISIBLE);
-                viewHolder.jun.setEnabled(false);
-            }
-            if (!isNov.get(position)){
-                viewHolder.nov.setVisibility(View.INVISIBLE);
-                viewHolder.nov.setEnabled(false);
-            }
+            viewHolder.feb = (CheckBox) view.findViewById(R.id.checkBox);
+            viewHolder.finish = view.findViewById(R.id.imageView3);
             viewHolder.feb
                     .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -123,6 +115,34 @@ public class ArrayAdapter extends android.widget.ArrayAdapter<Course> {
         }
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.id.setText(String.valueOf(position+1));
+        if (!isFeb.get(position)){
+            holder.feb.setVisibility(View.INVISIBLE);
+            holder.feb.setEnabled(false);
+        }
+        else {
+            holder.feb.setVisibility(View.VISIBLE);
+            holder.feb.setEnabled(true);
+        }
+        if (!isJun.get(position)){
+            holder.jun.setVisibility(View.INVISIBLE);
+            holder.jun.setEnabled(false);
+        }
+        else {
+            holder.jun.setVisibility(View.VISIBLE);
+            holder.jun.setEnabled(true);
+        }
+        if (!isNov.get(position)){
+            holder.nov.setVisibility(View.INVISIBLE);
+            holder.nov.setEnabled(false);
+        }
+        else {
+            holder.nov.setVisibility(View.VISIBLE);
+            holder.nov.setEnabled(true);
+        }
+        if (!isFeb.get(position) && !isNov.get(position) && !isJun.get(position)){
+            holder.finish.setVisibility(View.VISIBLE);
+        }
+        else holder.finish.setVisibility(View.INVISIBLE);
         holder.name.setText(list.get(position).getName());
         holder.feb.setChecked(list.get(position).isFeb());
         holder.jun.setChecked(list.get(position).isJun());
