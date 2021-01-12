@@ -121,7 +121,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@drawable/complete"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
 </RelativeLayout>
 

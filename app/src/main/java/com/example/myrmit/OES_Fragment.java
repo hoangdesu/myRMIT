@@ -20,6 +20,8 @@ import com.example.myrmit.model.Course;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+
 import com.example.myrmit.model.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -83,10 +85,14 @@ public class OES_Fragment extends Fragment {
                         ArrayList<Boolean> isJun = new ArrayList<>();
                         ArrayList<Boolean> isNov = new ArrayList<>();
                         assert courseList != null;
+                        assert feb != null;
+                        assert jun != null;
+                        assert nov != null;
                         firebaseHandler.getCompletedCourses("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 ArrayList<String> completedCourses = (ArrayList<String>) task.getResult().get("courseList");
+                                assert completedCourses != null;
                                 List<Course> list = new ArrayList<Course>();
                                 for (int i = 0; i < courseList.size(); i++) {
                                     list.add(get(courseList.get(i)));
@@ -113,7 +119,8 @@ public class OES_Fragment extends Fragment {
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         ArrayList<String> courseList = (ArrayList<String>) task.getResult().get("list");
                                         ArrayList<String> sem = (ArrayList<String>) task.getResult().get("semester");
-                                        for (int i = 0; i < courseList.size(); i++) {
+                                        assert sem != null;
+                                        for (int i = 0; i < Objects.requireNonNull(courseList).size(); i++) {
                                             for (Course course : list) {
                                                 if (course.getName().equals(courseList.get(i))) {
                                                     if (sem.get(i).equals("feb")) {
