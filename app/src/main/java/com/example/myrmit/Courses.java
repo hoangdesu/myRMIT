@@ -40,6 +40,7 @@ public class Courses extends AppCompatActivity {
     private TabLayout tabLayout;
     private ImageView canvas;
     OES_Fragment oes_fragment;
+    TimetableFragment timetableFragment;
     Display display;
     int endX;
     boolean isStart = false;
@@ -51,6 +52,7 @@ public class Courses extends AppCompatActivity {
         setContentView(R.layout.activity_courses);
         oes_fragment= new OES_Fragment();
         allocationFragment = new AllocationFragment();
+        timetableFragment = new TimetableFragment();
         viewPager = findViewById(R.id.pager1);
         tabLayout = findViewById(R.id.tab_layout1);
         canvas = findViewById(R.id.imageView2);
@@ -59,10 +61,12 @@ public class Courses extends AppCompatActivity {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         viewPagerAdapter.addFragment(oes_fragment, "");
         viewPagerAdapter.addFragment(allocationFragment, "");
+        viewPagerAdapter.addFragment(timetableFragment,"");
         viewPager.setAdapter(viewPagerAdapter);
 
         Objects.requireNonNull(tabLayout.getTabAt(0)).setIcon(R.drawable.oes);
-        Objects.requireNonNull(tabLayout.getTabAt(1)).setIcon(R.drawable.timetable);
+        Objects.requireNonNull(tabLayout.getTabAt(1)).setIcon(R.drawable.allocation);
+        Objects.requireNonNull(tabLayout.getTabAt(2)).setIcon(R.drawable.timetable);
         final boolean[] isMove = {false};
         canvas.setOnTouchListener(new View.OnTouchListener() {
             @Override
