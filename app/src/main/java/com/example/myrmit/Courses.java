@@ -61,8 +61,8 @@ public class Courses extends AppCompatActivity {
         viewPagerAdapter.addFragment(allocationFragment, "");
         viewPager.setAdapter(viewPagerAdapter);
 
-        Objects.requireNonNull(tabLayout.getTabAt(0)).setIcon(R.drawable.ic_baseline_home_24);
-        Objects.requireNonNull(tabLayout.getTabAt(1)).setIcon(R.drawable.ic_baseline_home_24);
+        Objects.requireNonNull(tabLayout.getTabAt(0)).setIcon(R.drawable.oes);
+        Objects.requireNonNull(tabLayout.getTabAt(1)).setIcon(R.drawable.timetable);
         final boolean[] isMove = {false};
         canvas.setOnTouchListener(new View.OnTouchListener() {
             @Override
