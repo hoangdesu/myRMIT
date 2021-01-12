@@ -114,6 +114,10 @@ public class Courses extends AppCompatActivity {
         });
     }
 
+    public void back(View view){
+        finish();
+    }
+
     private static class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private final List<Fragment> fragments = new ArrayList<>();

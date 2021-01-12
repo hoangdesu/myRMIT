@@ -75,7 +75,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
-        android:layout_centerVertical="true"
         android:layout_marginEnd="73dp"
         android:layout_marginRight="73dp"
         android:buttonTint="#08780C"
@@ -112,15 +111,28 @@
 
     <TextView
         android:id="@+id/imageView3"
-        android:layout_width="85dp"
-        android:layout_height="25dp"
+        android:layout_width="82dp"
+        android:layout_height="17dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="false"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
         android:background="@drawable/complete"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/imageView4"
+        android:layout_width="85dp"
+        android:layout_height="9dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="false"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="9dp"
+        android:layout_marginRight="9dp"
+        android:background="@drawable/progressing"
         android:visibility="invisible" />
 
 </RelativeLayout>

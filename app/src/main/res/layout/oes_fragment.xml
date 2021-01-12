@@ -50,12 +50,15 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView4"
         android:layout_alignParentBottom="true"
-        android:layout_centerInParent="false"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
         android:text="Save Enrolment !"
+        android:textColor="#FFFFFF"
         android:textSize="12sp"
+        android:visibility="invisible"
         app:backgroundTint="#590B0B" />
 
     <ListView
@@ -65,7 +68,7 @@
         android:layout_below="@+id/view"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="-485dp"
-        android:layout_marginBottom="46dp"
+        android:layout_marginBottom="50dp"
         android:dividerHeight="1dp">
 
     </ListView>
@@ -75,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="45dp"
+        android:layout_marginBottom="49dp"
         android:background="#575656" />
 
 

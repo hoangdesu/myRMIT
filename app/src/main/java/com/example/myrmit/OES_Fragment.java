@@ -37,7 +37,7 @@ public class OES_Fragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private ListView listView;
-    private ArrayList<Course> courses = new ArrayList<>();
+    private ArrayList<Course> courses;
     private Button confirm;
     private ImageView loading;
     public OES_Fragment() {
@@ -71,6 +71,10 @@ public class OES_Fragment extends Fragment {
         }
     }
     private void setList() {
+        courses = new ArrayList<>();
+        listView.setAdapter(null);
+        loading.setVisibility(View.VISIBLE);
+        confirm.setVisibility(View.INVISIBLE);
         firebaseHandler.getProgramOfStudent("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -117,23 +121,46 @@ public class OES_Fragment extends Fragment {
                                 firebaseHandler.getEnrolledCourses("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                        ArrayList<String> courseList = (ArrayList<String>) task.getResult().get("list");
+                                        ArrayList<String> enrolledList = (ArrayList<String>) task.getResult().get("list");
                                         ArrayList<String> sem = (ArrayList<String>) task.getResult().get("semester");
                                         assert sem != null;
-                                        for (int i = 0; i < Objects.requireNonNull(courseList).size(); i++) {
+                                        for (int i = 0; i < Objects.requireNonNull(enrolledList).size(); i++) {
                                             for (Course course : list) {
-                                                if (course.getName().equals(courseList.get(i))) {
+                                                if (course.getName().equals(enrolledList.get(i))) {
                                                     if (sem.get(i).equals("feb")) {
                                                         course.setFeb(true);
                                                     } else if (sem.get(i).equals("jun")) {
-                                                        course.setFeb(true);
+                                                        course.setJun(true);
                                                     } else course.setNov(true);
+                                                    break;
                                                 }
                                             }
                                         }
-                                        ArrayAdapter<Course> adapter = new com.example.myrmit.model.ArrayAdapter(getActivity(), list, isFeb, isJun, isNov);
-                                        listView.setAdapter(adapter);
-                                        loading.setVisibility(View.INVISIBLE);
+                                        task.getResult().getReference().getParent().document("progressingCourse").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                ArrayList<String> progressList = (ArrayList<String>) task.getResult().get("list");
+                                                assert progressList != null;
+                                                ArrayList<String> progress = new ArrayList<>();
+                                                for (String course: courseList){
+                                                    boolean isExist = false;
+                                                    for (String inProgress : progressList){
+                                                        if (course.equals(inProgress)){
+                                                            isExist = true;
+                                                            break;
+                                                        }
+                                                    }
+                                                    if (isExist){
+                                                        progress.add("1");
+                                                    }
+                                                    else progress.add("0");
+                                                }
+                                                ArrayAdapter<Course> adapter = new com.example.myrmit.model.ArrayAdapter(getActivity(), list, isFeb, isJun, isNov, progress);
+                                                listView.setAdapter(adapter);
+                                                loading.setVisibility(View.INVISIBLE);
+                                                confirm.setVisibility(View.VISIBLE);
+                                            }
+                                        });
                                     }
                                 });
                             }
@@ -157,31 +184,65 @@ public class OES_Fragment extends Fragment {
         loading = view.findViewById(R.id.imageView);
         confirm = view.findViewById(R.id.button2);
         listView = view.findViewById(R.id.listview);
+        confirmChange(view);
+        setList();
+        return view;
+    }
+
+    private void confirmChange(View view){
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<String> list = new ArrayList<>();
-                ArrayList<String> semester = new ArrayList<>();
-                for (Course course: courses){
-                    if (course.isFeb() || course.isJun() || course.isNov()){
-                        list.add(course.getName());
-                        if (course.isFeb()){
-                            semester.add("feb");
+                firebaseHandler.getEnrolledCourses("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        ArrayList<String> list = new ArrayList<>();
+                        ArrayList<String> semester = new ArrayList<>();
+                        for (Course course: courses){
+                            if (course.isFeb() || course.isJun() || course.isNov()){
+                                list.add(course.getName());
+                                if (course.isFeb()){
+                                    semester.add("feb");
+                                }
+                                else if (course.isJun()){
+                                    semester.add("jun");
+                                }
+                                else if (course.isNov()){
+                                    semester.add("nov");
+                                }
+                            }
                         }
-                        else if (course.isJun()){
-                            semester.add("jun");
+                        ArrayList<String> enrolledCourse = (ArrayList<String>) task.getResult().get("list");
+                        ArrayList<String> newSemester = (ArrayList<String>) task.getResult().get("semester");
+                        assert enrolledCourse != null;
+                        if (isChange(enrolledCourse, list, semester,newSemester)){
+                            Toast.makeText(view.getContext(), "Save Successful!", Toast.LENGTH_SHORT).show();
+                            firebaseHandler.confirmEnrolment("s3740819@rmit.edu.vn", list, semester);
+                            setList();
                         }
-                        else if (course.isNov()){
-                            semester.add("nov");
-                        }
+                        else Toast.makeText(view.getContext(), "No Change!", Toast.LENGTH_SHORT).show();
                     }
-                }
-                firebaseHandler.confirmEnrolment("s3740819@rmit.edu.vn", list, semester);
-                Toast.makeText(view.getContext(), "Save Successful!", Toast.LENGTH_SHORT).show();
+                });
+
             }
         });
-        setList();
-        return view;
+    }
+
+    private boolean isChange(ArrayList<String> enrolCourses, ArrayList<String> newList, ArrayList<String> semester, ArrayList<String> newSemester){
+        if (enrolCourses.size() != newList.size()){
+            return true;
+        }
+        else {
+            for (int i = 0; i < newList.size(); i++){
+                if (!newList.get(i).equals(enrolCourses.get(i))){
+                    return true;
+                }
+                else if (!semester.get(i).equals(newSemester.get(i))){
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
 }
