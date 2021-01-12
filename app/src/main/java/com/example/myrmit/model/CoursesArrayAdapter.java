@@ -19,15 +19,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ArrayAdapter extends android.widget.ArrayAdapter<Course> {
+public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
     private final List<Course> list;
     private final Activity context;
     private final List<Boolean> isFeb;
     private final List<Boolean> isJun;
-    private View view;
     private final ArrayList<String> progressingCourse;
     private final List<Boolean> isNov;
-    public ArrayAdapter(Activity context, List<Course> list, List<Boolean> isFeb, List<Boolean> isJun, List<Boolean> isNov, ArrayList<String> progressingCourse) {
+    public CoursesArrayAdapter(Activity context, List<Course> list, List<Boolean> isFeb, List<Boolean> isJun, List<Boolean> isNov, ArrayList<String> progressingCourse) {
         super(context, R.layout.course_list, list);
         this.context = context;
         this.list = list;
@@ -49,9 +48,8 @@ public class ArrayAdapter extends android.widget.ArrayAdapter<Course> {
     @SuppressLint({"InflateParams", "SetTextI18n"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        view = null;
+        View view = null;
         if (convertView == null) {
-            System.out.println("no");
             LayoutInflater inflator = context.getLayoutInflater();
             view = inflator.inflate(R.layout.course_list, null);
             final ViewHolder viewHolder = new ViewHolder();

@@ -6,30 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".OES_Fragment">
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="108dp"
-        android:background="#575656" />
-
     <View
         android:id="@+id/v"
         android:layout_width="match_parent"
         android:layout_height="133dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="526dp"
         android:background="@drawable/a" />
 
     <ListView
         android:id="@+id/group"
         android:layout_width="match_parent"
-        android:layout_height="419dp"
+        android:layout_height="465dp"
         android:layout_below="@+id/v"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="-527dp"
-        android:layout_marginBottom="108dp" />
+        android:layout_marginBottom="70dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="138dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:text="Confirm"
+        android:textStyle="bold"
+        app:backgroundTint="#082C49" />
 
 
 </RelativeLayout>

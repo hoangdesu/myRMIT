@@ -2,7 +2,6 @@ package com.example.myrmit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.DialogInterface;
@@ -20,7 +19,6 @@ import com.example.myrmit.model.Course;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -157,7 +155,7 @@ public class OES_Fragment extends Fragment {
                                                     }
                                                     else progress.add("0");
                                                 }
-                                                ArrayAdapter<Course> adapter = new com.example.myrmit.model.ArrayAdapter(getActivity(), list, isFeb, isJun, isNov, progress);
+                                                ArrayAdapter<Course> adapter = new CoursesArrayAdapter(getActivity(), list, isFeb, isJun, isNov, progress);
                                                 listView.setAdapter(adapter);
                                                 loading.setVisibility(View.INVISIBLE);
                                                 confirm.setVisibility(View.VISIBLE);

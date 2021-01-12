@@ -53,4 +53,13 @@ public class FirebaseHandler {
     public DocumentReference getProgram(String programID){
         return db.collection("rmitprograms").document(programID);
     }
+
+    public DocumentReference getProgressingCode(String username){
+        return db.collection("users").document(username).collection("programCode").document("program").collection("data").document("progressingCourse");
+    }
+
+    public void confirmAllocation(String username, String day, String time, String courseName){
+        db.collection("users").document(username).collection("programCode").document("program").collection("data").document("progressingCourse").collection("data").document(courseName).update("time", time);
+        db.collection("users").document(username).collection("programCode").document("program").collection("data").document("progressingCourse").collection("data").document(courseName).update("day", day);
+    }
 }
