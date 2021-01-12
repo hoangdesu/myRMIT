@@ -22,19 +22,15 @@
         android:layout_height="40dp"
         android:layout_alignTop="@id/listview"
         android:layout_marginTop="-40dp"
-        android:background="@drawable/capture" />
+        android:background="@drawable/title" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView4"
         android:layout_width="match_parent"
-        android:layout_height="227dp"
-        android:layout_alignTop="@+id/listview"
-        android:layout_marginTop="-135dp"
-        android:gravity="center_vertical"
-        android:text="      Id                                                      Course Name                                               Feb        Jun        Nov"
-        android:textColor="#040101"
-        android:textSize="10sp"
-        android:textStyle="bold" />
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="49dp"
+        android:background="#575656" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -72,14 +68,6 @@
         android:dividerHeight="1dp">
 
     </ListView>
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="49dp"
-        android:background="#575656" />
 
 
 </RelativeLayout>

@@ -6,12 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".OES_Fragment">
 
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="108dp"
+        android:background="#575656" />
+
     <View
+        android:id="@+id/v"
         android:layout_width="match_parent"
         android:layout_height="133dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="526dp"
         android:background="@drawable/a" />
+
+    <ListView
+        android:id="@+id/group"
+        android:layout_width="match_parent"
+        android:layout_height="419dp"
+        android:layout_below="@+id/v"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-527dp"
+        android:layout_marginBottom="108dp" />
 
 
 </RelativeLayout>
