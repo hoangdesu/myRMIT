@@ -1,9 +1,11 @@
 package com.example.myrmit;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -212,20 +214,52 @@ public class OES_Fragment extends Fragment {
                                 }
                             }
                         }
-                        ArrayList<String> enrolledCourse = (ArrayList<String>) task.getResult().get("list");
-                        ArrayList<String> newSemester = (ArrayList<String>) task.getResult().get("semester");
-                        assert enrolledCourse != null;
-                        if (isChange(enrolledCourse, list, semester,newSemester)){
-                            Toast.makeText(view.getContext(), "Save Successful!", Toast.LENGTH_SHORT).show();
-                            firebaseHandler.confirmEnrolment("s3740819@rmit.edu.vn", list, semester);
-                            setList();
+                        if (countMaxEnrol(semester, "feb") < 5 && countMaxEnrol(semester, "jun") < 5 && countMaxEnrol(semester, "nov") < 5) {
+                            ArrayList<String> enrolledCourse = (ArrayList<String>) task.getResult().get("list");
+                            ArrayList<String> newSemester = (ArrayList<String>) task.getResult().get("semester");
+                            assert enrolledCourse != null;
+                            if (isChange(enrolledCourse, list, semester, newSemester)) {
+                                Toast.makeText(view.getContext(), "Save Successful!", Toast.LENGTH_SHORT).show();
+                                firebaseHandler.confirmEnrolment("s3740819@rmit.edu.vn", list, semester);
+                                setList();
+                            } else
+                                Toast.makeText(view.getContext(), "There is no change in enrolment!", Toast.LENGTH_SHORT).show();
                         }
-                        else Toast.makeText(view.getContext(), "No Change!", Toast.LENGTH_SHORT).show();
+                        else {
+                            if (countMaxEnrol(semester, "feb") >= 5){
+                                showDialog(view, "The max number of courses for Feb semester is 4 only! Please try again!");
+                            } else if (countMaxEnrol(semester, "jun") >= 5){
+                                showDialog(view, "The max number of courses for Jun semester is 4 only! Please try again!");
+                            } else showDialog(view, "The max number of courses for Nov semester is 4 only! Please try again!");
+                        }
                     }
                 });
 
             }
         });
+    }
+
+    private int countMaxEnrol(ArrayList<String> list, String semester){
+        int count = 0;
+        for (String sem: list){
+            if (sem.equals(semester)){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public void showDialog(View view, String text){
+        AlertDialog alertDialog = new AlertDialog.Builder(view.getContext(), R.style.Theme_AppCompat_Dialog_Alert).create();
+        alertDialog.setTitle("Fail!");
+        alertDialog.setMessage(text);
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.show();
     }
 
     private boolean isChange(ArrayList<String> enrolCourses, ArrayList<String> newList, ArrayList<String> semester, ArrayList<String> newSemester){

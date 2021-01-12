@@ -2,12 +2,15 @@ package com.example.myrmit.model;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.myrmit.OES_Fragment;
 import com.example.myrmit.R;
@@ -21,6 +24,7 @@ public class ArrayAdapter extends android.widget.ArrayAdapter<Course> {
     private final Activity context;
     private final List<Boolean> isFeb;
     private final List<Boolean> isJun;
+    private View view;
     private final ArrayList<String> progressingCourse;
     private final List<Boolean> isNov;
     public ArrayAdapter(Activity context, List<Course> list, List<Boolean> isFeb, List<Boolean> isJun, List<Boolean> isNov, ArrayList<String> progressingCourse) {
@@ -45,7 +49,7 @@ public class ArrayAdapter extends android.widget.ArrayAdapter<Course> {
     @SuppressLint({"InflateParams", "SetTextI18n"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = null;
+        view = null;
         if (convertView == null) {
             System.out.println("no");
             LayoutInflater inflator = context.getLayoutInflater();
@@ -62,6 +66,7 @@ public class ArrayAdapter extends android.widget.ArrayAdapter<Course> {
                         @Override
                         public void onCheckedChanged(CompoundButton buttonView,
                                                      boolean isChecked) {
+
                             Course element = (Course) viewHolder.feb.getTag();
                             element.setFeb(buttonView.isChecked());
                             if (buttonView.isChecked()) {
@@ -69,13 +74,15 @@ public class ArrayAdapter extends android.widget.ArrayAdapter<Course> {
                                 element.setJun(false);
                                 viewHolder.jun.setChecked(false);
                                 viewHolder.nov.setChecked(false);
-                            }
+
+                           }
                         }
                     });
             viewHolder.jun.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton buttonView,
                                                      boolean isChecked) {
+
                             Course element = (Course) viewHolder.jun.getTag();
                             element.setJun(buttonView.isChecked());
                             if (buttonView.isChecked()) {
@@ -83,6 +90,7 @@ public class ArrayAdapter extends android.widget.ArrayAdapter<Course> {
                                 element.setNov(false);
                                 viewHolder.nov.setChecked(false);
                                 viewHolder.feb.setChecked(false);
+
                             }
                         }
                     });
@@ -90,6 +98,7 @@ public class ArrayAdapter extends android.widget.ArrayAdapter<Course> {
                         @Override
                         public void onCheckedChanged(CompoundButton buttonView,
                                                      boolean isChecked) {
+
                             Course element = (Course) viewHolder.nov.getTag();
                             element.setNov(buttonView.isChecked());
                             if (buttonView.isChecked()) {
@@ -97,6 +106,7 @@ public class ArrayAdapter extends android.widget.ArrayAdapter<Course> {
                                 viewHolder.feb.setChecked(false);
                                 element.setFeb(false);
                                 element.setJun(false);
+
                             }
                         }
                     });
