@@ -24,7 +24,7 @@
         android:gravity="center_vertical"
         android:text="Group 2"
         android:textColor="#000000"
-        android:textSize="12sp" />
+        android:textSize="10sp" />
 
     <TextView
         android:id="@+id/textView11"
@@ -47,7 +47,8 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="-3dp"
         android:layout_marginEnd="6dp"
-        android:layout_marginRight="6dp" />
+        android:layout_marginRight="6dp"
+        android:buttonTint="#043D6A"/>
 
     <TextView
         android:id="@+id/textView6"
@@ -89,7 +90,7 @@
         android:gravity="center_vertical"
         android:text="Course Name"
         android:textColor="#000000"
-        android:textSize="12sp"
+        android:textSize="10sp"
         android:textStyle="bold" />
 
     <TextView
@@ -108,7 +109,7 @@
         android:gravity="center_vertical"
         android:text="Group 1"
         android:textColor="#000000"
-        android:textSize="12sp" />
+        android:textSize="10sp" />
 
     <TextView
         android:id="@+id/textView8"
@@ -131,7 +132,8 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="6dp"
-        android:layout_marginRight="6dp" />
+        android:layout_marginRight="6dp"
+        android:buttonTint="#043D6A"/>
 
 </RelativeLayout>
 

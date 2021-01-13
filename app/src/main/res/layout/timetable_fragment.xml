@@ -9,9 +9,11 @@
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="133dp"
+        android:layout_height="140dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentBottom="false"
+        android:layout_centerHorizontal="false"
+        android:layout_centerVertical="true"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="526dp"
         android:background="@drawable/a" />
@@ -19,13 +21,10 @@
     <devs.mulham.horizontalcalendar.HorizontalCalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
-        android:layout_height="97dp"
-        android:layout_below="@id/view"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view"
         android:layout_centerHorizontal="false"
-        android:layout_centerVertical="false"
-        android:layout_marginTop="-527dp"
-        android:layout_marginBottom="431dp"
+        android:layout_marginTop="-526dp"
         android:background="#780A0A"
         app:selectorColor="#D3A228"
         app:textColorSelected="#00BCD4" />

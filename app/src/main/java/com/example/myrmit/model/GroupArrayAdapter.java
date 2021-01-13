@@ -84,10 +84,28 @@ public class GroupArrayAdapter extends android.widget.ArrayAdapter<Group> {
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.id.setText(String.valueOf(position+1));
         holder.name.setText(list.get(position).getCourseName());
-        holder.group1.setText(list.get(position).getLecturer() + " --- " + list.get(position).getDay1() +" " + list.get(position).getTime1() + ":00 -> " + (Integer.parseInt(list.get(position).getTime1())+3) +":00");
-        holder.group2.setText(list.get(position).getLecturer() + " --- " + list.get(position).getDay2() +" " + list.get(position).getTime2() + ":00 -> " + (Integer.parseInt(list.get(position).getTime2())+3) +":00");
+        holder.group1.setText("Lecturer: " + list.get(position).getLecturer() + " - Time: " + list.get(position).getTime1() + ":00 -> " + (Integer.parseInt(list.get(position).getTime1())+3) +":00"  + " ("+ convertDay(list.get(position).getDay1())+")");
+        holder.group2.setText("Lecturer: " + list.get(position).getLecturer() + " - Time: " + list.get(position).getTime2() + ":00 -> " + (Integer.parseInt(list.get(position).getTime2())+3) +":00" + " ("+ convertDay(list.get(position).getDay2())+")");
+
         holder.checkBox1.setChecked(list.get(position).isGroup1());
         holder.checkBox2.setChecked(list.get(position).isGroup2());
         return view;
+    }
+
+    private String convertDay(String day){
+        switch (day){
+            case "mon":
+                return "Monday" ;
+            case "tue":
+                return "Tuesday";
+            case "wed":
+                return "Wednesday";
+            case "thu":
+                return "Thursday";
+            case "fri":
+                return "Friday";
+            default: break;
+        }
+        return null;
     }
 }
