@@ -36,6 +36,7 @@ public class OES_Fragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private boolean isLoad = false;
     private ListView listView;
     private ArrayList<Course> courses;
     private Button confirm;
@@ -84,14 +85,14 @@ public class OES_Fragment extends Fragment {
                         ArrayList<String> courseList = (ArrayList<String>) task.getResult().get("courses");
                         ArrayList<String> feb = (ArrayList<String>) task.getResult().get("feb");
                         ArrayList<String> jun = (ArrayList<String>) task.getResult().get("jun");
-                        ArrayList<String> nov = (ArrayList<String>) task.getResult().get("nov");
+                        ArrayList<String> oct = (ArrayList<String>) task.getResult().get("oct");
                         ArrayList<Boolean> isFeb = new ArrayList<>();
                         ArrayList<Boolean> isJun = new ArrayList<>();
-                        ArrayList<Boolean> isNov = new ArrayList<>();
+                        ArrayList<Boolean> isOct = new ArrayList<>();
                         assert courseList != null;
                         assert feb != null;
                         assert jun != null;
-                        assert nov != null;
+                        assert oct != null;
                         firebaseHandler.getCompletedCourses("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -110,12 +111,12 @@ public class OES_Fragment extends Fragment {
                                     if (!isExist) {
                                         isFeb.add(feb.get(i).equals("1"));
                                         isJun.add(jun.get(i).equals("1"));
-                                        isNov.add(nov.get(i).equals("1"));
+                                        isOct.add(oct.get(i).equals("1"));
                                     }
                                     else {
                                         isFeb.add(false);
                                         isJun.add(false);
-                                        isNov.add(false);
+                                        isOct.add(false);
                                     }
                                 }
                                 firebaseHandler.getEnrolledCourses("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -131,7 +132,7 @@ public class OES_Fragment extends Fragment {
                                                         course.setFeb(true);
                                                     } else if (sem.get(i).equals("jun")) {
                                                         course.setJun(true);
-                                                    } else course.setNov(true);
+                                                    } else course.setOct(true);
                                                     break;
                                                 }
                                             }
@@ -155,7 +156,7 @@ public class OES_Fragment extends Fragment {
                                                     }
                                                     else progress.add("0");
                                                 }
-                                                ArrayAdapter<Course> adapter = new CoursesArrayAdapter(getActivity(), list, isFeb, isJun, isNov, progress);
+                                                ArrayAdapter<Course> adapter = new CoursesArrayAdapter(getActivity(), list, isFeb, isJun, isOct, progress);
                                                 listView.setAdapter(adapter);
                                                 loading.setVisibility(View.INVISIBLE);
                                                 confirm.setVisibility(View.VISIBLE);
@@ -199,7 +200,7 @@ public class OES_Fragment extends Fragment {
                         ArrayList<String> list = new ArrayList<>();
                         ArrayList<String> semester = new ArrayList<>();
                         for (Course course: courses){
-                            if (course.isFeb() || course.isJun() || course.isNov()){
+                            if (course.isFeb() || course.isJun() || course.isOct()){
                                 list.add(course.getName());
                                 if (course.isFeb()){
                                     semester.add("feb");
@@ -207,12 +208,12 @@ public class OES_Fragment extends Fragment {
                                 else if (course.isJun()){
                                     semester.add("jun");
                                 }
-                                else if (course.isNov()){
-                                    semester.add("nov");
+                                else if (course.isOct()){
+                                    semester.add("oct");
                                 }
                             }
                         }
-                        if (countMaxEnrol(semester, "feb") < 5 && countMaxEnrol(semester, "jun") < 5 && countMaxEnrol(semester, "nov") < 5) {
+                        if (countMaxEnrol(semester, "feb") < 5 && countMaxEnrol(semester, "jun") < 5 && countMaxEnrol(semester, "oct") < 5) {
                             ArrayList<String> enrolledCourse = (ArrayList<String>) task.getResult().get("list");
                             ArrayList<String> newSemester = (ArrayList<String>) task.getResult().get("semester");
                             assert enrolledCourse != null;
