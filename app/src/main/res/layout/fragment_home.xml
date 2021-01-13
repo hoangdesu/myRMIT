@@ -28,13 +28,13 @@
         <androidx.cardview.widget.CardView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="340dp"
-            android:layout_marginLeft="340dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="21dp"
+            android:layout_marginRight="21dp"
             app:cardCornerRadius="100dp"
             app:cardElevation="0dp">
 
@@ -69,14 +69,13 @@
             android:id="@+id/t"
             android:layout_width="86dp"
             android:layout_height="32dp"
-            android:layout_above="@+id/a"
+            android:layout_below="@+id/x"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginStart="38dp"
             android:layout_marginLeft="38dp"
-            android:layout_marginBottom="206dp"
+            android:layout_marginTop="29dp"
             android:fontFamily="@font/museo_500"
             android:text="Events"
             android:textColor="@color/app_secondary"
@@ -101,9 +100,14 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="281dp"
+                android:layout_marginRight="281dp"
                 app:cardCornerRadius="18dp"
                 app:cardElevation="10dp">
 
@@ -122,15 +126,16 @@
                         android:src="@drawable/maps_icon" />
 
                     <TextView
-                        android:layout_width="98dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="89dp"
+                        android:layout_height="51dp"
                         android:layout_below="@+id/v"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="-18dp"
                         android:fontFamily="@font/museo_500"
                         android:gravity="bottom|center"
                         android:text="Maps"
                         android:textColor="@color/app_secondary"
-                        android:textSize="16sp" />
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 
@@ -139,9 +144,17 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_centerHorizontal="true"
+                android:layout_marginStart="146dp"
+                android:layout_marginLeft="146dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="145dp"
+                android:layout_marginRight="145dp"
                 app:cardCornerRadius="18dp"
                 app:cardElevation="10dp">
 
@@ -160,15 +173,16 @@
                         android:src="@drawable/library_icon" />
 
                     <TextView
-                        android:layout_width="99dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="104dp"
+                        android:layout_height="60dp"
                         android:layout_below="@id/vv"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="-27dp"
                         android:fontFamily="@font/museo_500"
                         android:gravity="bottom|center"
                         android:text="Library"
                         android:textColor="@color/app_secondary"
-                        android:textSize="16sp" />
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 
@@ -177,12 +191,17 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="282dp"
+                android:layout_marginLeft="282dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="9dp"
+                android:layout_marginRight="9dp"
                 android:onClick="onCoursesClick"
                 app:cardCornerRadius="18dp"
                 app:cardElevation="10dp">
@@ -202,8 +221,8 @@
                         android:src="@drawable/course_icon" />
 
                     <TextView
-                        android:layout_width="98dp"
-                        android:layout_height="20dp"
+                        android:layout_width="101dp"
+                        android:layout_height="66dp"
                         android:layout_below="@id/vvv"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
@@ -212,14 +231,15 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginStart="6dp"
                         android:layout_marginLeft="6dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="-35dp"
                         android:layout_marginEnd="0dp"
                         android:layout_marginRight="0dp"
                         android:fontFamily="@font/museo_500"
                         android:gravity="bottom|center"
                         android:text="Courses"
                         android:textColor="@color/app_secondary"
-                        android:textSize="16sp" />
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 
@@ -231,9 +251,14 @@
                 android:layout_height="120dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginEnd="281dp"
+                android:layout_marginRight="281dp"
                 android:layout_marginBottom="15dp"
                 app:cardCornerRadius="18dp"
                 app:cardElevation="10dp">
@@ -253,15 +278,16 @@
                         android:src="@drawable/club_icon" />
 
                     <TextView
-                        android:layout_width="91dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="104dp"
+                        android:layout_height="58dp"
                         android:layout_below="@id/vvvv"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="-26dp"
                         android:fontFamily="@font/museo_500"
                         android:gravity="bottom|center"
                         android:text="Club"
                         android:textColor="@color/app_secondary"
-                        android:textSize="16sp" />
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 
@@ -271,8 +297,16 @@
                 android:id="@+id/service"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
+                android:layout_marginStart="146dp"
+                android:layout_marginLeft="146dp"
+                android:layout_marginEnd="145dp"
+                android:layout_marginRight="145dp"
                 android:layout_marginBottom="15dp"
                 app:cardCornerRadius="18dp"
                 app:cardElevation="10dp">
@@ -293,15 +327,16 @@
 
                     <TextView
                         android:layout_width="104dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="59dp"
                         android:layout_below="@+id/vvvvv"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="-27dp"
                         android:fontFamily="@font/museo_500"
                         android:gravity="bottom|center"
                         android:text="Services"
                         android:textColor="@color/app_secondary"
-                        android:textSize="16sp" />
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 
@@ -310,12 +345,16 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginStart="282dp"
+                android:layout_marginLeft="282dp"
+                android:layout_marginEnd="9dp"
+                android:layout_marginRight="9dp"
                 android:layout_marginBottom="15dp"
                 app:cardCornerRadius="18dp"
                 app:cardElevation="10dp">
@@ -335,15 +374,16 @@
                         android:src="@drawable/news_icon" />
 
                     <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="104dp"
+                        android:layout_height="59dp"
                         android:layout_below="@id/vvvvvv"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="-27dp"
                         android:fontFamily="@font/museo_500"
                         android:gravity="bottom|center"
                         android:text="News"
                         android:textColor="@color/app_secondary"
-                        android:textSize="16sp" />
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 
@@ -354,12 +394,14 @@
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="247dp"
             android:layout_above="@+id/a"
+            android:layout_below="@+id/x"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"
+            android:layout_marginTop="62dp"
             android:layout_marginEnd="0dp"
             android:layout_marginRight="0dp"
             android:layout_marginBottom="2dp"
