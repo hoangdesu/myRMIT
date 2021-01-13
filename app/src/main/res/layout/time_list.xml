@@ -48,7 +48,7 @@
         android:layout_marginTop="-3dp"
         android:layout_marginEnd="6dp"
         android:layout_marginRight="6dp"
-        android:buttonTint="#043D6A"/>
+        android:buttonTint="#043D6A" />
 
     <TextView
         android:id="@+id/textView6"
@@ -133,7 +133,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="6dp"
         android:layout_marginRight="6dp"
-        android:buttonTint="#043D6A"/>
+        android:buttonTint="#043D6A" />
 
 </RelativeLayout>
 
