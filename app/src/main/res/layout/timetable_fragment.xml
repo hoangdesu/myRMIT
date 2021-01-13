@@ -27,5 +27,15 @@
         android:layout_marginTop="-526dp"
         android:background="#780A0A"
         app:selectorColor="#D3A228"
-        app:textColorSelected="#00BCD4" />
+        app:textColorSelected="#00BCD4" >
+
+    </devs.mulham.horizontalcalendar.HorizontalCalendarView>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="507dp"
+        android:layout_below="@+id/calendarView"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="1dp" />
 </RelativeLayout>

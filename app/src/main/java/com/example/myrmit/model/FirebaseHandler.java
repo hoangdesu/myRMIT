@@ -62,4 +62,8 @@ public class FirebaseHandler {
         db.collection("users").document(username).collection("programCode").document("program").collection("data").document("progressingCourse").collection("data").document(courseName).update("time", time);
         db.collection("users").document(username).collection("programCode").document("program").collection("data").document("progressingCourse").collection("data").document(courseName).update("day", day);
     }
+
+    public DocumentReference getCurrentSemester(){
+        return db.collection("semester").document("now");
+    }
 }

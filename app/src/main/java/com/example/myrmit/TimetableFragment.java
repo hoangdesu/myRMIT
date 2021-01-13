@@ -17,6 +17,8 @@ import com.example.myrmit.model.Course;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import com.example.myrmit.model.*;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -71,20 +73,38 @@ public class TimetableFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.timetable_fragment, container, false);
-        Calendar startDate = Calendar.getInstance();
-        startDate.add(Calendar.MONTH, -1);
-
-        /* ends after 1 month from now */
-        Calendar endDate = Calendar.getInstance();
-        endDate.add(Calendar.MONTH, 1);
-        HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(view.getRootView(), R.id.calendarView)
-                .range(startDate, endDate)
+        HorizontalCalendar[] horizontalCalendar = {new HorizontalCalendar.Builder(view.getRootView(), R.id.calendarView)
                 .datesNumberOnScreen(5)
-                .build();
-        horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
+                .range(Calendar.getInstance(), Calendar.getInstance())
+                .configure().textSize(12, 12, 14).end()
+                .build()};
+        firebaseHandler.getCurrentSemester().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onDateSelected(Calendar date, int position) {
-                //do something
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                String sem = (String) task.getResult().get("semester");
+                Date date;
+                if (sem.split(",")[0].equals("feb")) {
+                    date = new Date(Integer.parseInt(sem.split(", ")[1]), Calendar.FEBRUARY, 1);//the year field adds 1900 on to it.
+                }
+                else if (sem.split(",")[0].equals("jun")){
+                    date = new Date(Integer.parseInt(sem.split(", ")[1]), Calendar.JUNE, 1);//the year field adds 1900 on to it.
+                }
+                else date = new Date(Integer.parseInt(sem.split(", ")[1]), Calendar.NOVEMBER, 1);//the year field adds 1900 on to it.
+                
+                Calendar startDate = new GregorianCalendar();
+                startDate.setTime(date);
+                startDate.add(Calendar.MONTH, 0);
+                Calendar endDate =  new GregorianCalendar();
+                endDate.setTime(date);
+                endDate.add(Calendar.MONTH, 3);
+                horizontalCalendar[0].refresh();
+                horizontalCalendar[0].setRange(startDate,endDate);
+                horizontalCalendar[0].setCalendarListener(new HorizontalCalendarListener() {
+                    @Override
+                    public void onDateSelected(Calendar date, int position) {
+                        //do something
+                    }
+                });
             }
         });
         return view;

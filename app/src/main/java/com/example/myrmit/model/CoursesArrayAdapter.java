@@ -2,7 +2,6 @@ package com.example.myrmit.model;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +9,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
-
-import com.example.myrmit.OES_Fragment;
 import com.example.myrmit.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
@@ -25,15 +20,15 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
     private final List<Boolean> isFeb;
     private final List<Boolean> isJun;
     private final ArrayList<String> progressingCourse;
-    private final List<Boolean> isNov;
-    public CoursesArrayAdapter(Activity context, List<Course> list, List<Boolean> isFeb, List<Boolean> isJun, List<Boolean> isNov, ArrayList<String> progressingCourse) {
+    private final List<Boolean> isOct;
+    public CoursesArrayAdapter(Activity context, List<Course> list, List<Boolean> isFeb, List<Boolean> isJun, List<Boolean> isOct, ArrayList<String> progressingCourse) {
         super(context, R.layout.course_list, list);
         this.context = context;
         this.list = list;
         this.isFeb = isFeb;
         this.progressingCourse = progressingCourse;
         this.isJun = isJun;
-        this.isNov = isNov;
+        this.isOct = isOct;
     }
     static class ViewHolder {
         protected TextView id;
@@ -41,7 +36,7 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
         protected CheckBox feb;
         protected TextView finish;
         protected CheckBox jun;
-        protected CheckBox nov;
+        protected CheckBox oct;
         protected TextView progressing;
     }
 
@@ -55,7 +50,7 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
             final ViewHolder viewHolder = new ViewHolder();
             viewHolder.id = (TextView) view.findViewById(R.id.id);
             viewHolder.name = (TextView) view.findViewById(R.id.description);
-            viewHolder.nov = (CheckBox) view.findViewById(R.id.checkBox3);
+            viewHolder.oct = (CheckBox) view.findViewById(R.id.checkBox3);
             viewHolder.jun = (CheckBox) view.findViewById(R.id.checkBox2);
             viewHolder.feb = (CheckBox) view.findViewById(R.id.checkBox);
             viewHolder.finish = view.findViewById(R.id.imageView3);
@@ -68,10 +63,10 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
                             Course element = (Course) viewHolder.feb.getTag();
                             element.setFeb(buttonView.isChecked());
                             if (buttonView.isChecked()) {
-                                element.setNov(false);
+                                element.setOct(false);
                                 element.setJun(false);
                                 viewHolder.jun.setChecked(false);
-                                viewHolder.nov.setChecked(false);
+                                viewHolder.oct.setChecked(false);
 
                            }
                         }
@@ -85,20 +80,20 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
                             element.setJun(buttonView.isChecked());
                             if (buttonView.isChecked()) {
                                 element.setFeb(false);
-                                element.setNov(false);
-                                viewHolder.nov.setChecked(false);
+                                element.setOct(false);
+                                viewHolder.oct.setChecked(false);
                                 viewHolder.feb.setChecked(false);
 
                             }
                         }
                     });
-            viewHolder.nov.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            viewHolder.oct.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton buttonView,
                                                      boolean isChecked) {
 
-                            Course element = (Course) viewHolder.nov.getTag();
-                            element.setNov(buttonView.isChecked());
+                            Course element = (Course) viewHolder.oct.getTag();
+                            element.setOct(buttonView.isChecked());
                             if (buttonView.isChecked()) {
                                 viewHolder.jun.setChecked(false);
                                 viewHolder.feb.setChecked(false);
@@ -110,13 +105,13 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
                     });
             view.setTag(viewHolder);
             viewHolder.feb.setTag(list.get(position));
-            viewHolder.nov.setTag(list.get(position));
+            viewHolder.oct.setTag(list.get(position));
             viewHolder.jun.setTag(list.get(position));
         } else {
             view = convertView;
             ((ViewHolder) view.getTag()).feb.setTag(list.get(position));
             ((ViewHolder) view.getTag()).jun.setTag(list.get(position));
-            ((ViewHolder) view.getTag()).nov.setTag(list.get(position));
+            ((ViewHolder) view.getTag()).oct.setTag(list.get(position));
         }
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.id.setText(String.valueOf(position+1));
@@ -135,14 +130,14 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
                 holder.jun.setVisibility(View.VISIBLE);
                 holder.jun.setEnabled(true);
             }
-            if (!isNov.get(position)) {
-                holder.nov.setVisibility(View.INVISIBLE);
-                holder.nov.setEnabled(false);
+            if (!isOct.get(position)) {
+                holder.oct.setVisibility(View.INVISIBLE);
+                holder.oct.setEnabled(false);
             } else {
-                holder.nov.setVisibility(View.VISIBLE);
-                holder.nov.setEnabled(true);
+                holder.oct.setVisibility(View.VISIBLE);
+                holder.oct.setEnabled(true);
             }
-            if (!isFeb.get(position) && !isNov.get(position) && !isJun.get(position)) {
+            if (!isFeb.get(position) && !isOct.get(position) && !isJun.get(position)) {
                 holder.finish.setVisibility(View.VISIBLE);
             } else holder.finish.setVisibility(View.INVISIBLE);
             holder.progressing.setVisibility(View.INVISIBLE);
@@ -152,14 +147,14 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
             holder.feb.setEnabled(false);
             holder.jun.setVisibility(View.INVISIBLE);
             holder.jun.setEnabled(false);
-            holder.nov.setVisibility(View.INVISIBLE);
-            holder.nov.setEnabled(false);
+            holder.oct.setVisibility(View.INVISIBLE);
+            holder.oct.setEnabled(false);
             holder.progressing.setVisibility(View.VISIBLE);
         }
         holder.name.setText(list.get(position).getName());
         holder.feb.setChecked(list.get(position).isFeb());
         holder.jun.setChecked(list.get(position).isJun());
-        holder.nov.setChecked(list.get(position).isNov());
+        holder.oct.setChecked(list.get(position).isOct());
         return view;
     }
 

@@ -5,13 +5,13 @@ public class Course {
     private String name;
     private boolean feb;
     private boolean jun;
-    private boolean nov;
+    private boolean oct;
 
     public Course(String name) {
         this.name = name;
         feb = false;
         jun = false;
-        nov = false;
+        oct = false;
     }
 
     public String getName() {
@@ -30,8 +30,8 @@ public class Course {
         this.jun = jun;
     }
 
-    public void setNov(boolean nov) {
-        this.nov = nov;
+    public void setOct(boolean oct) {
+        this.oct = oct;
     }
 
     public boolean isFeb() {
@@ -42,7 +42,7 @@ public class Course {
         return jun;
     }
 
-    public boolean isNov() {
-        return nov;
+    public boolean isOct() {
+        return oct;
     }
 }

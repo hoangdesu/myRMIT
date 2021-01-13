@@ -94,7 +94,7 @@ public class Courses extends AppCompatActivity {
                             canvas.setX(0);
                         }
                         else canvas.setX(endX);
-                        if (isMove[0] < 3 ) {
+                        if (isMove[0] < 4 ) {
                             Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.instructure.candroid");
                             if (launchIntent != null) {
                                 startActivity(launchIntent);
