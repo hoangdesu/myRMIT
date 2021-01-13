@@ -67,23 +67,21 @@ public class Courses extends AppCompatActivity {
         Objects.requireNonNull(tabLayout.getTabAt(0)).setIcon(R.drawable.oes);
         Objects.requireNonNull(tabLayout.getTabAt(1)).setIcon(R.drawable.allocation);
         Objects.requireNonNull(tabLayout.getTabAt(2)).setIcon(R.drawable.timetable);
-        final boolean[] isMove = {false};
+        final int[] isMove = {0};
         canvas.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                System.out.println(event.getAction());
-
                 if (!isStart){
                     endX = (int) v.getX();
                     isStart = true;
                 }
                 if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                    isMove[0] = true;
+                    isMove[0]++;
                     int x_cord = (int) event.getRawX();
                     int y_cord = (int) event.getRawY();
                     canvas.setX(x_cord - 75);
                     if (y_cord - 115 > 0 && y_cord - 155 < viewPager.getHeight()){
-                        canvas.setY(y_cord - 115);
+                        canvas.setY(y_cord - 145);
                     }
                     else if (y_cord - 115 < 0){
                         canvas.setY(0);
@@ -92,12 +90,11 @@ public class Courses extends AppCompatActivity {
                 }
                 else {
                     if (event.getAction() != MotionEvent.ACTION_DOWN) {
-                        if (isMove[0]) {
-                            isMove[0] = false;
-                            if ((int) v.getX() < endX / 2) {
-                                canvas.setX(0);
-                            } else canvas.setX(endX);
-                        }else {
+                        if ((int) v.getX() < endX / 2) {
+                            canvas.setX(0);
+                        }
+                        else canvas.setX(endX);
+                        if (isMove[0] < 3 ) {
                             Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.instructure.candroid");
                             if (launchIntent != null) {
                                 startActivity(launchIntent);
@@ -111,6 +108,7 @@ public class Courses extends AppCompatActivity {
                                 }
                             }
                         }
+                        isMove[0] = 0;
                     }
                 }
                 return true;
