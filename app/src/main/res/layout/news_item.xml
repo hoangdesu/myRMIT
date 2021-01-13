@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:gravity="bottom"
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="349dp"
+        android:layout_height="197dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
         app:cardCornerRadius="18dp"
-        app:cardElevation="5dp"
-        android:layout_margin="30dp">
+        app:cardElevation="5dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -21,18 +27,23 @@
             <ImageView
                 android:id="@+id/news_image"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="139dp"
+                android:layout_above="@+id/news_title"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="0dp"
+                android:layout_marginBottom="6dp"
                 android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/news_title"
                 android:layout_width="wrap_content"
-                android:layout_height="271dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="156dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/description"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginBottom="1dp"
                 android:fontFamily="@font/museo_500"
                 android:text="Title"
                 android:textColor="@color/black"
@@ -42,11 +53,12 @@
             <TextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
-                android:layout_height="183dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="188dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginLeft="13dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="Description"
@@ -58,4 +70,4 @@
 
 
     </androidx.cardview.widget.CardView>
-</LinearLayout>
+</RelativeLayout>
