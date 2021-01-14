@@ -106,6 +106,7 @@ public class TimetableFragment extends Fragment {
                         //do something
                     }
                 });
+                System.out.println();
             }
         });
         return view;
