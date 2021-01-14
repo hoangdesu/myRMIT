@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF">
+
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="325dp"
+        android:layout_height="31dp"
+        android:layout_alignBottom="@+id/textView8"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="81dp"
+        android:layout_marginBottom="-68dp"
+        android:gravity="center_vertical"
+        android:text="Group 2"
+        android:textColor="#000000"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="400dp"
+        android:layout_height="1dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="78dp"
+        android:background="#DCDCDC" />
+
+    <CheckBox
+        android:id="@+id/checkBox5"
+        android:layout_width="27dp"
+        android:layout_height="33dp"
+        android:layout_alignTop="@+id/textView12"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="-3dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginRight="6dp"
+        android:buttonTint="#043D6A" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="1dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_toEndOf="@+id/id"
+        android:layout_toRightOf="@+id/id"
+        android:background="#DCDCDC"
+        android:textColor="#575656" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="38dp"
+        android:layout_height="41dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Id"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="354dp"
+        android:layout_height="42dp"
+        android:layout_alignBottom="@+id/textView8"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="51dp"
+        android:layout_marginLeft="51dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="1dp"
+        android:gravity="center_vertical"
+        android:text="Course Name"
+        android:textColor="#000000"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="325dp"
+        android:layout_height="31dp"
+        android:layout_alignBottom="@+id/textView8"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="51dp"
+        android:layout_marginLeft="51dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="-33dp"
+        android:gravity="center_vertical"
+        android:text="Group 1"
+        android:textColor="#000000"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="400dp"
+        android:layout_height="1dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="42dp"
+        android:background="#DCDCDC" />
+
+    <CheckBox
+        android:id="@+id/checkBox4"
+        android:layout_width="27dp"
+        android:layout_height="33dp"
+        android:layout_below="@+id/textView7"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginRight="6dp"
+        android:buttonTint="#043D6A" />
+
+</RelativeLayout>
+
+
+
