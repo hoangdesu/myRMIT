@@ -27,7 +27,7 @@
         android:layout_marginTop="-526dp"
         android:background="#780A0A"
         app:selectorColor="#D3A228"
-        app:textColorSelected="#00BCD4" >
+        app:textColorSelected="#19FF00" >
 
     </devs.mulham.horizontalcalendar.HorizontalCalendarView>
 

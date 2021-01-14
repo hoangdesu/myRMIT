@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,7 +77,7 @@ public class TimetableFragment extends Fragment {
         HorizontalCalendar[] horizontalCalendar = {new HorizontalCalendar.Builder(view.getRootView(), R.id.calendarView)
                 .datesNumberOnScreen(5)
                 .range(Calendar.getInstance(), Calendar.getInstance())
-                .configure().textSize(12, 12, 14).end()
+                .configure().textSize(12, 12, 14).colorTextBottom(Color.YELLOW, Color.GREEN).end()
                 .build()};
         firebaseHandler.getCurrentSemester().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
