@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "173878740291",
+    "project_id": "myrmit-c2020",
+    "storage_bucket": "myrmit-c2020.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:173878740291:android:e35e6e55b2d5cb9f1f9bf6",
+        "android_client_info": {
+          "package_name": "com.example.myrmit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "173878740291-f7974fn7fjv7dd1e4pvrg7gs736bv0ln.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUUKAQ0fEH5u7xGZvHKZAbSYbJgO0xgzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "173878740291-f7974fn7fjv7dd1e4pvrg7gs736bv0ln.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
