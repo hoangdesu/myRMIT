@@ -3,6 +3,7 @@ package com.example.myrmit;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,18 +11,20 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.example.myrmit.model.Course;
 
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.Calendar;
+import java.util.HashMap;
 
 import com.example.myrmit.model.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class AllocationFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -73,27 +76,120 @@ public class AllocationFragment extends Fragment {
         View view = inflater.inflate(R.layout.allocation_fragment, container, false);
         confirm = view.findViewById(R.id.button3);
         listView = view.findViewById(R.id.group);
-        confirmChange(view);
+        confirmChange();
         setList();
         return view;
     }
 
-    private void confirmChange(View view){
+    private void confirmChange() {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < groups.size(); i++){
-                    if (groups.get(i).isGroup1()){
-                        firebaseHandler.confirmAllocation("s3740819@rmit.edu.vn", groups.get(i).getDay1(), groups.get(i).getTime1(), groups.get(i).getCourseName());
+                firebaseHandler.getProgressingCode("s3740819@rmit.edu.vn").collection("data").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        boolean isChange = false;
+                        firebaseHandler.updateTimetable("s3740819@rmit.edu.vn");
+                        for (DocumentSnapshot documentSnapshot : task.getResult()){
+                            for (int i = 0; i < groups.size(); i++){
+                                if (documentSnapshot.getId().equals(groups.get(i).getCourseName())) {
+                                    if (groups.get(i).isGroup1()) {
+                                        isChange = !documentSnapshot.get("day").equals(groups.get(i).getDay1());
+                                        break;
+                                    } else if (groups.get(i).isGroup2()) {
+                                        isChange = !documentSnapshot.get("day").equals(groups.get(i).getDay2());
+                                        break;
+                                    } else {
+                                        isChange = !documentSnapshot.get("day").equals("");
+                                        break;
+                                    }
+                                }
+                            }
+                            if (isChange){
+                                break;
+                            }
+                        }
+                        if (isChange){
+                            HashMap<String, HashMap<String, String>> date = new HashMap<>();
+                            for (int i = 0 ; i < groups.size(); i++){
+                                if (!getChosenGroupDay(groups.get(i)).equals("")){
+                                    if (!date.containsKey(getChosenGroupDay(groups.get(i))) ) {
+                                        HashMap<String, String> chosenTime = new HashMap<String, String>();
+                                        chosenTime.put(groups.get(i).getCourseName(), getChosenGroupTime(groups.get(i)));
+                                        date.put(getChosenGroupDay(groups.get(i)), chosenTime);
+                                    }
+                                    else date.get(getChosenGroupDay(groups.get(i))).put(groups.get(i).getCourseName(), getChosenGroupTime(groups.get(i)));
+                                }
+                                firebaseHandler.confirmAllocation("s3740819@rmit.edu.vn", getChosenGroupDay(groups.get(i)), getChosenGroupTime(groups.get(i)), groups.get(i).getCourseName());
+                            }
+                            for (String day : date.keySet()){
+                                firebaseHandler.getCurrentCalendar("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        ArrayList<String> dates = (ArrayList<String>) task.getResult().get("date");
+                                        ArrayList<String> dateList = new ArrayList<>();
+                                        ArrayList<String> time = new ArrayList<>();
+                                        ArrayList<String> courseName = new ArrayList<>();
+                                        for (String date : dates){
+                                            try {
+                                                if (isDate(day, date)){
+                                                    dateList.add(date);
+                                                }
+                                            } catch (ParseException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                        HashMap<String, String> map = date.get(day);
+                                        for (String d : map.keySet()){
+                                            courseName.add("Have a class: " + d + " !");
+                                            time.add(map.get(d));
+                                        }
+                                        firebaseHandler.addClassTime("s3740819@rmit.edu.vn", dateList, time,courseName);
+                                    }
+                                });
+                            }
+                            setList();
+                            Toast.makeText(v.getContext(), "Change Successful!", Toast.LENGTH_SHORT).show();
+                        }
+                        else Toast.makeText(v.getContext(), "No Change!", Toast.LENGTH_SHORT).show();
                     }
-                    else if (groups.get(i).isGroup2()){
-                        firebaseHandler.confirmAllocation("s3740819@rmit.edu.vn", groups.get(i).getDay2(), groups.get(i).getTime2(), groups.get(i).getCourseName());
-                    }
-                    else firebaseHandler.confirmAllocation("s3740819@rmit.edu.vn", "", "", groups.get(i).getCourseName());
-                }
-                setList();
+                });
             }
         });
+    }
+
+    private String getChosenGroupDay(Group group){
+        if (group.isGroup1()){
+            return group.getDay1();
+        }
+        else if (group.isGroup2()){
+            return group.getDay2();
+        }
+        return "";
+    }
+    private String getChosenGroupTime(Group group){
+        if (group.isGroup1()){
+            return group.getTime1();
+        }
+        else if (group.isGroup2()){
+            return group.getTime2();
+        }
+        return "";
+    }
+
+    private boolean isDate(String dayOfWeek, String date) throws ParseException {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf= new SimpleDateFormat("dd-MM-yyyy");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(sdf.parse(date));
+        switch (dayOfWeek){
+            case "mon": return cal.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY;
+            case "tue": return cal.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY;
+            case "wed": return cal.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY;
+            case "thu": return cal.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY;
+            case "fri": return cal.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY;
+            default: break;
+        }
+        return false;
     }
 
     private void setList() {

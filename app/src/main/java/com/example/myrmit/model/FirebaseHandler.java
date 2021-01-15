@@ -66,4 +66,60 @@ public class FirebaseHandler {
     public DocumentReference getCurrentSemester(){
         return db.collection("semester").document("now");
     }
+
+    public DocumentReference getDateData(String date, String username){
+        return db
+                .collection("users").document(username)
+                .collection("programCode").document("calendar")
+                .collection("data").document(date);
+    }
+
+    public void updateTimetable(String username){
+        db.collection("users").document(username).collection("programCode").document("calendar").collection("data").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (DocumentSnapshot documentSnapshot: task.getResult()){
+                    ArrayList<String> timeline = (ArrayList<String>) documentSnapshot.get("time");
+                    ArrayList<String> note = (ArrayList<String>) documentSnapshot.get("note");
+                    ArrayList<String> type = (ArrayList<String>) documentSnapshot.get("type");
+                    for (int i = 0; i < type.size(); i++){
+                        if (type.get(i).equals("class")){
+                            timeline.remove(i);
+                            note.remove(i);
+                            type.remove(i);
+                            i--;
+                        }
+                    }
+                    documentSnapshot.getReference().update("time", timeline);
+                    documentSnapshot.getReference().update("note", note);
+                    documentSnapshot.getReference().update("type", type);
+                }
+            }
+        });
+    }
+
+    public void addClassTime(String username, ArrayList<String> dates, ArrayList<String> time, ArrayList<String> courseName) {
+        for (String date : dates) {
+            db.collection("users").document(username).collection("programCode").document("calendar").collection("data").document(date).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    ArrayList<String> timeline = (ArrayList<String>) task.getResult().get("time");
+                    ArrayList<String> note = (ArrayList<String>) task.getResult().get("note");
+                    ArrayList<String> type = (ArrayList<String>) task.getResult().get("type");
+                    timeline.addAll(time);
+                    for (int i = 0 ; i < courseName.size(); i++) {
+                        type.add("class");
+                    }
+                    note.addAll(courseName);
+                    task.getResult().getReference().update("time", timeline);
+                    task.getResult().getReference().update("note", note);
+                    task.getResult().getReference().update("type", type);
+                }
+            });
+        }
+    }
+
+    public DocumentReference getCurrentCalendar(String username){
+        return  db.collection("users").document(username).collection("programCode").document("calendar");
+    }
 }

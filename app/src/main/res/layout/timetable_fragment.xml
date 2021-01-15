@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".OES_Fragment">
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/todo" />
+
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
@@ -32,10 +39,25 @@
     </devs.mulham.horizontalcalendar.HorizontalCalendarView>
 
     <ListView
+        android:id="@+id/timelist"
         android:layout_width="match_parent"
-        android:layout_height="507dp"
+        android:layout_height="453dp"
         android:layout_below="@+id/calendarView"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="1dp" />
+        android:layout_marginBottom="52dp">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="134dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="1dp"
+        android:text="Add Note +"
+        android:textSize="12sp"
+        app:backgroundTint="#065C0A" />
+
 </RelativeLayout>
