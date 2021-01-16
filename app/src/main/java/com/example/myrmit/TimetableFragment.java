@@ -12,6 +12,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,10 +25,10 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 import com.example.myrmit.model.*;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -48,10 +49,9 @@ public class TimetableFragment extends Fragment {
     private String mParam2;
     @SuppressLint("SimpleDateFormat")
     private final SimpleDateFormat sdf= new SimpleDateFormat("dd-MM-yyyy");
-    private ArrayList<Timeline> timelines;
     private ListView listView;
     private Button add;
-    private HorizontalCalendar[] horizontalCalendar;
+    private HorizontalCalendar[] calendar;
     private ImageView nothing;
     ArrayList<String> spinnerTime = new ArrayList<>();
     public TimetableFragment() {
@@ -93,7 +93,7 @@ public class TimetableFragment extends Fragment {
         listView = view.findViewById(R.id.timelist);
         add = view.findViewById(R.id.button4);
         nothing = view.findViewById(R.id.imageView6);
-        horizontalCalendar = new HorizontalCalendar[]{new HorizontalCalendar.Builder(view.getRootView(), R.id.calendarView)
+        calendar = new HorizontalCalendar[]{new HorizontalCalendar.Builder(view.getRootView(), R.id.calendarView)
                 .datesNumberOnScreen(5)
                 .range(Calendar.getInstance(), Calendar.getInstance())
                 .configure().textSize(12, 12, 14).colorTextBottom(Color.YELLOW, Color.GREEN).end()
@@ -116,8 +116,8 @@ public class TimetableFragment extends Fragment {
                 Calendar endDate =  Calendar.getInstance();
                 endDate.setTime(date[0]);
                 endDate.add(Calendar.MONTH, 4);
-                horizontalCalendar[0].refresh();
-                horizontalCalendar[0].setRange(startDate,endDate);
+                calendar[0].refresh();
+                calendar[0].setRange(startDate,endDate);
 //                firebaseHandler.getCurrentCalendar("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
 //                    @Override
 //                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -141,11 +141,11 @@ public class TimetableFragment extends Fragment {
 //                        }
 //                    }
 //                });
-                horizontalCalendar[0].goToday(true);
+                calendar[0].goToday(true);
                 add();
             }
         });
-        horizontalCalendar[0].setCalendarListener(new HorizontalCalendarListener() {
+        calendar[0].setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Calendar date, int position) {
                 setList(sdf.format(date.getTime()));
@@ -167,7 +167,7 @@ public class TimetableFragment extends Fragment {
                 TextView day = view.findViewById(R.id.day);
                 Button cancel = view.findViewById(R.id.button7);
                 Spinner spinner = view.findViewById(R.id.spinner);
-                day.setText(sdf.format(horizontalCalendar[0].getSelectedDate().getTime()));
+                day.setText(sdf.format(calendar[0].getSelectedDate().getTime()));
                 EditText note = view.findViewById(R.id.add_note);
                 note.addTextChangedListener(new TextWatcher() {
                     private String text;
@@ -197,7 +197,7 @@ public class TimetableFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         if (!spinner.getSelectedItem().toString().equals("Time") && !note.getText().toString().equals("")) {
-                            firebaseHandler.getCurrentCalendar("s3740819@rmit.edu.vn").collection("data").document(sdf.format(horizontalCalendar[0].getSelectedDate().getTime())).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            firebaseHandler.getCurrentCalendar("s3740819@rmit.edu.vn").collection("data").document(sdf.format(calendar[0].getSelectedDate().getTime())).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     ArrayList<String> time = (ArrayList<String>) task.getResult().get("time");
@@ -206,7 +206,10 @@ public class TimetableFragment extends Fragment {
                                     time.add(spinner.getSelectedItem().toString().split(":")[0]);
                                     noteList.add(note.getText().toString());
                                     type.add("note");
-                                    setList(sdf.format(horizontalCalendar[0].getSelectedDate().getTime()));
+                                    task.getResult().getReference().update("time", time);
+                                    task.getResult().getReference().update("note", noteList);
+                                    task.getResult().getReference().update("type", type);
+                                    setList(sdf.format(calendar[0].getSelectedDate().getTime()));
                                     alert.dismiss();
                                 }
                             });
@@ -221,16 +224,18 @@ public class TimetableFragment extends Fragment {
     }
 
     private void setSpinnerTime(Spinner spinner, View view){
-        firebaseHandler.getCurrentCalendar("s3740819@rmit.edu.vn").collection("data").document(sdf.format(horizontalCalendar[0].getSelectedDate().getTime())).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        firebaseHandler.getCurrentCalendar("s3740819@rmit.edu.vn").collection("data").document(sdf.format(calendar[0].getSelectedDate().getTime())).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 ArrayList<String> time = (ArrayList<String>) task.getResult().get("time");
                 ArrayList<String> type = (ArrayList<String>) task.getResult().get("type");
+                spinnerTime.clear();
                 spinnerTime.add("Time");
                 for (int i = 0; i< 24; i++){
                     spinnerTime.add(String.valueOf(i) + ":00");
                 }
-                for (int i = 0; i < time.size(); i++){
+                assert type != null;
+                for (int i = 0; i < Objects.requireNonNull(time).size(); i++){
                     if (!type.get(i).equals("class")){
                         spinnerTime.remove((time.get(i)+":00"));
                     }
@@ -244,24 +249,154 @@ public class TimetableFragment extends Fragment {
     }
 
     private void setList(String date) {
-        timelines = new ArrayList<>();
         nothing.setVisibility(View.VISIBLE);
         listView.setAdapter(null);
         firebaseHandler.getDateData(date, "s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 ArrayList<String> time = (ArrayList<String>) task.getResult().get("time");
+                assert time != null;
                 if (time.size() != 0){
                     ArrayList<Timeline> timelineArrayList = new ArrayList<>();
                     ArrayList<String> note = (ArrayList<String>) task.getResult().get("note");
                     ArrayList<String> type = (ArrayList<String>) task.getResult().get("type");
+                    assert note != null;
+                    assert type != null;
                     for (int i = 0; i< time.size(); i++){
                         timelineArrayList.add(get(time.get(i), note.get(i), type.get(i)));
                     }
                     sortTimeline(timelineArrayList);
+                    for (int i = 0; i< timelineArrayList.size(); i++){
+                        System.out.println(timelineArrayList.get(i).getType() + " --- " + timelineArrayList.get(i).getNote());
+                    }
                     ArrayAdapter<Timeline> adapter = new TimelineArrayAdapter(getActivity(), timelineArrayList);
                     listView.setAdapter(adapter);
                     nothing.setVisibility(View.INVISIBLE);
+                    setListViewListener(timelineArrayList);
+                }
+            }
+        });
+    }
+
+    private void setListViewListener(ArrayList<Timeline> timelines){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (!timelines.get(position).getType().equals("class")){
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(Objects.requireNonNull(getContext()), R.style.Theme_AppCompat_Dialog_Alert);
+                    View v = getLayoutInflater().inflate(R.layout.dialog_item_click, null);
+                    dialog.setView(v);
+                    final AlertDialog alert = dialog.create();
+                    Button change = v.findViewById(R.id.change);
+                    Button delete = v.findViewById(R.id.delete);
+                    change.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            final AlertDialog.Builder dialog1 = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
+                            View v1 = getLayoutInflater().inflate(R.layout.change_dialog, null);
+                            dialog1.setView(v1);
+                            final AlertDialog alert1 = dialog1.create();
+                            Button confirm = v1.findViewById(R.id.button6);
+                            Button cancel = v1.findViewById(R.id.button8);
+                            EditText newNote = v1.findViewById(R.id.add_note2);
+                            firebaseHandler.getCurrentCalendar("s3740819@rmit.edu.vn")
+                                    .collection("data").document(sdf.format(calendar[0].getSelectedDate().getTime())).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    ArrayList<String> time = (ArrayList<String>) task.getResult().get("time");
+                                    ArrayList<String> note = (ArrayList<String>) task.getResult().get("note");
+                                    assert note != null;
+                                    for (int i = 0; i < Objects.requireNonNull(time).size(); i++){
+                                        if (time.get(i).equals(timelines.get(position).getTime())){
+                                            newNote.setText(note.get(i));
+                                            break;
+                                        }
+                                    }
+                                }
+                            });
+                            newNote.addTextChangedListener(new TextWatcher() {
+                                private String text;
+
+                                public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
+
+                                public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {text = arg0.toString();}
+
+                                public void afterTextChanged(Editable arg0) {
+                                    int lineCount = newNote.getLineCount();
+                                    if(lineCount > 17){
+                                        newNote.setText(text);
+                                    }
+                                }
+                            });
+
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (newNote.getText().toString().equals("")) {
+                                        firebaseHandler.getCurrentCalendar("s3740819@rmit.edu.vn")
+                                                .collection("data").document(sdf.format(calendar[0].getSelectedDate().getTime())).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                ArrayList<String> time = (ArrayList<String>) task.getResult().get("time");
+                                                ArrayList<String> note = (ArrayList<String>) task.getResult().get("note");
+                                                assert note != null;
+                                                for (int i = 0; i < Objects.requireNonNull(time).size(); i++) {
+                                                    if (time.get(i).equals(timelines.get(position).getTime())) {
+                                                        note.remove(i);
+                                                        note.add(i, newNote.getText().toString());
+                                                        break;
+                                                    }
+                                                }
+                                                task.getResult().getReference().update("note", note);
+                                            }
+                                        });
+                                        setList(sdf.format(calendar[0].getSelectedDate().getTime()));
+                                        alert1.dismiss();
+                                    }
+                                    else Toast.makeText(getContext(), "Empty Note!", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            cancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    alert1.dismiss();
+                                }
+                            });
+                            alert1.show();
+                            alert.dismiss();
+                        }
+                    });
+                    delete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            firebaseHandler.getCurrentCalendar("s3740819@rmit.edu.vn")
+                                    .collection("data").document(sdf.format(calendar[0].getSelectedDate().getTime())).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    ArrayList<String> time = (ArrayList<String>) task.getResult().get("time");
+                                    ArrayList<String> type = (ArrayList<String>) task.getResult().get("type");
+                                    ArrayList<String> note = (ArrayList<String>) task.getResult().get("note");
+                                    assert type != null;
+                                    assert note != null;
+                                    for (int i = 0; i < Objects.requireNonNull(time).size(); i++){
+                                        if (time.get(i).equals(timelines.get(position).getTime()) && note.get(i).equals(timelines.get(position).getNote())
+                                                && type.get(i).equals(timelines.get(position).getType())){
+                                            time.remove(i);
+                                            type.remove(i);
+                                            note.remove(i);
+                                            break;
+                                        }
+                                    }
+                                    task.getResult().getReference().update("time", time);
+                                    task.getResult().getReference().update("note", note);
+                                    task.getResult().getReference().update("type", type);
+                                    setList(sdf.format(calendar[0].getSelectedDate().getTime()));
+                                    alert.dismiss();
+                                }
+                            });
+                        }
+                    });
+                    alert.show();
                 }
             }
         });
@@ -291,9 +426,7 @@ public class TimetableFragment extends Fragment {
     }
 
     private Timeline get(String time, String note, String type) {
-        Timeline timeline = new Timeline(time,note, type);
-        timelines.add(timeline);
-        return timeline;
+        return new Timeline(time,note, type);
     }
 
     private static Date addDays(Date d1) {

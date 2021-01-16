@@ -3,9 +3,11 @@ package com.example.myrmit.model;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -49,16 +51,22 @@ public class TimelineArrayAdapter extends android.widget.ArrayAdapter<Timeline> 
             ((ViewHolder) view.getTag()).note.setTag(list.get(position));
         }
         ViewHolder holder = (ViewHolder) view.getTag();
-        if (!list.get(position).getType().equals("class")){
+        if (list.get(position).getType().equals("note")){
             view.setBackgroundColor(Color.WHITE);
         }
         holder.time.setText(list.get(position).getTime() +":00");
         holder.note.setText(list.get(position).getNote());
-        if (holder.note.getLayout() != null && holder.note.getLayout().getLineCount() != 1 && holder.space.getText().toString().split("").length <= holder.note.getLayout().getLineCount()+1){
-            for (int i = 1; i< holder.note.getLayout().getLineCount(); i++) {
-                holder.space.setText(holder.space.getText().toString() + "\n");
+        ViewTreeObserver vto = holder.note.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (holder.note.getLayout() != null && holder.note.getLayout().getLineCount() != 1 && holder.space.getText().toString().split("").length <= holder.note.getLayout().getLineCount()){
+                    for (int i = 1; i< holder.note.getLayout().getLineCount(); i++) {
+                        holder.space.setText(holder.space.getText().toString() + "\n");
+                    }
+                }
             }
-        }
+        });
         return view;
     }
 
