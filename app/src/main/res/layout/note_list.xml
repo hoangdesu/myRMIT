@@ -18,9 +18,8 @@
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/id"
         android:layout_toRightOf="@+id/id"
-        android:background="#DCDCDC"
+        android:background="#303030"
         android:text="\n\n"
-        android:textColor="#575656"
         android:textSize="12sp" />
 
     <TextView

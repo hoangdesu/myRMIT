@@ -3,6 +3,7 @@ package com.example.myrmit.model;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,7 @@ import java.util.List;
 public class TimelineArrayAdapter extends android.widget.ArrayAdapter<Timeline> {
     private final List<Timeline> list;
     private final Activity context;
-
+    private int color;
     public TimelineArrayAdapter(Activity context, List<Timeline> list) {
         super(context, R.layout.note_list, list);
         this.context = context;
@@ -39,6 +40,7 @@ public class TimelineArrayAdapter extends android.widget.ArrayAdapter<Timeline> 
         if (convertView == null) {
             LayoutInflater inflator = context.getLayoutInflater();
             view = inflator.inflate(R.layout.note_list, null);
+            color = ((ColorDrawable)view.getBackground()).getColor();
             final ViewHolder viewHolder = new ViewHolder();
             viewHolder.space = view.findViewById(R.id.space);
             viewHolder.time = view.findViewById(R.id.time);
@@ -54,6 +56,7 @@ public class TimelineArrayAdapter extends android.widget.ArrayAdapter<Timeline> 
         if (list.get(position).getType().equals("note")){
             view.setBackgroundColor(Color.WHITE);
         }
+        else view.setBackgroundColor(color);
         holder.time.setText(list.get(position).getTime() +":00");
         holder.note.setText(list.get(position).getNote());
         ViewTreeObserver vto = holder.note.getViewTreeObserver();
