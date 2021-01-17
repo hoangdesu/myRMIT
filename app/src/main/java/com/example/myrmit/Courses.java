@@ -120,41 +120,5 @@ public class Courses extends AppCompatActivity {
         finish();
     }
 
-    private static class ViewPagerAdapter extends FragmentPagerAdapter {
-
-        private final List<Fragment> fragments = new ArrayList<>();
-        private final List<String> fragmentName = new ArrayList<>();
-
-        public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
-            super(fm, behavior);
-        }
-
-        public void addFragment(Fragment fragment, String name) {
-            fragments.add(fragment);
-            fragmentName.add(name);
-        }
-
-        public void clearFragment() {
-            fragments.clear();
-            fragmentName.clear();
-        }
-
-        @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            return fragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fragments.size();
-        }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return fragmentName.get(position);
-        }
-    }
 
 }

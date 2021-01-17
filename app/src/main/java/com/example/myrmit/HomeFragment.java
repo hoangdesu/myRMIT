@@ -1,6 +1,5 @@
 package com.example.myrmit;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -22,7 +21,7 @@ import java.util.List;
  */
 public class HomeFragment extends Fragment {
     ViewPager viewPager;
-    NewsAdapter newsAdapter;
+    SwipeCardAdapter swipeCardAdapter;
     List<News> newsList;
     CardView fragment_home_cardview_clubs;
 
@@ -75,17 +74,17 @@ public class HomeFragment extends Fragment {
 
         //Temp swipe cards
         newsList = new ArrayList<News>();
-        newsList.add(new News(R.drawable.temp_news_image, "RMIT Postgraduation Day", "Join our postgraduate workshops and discover"));
-        newsList.add(new News(R.drawable.temp_news_image, "RMIT Postgraduation Day", "Join our postgraduate workshops and discover"));
-        newsList.add(new News(R.drawable.temp_news_image, "RMIT Postgraduation Day", "Join our postgraduate workshops and discover"));
+        newsList.add(new News(R.drawable.temp_news_image, "RMIT Postgraduation Day", "Join our postgraduate workshops and discover","RMIT"));
+        newsList.add(new News(R.drawable.temp_news_image, "RMIT Postgraduation Day", "Join our postgraduate workshops and discover","RMIT"));
+        newsList.add(new News(R.drawable.temp_news_image, "RMIT Postgraduation Day", "Join our postgraduate workshops and discover","RMIT"));
 
-        newsAdapter = new NewsAdapter(newsList, getContext());
+        swipeCardAdapter = new SwipeCardAdapter(newsList, getContext());
         viewPager = view.findViewById(R.id.viewPager);
-        viewPager.setAdapter(newsAdapter);
+        viewPager.setAdapter(swipeCardAdapter);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (position < (newsAdapter.getCount() - 1)) {
+                if (position < (swipeCardAdapter.getCount() - 1)) {
 
                 }
             }

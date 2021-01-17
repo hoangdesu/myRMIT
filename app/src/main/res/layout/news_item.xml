@@ -1,71 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
     <androidx.cardview.widget.CardView
-        android:layout_width="375dp"
-        android:layout_height="658dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="5dp"
+        android:id="@+id/cardView"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
         app:cardCornerRadius="18dp"
-        app:cardElevation="5dp">
+        app:cardElevation="10dp">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="10dp"
+                    app:cardElevation="0dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/rmit_logo" />
+
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/museo_500"
+                    android:text="RMIT"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"></TextView>
+
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/news_image"
+                android:scaleType="fitCenter"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/temp_news_image">
+
+            </ImageView>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/news_title"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="6dp"
-                android:scaleType="centerCrop" />
+                android:padding="8dp">
 
-            <TextView
-                android:id="@+id/news_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/description"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginLeft="13dp"
-                android:layout_marginBottom="1dp"
-                android:fontFamily="@font/museo_500"
-                android:text="Title"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"></TextView>
+                <TextView
+                    android:id="@+id/news_title"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/museo_500"
+                    android:maxLines="1"
+                    android:text="RMIT Post graduation day"
+                    android:textColor="@color/app_secondary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+
+                <ImageView
+                    android:id="@+id/like_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="50dp"
+                    android:onClick="onLikeClick"
+                    android:src="@drawable/ic_like" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_bookmark" />
+
+
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginLeft="13dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
                 android:ellipsize="end"
-                android:maxLines="2"
-                android:text="Description"
+                android:fontFamily="@font/museo_500"
+                android:maxLines="3"
+                android:text="If you’re thinking about starting your master’s journey in 2021, don’t miss this opportunity to join our Master’s workshops so that you can experience RMIT for yourself and discover how you can transform your perspectives, transform your possibilities and transform yourself at RMIT!"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
 
-        </RelativeLayout>
-
-
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
+
 </RelativeLayout>

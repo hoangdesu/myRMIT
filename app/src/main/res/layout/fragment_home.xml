@@ -356,6 +356,7 @@
                 android:layout_marginEnd="9dp"
                 android:layout_marginRight="9dp"
                 android:layout_marginBottom="15dp"
+                android:onClick="onNewsClick"
                 app:cardCornerRadius="18dp"
                 app:cardElevation="10dp">
 

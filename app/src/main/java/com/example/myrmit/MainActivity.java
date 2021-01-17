@@ -123,6 +123,12 @@ public class MainActivity extends AppCompatActivity {
         Intent courses =  new Intent(MainActivity.this, Courses.class);
         startActivity(courses);
     }
+
+    public void onNewsClick(View view){
+        Intent intent =  new Intent(MainActivity.this, NewsActivity.class);
+        startActivity(intent);
+    }
+
     // Call once to add 14 clubs to "clubs" collection
     private String clubName;
     Map<String, Object> club;

@@ -8,54 +8,65 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.viewpager.widget.PagerAdapter;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class NewsAdapter extends PagerAdapter {
-    private List<News> newsList;
-    private LayoutInflater layoutInflater;
+
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> {
     private Context context;
+    private List<News> data;
 
-    public NewsAdapter(List<News> newsList, Context context) {
-        this.newsList = newsList;
+    public NewsAdapter(Context context, List<News> data) {
         this.context = context;
+        this.data = data;
     }
 
-    @Override
-    public int getCount() {
-        return newsList.size();
-    }
-
-    @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view.equals(object);
-    }
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.news_item, container, false);
-
-        ImageView newsImage;
-        TextView title, description;
-
-        newsImage = (ImageView) view.findViewById(R.id.news_image);
-        title = (TextView) view.findViewById(R.id.news_title);
-        description = (TextView) view.findViewById(R.id.description);
-
-        newsImage.setImageResource(newsList.get(position).getImage());
-        title.setText(newsList.get(position).getTitle());
-        description.setText(newsList.get(position).getDescription());
-
-        container.addView(view, 0);
-
-        return view;
+    public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        View view;
+        LayoutInflater inflater = LayoutInflater.from(context);
+        view = inflater.inflate(R.layout.news_item, viewGroup, false);
+        return new MyHolder(view);
     }
 
     @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((View) object);
+    public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+        //Set title, thumnail for the main activity
+        holder.newsTitle.setText(data.get(position).getTitle());
+        holder.newsThumbnail.setImageResource(data.get(position).getThumbnail());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Send data to NewsActivity
+                /*Intent intent = new Intent(context,NewsActivity.class);
+                intent.putExtra("Title",data.get(position).getTitle());
+                intent.putExtra("Author",data.get(position).getAuthor());
+                intent.putExtra("Thumbnail", data.get(position).getThumbnail());
+                context.startActivity(intent);*/
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return data.size();
+    }
+
+    public class MyHolder extends RecyclerView.ViewHolder {
+        TextView newsTitle;
+        CardView cardView;
+        ImageView newsThumbnail;
+
+        public MyHolder(@NonNull View itemView) {
+            super(itemView);
+
+            newsTitle = (TextView) itemView.findViewById(R.id.news_title);
+            newsThumbnail = (ImageView) itemView.findViewById(R.id.news_image);
+            cardView = (CardView) itemView.findViewById(R.id.cardView);
+        }
     }
 }
