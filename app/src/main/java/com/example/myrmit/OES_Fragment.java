@@ -156,10 +156,12 @@ public class OES_Fragment extends Fragment {
                                                     }
                                                     else progress.add("0");
                                                 }
-                                                ArrayAdapter<Course> adapter = new CoursesArrayAdapter(getActivity(), list, isFeb, isJun, isOct, progress);
-                                                listView.setAdapter(adapter);
-                                                loading.setVisibility(View.INVISIBLE);
-                                                confirm.setVisibility(View.VISIBLE);
+                                                try {
+                                                    ArrayAdapter<Course> adapter = new CoursesArrayAdapter(getActivity(), list, isFeb, isJun, isOct, progress);
+                                                    listView.setAdapter(adapter);
+                                                    loading.setVisibility(View.INVISIBLE);
+                                                    confirm.setVisibility(View.VISIBLE);
+                                                }catch (Exception ignored){}
                                             }
                                         });
                                     }

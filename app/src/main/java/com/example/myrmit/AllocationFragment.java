@@ -224,9 +224,12 @@ public class AllocationFragment extends Fragment {
                                                 groups.get(groups.size()-1).setGroup2(true);
                                             }
                                             if (groups.size() == progressing.size()){
-                                                ArrayAdapter<Group> adapter = new GroupArrayAdapter(getActivity(), groups);
-                                                listView.setAdapter(adapter);
-                                                confirm.setVisibility(View.VISIBLE);
+                                                try {
+                                                    ArrayAdapter<Group> adapter = new GroupArrayAdapter(getActivity(), groups);
+                                                    listView.setAdapter(adapter);
+                                                    confirm.setVisibility(View.VISIBLE);
+                                                }catch (Exception ignored){}
+
                                             }
                                         }
                                     });
