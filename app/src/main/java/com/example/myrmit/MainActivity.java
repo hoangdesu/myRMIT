@@ -129,6 +129,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onMapsClick(View view){
+        Intent intent =  new Intent(MainActivity.this, MapsActivity.class);
+        startActivity(intent);
+    }
+
     // Call once to add 14 clubs to "clubs" collection
     private String clubName;
     Map<String, Object> club;
