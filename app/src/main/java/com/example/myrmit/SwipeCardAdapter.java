@@ -1,21 +1,33 @@
 package com.example.myrmit;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class SwipeCardAdapter extends PagerAdapter {
     private List<News> newsList;
     private LayoutInflater layoutInflater;
     private Context context;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     public SwipeCardAdapter(List<News> newsList, Context context) {
         this.newsList = newsList;
@@ -45,7 +57,25 @@ public class SwipeCardAdapter extends PagerAdapter {
         title = (TextView) view.findViewById(R.id.news_title);
         description = (TextView) view.findViewById(R.id.description);
 
-        newsImage.setImageResource(newsList.get(position).getThumbnail());
+        StorageReference storageReference = storage.getReference().child("data_science.jpg");
+
+        try {
+            final File file = File.createTempFile("image","jpg");
+            storageReference.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                    newsImage.setImageBitmap(bitmap);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(context, "Failed to load image", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch  (IOException e){
+            e.printStackTrace();
+        }
         title.setText(newsList.get(position).getTitle());
         description.setText(newsList.get(position).getDescription());
 

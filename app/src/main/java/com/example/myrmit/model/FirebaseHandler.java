@@ -74,6 +74,10 @@ public class FirebaseHandler {
                 .collection("data").document(date);
     }
 
+    public DocumentReference getNews() {
+        return db.collection("news").document("all");
+    }
+
     public void updateTimetable(String username){
         db.collection("users").document(username).collection("programCode").document("calendar").collection("data").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

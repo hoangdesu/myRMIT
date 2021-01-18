@@ -2,6 +2,7 @@ package com.example.myrmit;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -10,6 +11,14 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.myrmit.model.FirebaseHandler;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +31,9 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     ViewPager viewPager;
     SwipeCardAdapter swipeCardAdapter;
-    List<News> newsList;
+    List<News> newsList = new ArrayList<News>();;
     CardView fragment_home_cardview_clubs;
+    FirebaseHandler firebaseHandler = new FirebaseHandler();
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -72,46 +82,57 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        //Temp swipe cards
-        newsList = new ArrayList<News>();
-        newsList.add(new News(R.drawable.temp_news_image, "RMIT Postgraduation Day", "Join our postgraduate workshops and discover","RMIT"));
-        newsList.add(new News(R.drawable.temp_news_image, "RMIT Postgraduation Day", "Join our postgraduate workshops and discover","RMIT"));
-        newsList.add(new News(R.drawable.temp_news_image, "RMIT Postgraduation Day", "Join our postgraduate workshops and discover","RMIT"));
-
-        swipeCardAdapter = new SwipeCardAdapter(newsList, getContext());
-        viewPager = view.findViewById(R.id.viewPager);
-        viewPager.setAdapter(swipeCardAdapter);
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        firebaseHandler.getNews().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (position < (swipeCardAdapter.getCount() - 1)) {
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                ArrayList<String> titles = (ArrayList<String>) task.getResult().get("title");
+                ArrayList<String> descriptions = (ArrayList<String>) task.getResult().get("description");
+                ArrayList<String> thumbnails = (ArrayList<String>) task.getResult().get("thumbnail");
 
+                System.out.println(titles.toString());
+                System.out.println(thumbnails.toString());
+
+                for (int i = 0; i < titles.size(); i++) {
+                    newsList.add(new News(thumbnails.get(i),titles.get(i),descriptions.get(i),"RMIT"));
                 }
+
+                swipeCardAdapter = new SwipeCardAdapter(newsList, getContext());
+                viewPager = view.findViewById(R.id.viewPager);
+                viewPager.setAdapter(swipeCardAdapter);
+                viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                        if (position < (swipeCardAdapter.getCount() - 1)) {
+
+                        }
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+
+                    }
+                });
+
+                fragment_home_cardview_clubs = view.findViewById(R.id.fragment_home_cardview_clubs);
+                fragment_home_cardview_clubs.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Fragment clubsFragment = new ClubsFragment();
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragment_home, clubsFragment)
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                });
+
             }
 
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
         });
-
-        fragment_home_cardview_clubs = view.findViewById(R.id.fragment_home_cardview_clubs);
-        fragment_home_cardview_clubs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment clubsFragment = new ClubsFragment();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_home, clubsFragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-
 
         return view;
     }

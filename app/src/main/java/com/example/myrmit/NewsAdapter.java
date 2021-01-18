@@ -3,6 +3,7 @@ package com.example.myrmit;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> {
     private Context context;
     private List<News> data;
-    private FirebaseStorage storage = FirebaseStorage.getInstance("gs://myrmit-c2020");
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
 
     public NewsAdapter(Context context, List<News> data) {
         this.context = context;
@@ -49,10 +50,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> {
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         //Set title, thumnail for the main activity
         holder.newsTitle.setText(data.get(position).getTitle());
-        holder.newsThumbnail.setImageResource(data.get(position).getThumbnail());
-        StorageReference storageReference = storage.getReference().child("temp.jpg");
-        System.out.println("yeyeyeyeye");
-        System.out.println(storage.getReference().getBucket().toString());
+        holder.newsDescription.setText(data.get(position).getDescription());
+        StorageReference storageReference = storage.getReference().child(data.get(position).getThumbnail());
         try {
             final File file = File.createTempFile("image","jpg");
             storageReference.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
@@ -70,6 +69,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> {
         } catch  (IOException e){
             e.printStackTrace();
         }
+        holder.likeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.likeIcon.setColorFilter(Color.parseColor("#FFE60028"));
+            }
+        });
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,15 +96,19 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> {
 
     public class MyHolder extends RecyclerView.ViewHolder {
         TextView newsTitle;
+        TextView newsDescription;
         CardView cardView;
         ImageView newsThumbnail;
+        ImageView likeIcon;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
 
+            likeIcon = (ImageView) itemView.findViewById(R.id.like_btn);
             newsTitle = (TextView) itemView.findViewById(R.id.news_title);
             newsThumbnail = (ImageView) itemView.findViewById(R.id.news_image);
             cardView = (CardView) itemView.findViewById(R.id.cardView);
+            newsDescription = (TextView) itemView.findViewById(R.id.description);
         }
     }
 }

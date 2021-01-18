@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="370dp">
     
     <androidx.cardview.widget.CardView
+        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/cardView"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="350dp"
         app:cardCornerRadius="18dp"
         app:cardElevation="10dp">
 
@@ -53,15 +54,28 @@
                     android:textSize="16sp"
                     android:textStyle="bold"></TextView>
 
+                <ImageView
+                    android:id="@+id/like_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="180dp"
+                    android:src="@drawable/ic_like" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_bookmark" />
+
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/news_image"
-                android:scaleType="fitCenter"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/temp_news_image">
+                android:scaleType="centerCrop">
 
             </ImageView>
 
@@ -72,32 +86,15 @@
 
                 <TextView
                     android:id="@+id/news_title"
-                    android:layout_width="250dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/museo_500"
                     android:maxLines="1"
-                    android:text="RMIT Post graduation day"
                     android:textColor="@color/app_secondary"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
-
-
-                <ImageView
-                    android:id="@+id/like_btn"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="50dp"
-                    android:onClick="onLikeClick"
-                    android:src="@drawable/ic_like" />
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_bookmark" />
 
 
             </RelativeLayout>
@@ -106,12 +103,11 @@
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/museo_500"
                 android:maxLines="3"
-                android:text="If you’re thinking about starting your master’s journey in 2021, don’t miss this opportunity to join our Master’s workshops so that you can experience RMIT for yourself and discover how you can transform your perspectives, transform your possibilities and transform yourself at RMIT!"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -119,4 +115,4 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

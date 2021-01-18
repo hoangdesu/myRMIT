@@ -1,12 +1,12 @@
 package com.example.myrmit;
 
 public class News {
-    private int thumbnail;
+    private String thumbnail;
     private String title;
     private String description;
     private String author;
 
-    public News(int thumbnail, String title, String description, String author) {
+    public News(String thumbnail, String title, String description, String author) {
         this.thumbnail = thumbnail;
         this.title = title;
         this.description = description;
@@ -21,11 +21,11 @@ public class News {
         this.author = author;
     }
 
-    public int getThumbnail() {
+    public String getThumbnail() {
         return thumbnail;
     }
 
-    public void setThumbnail(int thumbnail) {
+    public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
     }
 
