@@ -17,11 +17,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,18 +86,21 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        firebaseHandler.getNews().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        firebaseHandler.getNews().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                ArrayList<String> titles = (ArrayList<String>) task.getResult().get("title");
-                ArrayList<String> descriptions = (ArrayList<String>) task.getResult().get("description");
-                ArrayList<String> thumbnails = (ArrayList<String>) task.getResult().get("thumbnail");
-
-                System.out.println(titles.toString());
-                System.out.println(thumbnails.toString());
-
-                for (int i = 0; i < titles.size(); i++) {
-                    newsList.add(new News(thumbnails.get(i),titles.get(i),descriptions.get(i),"RMIT"));
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                String title, description, thumbnail;
+                boolean isLike = false;
+                List<String> likes = new ArrayList<>();
+                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                    title = Objects.requireNonNull(documentSnapshot.getData().get("title")).toString();
+                    description = Objects.requireNonNull(documentSnapshot.getData().get("description")).toString();
+                    thumbnail = Objects.requireNonNull(documentSnapshot.getData().get("thumbnail")).toString();
+                    likes = (ArrayList<String>) documentSnapshot.get("likes");
+                    if (likes.contains("s3715271@rmit.edu.vn")) {
+                        isLike = true;
+                    }
+                    newsList.add(new News(thumbnail,title,description,"RMIT",isLike));
                 }
 
                 swipeCardAdapter = new SwipeCardAdapter(newsList, getContext());

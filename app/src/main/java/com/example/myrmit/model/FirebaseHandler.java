@@ -4,18 +4,14 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 public class FirebaseHandler {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -74,8 +70,8 @@ public class FirebaseHandler {
                 .collection("data").document(date);
     }
 
-    public DocumentReference getNews() {
-        return db.collection("news").document("all");
+    public Task<QuerySnapshot> getNews() {
+        return db.collection("news").whereEqualTo("type","news").get();
     }
 
     public void updateTimetable(String username){
@@ -102,6 +98,14 @@ public class FirebaseHandler {
         });
     }
 
+    public void updatePostLike(String id, String title, boolean like) {
+        if (like) {
+            db.collection("news").document(title).update("likes", FieldValue.arrayUnion(id));
+        } else {
+            db.collection("news").document(title).update("likes", FieldValue.arrayRemove(id));
+        }
+    }
+
     public void addClassTime(String username, ArrayList<String> dates, ArrayList<String> time, ArrayList<String> courseName) {
         for (String date : dates) {
             db.collection("users").document(username).collection("programCode").document("calendar").collection("data").document(date).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -126,4 +130,5 @@ public class FirebaseHandler {
     public DocumentReference getCurrentCalendar(String username){
         return  db.collection("users").document(username).collection("programCode").document("calendar");
     }
+
 }

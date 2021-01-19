@@ -7,6 +7,22 @@
     android:orientation="vertical"
     tools:context=".NewsActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search"
+        android:queryHint="Search..."
+        android:iconifiedByDefault="false"
+        android:layout_margin="10dp"
+        android:elevation="5dp"
+        android:background="@drawable/bg_round"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
@@ -16,5 +32,22 @@
         android:scrollbars="vertical"
 
         ></androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/app_secondary"
+        android:onClick="filter"
+        android:src="@drawable/ic_baseline_filter_alt_24"
+        android:layout_marginRight="20dp">
+
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
 
 </RelativeLayout>

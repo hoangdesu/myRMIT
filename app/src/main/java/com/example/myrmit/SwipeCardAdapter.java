@@ -57,7 +57,7 @@ public class SwipeCardAdapter extends PagerAdapter {
         title = (TextView) view.findViewById(R.id.news_title);
         description = (TextView) view.findViewById(R.id.description);
 
-        StorageReference storageReference = storage.getReference().child("data_science.jpg");
+        StorageReference storageReference = storage.getReference().child(newsList.get(position).getThumbnail());
 
         try {
             final File file = File.createTempFile("image","jpg");

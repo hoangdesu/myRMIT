@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/dialog_container"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp"
+    android:padding="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/dialog_background"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/title_background"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:text="Filter"
+            android:textStyle="bold"
+            android:fontFamily="@font/museo_500"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/title"
+            android:orientation="vertical">
+            <RadioButton android:id="@+id/like_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/app_primary"
+                android:text="Liked"
+                android:fontFamily="@font/museo_500"/>
+            <RadioButton android:id="@+id/all_btn"
+                android:layout_width="wrap_content"
+                android:buttonTint="@color/app_primary"
+                android:layout_height="wrap_content"
+                android:text="All"
+                android:fontFamily="@font/museo_500"/>
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <android.widget.Button
+        android:id="@+id/apply_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="80dp"
+        android:background="@drawable/dialog_button_background"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/museo_500"
+        android:text="Apply"
+        app:layout_constraintBottom_toBottomOf="@id/layout_dialog"
+        app:layout_constraintTop_toBottomOf="@id/layout_dialog">
+
+    </android.widget.Button>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

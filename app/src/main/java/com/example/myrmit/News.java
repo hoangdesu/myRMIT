@@ -5,12 +5,22 @@ public class News {
     private String title;
     private String description;
     private String author;
+    private boolean isLiked;
 
-    public News(String thumbnail, String title, String description, String author) {
+    public News(String thumbnail, String title, String description, String author, boolean isLiked) {
         this.thumbnail = thumbnail;
         this.title = title;
         this.description = description;
         this.author = author;
+        this.isLiked = isLiked;
+    }
+
+    public boolean isLiked() {
+        return isLiked;
+    }
+
+    public void setLike(boolean like) {
+        isLiked = like;
     }
 
     public String getAuthor() {
