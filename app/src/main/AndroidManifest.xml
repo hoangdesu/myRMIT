@@ -4,7 +4,6 @@
     package="com.example.myrmit"
     android:versionCode="1"
     android:versionName="1.0">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -40,7 +39,8 @@
         android:theme="@style/Theme.MyRMIT"
         tools:ignore="HardcodedDebugMode"
         tools:targetApi="p">
-
+        <activity android:name=".SignInActivity"></activity>
+        <activity android:name=".MainActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -55,8 +55,10 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
-        <activity android:name=".OES_Fragment" />
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".OES_Fragment"
+            tools:ignore="Instantiatable" />
 
         <receiver
             android:name=".model.RestartService"
@@ -71,7 +73,7 @@
             android:name=".model.MyService"
             android:enabled="true" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
