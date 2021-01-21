@@ -3,6 +3,7 @@ package com.example.myrmit;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import java.io.InputStream;
 
@@ -23,6 +26,7 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         activity = this;
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -59,7 +63,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         @Override
         protected void onDraw(Canvas canvas) {
-            canvas.scale(((float)super.getWidth() /(float)movie.width()) ,(float)super.getHeight() /(float)movie.height());
+            canvas.scale(((float)super.getWidth() /(float)movie.width()) ,(float)super.getWidth() /(float)movie.width());
             canvas.drawColor(Color.WHITE);
             super.onDraw(canvas);
             long now=android.os.SystemClock.uptimeMillis();
