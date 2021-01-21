@@ -6,8 +6,8 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="308dp"
+        android:layout_width="381dp"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="30dp"
@@ -25,7 +25,7 @@
             <ImageView
                 android:id="@+id/news_image"
                 android:layout_width="match_parent"
-                android:layout_height="139dp"
+                android:layout_height="668dp"
                 android:layout_above="@+id/news_title"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="0dp"
