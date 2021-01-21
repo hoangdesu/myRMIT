@@ -180,7 +180,7 @@
                         android:layout_marginTop="-27dp"
                         android:fontFamily="@font/museo_500"
                         android:gravity="bottom|center"
-                        android:text="Library"
+                        android:text="Booking"
                         android:textColor="@color/app_secondary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
