@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initialSetting() {
+        SignInActivity.activity.finish();
         NotificationManager nMgr = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nMgr.cancelAll();
         MyService myService = new MyService();
