@@ -62,4 +62,16 @@
         android:textSize="12sp"
         app:backgroundTint="#065C0A" />
 
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="79dp"
+        android:layout_height="53dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="2dp"
+        android:src="@drawable/today" />
+
 </RelativeLayout>

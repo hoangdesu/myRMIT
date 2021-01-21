@@ -52,6 +52,7 @@ public class TimetableFragment extends Fragment {
     private ListView listView;
     private Button add;
     private HorizontalCalendar[] calendar;
+    private ImageView today;
     private ImageView nothing;
     ArrayList<String> spinnerTime = new ArrayList<>();
     public TimetableFragment() {
@@ -92,6 +93,7 @@ public class TimetableFragment extends Fragment {
         View view = inflater.inflate(R.layout.timetable_fragment, container, false);
         listView = view.findViewById(R.id.timelist);
         add = view.findViewById(R.id.button4);
+        today = view.findViewById(R.id.imageView7);
         nothing = view.findViewById(R.id.imageView6);
         calendar = new HorizontalCalendar[]{new HorizontalCalendar.Builder(view.getRootView(), R.id.calendarView)
                 .datesNumberOnScreen(5)
@@ -149,6 +151,12 @@ public class TimetableFragment extends Fragment {
             @Override
             public void onDateSelected(Calendar date, int position) {
                 setList(sdf.format(date.getTime()));
+            }
+        });
+        today.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar[0].goToday(true);
             }
         });
         return view;
