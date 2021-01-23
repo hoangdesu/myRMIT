@@ -80,6 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         PolygonOptions tennisCourt = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7307, 106.69225), new LatLng(10.7307, 106.69267), new LatLng(10.7303, 106.69267), new LatLng(10.7303, 106.69225)).strokeWidth(2);
 
         mMap.addPolygon(building1);
+        mMap.addPolygon(building2);
         mMap.addPolygon(parkingLot1);
         mMap.addPolygon(parkingLot2);
         mMap.addPolygon(cafeteria);
