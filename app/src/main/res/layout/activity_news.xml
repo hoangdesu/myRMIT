@@ -8,68 +8,97 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_margin="10dp"
+
             >
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:text="Title"
-                android:gravity="center"
                 android:fontFamily="@font/museo_500"
                 android:textStyle="bold"
                 android:textColor="@color/app_secondary"
-                android:textSize="25sp"
+                android:textSize="20sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 />
             <ImageView
                 android:id="@+id/image"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="200dp"
                 android:background="@color/design_default_color_primary_dark"
                 android:scaleType="centerCrop"
                 />
 
-            <TextView
-                android:id="@+id/author"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:justificationMode="inter_word"
-                android:text="Author"
-                android:textSize="18sp"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="10dp"
+                    app:cardElevation="0dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/rmit_logo" />
+
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/museo_500"
+                    android:text="RMIT"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"></TextView>
+
+                <ImageView
+                    android:id="@+id/like_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="230dp"
+                    android:src="@drawable/ic_like" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
                 android:fontFamily="@font/museo_500"
                 android:textColor="@color/black"
-                />
-
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="18dp"
-                android:fontFamily="@font/helvetica"
-                android:text="@string/date"
+                android:text="Description"
                 android:textSize="15sp"
 
+
+
                 />
-
-            <TextView
-                android:id="@+id/news"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="18dp"
-                android:fontFamily="@font/georgia"
-                android:text="@string/news"
-                android:textSize="18sp" />
-
-
 
         </LinearLayout>
 

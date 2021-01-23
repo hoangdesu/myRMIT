@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.example.myrmit.model.FirebaseHandler;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -38,6 +39,7 @@ public class HomeFragment extends Fragment {
     List<News> newsList = new ArrayList<News>();;
     CardView fragment_home_cardview_clubs;
     FirebaseHandler firebaseHandler = new FirebaseHandler();
+    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -97,7 +99,7 @@ public class HomeFragment extends Fragment {
                     description = Objects.requireNonNull(documentSnapshot.getData().get("description")).toString();
                     thumbnail = Objects.requireNonNull(documentSnapshot.getData().get("thumbnail")).toString();
                     likes = (ArrayList<String>) documentSnapshot.get("likes");
-                    if (likes.contains("s3715271@rmit.edu.vn")) {
+                    if (currentUser != null && likes.contains(currentUser)) {
                         isLike = true;
                     }
                     newsList.add(new News(thumbnail,title,description,"RMIT",isLike));

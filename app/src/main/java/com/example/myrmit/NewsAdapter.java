@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myrmit.model.FirebaseHandler;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -33,11 +34,12 @@ import java.util.List;
 
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> implements Filterable {
+    private static List<News> newsList;
+    private static List<News> newsListAll;
     private Context context;
-    private List<News> newsList;
-    private List<News> newsListAll;
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private FirebaseHandler firebaseHandler = new FirebaseHandler();
+    private String currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
     public NewsAdapter(Context context, List<News> newsList) {
         this.context = context;
@@ -45,6 +47,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
         this.newsListAll = new ArrayList<>(newsList);
     }
 
+    public static void updateData(String title, boolean like) {
+        for (News news :NewsAdapter.newsListAll) {
+            if (news.getTitle().equals(title)) {
+                news.setLike(like);
+            }
+        }
+    }
 
     @NonNull
     @Override
@@ -87,14 +96,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
         holder.likeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!newsList.get(position).isLiked()) {
-                    firebaseHandler.updatePostLike("s3715271@rmit.edu.vn", holder.newsTitle.getText().toString(), true);
-                    holder.likeIcon.setColorFilter(Color.parseColor("#FFE60028"));
-                    newsList.get(position).setLike(true);
-                } else {
-                    firebaseHandler.updatePostLike("s3715271@rmit.edu.vn", holder.newsTitle.getText().toString(), false);
-                    holder.likeIcon.setColorFilter(Color.parseColor("#FF000000"));
-                    newsList.get(position).setLike(false);
+                if (currentUser != null) {
+                    if (!newsList.get(position).isLiked()) {
+                        firebaseHandler.updatePostLike(currentUser, holder.newsTitle.getText().toString(), true);
+                        holder.likeIcon.setColorFilter(Color.parseColor("#FFE60028"));
+                        newsList.get(position).setLike(true);
+                    } else {
+                        firebaseHandler.updatePostLike(currentUser, holder.newsTitle.getText().toString(), false);
+                        holder.likeIcon.setColorFilter(Color.parseColor("#FF000000"));
+                        newsList.get(position).setLike(false);
+                    }
                 }
             }
         });
@@ -103,6 +114,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, NewsActivity.class);
+                intent.putExtra("Title",newsListAll.get(position).getTitle());
+                intent.putExtra("Author",newsListAll.get(position).getAuthor());
+                intent.putExtra("Image", newsListAll.get(position).getThumbnail());
+                intent.putExtra("Description", newsListAll.get(position).getDescription());
+                intent.putExtra("Like", newsListAll.get(position).isLiked());
                 context.startActivity(intent);
             }
         });

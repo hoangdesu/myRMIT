@@ -28,24 +28,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da164c8c-a112-4b82-813c-bc6aee1a590f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/Services.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/service_background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_services.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/AllocationFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/AllocationFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/Courses.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/Courses.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/OES_Fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/OES_Fragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/TimetableFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/TimetableFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/CoursesArrayAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/CoursesArrayAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/FirebaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/FirebaseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/HomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/NewFeed.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/NewFeed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/NewsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/NewsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/NewsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/NewsAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_news.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_news.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R58M834F1QX]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -189,22 +184,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1611292303908" />
-    <state width="1305" height="227" key="GridCell.Tab.0.bottom" timestamp="1611071435070">
+    <state width="1322" height="227" key="GridCell.Tab.0.bottom" timestamp="1611421037938">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1305" height="227" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611071435070" />
-    <state width="1305" height="227" key="GridCell.Tab.0.center" timestamp="1611071435070">
+    <state width="1322" height="227" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611421037938" />
+    <state width="1322" height="227" key="GridCell.Tab.0.center" timestamp="1611421037938">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1305" height="227" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611071435070" />
-    <state width="1305" height="227" key="GridCell.Tab.0.left" timestamp="1611071435069">
+    <state width="1322" height="227" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611421037938" />
+    <state width="1322" height="227" key="GridCell.Tab.0.left" timestamp="1611421037938">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1305" height="227" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611071435069" />
-    <state width="1305" height="227" key="GridCell.Tab.0.right" timestamp="1611071435070">
+    <state width="1322" height="227" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611421037938" />
+    <state width="1322" height="227" key="GridCell.Tab.0.right" timestamp="1611421037938">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1305" height="227" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611071435070" />
+    <state width="1322" height="227" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611421037938" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1610990510611">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

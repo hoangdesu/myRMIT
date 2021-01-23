@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myrmit.model.FirebaseHandler;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -32,7 +33,9 @@ public class NewFeed extends AppCompatActivity {
     private NewsAdapter newsAdapter;
     private SearchView searchView;
     private int filterOptions = 2;
+    private boolean updateFlag = false;
     FirebaseHandler firebaseHandler = new FirebaseHandler();
+    private String currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +70,10 @@ public class NewFeed extends AppCompatActivity {
                 List<String> likes = new ArrayList<>();
                 for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                     title = Objects.requireNonNull(documentSnapshot.getData().get("title")).toString();
-                    description = Objects.requireNonNull(documentSnapshot.getData().get("description")).toString();
+                    description = Objects.requireNonNull(documentSnapshot.getData().get("description")).toString().replace("\\n","\n\n");
                     thumbnail = Objects.requireNonNull(documentSnapshot.getData().get("thumbnail")).toString();
                     likes = (ArrayList<String>) documentSnapshot.get("likes");
-                    if (likes.contains("s3715271@rmit.edu.vn")) {
+                    if (currentUser != null && likes.contains(currentUser)) {
                         isLike = true;
                     }
                     System.out.println(likes.toString());
@@ -83,8 +86,17 @@ public class NewFeed extends AppCompatActivity {
                 newsAdapter = new NewsAdapter(NewFeed.this, newsList);
                 recyclerView.setLayoutManager(new GridLayoutManager(NewFeed.this, 1));
                 recyclerView.setAdapter(newsAdapter);
+                updateFlag = true;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (updateFlag) {
+            newsAdapter.notifyDataSetChanged();
+        }
     }
 
     public void filter(View view) {
