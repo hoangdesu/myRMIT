@@ -20,13 +20,24 @@ import android.widget.FrameLayout;
 import java.io.InputStream;
 
 public class WelcomeActivity extends AppCompatActivity {
+    @SuppressLint("StaticFieldLeak")
     public static Activity activity;
+    View view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         activity = this;
         Handler handler = new Handler();
+        view = findViewById(R.id.view2);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handler.removeCallbacksAndMessages(null);
+                Intent intent = new Intent(WelcomeActivity.this, SignInActivity.class);
+                startActivity(intent);
+            }
+        });
         handler.postDelayed(new Runnable() {
             public void run() {
                 Intent intent = new Intent(WelcomeActivity.this, SignInActivity.class);
