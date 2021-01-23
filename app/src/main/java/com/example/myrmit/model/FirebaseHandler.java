@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -130,6 +131,10 @@ public class FirebaseHandler {
 
     public DocumentReference getCurrentCalendar(String username){
         return  db.collection("users").document(username).collection("programCode").document("calendar");
+    }
+
+    public CollectionReference getRMITServices(){
+        return db.collection("services");
     }
 
 }

@@ -15,4 +15,23 @@
         android:layout_centerHorizontal="false"
         android:layout_centerVertical="true"
         android:background="@drawable/a" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="635dp"
+        android:layout_below="@+id/v2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/service_background" />
+
+    <ListView
+        android:id="@+id/serviceView"
+        android:layout_width="match_parent"
+        android:layout_height="630dp"
+        android:layout_below="@+id/v2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="4dp" />
 </RelativeLayout>

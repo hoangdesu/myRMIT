@@ -37,37 +37,32 @@ public class TimelineArrayAdapter extends android.widget.ArrayAdapter<Timeline> 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
-        if (convertView == null) {
-            LayoutInflater inflator = context.getLayoutInflater();
-            view = inflator.inflate(R.layout.note_list, null);
-            color = ((ColorDrawable)view.getBackground()).getColor();
-            final ViewHolder viewHolder = new ViewHolder();
-            viewHolder.space = view.findViewById(R.id.space);
-            viewHolder.time = view.findViewById(R.id.time);
-            viewHolder.note = view.findViewById(R.id.note);
-            view.setTag(viewHolder);
-        } else {
-            view = convertView;
-            ((ViewHolder) view.getTag()).space.setTag(list.get(position));
-            ((ViewHolder) view.getTag()).time.setTag(list.get(position));
-            ((ViewHolder) view.getTag()).note.setTag(list.get(position));
-        }
-        ViewHolder holder = (ViewHolder) view.getTag();
+        LayoutInflater inflator = context.getLayoutInflater();
+        view = inflator.inflate(R.layout.note_list, null);
+        color = ((ColorDrawable)view.getBackground()).getColor();
+        final ViewHolder viewHolder = new ViewHolder();
+        viewHolder.space = view.findViewById(R.id.space);
+        viewHolder.time = view.findViewById(R.id.time);
+        viewHolder.note = view.findViewById(R.id.note);
         if (list.get(position).getType().equals("note")){
             view.setBackgroundColor(Color.WHITE);
         }
         else view.setBackgroundColor(color);
-        holder.time.setText(list.get(position).getTime() +":00");
-        holder.note.setText(list.get(position).getNote());
-        ViewTreeObserver vto = holder.note.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        viewHolder.time.setText(list.get(position).getTime() +":00");
+        viewHolder.note.setText(list.get(position).getNote());
+        viewHolder.note.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
-            public void onGlobalLayout() {
-                if (holder.note.getLayout() != null && holder.note.getLayout().getLineCount() != 1 && holder.space.getText().toString().split("").length <= holder.note.getLayout().getLineCount()){
-                    for (int i = 1; i< holder.note.getLayout().getLineCount(); i++) {
-                        holder.space.setText(holder.space.getText().toString() + "\n");
+            public boolean onPreDraw() {
+                viewHolder.note.getViewTreeObserver().removeOnPreDrawListener(this);
+
+                int lineCount = viewHolder.note.getLineCount();
+                if ( lineCount != 1 && viewHolder.space.getText().toString().split("").length < lineCount){
+                    for (int i = 1; i< lineCount; i++) {
+                        viewHolder.space.setText(viewHolder.space.getText().toString() + "\n");
                     }
                 }
+
+                return true;
             }
         });
         return view;
