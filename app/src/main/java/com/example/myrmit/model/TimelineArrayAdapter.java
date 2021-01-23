@@ -33,7 +33,7 @@ public class TimelineArrayAdapter extends android.widget.ArrayAdapter<Timeline> 
         protected TextView space;
     }
 
-    @SuppressLint({"InflateParams", "SetTextI18n"})
+    @SuppressLint({"InflateParams", "SetTextI18n", "ViewHolder"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
@@ -56,7 +56,7 @@ public class TimelineArrayAdapter extends android.widget.ArrayAdapter<Timeline> 
                 viewHolder.note.getViewTreeObserver().removeOnPreDrawListener(this);
 
                 int lineCount = viewHolder.note.getLineCount();
-                if ( lineCount != 1 && viewHolder.space.getText().toString().split("").length < lineCount){
+                if (viewHolder.space.getText().toString().split("").length-1 < lineCount){
                     for (int i = 1; i< lineCount; i++) {
                         viewHolder.space.setText(viewHolder.space.getText().toString() + "\n");
                     }
