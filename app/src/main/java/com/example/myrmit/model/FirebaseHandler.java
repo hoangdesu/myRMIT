@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -24,8 +25,8 @@ public class FirebaseHandler {
         db.setFirestoreSettings(settings);
     }
 
-    public FirebaseFirestore getDb() {
-        return db;
+    public DocumentReference getAccount(String username){
+        return db.collection("users").document(username);
     }
 
     public DocumentReference getProgramOfStudent(String username){

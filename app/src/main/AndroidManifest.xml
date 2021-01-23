@@ -39,7 +39,8 @@
         android:theme="@style/Theme.MyRMIT"
         tools:ignore="HardcodedDebugMode"
         tools:targetApi="p">
-        <activity android:name=".SignInActivity"></activity>
+        <activity android:name=".Services"></activity>
+        <activity android:name=".SignInActivity" />
         <activity android:name=".MainActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
