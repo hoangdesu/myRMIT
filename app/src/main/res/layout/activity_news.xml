@@ -1,53 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".NewsActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-    <SearchView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/search"
-        android:queryHint="Search..."
-        android:iconifiedByDefault="false"
-        android:layout_margin="10dp"
-        android:elevation="5dp"
-        android:background="@drawable/bg_round"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            >
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Title"
+                android:gravity="center"
+                android:fontFamily="@font/museo_500"
+                android:textStyle="bold"
+                android:textColor="@color/app_secondary"
+                android:textSize="25sp"
+                />
+            <ImageView
+                android:id="@+id/image"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="@color/design_default_color_primary_dark"
+                android:scaleType="centerCrop"
+                />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="true"
-        android:scrollbars="vertical"
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:justificationMode="inter_word"
+                android:text="Author"
+                android:textSize="18sp"
+                android:fontFamily="@font/museo_500"
+                android:textColor="@color/black"
+                />
 
-        ></androidx.recyclerview.widget.RecyclerView>
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="18dp"
+                android:fontFamily="@font/helvetica"
+                android:text="@string/date"
+                android:textSize="15sp"
 
-    </LinearLayout>
+                />
+
+            <TextView
+                android:id="@+id/news"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="18dp"
+                android:fontFamily="@font/georgia"
+                android:text="@string/news"
+                android:textSize="18sp" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/app_secondary"
-        android:onClick="filter"
-        android:src="@drawable/ic_baseline_filter_alt_24"
-        android:layout_marginRight="20dp">
 
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+        </LinearLayout>
 
+    </ScrollView>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

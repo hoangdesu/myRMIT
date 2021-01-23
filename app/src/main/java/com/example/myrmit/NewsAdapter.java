@@ -1,6 +1,7 @@
 package com.example.myrmit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -101,12 +102,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Send data to NewsActivity
-                /*Intent intent = new Intent(context,NewsActivity.class);
-                intent.putExtra("Title",data.get(position).getTitle());
-                intent.putExtra("Author",data.get(position).getAuthor());
-                intent.putExtra("Thumbnail", data.get(position).getThumbnail());
-                context.startActivity(intent);*/
+                Intent intent = new Intent(context, NewsActivity.class);
+                context.startActivity(intent);
             }
         });
     }
