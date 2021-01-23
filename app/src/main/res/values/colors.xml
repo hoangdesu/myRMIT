@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="app_primary">#FFE60028</color>
     <color name="app_secondary">#FF070758</color>
+    <color name="land_mark">#FF070758</color>
 </resources>
