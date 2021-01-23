@@ -9,7 +9,13 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.example.myrmit.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +24,7 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
     private final List<Course> list;
     private final Activity context;
     private final List<Boolean> isFeb;
+    private final FirebaseHandler firebaseHandler = new FirebaseHandler();
     private final List<Boolean> isJun;
     private final ArrayList<String> progressingCourse;
     private final List<Boolean> isOct;
@@ -151,6 +158,22 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
             holder.oct.setEnabled(false);
             holder.progressing.setVisibility(View.VISIBLE);
         }
+        firebaseHandler.getAccount(FirebaseAuth.getInstance().getCurrentUser().getEmail().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                String role = (String) task.getResult().get("role");
+                if (!role.equals("student")){
+                    holder.feb.setEnabled(false);
+                    holder.jun.setEnabled(false);
+                    holder.oct.setEnabled(false);
+                }
+                else {
+                    holder.feb.setEnabled(true);
+                    holder.jun.setEnabled(true);
+                    holder.oct.setEnabled(true);
+                }
+            }
+        });
         holder.name.setText(list.get(position).getName());
         holder.feb.setChecked(list.get(position).isFeb());
         holder.jun.setChecked(list.get(position).isJun());
