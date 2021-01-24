@@ -23,6 +23,7 @@ import java.util.HashMap;
 import com.example.myrmit.model.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -38,10 +39,11 @@ public class AllocationFragment extends Fragment {
     private ListView listView;
     private ArrayList<Group> groups;
     private Button confirm;
+    private String user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
     public AllocationFragment() {
         // Required empty public constructor
     }
-    
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,7 +70,7 @@ public class AllocationFragment extends Fragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseHandler.getProgressingCourse("s3740819@rmit.edu.vn").collection("data").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                firebaseHandler.getProgressingCourse(user).collection("data").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         boolean isChange = false;
@@ -103,10 +105,10 @@ public class AllocationFragment extends Fragment {
                                     }
                                     else date.get(getChosenGroupDay(groups.get(i))).put(groups.get(i).getCourseName(), getChosenGroupTime(groups.get(i)));
                                 }
-                                firebaseHandler.confirmAllocation("s3740819@rmit.edu.vn", getChosenGroupDay(groups.get(i)), getChosenGroupTime(groups.get(i)), groups.get(i).getCourseName());
+                                firebaseHandler.confirmAllocation(user, getChosenGroupDay(groups.get(i)), getChosenGroupTime(groups.get(i)), groups.get(i).getCourseName());
                             }
                             for (String day : date.keySet()){
-                                firebaseHandler.getCurrentCalendar("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                firebaseHandler.getCurrentCalendar(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         ArrayList<String> dates = (ArrayList<String>) task.getResult().get("date");
@@ -127,7 +129,7 @@ public class AllocationFragment extends Fragment {
                                             courseName.add("Have a class: " + d + " !");
                                             time.add(map.get(d));
                                         }
-                                        firebaseHandler.addClassTime("s3740819@rmit.edu.vn", dateList, time,courseName);
+                                        firebaseHandler.addClassTime(user, dateList, time,courseName);
                                     }
                                 });
                             }
@@ -179,48 +181,89 @@ public class AllocationFragment extends Fragment {
         groups = new ArrayList<>();
         listView.setAdapter(null);
         confirm.setVisibility(View.INVISIBLE);
-        firebaseHandler.getProgramOfStudent("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        firebaseHandler.getAccount(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                String code = (String) task.getResult().get("code");
-                firebaseHandler.getProgressingCourse("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> taskk) {
-                        ArrayList<String> progressing = (ArrayList<String>) taskk.getResult().get("list");
-                        ArrayList<Group> groups = new ArrayList<>();
-                        for (String course : progressing) {
-                            firebaseHandler.getProgram(code).collection("data").document(course).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                String role = (String) task.getResult().get("role");
+                if (role.equals("student")){
+                    firebaseHandler.getProgramOfStudent(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            String code = (String) task.getResult().get("code");
+                            firebaseHandler.getProgressingCourse(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    ArrayList<String> day = (ArrayList<String>) task.getResult().get("day");
-                                    ArrayList<String> time = (ArrayList<String>) task.getResult().get("time");
-                                    taskk.getResult().getReference().collection("data").document(course).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                            groups.add(get(day.get(0), time.get(0), day.get(1), time.get(1), course));
-                                            String d = (String) task.getResult().get("day");
-                                            String t = (String) task.getResult().get("time");
-                                            if (d.equals(day.get(0)) &&  t.equals(time.get(0))){
-                                                groups.get(groups.size()-1).setGroup1(true);
-                                            }
-                                            else if (d.equals(day.get(1))&& t.equals(time.get(1))){
-                                                groups.get(groups.size()-1).setGroup2(true);
-                                            }
-                                            if (groups.size() == progressing.size()){
-                                                try {
-                                                    ArrayAdapter<Group> adapter = new GroupArrayAdapter(getActivity(), groups);
-                                                    listView.setAdapter(adapter);
-                                                    confirm.setVisibility(View.VISIBLE);
-                                                }catch (Exception ignored){}
+                                public void onComplete(@NonNull Task<DocumentSnapshot> taskk) {
+                                    ArrayList<String> progressing = (ArrayList<String>) taskk.getResult().get("list");
+                                    ArrayList<Group> groups = new ArrayList<>();
+                                    for (String course : progressing) {
+                                        firebaseHandler.getProgram(code).collection("data").document(course).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                ArrayList<String> day = (ArrayList<String>) task.getResult().get("day");
+                                                ArrayList<String> time = (ArrayList<String>) task.getResult().get("time");
+                                                taskk.getResult().getReference().collection("data").document(course).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        groups.add(get(day.get(0), time.get(0), day.get(1), time.get(1), course));
+                                                        String d = (String) task.getResult().get("day");
+                                                        String t = (String) task.getResult().get("time");
+                                                        if (d.equals(day.get(0)) &&  t.equals(time.get(0))){
+                                                            groups.get(groups.size()-1).setGroup1(true);
+                                                        }
+                                                        else if (d.equals(day.get(1))&& t.equals(time.get(1))){
+                                                            groups.get(groups.size()-1).setGroup2(true);
+                                                        }
+                                                        if (groups.size() == progressing.size()){
+                                                            try {
+                                                                ArrayAdapter<Group> adapter = new GroupArrayAdapter(getActivity(), groups, true);
+                                                                listView.setAdapter(adapter);
+                                                                confirm.setVisibility(View.VISIBLE);
+                                                            }catch (Exception ignored){}
 
+                                                        }
+                                                    }
+                                                });
                                             }
-                                        }
-                                    });
+                                        });
+                                    }
                                 }
                             });
                         }
-                    }
-                });
+                    });
+                }
+                else {
+                    firebaseHandler.getProgressingCourse(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            ArrayList<String> list = (ArrayList<String>) task.getResult().get("list");
+                            ArrayList<Group> groups = new ArrayList<>();
+                            firebaseHandler.getProgramOfStudent(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    String programCode = (String) task.getResult().get("code");
+                                    for (String course: list){
+                                        firebaseHandler.getProgram(programCode).collection("data").document(course).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                ArrayList<String> day = (ArrayList<String>) task.getResult().get("day");
+                                                ArrayList<String> time = (ArrayList<String>) task.getResult().get("time");
+                                                groups.add(get(day.get(0), time.get(0), day.get(1), time.get(1), course));
+                                                if (groups.size() == list.size()){
+                                                    try {
+                                                        ArrayAdapter<Group> adapter = new GroupArrayAdapter(getActivity(), groups, false);
+                                                        listView.setAdapter(adapter);
+                                                        confirm.setEnabled(false);
+                                                    }catch (Exception ignored){}
+
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
             }
         });
     }

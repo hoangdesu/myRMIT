@@ -33,6 +33,7 @@ import java.util.Objects;
 import com.example.myrmit.model.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
@@ -53,6 +54,7 @@ public class TimetableFragment extends Fragment {
     private Button add;
     private HorizontalCalendar[] calendar;
     private ImageView today;
+    private String user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
     private ImageView nothing;
     ArrayList<String> spinnerTime = new ArrayList<>();
     public TimetableFragment() {
@@ -102,29 +104,29 @@ public class TimetableFragment extends Fragment {
                 endDate.add(Calendar.MONTH, 4);
                 calendar[0].refresh();
                 calendar[0].setRange(startDate,endDate);
-//                firebaseHandler.getCurrentCalendar("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                        ArrayList<String> dates = (ArrayList<String>) task.getResult().get("date");
-//                        if (dates == null || dates.size() == 0){
-//                            dates = new ArrayList<>();
-//                            while( date[0].before(horizontalCalendar[0].getDateAt(horizontalCalendar[0].positionOfDate(endDate)).getTime())){
-//                                dates.add(sdf.format(date[0]));
-//                                date[0] = addDays(date[0]);
-//                            }
-//                            task.getResult().getReference().update("date", dates);
-//                            task.getResult().getReference().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                                    ArrayList<String> dates = (ArrayList<String>) task.getResult().get("date");
-//                                    for (String date : dates) {
-//                                        task.getResult().getReference().collection("data").document(date).set(new Note());
-//                                    }
-//                                }
-//                            });
-//                        }
-//                    }
-//                });
+                firebaseHandler.getCurrentCalendar(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        ArrayList<String> dates = (ArrayList<String>) task.getResult().get("date");
+                        if (dates == null || dates.size() == 0){
+                            dates = new ArrayList<>();
+                            while( date[0].before(calendar[0].getDateAt(calendar[0].positionOfDate(endDate)).getTime())){
+                                dates.add(sdf.format(date[0]));
+                                date[0] = addDays(date[0]);
+                            }
+                            task.getResult().getReference().update("date", dates);
+                            task.getResult().getReference().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    ArrayList<String> dates = (ArrayList<String>) task.getResult().get("date");
+                                    for (String date : dates) {
+                                        task.getResult().getReference().collection("data").document(date).set(new Note());
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
                 calendar[0].goToday(true);
                 add();
             }
@@ -187,7 +189,7 @@ public class TimetableFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         if (!spinner.getSelectedItem().toString().equals("Time") && !note.getText().toString().equals("")) {
-                            firebaseHandler.getCurrentCalendar("s3740819@rmit.edu.vn").collection("data").document(sdf.format(calendar[0].getSelectedDate().getTime())).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            firebaseHandler.getCurrentCalendar(user).collection("data").document(sdf.format(calendar[0].getSelectedDate().getTime())).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     ArrayList<String> time = (ArrayList<String>) task.getResult().get("time");
@@ -214,7 +216,7 @@ public class TimetableFragment extends Fragment {
     }
 
     private void setSpinnerTime(Spinner spinner, View view){
-        firebaseHandler.getCurrentCalendar("s3740819@rmit.edu.vn").collection("data").document(sdf.format(calendar[0].getSelectedDate().getTime())).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        firebaseHandler.getCurrentCalendar(user).collection("data").document(sdf.format(calendar[0].getSelectedDate().getTime())).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 ArrayList<String> time = (ArrayList<String>) task.getResult().get("time");
@@ -241,7 +243,7 @@ public class TimetableFragment extends Fragment {
     private void setList(String date) {
         nothing.setVisibility(View.VISIBLE);
         listView.setAdapter(null);
-        firebaseHandler.getDateData(date, "s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        firebaseHandler.getDateData(date, user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 ArrayList<String> time = (ArrayList<String>) task.getResult().get("time");
@@ -256,9 +258,6 @@ public class TimetableFragment extends Fragment {
                         timelineArrayList.add(get(time.get(i), note.get(i), type.get(i)));
                     }
                     sortTimeline(timelineArrayList);
-                    for (int i = 0; i< timelineArrayList.size(); i++){
-                        System.out.println(timelineArrayList.get(i).getType() + " --- " + timelineArrayList.get(i).getNote());
-                    }
                     ArrayAdapter<Timeline> adapter = new TimelineArrayAdapter(getActivity(), timelineArrayList);
                     listView.setAdapter(adapter);
                     nothing.setVisibility(View.INVISIBLE);
@@ -289,7 +288,7 @@ public class TimetableFragment extends Fragment {
                             Button confirm = v1.findViewById(R.id.button6);
                             Button cancel = v1.findViewById(R.id.button8);
                             EditText newNote = v1.findViewById(R.id.add_note2);
-                            firebaseHandler.getCurrentCalendar("s3740819@rmit.edu.vn")
+                            firebaseHandler.getCurrentCalendar(user)
                                     .collection("data").document(sdf.format(calendar[0].getSelectedDate().getTime())).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -323,7 +322,7 @@ public class TimetableFragment extends Fragment {
                                 @Override
                                 public void onClick(View v) {
                                     if (newNote.getText().toString().equals("")) {
-                                        firebaseHandler.getCurrentCalendar("s3740819@rmit.edu.vn")
+                                        firebaseHandler.getCurrentCalendar(user)
                                                 .collection("data").document(sdf.format(calendar[0].getSelectedDate().getTime())).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -359,7 +358,7 @@ public class TimetableFragment extends Fragment {
                     delete.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            firebaseHandler.getCurrentCalendar("s3740819@rmit.edu.vn")
+                            firebaseHandler.getCurrentCalendar(user)
                                     .collection("data").document(sdf.format(calendar[0].getSelectedDate().getTime())).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
