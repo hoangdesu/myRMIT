@@ -76,6 +76,10 @@ public class FirebaseHandler {
         return db.collection("news").whereEqualTo("type","news").get();
     }
 
+    public Task<QuerySnapshot> getFacilities() {
+        return db.collection("facilities").get();
+    }
+
     public void updateTimetable(String username){
         db.collection("users").document(username).collection("programCode").document("calendar").collection("data").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

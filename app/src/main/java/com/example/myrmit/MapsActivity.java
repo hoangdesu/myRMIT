@@ -1,26 +1,51 @@
 package com.example.myrmit;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
+import com.example.myrmit.model.FirebaseHandler;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private static final String TAG = "MapsActivity";
+    private FacilityCardAdapter facilityCardAdapter;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+    private List<Facility> facilities = new ArrayList<Facility>();;
+    private FirebaseHandler firebaseHandler = new FirebaseHandler();
+    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +55,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        viewPager = findViewById(R.id.pager);
+        tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     /**
@@ -90,5 +118,94 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addPolygon(sportHall);
         mMap.addPolygon(footballField);
         mMap.addPolygon(tennisCourt);
+
+
+        int height = 70;
+        int width = 70;
+        BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.marker);
+        Bitmap b = bitmapdraw.getBitmap();
+        Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        MarkerOptions building2Marker = new MarkerOptions().position(new LatLng(10.72948, 106.6959)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        MarkerOptions building1Marker = new MarkerOptions().position(new LatLng(10.7291, 106.6946)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        MarkerOptions building8Marker = new MarkerOptions().position(new LatLng(10.72925, 106.6937)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        MarkerOptions building9Marker = new MarkerOptions().position(new LatLng(10.7298, 106.6933)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        mMap.addMarker(building2Marker);
+        mMap.addMarker(building1Marker);
+        mMap.addMarker(building8Marker);
+        mMap.addMarker(building9Marker);
+
+        bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.parking);
+        b = bitmapdraw.getBitmap();
+        smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        MarkerOptions parkingLot1Marker = new MarkerOptions().position(new LatLng(10.7299, 106.6963)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        MarkerOptions parkingLot2Marker = new MarkerOptions().position(new LatLng(10.7298, 106.6953)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        mMap.addMarker(parkingLot1Marker);
+        mMap.addMarker(parkingLot2Marker);
+
+        bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.tennis);
+        b = bitmapdraw.getBitmap();
+        smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        MarkerOptions tennisCourtMarker = new MarkerOptions().position(new LatLng(10.7306, 106.69245)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        mMap.addMarker(tennisCourtMarker);
+
+        bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.football);
+        b = bitmapdraw.getBitmap();
+        smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        MarkerOptions footballFieldMarker = new MarkerOptions().position(new LatLng(10.7296, 106.69175)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        mMap.addMarker(footballFieldMarker);
+
+        bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.sports);
+        b = bitmapdraw.getBitmap();
+        smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        MarkerOptions sportHallMarker = new MarkerOptions().position(new LatLng(10.7293, 106.69275)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        mMap.addMarker(sportHallMarker);
+
+        bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.net);
+        b = bitmapdraw.getBitmap();
+        smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        MarkerOptions basketballCourtMarker = new MarkerOptions().position(new LatLng(10.72979, 106.6942)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        mMap.addMarker(basketballCourtMarker);
+
+        bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.food);
+        b = bitmapdraw.getBitmap();
+        smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        MarkerOptions cafeteriaMarker = new MarkerOptions().position(new LatLng(10.72965, 106.6946)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        mMap.addMarker(cafeteriaMarker);
+
+        firebaseHandler.getFacilities().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                String title, openHour, image;
+                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                    title = Objects.requireNonNull(documentSnapshot.getData().get("title")).toString();
+                    openHour = Objects.requireNonNull(documentSnapshot.getData().get("open")).toString();
+                    image = Objects.requireNonNull(documentSnapshot.getData().get("image")).toString();
+                    facilities.add(new Facility(image,title,openHour));
+                }
+
+                System.out.println("facilities size: " + facilities.size());
+
+                facilityCardAdapter = new FacilityCardAdapter(facilities, MapsActivity.this);
+                viewPager = findViewById(R.id.viewPager);
+                viewPager.setAdapter(facilityCardAdapter);
+                viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+
+                    }
+                });
+            }
+
+        });
     }
 }
