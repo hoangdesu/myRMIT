@@ -57,9 +57,9 @@ public class ArrayAdapterService extends android.widget.ArrayAdapter<RMITService
         viewHolder.id.setText(String.valueOf(position+1));
         viewHolder.name.setText(list.get(position).getName());
         viewHolder.description.setText(list.get(position).getDescription());
-        viewHolder.time.setText(list.get(position).getTime());
-        viewHolder.location.setText(list.get(position).getLocation());
-        viewHolder.phone.setText(list.get(position).getPhone());
+        viewHolder.time.setText("Time Work: " + list.get(position).getTime());
+        viewHolder.location.setText("Location: " + list.get(position).getLocation());
+        viewHolder.phone.setText("Phone Call: " + list.get(position).getPhone());
         viewHolder.description.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
@@ -68,12 +68,11 @@ public class ArrayAdapterService extends android.widget.ArrayAdapter<RMITService
 
                 // Drawing happens after layout so we can assume getLineCount() returns the correct value
                 int lineCount = viewHolder.description.getLineCount();
-                if ( lineCount != 1 && viewHolder.space.getText().toString().split("").length-12 < lineCount){
+                if (viewHolder.space.getText().toString().split("").length - 11 < lineCount){
                     for (int i = 1; i< lineCount; i++) {
                         viewHolder.space.setText(viewHolder.space.getText().toString() + "\n");
                     }
                 }
-
                 return true;
             }
         });

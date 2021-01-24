@@ -52,7 +52,7 @@ public class FirebaseHandler {
         return db.collection("rmitprograms").document(programID);
     }
 
-    public DocumentReference getProgressingCode(String username){
+    public DocumentReference getProgressingCourse(String username){
         return db.collection("users").document(username).collection("programCode").document("program").collection("data").document("progressingCourse");
     }
 
@@ -135,6 +135,10 @@ public class FirebaseHandler {
 
     public CollectionReference getRMITServices(){
         return db.collection("services");
+    }
+
+    public CollectionReference getAllAccounts(){
+        return db.collection("users");
     }
 
 }

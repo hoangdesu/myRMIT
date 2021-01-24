@@ -25,7 +25,9 @@ import java.util.Objects;
 import com.example.myrmit.model.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class OES_Fragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -36,7 +38,7 @@ public class OES_Fragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private boolean isLoad = false;
+    private final String user = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();
     private ListView listView;
     private ArrayList<Course> courses;
     private Button confirm;
@@ -58,7 +60,7 @@ public class OES_Fragment extends Fragment {
         listView.setAdapter(null);
         loading.setVisibility(View.VISIBLE);
         confirm.setVisibility(View.INVISIBLE);
-        firebaseHandler.getProgramOfStudent("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        firebaseHandler.getProgramOfStudent(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 firebaseHandler.getProgram((String)task.getResult().get("code")).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -75,59 +77,136 @@ public class OES_Fragment extends Fragment {
                         assert feb != null;
                         assert jun != null;
                         assert oct != null;
-                        firebaseHandler.getCompletedCourses("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        firebaseHandler.getAccount(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                ArrayList<String> completedCourses = (ArrayList<String>) task.getResult().get("courseList");
-                                assert completedCourses != null;
-                                List<Course> list = new ArrayList<Course>();
-                                for (int i = 0; i < courseList.size(); i++) {
-                                    list.add(get(courseList.get(i)));
-                                    boolean isExist = false;
-                                    for (String course: completedCourses){
-                                        if (course.equals(courseList.get(i))){
-                                            isExist = true;
-                                            break;
-                                        }
-                                    }
-                                    if (!isExist) {
-                                        isFeb.add(feb.get(i).equals("1"));
-                                        isJun.add(jun.get(i).equals("1"));
-                                        isOct.add(oct.get(i).equals("1"));
-                                    }
-                                    else {
-                                        isFeb.add(false);
-                                        isJun.add(false);
-                                        isOct.add(false);
-                                    }
-                                }
-                                firebaseHandler.getEnrolledCourses("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                        ArrayList<String> enrolledList = (ArrayList<String>) task.getResult().get("list");
-                                        ArrayList<String> sem = (ArrayList<String>) task.getResult().get("semester");
-                                        assert sem != null;
-                                        for (int i = 0; i < Objects.requireNonNull(enrolledList).size(); i++) {
-                                            for (Course course : list) {
-                                                if (course.getName().equals(enrolledList.get(i))) {
-                                                    if (sem.get(i).equals("feb")) {
-                                                        course.setFeb(true);
-                                                    } else if (sem.get(i).equals("jun")) {
-                                                        course.setJun(true);
-                                                    } else course.setOct(true);
-                                                    break;
+                                String role = (String) task.getResult().get("role");
+                                assert role != null;
+                                if (role.equals("student")){
+                                    firebaseHandler.getCompletedCourses(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            ArrayList<String> completedCourses = (ArrayList<String>) task.getResult().get("courseList");
+                                            assert completedCourses != null;
+                                            List<Course> list = new ArrayList<Course>();
+                                            for (int i = 0; i < courseList.size(); i++) {
+                                                list.add(get(courseList.get(i)));
+                                                boolean isExist = false;
+                                                for (String course: completedCourses){
+                                                    if (course.equals(courseList.get(i))){
+                                                        isExist = true;
+                                                        break;
+                                                    }
+                                                }
+                                                if (!isExist) {
+                                                    isFeb.add(feb.get(i).equals("1"));
+                                                    isJun.add(jun.get(i).equals("1"));
+                                                    isOct.add(oct.get(i).equals("1"));
+                                                }
+                                                else {
+                                                    isFeb.add(false);
+                                                    isJun.add(false);
+                                                    isOct.add(false);
                                                 }
                                             }
+                                            firebaseHandler.getEnrolledCourses(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                    ArrayList<String> enrolledList = (ArrayList<String>) task.getResult().get("list");
+                                                    ArrayList<String> sem = (ArrayList<String>) task.getResult().get("semester");
+                                                    assert sem != null;
+                                                    for (int i = 0; i < Objects.requireNonNull(enrolledList).size(); i++) {
+                                                        for (Course course : list) {
+                                                            if (course.getName().equals(enrolledList.get(i))) {
+                                                                if (sem.get(i).equals("feb")) {
+                                                                    course.setFeb(true);
+                                                                } else if (sem.get(i).equals("jun")) {
+                                                                    course.setJun(true);
+                                                                } else course.setOct(true);
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    task.getResult().getReference().getParent().document("progressingCourse").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                            ArrayList<String> progressList = (ArrayList<String>) task.getResult().get("list");
+                                                            assert progressList != null;
+                                                            ArrayList<String> progress = new ArrayList<>();
+                                                            for (String course: courseList){
+                                                                boolean isExist = false;
+                                                                for (String inProgress : progressList){
+                                                                    if (course.equals(inProgress)){
+                                                                        isExist = true;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                                if (isExist){
+                                                                    progress.add("1");
+                                                                }
+                                                                else progress.add("0");
+                                                            }
+                                                            try {
+                                                                ArrayAdapter<Course> adapter = new CoursesArrayAdapter(getActivity(), list, isFeb, isJun, isOct, progress, true);
+                                                                listView.setAdapter(adapter);
+                                                                loading.setVisibility(View.INVISIBLE);
+                                                                confirm.setVisibility(View.VISIBLE);
+                                                            }catch (Exception ignored){}
+                                                        }
+                                                    });
+                                                }
+                                            });
                                         }
-                                        task.getResult().getReference().getParent().document("progressingCourse").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                ArrayList<String> progressList = (ArrayList<String>) task.getResult().get("list");
-                                                assert progressList != null;
+                                    });
+                                }
+                                else if (role.equals("lecturer")){
+                                    firebaseHandler.getProgressingCourse(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            ArrayList<String> progressingCourse = (ArrayList<String>) task.getResult().get("list");
+                                            List<Course> list = new ArrayList<Course>();
+                                            assert progressingCourse != null;
+                                            if (progressingCourse.size() == 0){
+                                                firebaseHandler.getAllAccounts().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<QuerySnapshot> taskk) {
+                                                        ArrayList<String> teachingCourses = new ArrayList<>();
+                                                        int[] i = {0};
+                                                        for (DocumentSnapshot documentSnapshot: taskk.getResult()){
+                                                            String role = (String) documentSnapshot.get("role");
+                                                            assert role != null;
+                                                            if (role.equals("student")){
+                                                                firebaseHandler.getProgressingCourse(documentSnapshot.getId()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                                        i[0]++;
+                                                                        ArrayList<String> courses = (ArrayList<String>) task.getResult().get("list");
+                                                                        assert courses != null;
+                                                                        for (String course : courses){
+                                                                            if (teachingCourses.size() == 0 || !teachingCourses.contains(course)){
+                                                                                teachingCourses.add(course);
+                                                                            }
+                                                                        }
+                                                                        if (i[0] == taskk.getResult().size()){
+                                                                            firebaseHandler.getProgressingCourse(user).update("list", teachingCourses);
+                                                                            setList();
+                                                                        }
+                                                                    }
+                                                                });
+                                                            } else i[0]++;
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                            else {
                                                 ArrayList<String> progress = new ArrayList<>();
                                                 for (String course: courseList){
+                                                    list.add(get(course));
+                                                    isFeb.add(false);
+                                                    isJun.add(false);
+                                                    isOct.add(false);
                                                     boolean isExist = false;
-                                                    for (String inProgress : progressList){
+                                                    for (String inProgress : progressingCourse){
                                                         if (course.equals(inProgress)){
                                                             isExist = true;
                                                             break;
@@ -139,15 +218,15 @@ public class OES_Fragment extends Fragment {
                                                     else progress.add("0");
                                                 }
                                                 try {
-                                                    ArrayAdapter<Course> adapter = new CoursesArrayAdapter(getActivity(), list, isFeb, isJun, isOct, progress);
+                                                    ArrayAdapter<Course> adapter = new CoursesArrayAdapter(getActivity(), list, isFeb, isJun, isOct, progress, false);
                                                     listView.setAdapter(adapter);
                                                     loading.setVisibility(View.INVISIBLE);
-                                                    confirm.setVisibility(View.VISIBLE);
-                                                }catch (Exception ignored){}
+                                                    confirm.setEnabled(false);
+                                                } catch (Exception ignored){}
                                             }
-                                        });
-                                    }
-                                });
+                                        }
+                                    });
+                                }
                             }
                         });
                     }
@@ -178,7 +257,7 @@ public class OES_Fragment extends Fragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseHandler.getEnrolledCourses("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                firebaseHandler.getEnrolledCourses(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         ArrayList<String> list = new ArrayList<>();
