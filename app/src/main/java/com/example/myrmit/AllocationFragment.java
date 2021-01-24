@@ -68,7 +68,7 @@ public class AllocationFragment extends Fragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseHandler.getProgressingCode("s3740819@rmit.edu.vn").collection("data").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                firebaseHandler.getProgressingCourse("s3740819@rmit.edu.vn").collection("data").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         boolean isChange = false;
@@ -183,7 +183,7 @@ public class AllocationFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 String code = (String) task.getResult().get("code");
-                firebaseHandler.getProgressingCode("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                firebaseHandler.getProgressingCourse("s3740819@rmit.edu.vn").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> taskk) {
                         ArrayList<String> progressing = (ArrayList<String>) taskk.getResult().get("list");

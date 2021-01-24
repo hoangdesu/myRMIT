@@ -19,6 +19,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
     private final List<Course> list;
@@ -26,12 +27,14 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
     private final List<Boolean> isFeb;
     private final FirebaseHandler firebaseHandler = new FirebaseHandler();
     private final List<Boolean> isJun;
+    private final boolean isStudent;
     private final ArrayList<String> progressingCourse;
     private final List<Boolean> isOct;
-    public CoursesArrayAdapter(Activity context, List<Course> list, List<Boolean> isFeb, List<Boolean> isJun, List<Boolean> isOct, ArrayList<String> progressingCourse) {
+    public CoursesArrayAdapter(Activity context, List<Course> list, List<Boolean> isFeb, List<Boolean> isJun, List<Boolean> isOct, ArrayList<String> progressingCourse, boolean isStudent) {
         super(context, R.layout.course_list, list);
         this.context = context;
         this.list = list;
+        this.isStudent = isStudent;
         this.isFeb = isFeb;
         this.progressingCourse = progressingCourse;
         this.isJun = isJun;
@@ -144,7 +147,7 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
                 holder.oct.setVisibility(View.VISIBLE);
                 holder.oct.setEnabled(true);
             }
-            if (!isFeb.get(position) && !isOct.get(position) && !isJun.get(position)) {
+            if (!isFeb.get(position) && !isOct.get(position) && !isJun.get(position) && isStudent) {
                 holder.finish.setVisibility(View.VISIBLE);
             } else holder.finish.setVisibility(View.INVISIBLE);
             holder.progressing.setVisibility(View.INVISIBLE);
@@ -158,10 +161,11 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
             holder.oct.setEnabled(false);
             holder.progressing.setVisibility(View.VISIBLE);
         }
-        firebaseHandler.getAccount(FirebaseAuth.getInstance().getCurrentUser().getEmail().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        firebaseHandler.getAccount(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 String role = (String) task.getResult().get("role");
+                assert role != null;
                 if (!role.equals("student")){
                     holder.feb.setEnabled(false);
                     holder.jun.setEnabled(false);
