@@ -3,14 +3,18 @@ package com.example.myrmit;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -52,10 +56,12 @@ public class FacilityCardAdapter extends PagerAdapter {
 
         ImageView facilityImage;
         TextView title, openHour;
+        RatingBar ratingBar;
 
         facilityImage = (ImageView) view.findViewById(R.id.image);
         title = (TextView) view.findViewById(R.id.title);
         openHour = (TextView) view.findViewById(R.id.open_hour);
+        ratingBar = (RatingBar) view.findViewById(R.id.rating);
 
         StorageReference storageReference = storage.getReference().child(facilityList.get(position).getImage());
 
@@ -78,8 +84,10 @@ public class FacilityCardAdapter extends PagerAdapter {
         }
         title.setText(facilityList.get(position).getTitle());
         openHour.setText(facilityList.get(position).getOpenHour());
+        ratingBar.setRating((float) facilityList.get(position).getRating());
 
         container.addView(view, 0);
+
 
         return view;
     }
@@ -89,7 +97,4 @@ public class FacilityCardAdapter extends PagerAdapter {
         container.removeView((View) object);
     }
 
-    public List<Facility> getFacilityList() {
-        return this.facilityList;
-    }
 }
