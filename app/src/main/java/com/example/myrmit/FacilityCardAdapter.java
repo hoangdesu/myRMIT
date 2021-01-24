@@ -55,7 +55,7 @@ public class FacilityCardAdapter extends PagerAdapter {
 
         facilityImage = (ImageView) view.findViewById(R.id.image);
         title = (TextView) view.findViewById(R.id.title);
-        openHour = (TextView) view.findViewById(R.id.description);
+        openHour = (TextView) view.findViewById(R.id.open_hour);
 
         StorageReference storageReference = storage.getReference().child(facilityList.get(position).getImage());
 
@@ -87,5 +87,9 @@ public class FacilityCardAdapter extends PagerAdapter {
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
+    }
+
+    public List<Facility> getFacilityList() {
+        return this.facilityList;
     }
 }

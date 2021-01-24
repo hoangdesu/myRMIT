@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,9 +20,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
@@ -42,7 +45,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String TAG = "MapsActivity";
     private FacilityCardAdapter facilityCardAdapter;
     private ViewPager viewPager;
-    private TabLayout tabLayout;
     private List<Facility> facilities = new ArrayList<Facility>();;
     private FirebaseHandler firebaseHandler = new FirebaseHandler();
     String currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
@@ -55,9 +57,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        viewPager = findViewById(R.id.pager);
-        tabLayout = findViewById(R.id.tab_layout);
-        tabLayout.setupWithViewPager(viewPager);
     }
 
     /**
@@ -89,23 +88,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Add a marker in Sydney and move the camera
 
-        LatLng rmitLoc = new LatLng(10.7285, 106.6940);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(rmitLoc, (float)16.4));
+        LatLng rmitLoc = new LatLng(10.7296, 106.693);
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(rmitLoc).bearing(90).zoom((float) 16.8).build();
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         mMap.getUiSettings().setScrollGesturesEnabled(false);
         mMap.getUiSettings().setZoomGesturesEnabled(false);
         mMap.getUiSettings().setRotateGesturesEnabled(false);
 
-        PolygonOptions building2 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.72948, 106.6959), new LatLng(10.72948, 106.6967), new LatLng(10.72915, 106.6967), new LatLng(10.72915, 106.6959)).strokeWidth(2);
-        PolygonOptions building1 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7294, 106.6946), new LatLng(10.7294, 106.6957), new LatLng(10.7291, 106.6957), new LatLng(10.7291, 106.6946)).strokeWidth(2);
-        PolygonOptions parkingLot1 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7299, 106.6961), new LatLng(10.7299, 106.6968), new LatLng(10.72965, 106.6968), new LatLng(10.72965, 106.6961)).strokeWidth(2);
-        PolygonOptions parkingLot2 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7298, 106.6949), new LatLng(10.7298, 106.69567), new LatLng(10.72957, 106.69567), new LatLng(10.72957, 106.6949)).strokeWidth(2);
-        PolygonOptions cafeteria = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7298, 106.6944), new LatLng(10.7298, 106.6948), new LatLng(10.72957, 106.6948), new LatLng(10.72957, 106.6944)).strokeWidth(2);
-        PolygonOptions basketballCourt = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.72975, 106.69415), new LatLng(10.72975, 106.6943), new LatLng(10.72954, 106.6943), new LatLng(10.72954, 106.69415)).strokeWidth(2);
-        PolygonOptions building9 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7298, 106.6933), new LatLng(10.7298, 106.6937), new LatLng(10.72965, 106.6937), new LatLng(10.72965, 106.6935), new LatLng(10.72955, 106.6935), new LatLng(10.72955, 106.6933)).strokeWidth(2);
-        PolygonOptions building8 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7294, 106.6933), new LatLng(10.7294, 106.6935), new LatLng(10.72925, 106.6935), new LatLng(10.72925, 106.6937), new LatLng(10.7291, 106.6937), new LatLng(10.7291, 106.6933)).strokeWidth(2);
-        PolygonOptions sportHall = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.72965, 106.6923), new LatLng(10.72965, 106.6924), new LatLng(10.72975, 106.6924), new LatLng(10.72975, 106.693), new LatLng(10.72965, 106.693), new LatLng(10.72965, 106.6931),new LatLng(10.7292, 106.6931), new LatLng(10.7292, 106.6930), new LatLng(10.7291, 106.6930), new LatLng(10.7291, 106.6924), new LatLng(10.7292, 106.6924), new LatLng(10.7292, 106.6923)).strokeWidth(2);
-        PolygonOptions footballField = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7303, 106.6912), new LatLng(10.7303, 106.6922), new LatLng(10.7293, 106.6922), new LatLng(10.7293, 106.6912)).strokeWidth(2);
-        PolygonOptions tennisCourt = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7307, 106.69225), new LatLng(10.7307, 106.69267), new LatLng(10.7303, 106.69267), new LatLng(10.7303, 106.69225)).strokeWidth(2);
+        PolygonOptions building2 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.72948, 106.6959), new LatLng(10.72948, 106.6967), new LatLng(10.72915, 106.6967), new LatLng(10.72915, 106.6959));
+        PolygonOptions building1 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7294, 106.6946), new LatLng(10.7294, 106.6957), new LatLng(10.7291, 106.6957), new LatLng(10.7291, 106.6946));
+        PolygonOptions parkingLot1 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7299, 106.6961), new LatLng(10.7299, 106.6968), new LatLng(10.72965, 106.6968), new LatLng(10.72965, 106.6961));
+        PolygonOptions parkingLot2 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7298, 106.6949), new LatLng(10.7298, 106.69567), new LatLng(10.72957, 106.69567), new LatLng(10.72957, 106.6949));
+        PolygonOptions cafeteria = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7298, 106.6944), new LatLng(10.7298, 106.6948), new LatLng(10.72957, 106.6948), new LatLng(10.72957, 106.6944));
+        PolygonOptions basketballCourt = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.72975, 106.69415), new LatLng(10.72975, 106.6943), new LatLng(10.72954, 106.6943), new LatLng(10.72954, 106.69415));
+        PolygonOptions building9 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7298, 106.6933), new LatLng(10.7298, 106.6937), new LatLng(10.72965, 106.6937), new LatLng(10.72965, 106.6935), new LatLng(10.72955, 106.6935), new LatLng(10.72955, 106.6933));
+        PolygonOptions building8 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7294, 106.6933), new LatLng(10.7294, 106.6935), new LatLng(10.72925, 106.6935), new LatLng(10.72925, 106.6937), new LatLng(10.7291, 106.6937), new LatLng(10.7291, 106.6933));
+        PolygonOptions sportHall = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.72965, 106.6923), new LatLng(10.72965, 106.6924), new LatLng(10.72975, 106.6924), new LatLng(10.72975, 106.693), new LatLng(10.72965, 106.693), new LatLng(10.72965, 106.6931),new LatLng(10.7292, 106.6931), new LatLng(10.7292, 106.6930), new LatLng(10.7291, 106.6930), new LatLng(10.7291, 106.6924), new LatLng(10.7292, 106.6924), new LatLng(10.7292, 106.6923));
+        PolygonOptions footballField = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7303, 106.6912), new LatLng(10.7303, 106.6922), new LatLng(10.7293, 106.6922), new LatLng(10.7293, 106.6912));
+        PolygonOptions tennisCourt = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7307, 106.69225), new LatLng(10.7307, 106.69267), new LatLng(10.7303, 106.69267), new LatLng(10.7303, 106.69225));
 
         mMap.addPolygon(building1);
         mMap.addPolygon(building2);
@@ -125,10 +125,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.marker);
         Bitmap b = bitmapdraw.getBitmap();
         Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-        MarkerOptions building2Marker = new MarkerOptions().position(new LatLng(10.72948, 106.6959)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
-        MarkerOptions building1Marker = new MarkerOptions().position(new LatLng(10.7291, 106.6946)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
-        MarkerOptions building8Marker = new MarkerOptions().position(new LatLng(10.72925, 106.6937)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
-        MarkerOptions building9Marker = new MarkerOptions().position(new LatLng(10.7298, 106.6933)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        MarkerOptions building2Marker = new MarkerOptions().position(new LatLng(10.72948, 106.6959)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).title("Building 2");
+        MarkerOptions building1Marker = new MarkerOptions().position(new LatLng(10.7291, 106.6946)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).title("Building 1");
+        MarkerOptions building8Marker = new MarkerOptions().position(new LatLng(10.72925, 106.6937)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).title("Building 8");
+        MarkerOptions building9Marker = new MarkerOptions().position(new LatLng(10.7298, 106.6933)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).title("Building 9");
         mMap.addMarker(building2Marker);
         mMap.addMarker(building1Marker);
         mMap.addMarker(building8Marker);
@@ -137,40 +137,52 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.parking);
         b = bitmapdraw.getBitmap();
         smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-        MarkerOptions parkingLot1Marker = new MarkerOptions().position(new LatLng(10.7299, 106.6963)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
-        MarkerOptions parkingLot2Marker = new MarkerOptions().position(new LatLng(10.7298, 106.6953)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        MarkerOptions parkingLot1Marker = new MarkerOptions().position(new LatLng(10.7299, 106.6963)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).title("Parking Lot 1");
+        MarkerOptions parkingLot2Marker = new MarkerOptions().position(new LatLng(10.7298, 106.6953)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).title("Parking Lot 2");
         mMap.addMarker(parkingLot1Marker);
         mMap.addMarker(parkingLot2Marker);
 
         bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.tennis);
         b = bitmapdraw.getBitmap();
         smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-        MarkerOptions tennisCourtMarker = new MarkerOptions().position(new LatLng(10.7306, 106.69245)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        MarkerOptions tennisCourtMarker = new MarkerOptions().position(new LatLng(10.7306, 106.69245)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).title("Tennis Court");
         mMap.addMarker(tennisCourtMarker);
 
         bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.football);
         b = bitmapdraw.getBitmap();
         smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-        MarkerOptions footballFieldMarker = new MarkerOptions().position(new LatLng(10.7296, 106.69175)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        MarkerOptions footballFieldMarker = new MarkerOptions().position(new LatLng(10.7296, 106.69175)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).title("Football Field");
         mMap.addMarker(footballFieldMarker);
 
         bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.sports);
         b = bitmapdraw.getBitmap();
         smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-        MarkerOptions sportHallMarker = new MarkerOptions().position(new LatLng(10.7293, 106.69275)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        MarkerOptions sportHallMarker = new MarkerOptions().position(new LatLng(10.7293, 106.69275)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).title("Sport Hall");
         mMap.addMarker(sportHallMarker);
 
         bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.net);
         b = bitmapdraw.getBitmap();
         smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-        MarkerOptions basketballCourtMarker = new MarkerOptions().position(new LatLng(10.72979, 106.6942)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        MarkerOptions basketballCourtMarker = new MarkerOptions().position(new LatLng(10.72979, 106.6942)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).title("Basketball Court");
         mMap.addMarker(basketballCourtMarker);
 
         bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.food);
         b = bitmapdraw.getBitmap();
         smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-        MarkerOptions cafeteriaMarker = new MarkerOptions().position(new LatLng(10.72965, 106.6946)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+        MarkerOptions cafeteriaMarker = new MarkerOptions().position(new LatLng(10.72965, 106.6946)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).title("Cafeteria");
         mMap.addMarker(cafeteriaMarker);
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                for (int i = 0; i < facilities.size(); i++) {
+                    if (facilities.get(i).getTitle().equals(marker.getTitle())) {
+                        viewPager.setCurrentItem(i);
+                    }
+                }
+                return true;
+            }
+        });
 
         firebaseHandler.getFacilities().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -184,28 +196,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
 
                 System.out.println("facilities size: " + facilities.size());
-
-                facilityCardAdapter = new FacilityCardAdapter(facilities, MapsActivity.this);
-                viewPager = findViewById(R.id.viewPager);
-                viewPager.setAdapter(facilityCardAdapter);
-                viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                    @Override
-                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-                    }
-
-                    @Override
-                    public void onPageSelected(int position) {
-
-                    }
-
-                    @Override
-                    public void onPageScrollStateChanged(int state) {
-
-                    }
-                });
+                facilityCardAdapter.notifyDataSetChanged();
             }
 
+
+        });
+
+        facilityCardAdapter = new FacilityCardAdapter(facilities, MapsActivity.this);
+        viewPager = findViewById(R.id.viewPager);
+        viewPager.setAdapter(facilityCardAdapter);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
         });
     }
 }

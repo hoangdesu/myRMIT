@@ -13,22 +13,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
-        app:tabIndicatorGravity="top"></com.google.android.material.tabs.TabLayout>
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="611dp"
-        android:layout_above="@+id/tab_layout"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="1dp">
+        android:layout_height="150dp"
+        android:layout_above="@+id/a"
+        android:layout_below="@+id/x"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true"
+        android:clipToPadding="false"
+        android:foregroundGravity="center"
+        android:overScrollMode="never">
 
     </androidx.viewpager.widget.ViewPager>
 
