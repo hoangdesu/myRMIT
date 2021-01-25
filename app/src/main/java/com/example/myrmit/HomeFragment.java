@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -39,7 +40,7 @@ public class HomeFragment extends Fragment {
     List<News> newsList = new ArrayList<News>();;
     CardView fragment_home_cardview_clubs;
     FirebaseHandler firebaseHandler = new FirebaseHandler();
-    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -99,7 +100,7 @@ public class HomeFragment extends Fragment {
                     description = Objects.requireNonNull(documentSnapshot.getData().get("description")).toString();
                     thumbnail = Objects.requireNonNull(documentSnapshot.getData().get("thumbnail")).toString();
                     likes = (ArrayList<String>) documentSnapshot.get("likes");
-                    if (currentUser != null && likes.contains(currentUser)) {
+                    if (currentUser != null && likes.contains(currentUser.getEmail())) {
                         isLike = true;
                     }
                     newsList.add(new News(thumbnail,title,description,"RMIT",isLike));

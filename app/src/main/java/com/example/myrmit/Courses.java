@@ -30,11 +30,19 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.myrmit.model.ArrayAdapterCourses;
 import com.example.myrmit.model.Course;
+import com.example.myrmit.model.CourseReview;
+import com.example.myrmit.model.FirebaseHandler;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class Courses extends AppCompatActivity {
     private ViewPager viewPager;
@@ -50,8 +58,8 @@ public class Courses extends AppCompatActivity {
     @SuppressLint("ClickableViewAccessibility")
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_courses);
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            setContentView(R.layout.activity_courses);
             oes_fragment = new OES_Fragment();
             allocationFragment = new AllocationFragment();
             timetableFragment = new TimetableFragment();
@@ -113,6 +121,37 @@ public class Courses extends AppCompatActivity {
                 }
             });
         }
+        else {
+            FirebaseHandler firebaseHandler = new FirebaseHandler();
+            setContentView(R.layout.activity_courses_guess);
+            ListView listview = findViewById(R.id.courseView);
+            firebaseHandler.getRMITPrograms().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    ArrayList<CourseReview> list = new ArrayList<>();
+                    for (DocumentSnapshot documentSnapshot: task.getResult()){
+                        String description = (String) documentSnapshot.get("description");
+                        String[] temp = description.split("~");
+                        description = "";
+                        for (int i = 0; i < temp.length; i++){
+                            if (i != temp.length-1){
+                                description += temp[i] + "\n";
+                            }
+                            else description += temp[i];
+                         }
+                        list.add(get(documentSnapshot.getId(), (String)documentSnapshot.get("name"),description, (ArrayList<String>) documentSnapshot.get("courses")));
+                    }
+                    if (list.size() == task.getResult().size()){
+                        ArrayAdapterCourses arrayAdapter = new ArrayAdapterCourses(Courses.this, list);
+                        listview.setAdapter(arrayAdapter);
+                    }
+                }
+            });
+        }
+    }
+
+    private CourseReview get(String code, String name, String description, ArrayList<String> courses){
+        return new CourseReview(name, description, courses, code);
     }
 
     public void back(View view){
