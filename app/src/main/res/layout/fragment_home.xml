@@ -372,7 +372,7 @@
 
         </RelativeLayout>
 
-        <androidx.viewpager.widget.ViewPager
+        <com.example.myrmit.ClickableViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="247dp"
@@ -389,7 +389,7 @@
             android:foregroundGravity="center"
             android:overScrollMode="never">
 
-        </androidx.viewpager.widget.ViewPager>
+        </com.example.myrmit.ClickableViewPager>
     </RelativeLayout>
 
 </RelativeLayout>

@@ -74,12 +74,17 @@ public class NewFeed extends AppCompatActivity {
                     description = Objects.requireNonNull(documentSnapshot.getData().get("description")).toString().replace("\\n","\n\n");
                     thumbnail = Objects.requireNonNull(documentSnapshot.getData().get("thumbnail")).toString();
                     likes = (ArrayList<String>) documentSnapshot.get("likes");
-                    if (currentUser != null && likes.contains(currentUser.getEmail())) {
-                        isLike = true;
+                    if (currentUser != null) {
+                        for (int i = 0 ; i < likes.size(); i++) {
+                            if (likes.get(i).equals(currentUser.getEmail())) {
+                                isLike = true;
+                                break;
+                            }
+                        }
                     }
-                    System.out.println(likes.toString());
                     System.out.println("like: " + isLike);
                     newsList.add(new News(thumbnail,title,description,"RMIT",isLike));
+                    isLike = false;
                 }
 
                 System.out.println("NewsList size: " + newsList.size());

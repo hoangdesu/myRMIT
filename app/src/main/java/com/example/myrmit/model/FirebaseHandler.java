@@ -73,7 +73,11 @@ public class FirebaseHandler {
     }
 
     public Task<QuerySnapshot> getNews() {
-        return db.collection("news").whereEqualTo("type","news").get();
+        return db.collection("news").whereEqualTo("type", "news").get();
+    }
+
+    public Task<QuerySnapshot> getEvents() {
+        return db.collection("news").whereEqualTo("type", "event").get();
     }
 
     public Task<QuerySnapshot> getFacilities() {

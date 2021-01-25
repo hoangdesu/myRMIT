@@ -49,9 +49,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
     }
 
     public static void updateData(String title, boolean like) {
-        for (News news :NewsAdapter.newsListAll) {
-            if (news.getTitle().equals(title)) {
-                news.setLike(like);
+        if (newsListAll != null) {
+            for (News news : newsListAll) {
+                if (news.getTitle().equals(title)) {
+                    news.setLike(like);
+                }
             }
         }
     }
@@ -71,6 +73,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
         holder.newsTitle.setText(newsList.get(position).getTitle());
         holder.newsDescription.setText(newsList.get(position).getDescription());
         if (newsList.get(position).isLiked()) {
+            System.out.println("YESS");
             holder.likeIcon.setColorFilter(Color.parseColor("#FFE60028"));
         } else {
             holder.likeIcon.setColorFilter(Color.parseColor("#FF000000"));
@@ -102,10 +105,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
                         firebaseHandler.updatePostLike(currentUser.getEmail(), holder.newsTitle.getText().toString(), true);
                         holder.likeIcon.setColorFilter(Color.parseColor("#FFE60028"));
                         newsList.get(position).setLike(true);
+                        HomeFragment.updateData(holder.newsTitle.getText().toString(), true);
                     } else {
                         firebaseHandler.updatePostLike(currentUser.getEmail(), holder.newsTitle.getText().toString(), false);
                         holder.likeIcon.setColorFilter(Color.parseColor("#FF000000"));
                         newsList.get(position).setLike(false);
+                        HomeFragment.updateData(holder.newsTitle.getText().toString(), false);
                     }
                 }
             }

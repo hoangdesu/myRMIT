@@ -1,5 +1,6 @@
 package com.example.myrmit;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -35,9 +36,9 @@ import java.util.Objects;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
-    ViewPager viewPager;
+    ClickableViewPager viewPager;
     SwipeCardAdapter swipeCardAdapter;
-    List<News> newsList = new ArrayList<News>();;
+    static List<News> newsList = new ArrayList<News>();;
     CardView fragment_home_cardview_clubs;
     FirebaseHandler firebaseHandler = new FirebaseHandler();
     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -89,7 +90,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        firebaseHandler.getNews().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        firebaseHandler.getEvents().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 String title, description, thumbnail;
@@ -97,7 +98,7 @@ public class HomeFragment extends Fragment {
                 List<String> likes = new ArrayList<>();
                 for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                     title = Objects.requireNonNull(documentSnapshot.getData().get("title")).toString();
-                    description = Objects.requireNonNull(documentSnapshot.getData().get("description")).toString();
+                    description = Objects.requireNonNull(documentSnapshot.getData().get("description")).toString().replace("\\n","\n\n");
                     thumbnail = Objects.requireNonNull(documentSnapshot.getData().get("thumbnail")).toString();
                     likes = (ArrayList<String>) documentSnapshot.get("likes");
                     if (currentUser != null && likes.contains(currentUser.getEmail())) {
@@ -109,22 +110,16 @@ public class HomeFragment extends Fragment {
                 swipeCardAdapter = new SwipeCardAdapter(newsList, getContext());
                 viewPager = view.findViewById(R.id.viewPager);
                 viewPager.setAdapter(swipeCardAdapter);
-                viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                viewPager.setOnItemClickListener(new ClickableViewPager.OnItemClickListener() {
                     @Override
-                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                        if (position < (swipeCardAdapter.getCount() - 1)) {
-
-                        }
-                    }
-
-                    @Override
-                    public void onPageSelected(int position) {
-
-                    }
-
-                    @Override
-                    public void onPageScrollStateChanged(int state) {
-
+                    public void onItemClick(int position) {
+                        Intent intent = new Intent(getContext(), NewsActivity.class);
+                        intent.putExtra("Title",newsList.get(position).getTitle());
+                        intent.putExtra("Author",newsList.get(position).getAuthor());
+                        intent.putExtra("Image", newsList.get(position).getThumbnail());
+                        intent.putExtra("Description", newsList.get(position).getDescription());
+                        intent.putExtra("Like", newsList.get(position).isLiked());
+                        startActivity(intent);
                     }
                 });
 
@@ -145,6 +140,14 @@ public class HomeFragment extends Fragment {
         });
 
         return view;
+    }
+
+    public static void updateData(String title, boolean like) {
+        for (News news : newsList) {
+            if (news.getTitle().equals(title)) {
+                news.setLike(like);
+            }
+        }
     }
 
 }

@@ -69,11 +69,13 @@ public class NewsActivity extends AppCompatActivity {
                         firebaseHandler.updatePostLike(currentUser.getEmail(), title, true);
                         aLike.setColorFilter(Color.parseColor("#FFE60028"));
                         NewsAdapter.updateData(title, true);
+                        HomeFragment.updateData(title, true);
                         like = true;
                     } else {
                         firebaseHandler.updatePostLike(currentUser.getEmail(), title, false);
                         aLike.setColorFilter(Color.parseColor("#FF000000"));
                         NewsAdapter.updateData(title, false);
+                        HomeFragment.updateData(title, false);
                         like = false;
                     }
                 }
