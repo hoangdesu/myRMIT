@@ -4,6 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <View
+        android:id="@+id/view7"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:layout_above="@+id/textView37"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="-2dp"
+        android:layout_toEndOf="@+id/textView34"
+        android:layout_toRightOf="@+id/textView34"
+        android:background="#FFC107" />
+
     <TextView
         android:id="@+id/textView38"
         android:layout_width="336dp"
@@ -28,6 +44,17 @@
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="3dp"
+        android:layout_toEndOf="@+id/textView34"
+        android:layout_toRightOf="@+id/textView34"
+        android:background="#DCDCDC" />
+
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="400dp"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="false"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
         android:layout_toEndOf="@+id/textView34"
         android:layout_toRightOf="@+id/textView34"
         android:background="#DCDCDC" />
@@ -76,6 +103,7 @@
         android:gravity="center_vertical"
         android:text="Name"
         android:textColor="#000000"
+        android:textSize="10sp"
         android:textStyle="bold" />
 
     <ImageView

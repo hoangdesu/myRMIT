@@ -8,8 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.myrmit.R;
 
@@ -45,6 +50,19 @@ public class ArrayAdapterCourses extends android.widget.ArrayAdapter<CourseRevie
         viewHolder.space = view.findViewById(R.id.textView34);
         viewHolder.info = view.findViewById(R.id.imageView14);
         viewHolder.name.setText(list.get(position).getName());
+        viewHolder.info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
+                View view = context.getLayoutInflater().inflate(R.layout.courseslist_dialog, null);
+                dialog.setView(view);
+                final AlertDialog alert = dialog.create();
+                ListView listView = view.findViewById(R.id.list_courses);
+                ArrayCoursesView arrayAdapter = new ArrayCoursesView(context, list.get(position).getCourses());
+                listView.setAdapter(arrayAdapter);
+                alert.show();
+            }
+        });
         viewHolder.description.setText(list.get(position).getDescription());
         viewHolder.code.setText(list.get(position).getCode());
         viewHolder.description.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
@@ -57,7 +75,6 @@ public class ArrayAdapterCourses extends android.widget.ArrayAdapter<CourseRevie
                         viewHolder.space.setText(viewHolder.space.getText().toString() + "\n");
                     }
                 }
-
                 return true;
             }
         });
