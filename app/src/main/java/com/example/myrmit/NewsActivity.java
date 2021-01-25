@@ -17,6 +17,7 @@ import com.example.myrmit.model.FirebaseHandler;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -34,7 +35,7 @@ public class NewsActivity extends AppCompatActivity {
     private ImageView aLike;
     private FirebaseHandler firebaseHandler = new FirebaseHandler();
     private Boolean like = true;
-    private String currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+    private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +66,12 @@ public class NewsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (currentUser != null) {
                     if (!like) {
-                        firebaseHandler.updatePostLike(currentUser, title, true);
+                        firebaseHandler.updatePostLike(currentUser.getEmail(), title, true);
                         aLike.setColorFilter(Color.parseColor("#FFE60028"));
                         NewsAdapter.updateData(title, true);
                         like = true;
                     } else {
-                        firebaseHandler.updatePostLike(currentUser, title, false);
+                        firebaseHandler.updatePostLike(currentUser.getEmail(), title, false);
                         aLike.setColorFilter(Color.parseColor("#FF000000"));
                         NewsAdapter.updateData(title, false);
                         like = false;

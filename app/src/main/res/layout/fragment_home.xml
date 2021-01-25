@@ -24,29 +24,6 @@
             android:layout_marginTop="0dp"
             android:background="@drawable/ic_wave_bg_header" />
 
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="21dp"
-            android:layout_marginRight="21dp"
-            app:cardCornerRadius="100dp"
-            app:cardElevation="0dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/temp_avatar" />
-
-
-        </androidx.cardview.widget.CardView>
-
         <TextView
             android:id="@+id/x"
             android:layout_width="wrap_content"

@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import com.example.myrmit.model.Course;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -191,8 +189,7 @@ public class OES_Fragment extends Fragment {
                                                                         }
                                                                         if (i[0] == taskk.getResult().size()){
                                                                             firebaseHandler.getProgressingCourse(user).update("list", teachingCourses);
-                                                                            Toast.makeText(getContext(), "New Change! Load again!", Toast.LENGTH_SHORT).show();
-                                                                            getActivity().recreate();
+                                                                            setList();
                                                                         }
                                                                     }
                                                                 });
@@ -285,7 +282,7 @@ public class OES_Fragment extends Fragment {
                             assert enrolledCourse != null;
                             if (isChange(enrolledCourse, list, semester, newSemester)) {
                                 Toast.makeText(view.getContext(), "Save Successful!", Toast.LENGTH_SHORT).show();
-                                firebaseHandler.confirmEnrolment(user, list, semester);
+                                firebaseHandler.confirmEnrolment("s3740819@rmit.edu.vn", list, semester);
                                 setList();
                             } else
                                 Toast.makeText(view.getContext(), "There is no change in enrolment!", Toast.LENGTH_SHORT).show();

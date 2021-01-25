@@ -106,33 +106,31 @@ public class TimetableFragment extends Fragment {
                 calendar[0].setRange(startDate,endDate);
 
                 ////////////////////////////////////////////////////////////////
-//                firebaseHandler.getCurrentCalendar(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                        ArrayList<String> dates = (ArrayList<String>) task.getResult().get("date");
-//                        if (dates == null || dates.size() == 0){
-//                            calendar[0].hide();
-//                            dates = new ArrayList<>();
-//                            while( date[0].before(calendar[0].getDateAt(calendar[0].positionOfDate(endDate)).getTime())){
-//                                dates.add(sdf.format(date[0]));
-//                                date[0] = addDays(date[0]);
-//                            }
-//                            task.getResult().getReference().update("date", dates);
-//                            task.getResult().getReference().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                                    ArrayList<String> dates = (ArrayList<String>) task.getResult().get("date");
-//                                    for (String date : dates) {
-//                                        task.getResult().getReference().collection("data").document(date).set(new Note());
-//                                    }
-//                                    calendar[0].goToday(true);
-//                                    calendar[0].show();
-//                                }
-//                            });
-//                        }
-//                    }
-//                });
-                calendar[0].goToday(true);
+                firebaseHandler.getCurrentCalendar(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        ArrayList<String> dates = (ArrayList<String>) task.getResult().get("date");
+                        if (dates == null || dates.size() == 0){
+                            dates = new ArrayList<>();
+                            while( date[0].before(calendar[0].getDateAt(calendar[0].positionOfDate(endDate)).getTime())){
+                                dates.add(sdf.format(date[0]));
+                                date[0] = addDays(date[0]);
+                            }
+                            task.getResult().getReference().update("date", dates);
+                            task.getResult().getReference().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    ArrayList<String> dates = (ArrayList<String>) task.getResult().get("date");
+                                    for (String date : dates) {
+                                        task.getResult().getReference().collection("data").document(date).set(new Note());
+                                    }
+                                }
+                            });
+                        }
+                        calendar[0].goToday(true);
+                    }
+                });
+                /////////////////////////////////////////////////////////////////
                 add();
             }
         });

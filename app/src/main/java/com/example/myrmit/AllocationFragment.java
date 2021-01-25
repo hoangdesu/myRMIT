@@ -68,7 +68,7 @@ public class AllocationFragment extends Fragment {
         listView = view.findViewById(R.id.group);
         nothing = view.findViewById(R.id.imageView13);
         confirmChange();
-        setList(view);
+        setList();
         return view;
     }
 
@@ -145,7 +145,7 @@ public class AllocationFragment extends Fragment {
                             }
                         });
                     }
-                    setList(v);
+                    setList();
                     Toast.makeText(v.getContext(), "Change Successful!", Toast.LENGTH_SHORT).show();
                 }
                 else Toast.makeText(v.getContext(), "No Change!", Toast.LENGTH_SHORT).show();
@@ -187,7 +187,7 @@ public class AllocationFragment extends Fragment {
         return false;
     }
 
-    private void setList(View v) {
+    private void setList() {
         groups = new ArrayList<>();
         listView.setAdapter(null);
         confirm.setVisibility(View.INVISIBLE);
@@ -236,11 +236,6 @@ public class AllocationFragment extends Fragment {
                                                                                     }
                                                                                     else if (d.equals(day.get(1))&& t.equals(time.get(1))){
                                                                                         groups.get(groups.size()-1).setGroup2(true);
-                                                                                    }
-                                                                                    else {
-                                                                                        if (!d.equals("")&& !t.equals("")){
-                                                                                            confirm(v);
-                                                                                        }
                                                                                     }
                                                                                     if (groups.size() == progressing.size()){
                                                                                         try {

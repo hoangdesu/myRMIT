@@ -19,6 +19,7 @@ import com.example.myrmit.model.FirebaseHandler;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -35,7 +36,7 @@ public class NewFeed extends AppCompatActivity {
     private int filterOptions = 2;
     private boolean updateFlag = false;
     FirebaseHandler firebaseHandler = new FirebaseHandler();
-    private String currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+    private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class NewFeed extends AppCompatActivity {
                     description = Objects.requireNonNull(documentSnapshot.getData().get("description")).toString().replace("\\n","\n\n");
                     thumbnail = Objects.requireNonNull(documentSnapshot.getData().get("thumbnail")).toString();
                     likes = (ArrayList<String>) documentSnapshot.get("likes");
-                    if (currentUser != null && likes.contains(currentUser)) {
+                    if (currentUser != null && likes.contains(currentUser.getEmail())) {
                         isLike = true;
                     }
                     System.out.println(likes.toString());

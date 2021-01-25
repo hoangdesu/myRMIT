@@ -161,7 +161,6 @@ public class GroupArrayAdapter extends android.widget.ArrayAdapter<Group> {
                                         task.getResult().getReference().update("time", time);
                                     }
                                 });
-                                Toast.makeText(context, "New Change! Load again!", Toast.LENGTH_SHORT).show();
                                 alert.dismiss();
                                 context.recreate();
                             }
@@ -208,7 +207,6 @@ public class GroupArrayAdapter extends android.widget.ArrayAdapter<Group> {
                                         task.getResult().getReference().update("time", time);
                                     }
                                 });
-                                Toast.makeText(context, "New Change! Load again!", Toast.LENGTH_SHORT).show();
                                 alert.dismiss();
                                 context.recreate();
                             }

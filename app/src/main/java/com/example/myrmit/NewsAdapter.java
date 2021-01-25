@@ -22,6 +22,7 @@ import com.example.myrmit.model.FirebaseHandler;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -39,7 +40,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
     private Context context;
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private FirebaseHandler firebaseHandler = new FirebaseHandler();
-    private String currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+    private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
     public NewsAdapter(Context context, List<News> newsList) {
         this.context = context;
@@ -98,11 +99,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
             public void onClick(View v) {
                 if (currentUser != null) {
                     if (!newsList.get(position).isLiked()) {
-                        firebaseHandler.updatePostLike(currentUser, holder.newsTitle.getText().toString(), true);
+                        firebaseHandler.updatePostLike(currentUser.getEmail(), holder.newsTitle.getText().toString(), true);
                         holder.likeIcon.setColorFilter(Color.parseColor("#FFE60028"));
                         newsList.get(position).setLike(true);
                     } else {
-                        firebaseHandler.updatePostLike(currentUser, holder.newsTitle.getText().toString(), false);
+                        firebaseHandler.updatePostLike(currentUser.getEmail(), holder.newsTitle.getText().toString(), false);
                         holder.likeIcon.setColorFilter(Color.parseColor("#FF000000"));
                         newsList.get(position).setLike(false);
                     }
