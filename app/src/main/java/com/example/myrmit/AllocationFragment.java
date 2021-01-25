@@ -212,25 +212,40 @@ public class AllocationFragment extends Fragment {
                                                 taskk.getResult().getReference().collection("data").document(course).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                        groups.add(get(day.get(0), time.get(0), day.get(1), time.get(1), course));
                                                         String d = (String) task.getResult().get("day");
                                                         String t = (String) task.getResult().get("time");
-                                                        if (d.equals(day.get(0)) &&  t.equals(time.get(0))){
-                                                            groups.get(groups.size()-1).setGroup1(true);
-                                                        }
-                                                        else if (d.equals(day.get(1))&& t.equals(time.get(1))){
-                                                            groups.get(groups.size()-1).setGroup2(true);
-                                                        }
-                                                        if (groups.size() == progressing.size()){
-                                                            try {
-                                                                ArrayAdapter<Group> adapter = new GroupArrayAdapter(getActivity(), groups, true, code);
-                                                                listView.setAdapter(adapter);
-                                                                confirm.setVisibility(View.VISIBLE);
-                                                                loading.setVisibility(View.INVISIBLE);
-                                                                loading.setEnabled(false);
-                                                            }catch (Exception ignored){}
-
-                                                        }
+                                                        firebaseHandler.getAllAccounts().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                                for (DocumentSnapshot documentSnapshot:task.getResult()){
+                                                                    if (documentSnapshot.get("role").equals("lecturer")) {
+                                                                        firebaseHandler.getProgramOfStudent(documentSnapshot.getId()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                                            @Override
+                                                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                                                if (task.getResult().get("code").equals(code)){
+                                                                                    groups.add(get(day.get(0), time.get(0), day.get(1), time.get(1), course, (String) documentSnapshot.get("name")));
+                                                                                    if (d.equals(day.get(0)) &&  t.equals(time.get(0))){
+                                                                                        groups.get(groups.size()-1).setGroup1(true);
+                                                                                    }
+                                                                                    else if (d.equals(day.get(1))&& t.equals(time.get(1))){
+                                                                                        groups.get(groups.size()-1).setGroup2(true);
+                                                                                    }
+                                                                                    if (groups.size() == progressing.size()){
+                                                                                        try {
+                                                                                            ArrayAdapter<Group> adapter = new GroupArrayAdapter(getActivity(), groups, true, code);
+                                                                                            listView.setAdapter(adapter);
+                                                                                            confirm.setVisibility(View.VISIBLE);
+                                                                                            loading.setVisibility(View.INVISIBLE);
+                                                                                            loading.setEnabled(false);
+                                                                                        }catch (Exception ignored){}
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
                                                     }
                                                 });
                                             }
@@ -265,7 +280,7 @@ public class AllocationFragment extends Fragment {
                                                 timeDay.addAll(time);
                                                 noteDay.add("Have a class: " + course +" !");
                                                 noteDay.add("Have a class: " + course +" !");
-                                                groups.add(get(day.get(0), time.get(0), day.get(1), time.get(1), course));
+                                                groups.add(get(day.get(0), time.get(0), day.get(1), time.get(1), course, ""));
                                                 if (groups.size() == list.size()){
                                                     firebaseHandler.getCurrentCalendar(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                                         @Override
@@ -310,8 +325,8 @@ public class AllocationFragment extends Fragment {
         });
     }
 
-    private Group get(String day1, String time1, String day2, String time2, String courseName) {
-        Group group = new Group("Minh Dinh", day1, time1, courseName, day2, time2);
+    private Group get(String day1, String time1, String day2, String time2, String courseName, String lecturerName) {
+        Group group = new Group(lecturerName, day1, time1, courseName, day2, time2);
         groups.add(group);
         return group;
     }
