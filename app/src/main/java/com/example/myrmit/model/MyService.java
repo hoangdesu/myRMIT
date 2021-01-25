@@ -29,13 +29,11 @@ import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class MyService extends Service {
     static int id = 2;
     FirebaseHandler firebaseHandler = new FirebaseHandler();
-    ArrayList<String> list;
-    ArrayList<String> member;
+    String user;
     ArrayList<ListenerRegistration> listenerRegistration;
     @Override
     public void onCreate() {
@@ -84,11 +82,10 @@ public class MyService extends Service {
         super.onStartCommand(intent, flags, startId);
         // Super user does not have these abilities.
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-//            if (!FirebaseAuth.getInstance().getCurrentUser().getEmail().equals("vietnamsachvaxanh@gmail.com")) {
+                user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 //                listenLocationChange();
-//                listenNewCleaningSite();
+                listenTimeChanges();
 //                listenCleaningSite();
-//            }
         }
         return START_NOT_STICKY;
     }
@@ -104,51 +101,55 @@ public class MyService extends Service {
         }
     }
 
-//    /**
-//     * Listen and get the notification if there is a new cleaning site.
-//     */
-//    private void listenNewCleaningSite(){
-//        listenerRegistration.add(firebaseHandler.findUser().addSnapshotListener(new EventListener<QuerySnapshot>() {
-//            @Override
-//            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-//                if (error != null) {
-//                    return;
-//                }
-//                assert value != null;
-//                if (value.getDocumentChanges().size() > 0) {
-//                    DocumentChange change = value.getDocumentChanges().get(value.getDocumentChanges().size() - 1);
-//                    if (change.getDocument().getId().equals("vietnamsachvaxanh@gmail.com")) {
-//                        NotificationManager mNotificationManager;
-//                        NotificationCompat.Builder mBuilder =
-//                                new NotificationCompat.Builder(getApplicationContext(), "notify_001");
-//                        Intent ii = new Intent(getApplicationContext(), WelcomeScreen.class);
-//                        PendingIntent pendingIntent = PendingIntent.getActivity(MyService.this, 0, ii, 0);
-//                        if (WelcomeScreen.activity == null) {
-//                            mBuilder.setContentIntent(pendingIntent);
-//                        }
-//                        mBuilder.setSmallIcon(R.drawable.icon);
-//                        mBuilder.setContentTitle("New Cleaning site!");
-//                        mBuilder.setContentText("Go to the map and check it out!");
-//                        mBuilder.setPriority(Notification.PRIORITY_MAX);
-//                        mNotificationManager =
-//                                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//                        mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                            String channelId = "My_channel_id";
-//                            NotificationChannel channel = new NotificationChannel(
-//                                    channelId,
-//                                    "Bao's Channel",
-//                                    NotificationManager.IMPORTANCE_HIGH);
-//                            mNotificationManager.createNotificationChannel(channel);
-//                            mBuilder.setChannelId(channelId);
-//                        }
-//                        mNotificationManager.notify(id, mBuilder.build());
-//                        idHandler();
-//                    }
-//                }
-//            }
-//        }));
-//    }
+    private void listenTimeChanges(){
+        firebaseHandler.getProgressingCourse(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                ArrayList<String> list = (ArrayList<String>) task.getResult().get("list");
+                task.getResult().getReference().getParent().getParent().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        String programID = (String) task.getResult().get("code");
+                        listenerRegistration.add(firebaseHandler.getProgram(programID).collection("data").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                if (error != null) {
+                                    return;
+                                }
+                                assert value != null;
+                                if (value.getDocumentChanges().size() > 0) {
+                                    DocumentChange change = value.getDocumentChanges().get(value.getDocumentChanges().size() - 1);
+                                    if (list.contains(change.getDocument().getId())){
+                                        NotificationManager mNotificationManager;
+                                        NotificationCompat.Builder mBuilder =
+                                                new NotificationCompat.Builder(getApplicationContext(), "notify_001");
+                                        mBuilder.setSmallIcon(R.drawable.myrmit);
+                                        mBuilder.setContentTitle("New change in class time!");
+                                        mBuilder.setContentText("Go to the allocation page and check it out!");
+                                        mBuilder.setPriority(Notification.PRIORITY_MAX);
+                                        mNotificationManager =
+                                                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                                        mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                            String channelId = "My_channel_id";
+                                            NotificationChannel channel = new NotificationChannel(
+                                                    channelId,
+                                                    "Bao's Channel",
+                                                    NotificationManager.IMPORTANCE_HIGH);
+                                            mNotificationManager.createNotificationChannel(channel);
+                                            mBuilder.setChannelId(channelId);
+                                        }
+                                        mNotificationManager.notify(id, mBuilder.build());
+                                        idHandler();
+                                    }
+                                }
+                            }
+                        }));
+                    }
+                });
+            }
+        });
+    }
 //
 //    /**
 //     * Listen to cleaning site that the user is in
