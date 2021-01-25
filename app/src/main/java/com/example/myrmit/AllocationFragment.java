@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,7 @@ public class AllocationFragment extends Fragment {
     private String mParam2;
     private ListView listView;
     private ArrayList<Group> groups;
+    ImageView nothing;
     private Button confirm;
     private ImageView loading;
     private String user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
@@ -64,6 +66,7 @@ public class AllocationFragment extends Fragment {
         confirm = view.findViewById(R.id.button3);
         loading = view.findViewById(R.id.imageView12);
         listView = view.findViewById(R.id.group);
+        nothing = view.findViewById(R.id.imageView13);
         confirmChange();
         setList();
         return view;
@@ -203,6 +206,10 @@ public class AllocationFragment extends Fragment {
                                 public void onComplete(@NonNull Task<DocumentSnapshot> taskk) {
                                     ArrayList<String> progressing = (ArrayList<String>) taskk.getResult().get("list");
                                     ArrayList<Group> groups = new ArrayList<>();
+                                    if (progressing.size() == 0 || progressing == null){
+                                        nothing.setVisibility(View.VISIBLE);
+                                        loading.setVisibility(View.INVISIBLE);
+                                    }
                                     for (String course : progressing) {
                                         firebaseHandler.getProgram(code).collection("data").document(course).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                             @Override
@@ -263,6 +270,10 @@ public class AllocationFragment extends Fragment {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             ArrayList<String> list = (ArrayList<String>) task.getResult().get("list");
                             ArrayList<Group> groups = new ArrayList<>();
+                            if (list.size() == 0 || list == null){
+                                nothing.setVisibility(View.VISIBLE);
+                                loading.setVisibility(View.INVISIBLE);
+                            }
                             firebaseHandler.getProgramOfStudent(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {

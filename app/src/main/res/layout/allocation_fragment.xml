@@ -17,6 +17,17 @@
         android:src="@drawable/loading" />
 
     <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="277dp"
+        android:layout_marginBottom="200dp"
+        android:src="@drawable/nothing"
+        android:visibility="invisible" />
+
+    <ImageView
         android:id="@+id/imageView5"
         android:layout_width="194dp"
         android:layout_height="30dp"
