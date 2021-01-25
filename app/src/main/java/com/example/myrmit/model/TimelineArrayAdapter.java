@@ -56,7 +56,7 @@ public class TimelineArrayAdapter extends android.widget.ArrayAdapter<Timeline> 
                 viewHolder.note.getViewTreeObserver().removeOnPreDrawListener(this);
 
                 int lineCount = viewHolder.note.getLineCount();
-                if (viewHolder.space.getText().toString().split("").length-1 < lineCount){
+                if (viewHolder.space.getText().toString().split("").length-1 <= lineCount){
                     for (int i = 1; i< lineCount; i++) {
                         viewHolder.space.setText(viewHolder.space.getText().toString() + "\n");
                     }

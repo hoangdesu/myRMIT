@@ -104,6 +104,8 @@ public class TimetableFragment extends Fragment {
                 endDate.add(Calendar.MONTH, 4);
                 calendar[0].refresh();
                 calendar[0].setRange(startDate,endDate);
+
+                ////////////////////////////////////////////////////////////////
                 firebaseHandler.getCurrentCalendar(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -125,9 +127,10 @@ public class TimetableFragment extends Fragment {
                                 }
                             });
                         }
+                        calendar[0].goToday(true);
                     }
                 });
-                calendar[0].goToday(true);
+                /////////////////////////////////////////////////////////////////
                 add();
             }
         });

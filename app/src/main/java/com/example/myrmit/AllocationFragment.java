@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class AllocationFragment extends Fragment {
     private ListView listView;
     private ArrayList<Group> groups;
     private Button confirm;
+    private ImageView loading;
     private String user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
     public AllocationFragment() {
         // Required empty public constructor
@@ -60,6 +62,7 @@ public class AllocationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.allocation_fragment, container, false);
         confirm = view.findViewById(R.id.button3);
+        loading = view.findViewById(R.id.imageView12);
         listView = view.findViewById(R.id.group);
         confirmChange();
         setList();
@@ -70,75 +73,79 @@ public class AllocationFragment extends Fragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseHandler.getProgressingCourse(user).collection("data").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        boolean isChange = false;
-                        firebaseHandler.updateTimetable("s3740819@rmit.edu.vn");
-                        for (DocumentSnapshot documentSnapshot : task.getResult()){
-                            for (int i = 0; i < groups.size(); i++){
-                                if (documentSnapshot.getId().equals(groups.get(i).getCourseName())) {
-                                    if (groups.get(i).isGroup1()) {
-                                        isChange = !documentSnapshot.get("day").equals(groups.get(i).getDay1());
-                                        break;
-                                    } else if (groups.get(i).isGroup2()) {
-                                        isChange = !documentSnapshot.get("day").equals(groups.get(i).getDay2());
-                                        break;
-                                    } else {
-                                        isChange = !documentSnapshot.get("day").equals("");
-                                        break;
-                                    }
-                                }
-                            }
-                            if (isChange){
+                confirm(v);
+            }
+        });
+    }
+
+    private void confirm(View v){
+        firebaseHandler.getProgressingCourse(user).collection("data").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                boolean isChange = false;
+                firebaseHandler.updateTimetable(user);
+                for (DocumentSnapshot documentSnapshot : task.getResult()){
+                    for (int i = 0; i < groups.size(); i++){
+                        if (documentSnapshot.getId().equals(groups.get(i).getCourseName())) {
+                            if (groups.get(i).isGroup1()) {
+                                isChange = !documentSnapshot.get("day").equals(groups.get(i).getDay1());
+                                break;
+                            } else if (groups.get(i).isGroup2()) {
+                                isChange = !documentSnapshot.get("day").equals(groups.get(i).getDay2());
+                                break;
+                            } else {
+                                isChange = !documentSnapshot.get("day").equals("");
                                 break;
                             }
                         }
-                        if (isChange){
-                            HashMap<String, HashMap<String, String>> date = new HashMap<>();
-                            for (int i = 0 ; i < groups.size(); i++){
-                                if (!getChosenGroupDay(groups.get(i)).equals("")){
-                                    if (!date.containsKey(getChosenGroupDay(groups.get(i))) ) {
-                                        HashMap<String, String> chosenTime = new HashMap<String, String>();
-                                        chosenTime.put(groups.get(i).getCourseName(), getChosenGroupTime(groups.get(i)));
-                                        date.put(getChosenGroupDay(groups.get(i)), chosenTime);
-                                    }
-                                    else date.get(getChosenGroupDay(groups.get(i))).put(groups.get(i).getCourseName(), getChosenGroupTime(groups.get(i)));
-                                }
-                                firebaseHandler.confirmAllocation(user, getChosenGroupDay(groups.get(i)), getChosenGroupTime(groups.get(i)), groups.get(i).getCourseName());
-                            }
-                            for (String day : date.keySet()){
-                                firebaseHandler.getCurrentCalendar(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                        ArrayList<String> dates = (ArrayList<String>) task.getResult().get("date");
-                                        ArrayList<String> dateList = new ArrayList<>();
-                                        ArrayList<String> time = new ArrayList<>();
-                                        ArrayList<String> courseName = new ArrayList<>();
-                                        for (String date : dates){
-                                            try {
-                                                if (isDate(day, date)){
-                                                    dateList.add(date);
-                                                }
-                                            } catch (ParseException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                        HashMap<String, String> map = date.get(day);
-                                        for (String d : map.keySet()){
-                                            courseName.add("Have a class: " + d + " !");
-                                            time.add(map.get(d));
-                                        }
-                                        firebaseHandler.addClassTime(user, dateList, time,courseName);
-                                    }
-                                });
-                            }
-                            setList();
-                            Toast.makeText(v.getContext(), "Change Successful!", Toast.LENGTH_SHORT).show();
-                        }
-                        else Toast.makeText(v.getContext(), "No Change!", Toast.LENGTH_SHORT).show();
                     }
-                });
+                    if (isChange){
+                        break;
+                    }
+                }
+                if (isChange){
+                    HashMap<String, HashMap<String, String>> date = new HashMap<>();
+                    for (int i = 0 ; i < groups.size(); i++){
+                        if (!getChosenGroupDay(groups.get(i)).equals("")){
+                            if (!date.containsKey(getChosenGroupDay(groups.get(i))) ) {
+                                HashMap<String, String> chosenTime = new HashMap<String, String>();
+                                chosenTime.put(groups.get(i).getCourseName(), getChosenGroupTime(groups.get(i)));
+                                date.put(getChosenGroupDay(groups.get(i)), chosenTime);
+                            }
+                            else date.get(getChosenGroupDay(groups.get(i))).put(groups.get(i).getCourseName(), getChosenGroupTime(groups.get(i)));
+                        }
+                        firebaseHandler.confirmAllocation(user, getChosenGroupDay(groups.get(i)), getChosenGroupTime(groups.get(i)), groups.get(i).getCourseName());
+                    }
+                    for (String day : date.keySet()){
+                        firebaseHandler.getCurrentCalendar(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                ArrayList<String> dates = (ArrayList<String>) task.getResult().get("date");
+                                ArrayList<String> dateList = new ArrayList<>();
+                                ArrayList<String> time = new ArrayList<>();
+                                ArrayList<String> notes = new ArrayList<>();
+                                for (String date : dates){
+                                    try {
+                                        if (isDate(day, date)){
+                                            dateList.add(date);
+                                        }
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                HashMap<String, String> map = date.get(day);
+                                for (String d : map.keySet()){
+                                    notes.add("Have a class: " + d + " !");
+                                    time.add(map.get(d));
+                                }
+                                firebaseHandler.addClassTime(user, dateList, time,notes);
+                            }
+                        });
+                    }
+                    setList();
+                    Toast.makeText(v.getContext(), "Change Successful!", Toast.LENGTH_SHORT).show();
+                }
+                else Toast.makeText(v.getContext(), "No Change!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -181,6 +188,7 @@ public class AllocationFragment extends Fragment {
         groups = new ArrayList<>();
         listView.setAdapter(null);
         confirm.setVisibility(View.INVISIBLE);
+        loading.setVisibility(View.VISIBLE);
         firebaseHandler.getAccount(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -215,9 +223,11 @@ public class AllocationFragment extends Fragment {
                                                         }
                                                         if (groups.size() == progressing.size()){
                                                             try {
-                                                                ArrayAdapter<Group> adapter = new GroupArrayAdapter(getActivity(), groups, true);
+                                                                ArrayAdapter<Group> adapter = new GroupArrayAdapter(getActivity(), groups, true, code);
                                                                 listView.setAdapter(adapter);
                                                                 confirm.setVisibility(View.VISIBLE);
+                                                                loading.setVisibility(View.INVISIBLE);
+                                                                loading.setEnabled(false);
                                                             }catch (Exception ignored){}
 
                                                         }
@@ -232,6 +242,7 @@ public class AllocationFragment extends Fragment {
                     });
                 }
                 else {
+                    firebaseHandler.updateTimetable(user);
                     firebaseHandler.getProgressingCourse(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -241,20 +252,51 @@ public class AllocationFragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     String programCode = (String) task.getResult().get("code");
+                                    ArrayList<String> weekDay = new ArrayList<>();
+                                    ArrayList<String> timeDay = new ArrayList<>();
+                                    ArrayList<String> noteDay = new ArrayList<>();
                                     for (String course: list){
                                         firebaseHandler.getProgram(programCode).collection("data").document(course).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                                 ArrayList<String> day = (ArrayList<String>) task.getResult().get("day");
                                                 ArrayList<String> time = (ArrayList<String>) task.getResult().get("time");
+                                                weekDay.addAll(day);
+                                                timeDay.addAll(time);
+                                                noteDay.add("Have a class: " + course +" !");
+                                                noteDay.add("Have a class: " + course +" !");
                                                 groups.add(get(day.get(0), time.get(0), day.get(1), time.get(1), course));
                                                 if (groups.size() == list.size()){
+                                                    firebaseHandler.getCurrentCalendar(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                            ArrayList<String> dates = (ArrayList<String>) task.getResult().get("date");
+                                                            for (String date : dates){
+                                                                ArrayList<String> dateList = new ArrayList<>();
+                                                                ArrayList<String> time = new ArrayList<>();
+                                                                ArrayList<String> notes = new ArrayList<>();
+                                                                for (int i = 0; i < weekDay.size(); i++) {
+                                                                    try {
+                                                                        if (isDate(weekDay.get(i), date)) {
+                                                                            if (dateList.size() == 0) {
+                                                                                dateList.add(date);
+                                                                            }
+                                                                            time.add(timeDay.get(i));
+                                                                            notes.add(noteDay.get(i));
+                                                                        }
+                                                                    } catch (ParseException e) {
+                                                                        e.printStackTrace();
+                                                                    }
+                                                                }
+                                                                firebaseHandler.addClassTime(user, dateList, time,notes);
+                                                            }
+                                                        }
+                                                    });
                                                     try {
-                                                        ArrayAdapter<Group> adapter = new GroupArrayAdapter(getActivity(), groups, false);
+                                                        ArrayAdapter<Group> adapter = new GroupArrayAdapter(getActivity(), groups, false, programCode);
                                                         listView.setAdapter(adapter);
                                                         confirm.setEnabled(false);
                                                     }catch (Exception ignored){}
-
                                                 }
                                             }
                                         });

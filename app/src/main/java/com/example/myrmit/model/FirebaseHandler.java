@@ -112,7 +112,7 @@ public class FirebaseHandler {
         }
     }
 
-    public void addClassTime(String username, ArrayList<String> dates, ArrayList<String> time, ArrayList<String> courseName) {
+    public void addClassTime(String username, ArrayList<String> dates, ArrayList<String> time, ArrayList<String> notes) {
         for (String date : dates) {
             db.collection("users").document(username).collection("programCode").document("calendar").collection("data").document(date).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -121,10 +121,10 @@ public class FirebaseHandler {
                     ArrayList<String> note = (ArrayList<String>) task.getResult().get("note");
                     ArrayList<String> type = (ArrayList<String>) task.getResult().get("type");
                     timeline.addAll(time);
-                    for (int i = 0 ; i < courseName.size(); i++) {
+                    for (int i = 0 ; i < notes.size(); i++) {
                         type.add("class");
                     }
-                    note.addAll(courseName);
+                    note.addAll(notes);
                     task.getResult().getReference().update("time", timeline);
                     task.getResult().getReference().update("note", note);
                     task.getResult().getReference().update("type", type);
