@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.example.myrmit.clubs.ClubsActivity;
 import com.example.myrmit.coursesActivity.Courses;
 import com.example.myrmit.model.*;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private HomeFragment homeFragment;
     private RecordFragment recordFragment;
-    private ClubsFragment clubsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         // addClubs();
         homeFragment = new HomeFragment();
         recordFragment = new RecordFragment();
-        clubsFragment = new ClubsFragment();
 
         tabLayout.setupWithViewPager(viewPager);
 
@@ -139,6 +138,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onServicesClick(View view){
         Intent intent = new Intent(MainActivity.this, Services.class);
+        startActivity(intent);
+    }
+
+    public void onClubsClick(View view) {
+        Intent intent = new Intent(MainActivity.this, ClubsActivity.class);
         startActivity(intent);
     }
 
@@ -561,17 +565,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-
-//    createdDate
-//"1/1/2021"
-//        (string)
-//    description
-//""
-//    event
-//            host
-//"s3740819@rmit.edu.vn"
-//    numberOfMembers
-//"0"
-//    vote
-//"****"
-//}

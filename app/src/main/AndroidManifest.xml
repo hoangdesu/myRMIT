@@ -39,11 +39,9 @@
         android:theme="@style/Theme.MyRMIT"
         tools:ignore="HardcodedDebugMode"
         tools:targetApi="p">
-
-        <activity android:name=".NewsActivity"></activity>
-
-        <activity android:name=".Services"></activity>
-
+        <activity android:name=".clubs.ClubsActivity"></activity>
+        <activity android:name=".NewsActivity" />
+        <activity android:name=".Services" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".MainActivity" />
         <!--
@@ -92,7 +90,7 @@
             android:name=".model.MyFirebaseMessagingService"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>

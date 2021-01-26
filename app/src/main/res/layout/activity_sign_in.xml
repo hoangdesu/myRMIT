@@ -26,15 +26,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="40dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/button_signin"
-            android:onClick="guessLogin"
-            android:text="Login as guess"
+            android:onClick="guestLogin"
+            android:text="Login as guest"
             android:textColor="@android:color/white"
             app:backgroundTint="#34550D" />
 

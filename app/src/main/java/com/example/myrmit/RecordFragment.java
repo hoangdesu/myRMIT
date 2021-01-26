@@ -1,16 +1,31 @@
 package com.example.myrmit;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.myrmit.model.FirebaseHandler;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,8 +34,17 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 public class RecordFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    TextView tvUsername;
+    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    ProgressBar progressBarGPA;
+    ProgressBar credits_progress_bar;
+    TextView tvGPA;
+    TextView tvCredits;
+    TextView tvStudent_ID;
+    TextView tvDOB;
+    TextView tvProgram;
+    TextView tvGender;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -28,6 +52,7 @@ public class RecordFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private Button logout;
+
     public RecordFragment() {
         // Required empty public constructor
     }
@@ -68,11 +93,83 @@ public class RecordFragment extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // TODO: Add sign out confirm dialog
+
+
                 FirebaseAuth.getInstance().signOut();
-                Intent intent= new Intent(getActivity(), SignInActivity.class);
+                Intent intent = new Intent(getActivity(), SignInActivity.class);
                 startActivity(intent);
             }
         });
+
+
+        // Display user's information
+        tvUsername = view.findViewById(R.id.tv_fragment_record_username);
+        tvGPA = view.findViewById(R.id.tvGPA);
+        tvCredits = view.findViewById(R.id.tvCredits);
+        tvStudent_ID = view.findViewById(R.id.tvStudent_ID);
+        tvDOB = view.findViewById(R.id.tvDOB);
+        tvGender = view.findViewById(R.id.tvGender);
+        tvProgram = view.findViewById(R.id.tvProgram);
+        progressBarGPA = view.findViewById(R.id.progressBarGPA);
+        credits_progress_bar = view.findViewById(R.id.credits_progress_bar);
+
+        progressBarGPA.setMax(4 * 10);
+        progressBarGPA.setProgress((int) (3.4 * 10));
+        credits_progress_bar.setMax(384);
+        credits_progress_bar.setProgress(192);
+
+        CollectionReference users = FirebaseFirestore.getInstance().collection("users");
+
+        if (currentUser != null) {
+            String userEmail = currentUser.getEmail();
+            //Log.i("EMAIL", userEmail);
+            assert userEmail != null;
+            DocumentReference userRef = users.document(userEmail);
+            userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @SuppressLint("SetTextI18n")
+                @Override
+                public void onSuccess(DocumentSnapshot user) {
+                    String firstName = user.getString("firstName");
+                    String lastName = user.getString("lastName");
+                    String fullName = firstName + " " + lastName;
+                    String name = user.getString("name");
+
+                    String dob = user.getString("dob");
+                    String gender = user.getString("gender");
+                    Double gpa = user.getDouble("gpa");
+                    String program = user.getString("program");
+                    String studentID = user.getString("studentID");
+                    Double credits = user.getDouble("credits");
+
+
+                    if (firstName.equals("")) {
+                        tvUsername.setText(name);
+                    } else {
+                        tvUsername.setText(fullName);
+                    }
+
+                    if ((dob != null) && (gpa != null)) {
+                        tvGPA.setText(String.valueOf(gpa));
+                        progressBarGPA.setProgress((int) (gpa * 10));
+                        credits_progress_bar.setProgress(credits.intValue());
+
+                        tvCredits.setText(credits.intValue() + "/384");
+
+                        tvStudent_ID.setText(studentID);
+                        tvDOB.setText(dob);
+                        tvGender.setText(gender);
+                        tvProgram.setText(program);
+                    }
+
+                }
+            });
+        }
+
+
+
+
         return view;
     }
 }

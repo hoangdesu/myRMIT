@@ -30,16 +30,16 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/tv_fragment_record_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:fontFamily="@font/museo_500"
-        android:text="Ovilee May"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="190dp">
+        android:layout_marginTop="190dp"
+        android:fontFamily="@font/museo_500"
+        android:text="Guest"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold">
 
     </TextView>
 
@@ -83,7 +83,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/student_ID"
+                    android:id="@+id/tvStudent_ID"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -120,7 +120,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/dob"
+                    android:id="@+id/tvDOB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -156,7 +156,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/gender"
+                    android:id="@+id/tvGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -192,7 +192,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/program"
+                    android:id="@+id/tvProgram"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -226,7 +226,7 @@
         android:id="@+id/gpa_card"
         android:layout_width="144dp"
         android:layout_height="162dp"
-        android:layout_below="@+id/name"
+        android:layout_below="@+id/tv_fragment_record_username"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="15dp"
         app:cardCornerRadius="18dp"
@@ -239,7 +239,7 @@
 
 
             <ProgressBar
-                android:id="@+id/progress_bar"
+                android:id="@+id/progressBarGPA"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
@@ -253,7 +253,7 @@
             </ProgressBar>
 
             <TextView
-                android:id="@+id/gpa"
+                android:id="@+id/tvGPA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -284,7 +284,7 @@
         android:id="@+id/credits_card"
         android:layout_width="148dp"
         android:layout_height="158dp"
-        android:layout_below="@+id/name"
+        android:layout_below="@+id/tv_fragment_record_username"
         android:layout_alignParentRight="true"
         android:layout_marginTop="15dp"
         android:layout_marginRight="52dp"
@@ -312,7 +312,7 @@
             </ProgressBar>
 
             <TextView
-                android:id="@+id/credits"
+                android:id="@+id/tvCredits"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
