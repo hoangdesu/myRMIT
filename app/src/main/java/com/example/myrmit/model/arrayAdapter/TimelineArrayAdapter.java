@@ -39,27 +39,28 @@ public class TimelineArrayAdapter extends android.widget.ArrayAdapter<Timeline> 
         view = inflator.inflate(R.layout.note_list, null);
         color = ((ColorDrawable)view.getBackground()).getColor();
         final ViewHolder viewHolder = new ViewHolder();
+        // Initial setting for all components
         viewHolder.space = view.findViewById(R.id.space);
         viewHolder.time = view.findViewById(R.id.time);
         viewHolder.note = view.findViewById(R.id.note);
+        // Set behavior for them
         if (list.get(position).getType().equals("note")){
             view.setBackgroundColor(Color.WHITE);
         }
         else view.setBackgroundColor(color);
         viewHolder.time.setText(list.get(position).getTime() +":00");
         viewHolder.note.setText(list.get(position).getNote());
+        // Set line extending
         viewHolder.note.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
                 viewHolder.note.getViewTreeObserver().removeOnPreDrawListener(this);
-
                 int lineCount = viewHolder.note.getLineCount();
                 if (viewHolder.space.getText().toString().split("").length-1 <= lineCount){
                     for (int i = 1; i< lineCount; i++) {
                         viewHolder.space.setText(viewHolder.space.getText().toString() + "\n");
                     }
                 }
-
                 return true;
             }
         });
