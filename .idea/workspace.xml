@@ -28,15 +28,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da164c8c-a112-4b82-813c-bc6aee1a590f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/history.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/MyFirebaseMessagingService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/HomeFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/NewFeed.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/NewFeed.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/NewsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/NewsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/NewsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/NewsAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/FirebaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/FirebaseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_record.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_record.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/SignInActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/SignInActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,9 +47,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="layoutResourceFile" />
         <option value="resourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -211,22 +206,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1611472042473" />
-    <state width="1305" height="193" key="GridCell.Tab.0.bottom" timestamp="1611612263264">
+    <state width="1322" height="290" key="GridCell.Tab.0.bottom" timestamp="1611674560977">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1305" height="193" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611612263264" />
-    <state width="1305" height="193" key="GridCell.Tab.0.center" timestamp="1611612263264">
+    <state width="1322" height="290" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611674560977" />
+    <state width="1322" height="290" key="GridCell.Tab.0.center" timestamp="1611674560976">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1305" height="193" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611612263264" />
-    <state width="1305" height="193" key="GridCell.Tab.0.left" timestamp="1611612263263">
+    <state width="1322" height="290" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611674560976" />
+    <state width="1322" height="290" key="GridCell.Tab.0.left" timestamp="1611674560976">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1305" height="193" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611612263263" />
-    <state width="1305" height="193" key="GridCell.Tab.0.right" timestamp="1611612263264">
+    <state width="1322" height="290" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611674560976" />
+    <state width="1322" height="290" key="GridCell.Tab.0.right" timestamp="1611674560976">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1305" height="193" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611612263264" />
+    <state width="1322" height="290" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611674560976" />
     <state x="499" y="142" key="chooseDestDirectoryDialog" timestamp="1611611126769">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

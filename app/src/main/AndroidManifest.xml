@@ -87,6 +87,14 @@
         </activity>
         <activity android:name=".coursesActivity.Courses" />
         <activity android:name=".NewFeed" />
+
+        <service
+            android:name=".model.MyFirebaseMessagingService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class SignInActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
@@ -37,6 +38,8 @@ public class SignInActivity extends AppCompatActivity {
         status = findViewById(R.id.textView13);
         username = findViewById(R.id.email);
         password = findViewById(R.id.password);
+        FirebaseMessaging.getInstance().subscribeToTopic("news_notification");
+        System.out.println("Firebase messaging subscribed");
         if (FirebaseAuth.getInstance().getCurrentUser() != null){
             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
             startActivity(intent);
