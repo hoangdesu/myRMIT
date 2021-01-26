@@ -31,31 +31,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da164c8c-a112-4b82-813c-bc6aee1a590f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/custom_searchview.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/ic_launcher-playstore.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/ic_launcher-playstore.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/WelcomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/WelcomeActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_clubs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_clubs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,15 +71,12 @@
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
     <property name="multi-representation-previewD:/Android App Dev/_myRMIT/app/src/main/java/com/example/myrmit/ClickableViewPager.java_selected" value="Custom views" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="android.template.996065418">
-      <recent name="com.example.myrmit" />
-    </key>
-    <key name="android.template.548432242">
-      <recent name="com.example.myrmit.clubs" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Android App Dev\_myRMIT\app\src\main\res\drawable-v24" />
       <recent name="D:\Android App Dev\_myRMIT\app\src\main\res\drawable" />
@@ -111,7 +84,16 @@
       <recent name="D:\myRMIT\app\src\main\res\drawable-v24" />
       <recent name="D:\myRMIT\app\src\main\res\layout" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
+    </key>
+    <key name="android.template.548432242">
+      <recent name="com.example.myrmit.clubs" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.myrmit" />
+    </key>
+    <key name="android.template.996065418">
       <recent name="com.example.myrmit" />
     </key>
     <key name="android.template.-78474298">
@@ -202,8 +184,25 @@
       <option name="project" value="LOCAL" />
       <updated>1611695385194</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fix splash art bug&#10;Transparent app icon&#10;Clubs UI">
+      <created>1611699700173</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1611699700173</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -219,9 +218,14 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Logout confirm alert" />
-    <option name="LAST_COMMIT_MESSAGE" value="Logout confirm alert" />
+    <MESSAGE value="Fix splash art bug&#10;Transparent app icon&#10;Clubs UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix splash art bug&#10;Transparent app icon&#10;Clubs UI" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="480" y="285" key="#PSD" timestamp="1611700033881">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="480" y="285" key="#PSD/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611700033881" />
     <state x="488" y="70" key="#com.intellij.ide.util.MemberChooser" timestamp="1611513657019">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -244,10 +248,10 @@
     </state>
     <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1611601986238" />
     <state x="370" y="196" key="AndroidCreateResourceFileDialog/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611696838000" />
-    <state x="464" y="23" key="CommitChangelistDialog2" timestamp="1611695385072">
+    <state x="464" y="23" width="1066" height="1057" key="CommitChangelistDialog2" timestamp="1611699700030">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="464" y="23" key="CommitChangelistDialog2/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611695385072" />
+    <state x="464" y="23" width="1066" height="1057" key="CommitChangelistDialog2/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611699700030" />
     <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1611472042473">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -272,14 +276,14 @@
     </state>
     <state width="1322" height="200" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611680566601" />
     <state width="1860" height="224" key="GridCell.Tab.0.right/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
-    <state x="464" y="186" key="SettingsEditor" timestamp="1611694467207">
+    <state x="464" y="186" key="SettingsEditor" timestamp="1611700564909">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="464" y="186" key="SettingsEditor/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694467207" />
-    <state x="555" y="283" key="Vcs.Push.Dialog.v2" timestamp="1611695391908">
+    <state x="464" y="186" key="SettingsEditor/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611700564909" />
+    <state x="555" y="283" key="Vcs.Push.Dialog.v2" timestamp="1611699703251">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="555" y="283" key="Vcs.Push.Dialog.v2/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611695391908" />
+    <state x="555" y="283" key="Vcs.Push.Dialog.v2/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611699703251" />
     <state x="499" y="142" key="chooseDestDirectoryDialog" timestamp="1611611126769">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
