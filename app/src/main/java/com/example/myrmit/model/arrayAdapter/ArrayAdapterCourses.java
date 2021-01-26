@@ -41,12 +41,15 @@ public class ArrayAdapterCourses extends android.widget.ArrayAdapter<CourseRevie
         LayoutInflater inflator = context.getLayoutInflater();
         view = inflator.inflate(R.layout.course_list_guess, null);
         final ViewHolder viewHolder = new ViewHolder();
+        // Setup the components
         viewHolder.name = view.findViewById(R.id.textView36);
         viewHolder.description = view.findViewById(R.id.textView38);
         viewHolder.code = view.findViewById(R.id.textView35);
         viewHolder.space = view.findViewById(R.id.textView34);
         viewHolder.info = view.findViewById(R.id.imageView14);
         viewHolder.name.setText(list.get(position).getName());
+
+        // Set onClick for viewing info
         viewHolder.info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,8 +63,11 @@ public class ArrayAdapterCourses extends android.widget.ArrayAdapter<CourseRevie
                 alert.show();
             }
         });
+
+        // Set behavior
         viewHolder.description.setText(list.get(position).getDescription());
         viewHolder.code.setText(list.get(position).getCode());
+        // Set line extending
         viewHolder.description.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {

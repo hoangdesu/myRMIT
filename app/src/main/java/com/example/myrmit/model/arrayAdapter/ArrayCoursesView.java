@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ArrayCoursesView extends android.widget.ArrayAdapter<String> {
-    ArrayList<String> list;
-    Activity context;
+    private final ArrayList<String> list;
+    private final Activity context;
     public ArrayCoursesView(Activity context, ArrayList<String> list) {
         super(context, R.layout.list_courses_guess, list);
         System.out.println(Arrays.toString(list.toArray()));
@@ -37,11 +37,14 @@ public class ArrayCoursesView extends android.widget.ArrayAdapter<String> {
         LayoutInflater inflator = context.getLayoutInflater();
         view = inflator.inflate(R.layout.list_courses_guess, null);
         final ViewHolder viewHolder = new ViewHolder();
+        // Initial setting for all components
         viewHolder.name = view.findViewById(R.id.textView42);
         viewHolder.id = view.findViewById(R.id.textViewId);
         viewHolder.space = view.findViewById(R.id.textView40);
+        // Set their behavior based on given data
         viewHolder.name.setText(list.get(position).toString());
         viewHolder.id.setText(String.valueOf(position+1));
+        // Set line extending
         viewHolder.name.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {

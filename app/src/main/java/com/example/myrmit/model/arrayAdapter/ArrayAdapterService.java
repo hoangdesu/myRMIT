@@ -45,6 +45,7 @@ public class ArrayAdapterService extends android.widget.ArrayAdapter<RMITService
         LayoutInflater inflator = context.getLayoutInflater();
         view = inflator.inflate(R.layout.service_item, null);
         final ViewHolder viewHolder = new ViewHolder();
+        // Initial setting for all components
         viewHolder.name = view.findViewById(R.id.textView25);
         viewHolder.time = view.findViewById(R.id.textView28);
         viewHolder.description = view.findViewById(R.id.textView31);
@@ -54,19 +55,18 @@ public class ArrayAdapterService extends android.widget.ArrayAdapter<RMITService
         viewHolder.phone = view.findViewById(R.id.textView21);
         viewHolder.id = view.findViewById(R.id.textView24);
         viewHolder.space = view.findViewById(R.id.textView23);
+        // Set their behavior based on given data
         viewHolder.id.setText(String.valueOf(position+1));
         viewHolder.name.setText(list.get(position).getName());
         viewHolder.description.setText(list.get(position).getDescription());
         viewHolder.time.setText("Time Work: " + list.get(position).getTime());
         viewHolder.location.setText("Location: " + list.get(position).getLocation());
         viewHolder.phone.setText("Phone Call: " + list.get(position).getPhone());
+        // Set line extending
         viewHolder.description.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
-                // Remove listener because we don't want this called before _every_ frame
                 viewHolder.description.getViewTreeObserver().removeOnPreDrawListener(this);
-
-                // Drawing happens after layout so we can assume getLineCount() returns the correct value
                 int lineCount = viewHolder.description.getLineCount();
                 if (viewHolder.space.getText().toString().split("").length - 11 < lineCount){
                     for (int i = 1; i< lineCount; i++) {
@@ -76,8 +76,18 @@ public class ArrayAdapterService extends android.widget.ArrayAdapter<RMITService
                 return true;
             }
         });
+        // Set on Click
+        setOnClick(viewHolder, position);
+        return view;
+    }
 
-        viewHolder.call.setOnClickListener(new View.OnClickListener() {
+    /**
+     * Set on Click for necessary items
+     * @param viewHolder ViewHolder
+     * @param position int
+     */
+    private void setOnClick(ViewHolder viewHolder, int position){
+        viewHolder.call.setOnClickListener(new View.OnClickListener() {         // Get the phone number and move to calling app
             @Override
             public void onClick(View v) {
                 Intent dialIntent = new Intent(Intent.ACTION_DIAL);
@@ -86,10 +96,7 @@ public class ArrayAdapterService extends android.widget.ArrayAdapter<RMITService
             }
         });
 
-        /**
-         * Binh set hereeeeeee
-         */
-        viewHolder.map.setOnClickListener(new View.OnClickListener() {
+        viewHolder.map.setOnClickListener(new View.OnClickListener() {          // Get the location and move to map to view where it is
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, MapsActivity.class);
@@ -104,6 +111,5 @@ public class ArrayAdapterService extends android.widget.ArrayAdapter<RMITService
                 context.startActivity(intent);
             }
         });
-        return view;
     }
 }
