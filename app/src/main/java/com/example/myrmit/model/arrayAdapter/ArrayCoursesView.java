@@ -1,4 +1,4 @@
-package com.example.myrmit.model;
+package com.example.myrmit.model.arrayAdapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

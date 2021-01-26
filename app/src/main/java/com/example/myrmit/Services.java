@@ -6,10 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import com.example.myrmit.model.ArrayAdapterService;
+import com.example.myrmit.model.arrayAdapter.ArrayAdapterService;
 import com.example.myrmit.model.FirebaseHandler;
-import com.example.myrmit.model.Group;
-import com.example.myrmit.model.RMITService;
+import com.example.myrmit.model.objects.RMITService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;

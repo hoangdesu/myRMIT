@@ -3,9 +3,6 @@ package com.example.myrmit;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
@@ -16,26 +13,18 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
-import android.app.ListActivity;
-import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.myrmit.model.ArrayAdapterCourses;
-import com.example.myrmit.model.Course;
-import com.example.myrmit.model.CourseReview;
+import com.example.myrmit.model.arrayAdapter.ArrayAdapterCourses;
+import com.example.myrmit.model.objects.CourseReview;
 import com.example.myrmit.model.FirebaseHandler;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

@@ -1,4 +1,4 @@
-package com.example.myrmit.model;
+package com.example.myrmit.model.arrayAdapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -17,15 +17,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.myrmit.AllocationFragment;
 import com.example.myrmit.R;
+import com.example.myrmit.model.FirebaseHandler;
+import com.example.myrmit.model.objects.Group;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class GroupArrayAdapter extends android.widget.ArrayAdapter<Group> {
     private final List<Group> list;

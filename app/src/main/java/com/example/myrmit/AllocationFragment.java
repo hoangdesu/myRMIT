@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +22,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 import com.example.myrmit.model.*;
+import com.example.myrmit.model.arrayAdapter.GroupArrayAdapter;
+import com.example.myrmit.model.objects.Group;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

@@ -1,4 +1,4 @@
-package com.example.myrmit.model;
+package com.example.myrmit.model.arrayAdapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.myrmit.R;
+import com.example.myrmit.model.objects.Course;
+import com.example.myrmit.model.FirebaseHandler;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

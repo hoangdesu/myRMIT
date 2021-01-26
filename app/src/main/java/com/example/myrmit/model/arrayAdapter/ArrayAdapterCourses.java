@@ -1,22 +1,19 @@
-package com.example.myrmit.model;
+package com.example.myrmit.model.arrayAdapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.myrmit.R;
+import com.example.myrmit.model.objects.CourseReview;
 
 import java.util.List;
 

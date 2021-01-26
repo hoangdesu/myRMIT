@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.myrmit.model.Course;
+import com.example.myrmit.model.objects.Course;
 
 
 import java.util.ArrayList;
@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.example.myrmit.model.*;
+import com.example.myrmit.model.arrayAdapter.CoursesArrayAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

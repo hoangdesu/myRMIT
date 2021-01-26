@@ -1,4 +1,4 @@
-package com.example.myrmit.model;
+package com.example.myrmit.model.objects;
 
 import java.util.ArrayList;
 

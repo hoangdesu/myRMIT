@@ -31,6 +31,9 @@ import java.util.GregorianCalendar;
 import java.util.Objects;
 
 import com.example.myrmit.model.*;
+import com.example.myrmit.model.arrayAdapter.TimelineArrayAdapter;
+import com.example.myrmit.model.objects.Note;
+import com.example.myrmit.model.objects.Timeline;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
