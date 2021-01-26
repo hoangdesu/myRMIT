@@ -441,11 +441,11 @@ public class TimetableFragment extends Fragment {
                             }
                             // Update the new note
                             task.getResult().getReference().update("note", note);
+                            // Refresh the list and dismiss the dialog
+                            setList(sdf.format(calendar[0].getSelectedDate().getTime()));
+                            alert1.dismiss();
                         }
                     });
-                    // Refresh the list and dismiss the dialog
-                    setList(sdf.format(calendar[0].getSelectedDate().getTime()));
-                    alert1.dismiss();
                 }
                 // If there is nothing in note field
                 else Toast.makeText(getContext(), "Empty Note!", Toast.LENGTH_SHORT).show();
