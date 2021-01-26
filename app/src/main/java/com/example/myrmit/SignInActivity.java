@@ -21,6 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SignInActivity extends AppCompatActivity {
+    @SuppressLint("StaticFieldLeak")
     public static Activity activity;
     EditText username;
     EditText password;
@@ -39,6 +40,9 @@ public class SignInActivity extends AppCompatActivity {
         if (FirebaseAuth.getInstance().getCurrentUser() != null){
             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
             startActivity(intent);
+        }
+        if (MainActivity.activity!= null){
+            MainActivity.activity.finish();
         }
         ImageView signIn = (ImageView)findViewById(R.id.signin);
         signIn.setOnTouchListener(new View.OnTouchListener() {

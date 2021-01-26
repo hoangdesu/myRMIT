@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -31,6 +33,8 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     public static Intent mServiceIntent;
     private ViewPager viewPager;
+    @SuppressLint("StaticFieldLeak")
+    public static Activity activity;
     private TabLayout tabLayout;
     private HomeFragment homeFragment;
     private RecordFragment recordFragment;
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initialSetting();
+        activity = this;
         viewPager = findViewById(R.id.pager);
         tabLayout = findViewById(R.id.tab_layout);
         // addClubs();
