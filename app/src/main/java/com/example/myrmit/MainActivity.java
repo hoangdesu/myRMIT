@@ -12,11 +12,17 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.NotificationManager;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.myrmit.coursesActivity.Courses;
 import com.example.myrmit.model.*;
@@ -31,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
     public static Intent mServiceIntent;
     private ViewPager viewPager;
     @SuppressLint("StaticFieldLeak")
@@ -40,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
     private RecordFragment recordFragment;
     private ClubsFragment clubsFragment;
+    private SensorManager sensorManager;
+    private Sensor sensor;
+    private long lastMeasuredTime = System.currentTimeMillis();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_baseline_home_24);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_baseline_record_24);
+
+        sensorManager = (SensorManager) getSystemService(Service.SENSOR_SERVICE);
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
     }
 
     private void initialSetting() {
@@ -83,6 +96,37 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        System.out.println("sensor value: " + event.values[0]);
+        if ( event.sensor.getType() == Sensor.TYPE_LIGHT) {
+            if (event.values[0] < 3) {
+                long currentTime = System.currentTimeMillis();
+                if (currentTime - lastMeasuredTime > 10000) {
+                    lastMeasuredTime = currentTime;
+                    Toast.makeText(this, "Turn on the light to protect your eyes!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
