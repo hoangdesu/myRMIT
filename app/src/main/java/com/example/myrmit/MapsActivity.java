@@ -2,17 +2,20 @@ package com.example.myrmit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +25,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.myrmit.model.FirebaseHandler;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -52,7 +60,11 @@ import java.util.Objects;
 import java.util.Set;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private static final long UPDATE_INTERVAL = 10*1000 ;
+    private static final long FASTEST_INTERVAL = 5000 ;
+    protected FusedLocationProviderClient client;
+    protected LocationRequest mLocationRequest;
     private GoogleMap mMap;
     private static final String TAG = "MapsActivity";
     private FacilityCardAdapter facilityCardAdapter;
@@ -60,6 +72,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private List<Facility> facilities = new ArrayList<Facility>();
     private FirebaseHandler firebaseHandler = new FirebaseHandler();
     private Map<String,Polygon> polygonMap = new HashMap<>();
+    private Marker myMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +95,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        requestPermission();
+        client = LocationServices.getFusedLocationProviderClient(MapsActivity.this);
         mMap = googleMap;
 
         try {
@@ -274,6 +289,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         });
+
+        startLocationUpdate();
+    }
+
+    public void onLocationChanged(Location location){
+        LatLng myLoc = new LatLng(location.getLatitude(), location.getLongitude());
+        if (myMarker != null) {
+            myMarker.remove();
+        }
+
+        BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.location);
+        Bitmap b = bitmapdraw.getBitmap();
+        Bitmap smallMarker = Bitmap.createScaledBitmap(b, 50, 50, false);
+        myMarker = mMap.addMarker(new MarkerOptions().position(myLoc).title("I'm Here").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+    }
+
+    @SuppressLint({"MissingPermission", "RestrictedApi"})
+    private void startLocationUpdate(){
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        client.requestLocationUpdates(mLocationRequest, new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult){
+                onLocationChanged(locationResult.getLastLocation());
+            }
+        }, null);
+    }
+
+    private void requestPermission(){
+        ActivityCompat.requestPermissions(MapsActivity.this, new String[]{
+                android.Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
     }
 
     private void handleStroke(String title) {
