@@ -45,162 +45,164 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/history_card">
+        android:layout_height="201dp"
+        android:layout_above="@+id/log_out_btn"
+        android:layout_below="@id/history_card"
+        android:layout_marginBottom="-20dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/credits_card"
-        android:orientation="vertical">
-
-
-    <LinearLayout
-        android:id="@+id/studentID_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/history_card"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/id"
-            android:layout_marginLeft="40dp"/>
-
-        <TextView
-            android:layout_width="170dp"
-            android:fontFamily="@font/museo_500"
-            android:textStyle="bold"
-            android:textColorHint="@color/app_secondary"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="16sp"
-            android:text="Student ID"
-            android:textColor="@color/black"/>
-
-        <TextView
-            android:id="@+id/student_ID"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="16sp"
-            android:text="s3715271"
-            android:textColor="@color/black"/>
-
-    </LinearLayout>
+            android:layout_below="@id/credits_card"
+            android:orientation="vertical">
 
 
-    <LinearLayout
-        android:id="@+id/dob_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/studentID_layout"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:id="@+id/studentID_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/history_card"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/dob"
-            android:layout_marginLeft="40dp"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="40dp"
+                    android:src="@drawable/id" />
 
-        <TextView
-            android:layout_width="170dp"
-            android:fontFamily="@font/museo_500"
-            android:textColorHint="@color/app_secondary"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="16sp"
-            android:text="Date of Birth"
-            android:textColor="@color/black"/>
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/museo_500"
+                    android:text="Student ID"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/app_secondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/dob"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="16sp"
-            android:text="08/06/1999"
-            android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/student_ID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="s3715271"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/gender_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/dob_layout"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/gender"
-            android:layout_marginLeft="40dp"/>
+            <LinearLayout
+                android:id="@+id/dob_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/studentID_layout"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="170dp"
-            android:fontFamily="@font/museo_500"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="16sp"
-            android:text="Gender"
-            android:textColorHint="@color/app_secondary"
-            android:textColor="@color/black"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="40dp"
+                    android:src="@drawable/dob" />
 
-        <TextView
-            android:id="@+id/gender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="16sp"
-            android:text="M"
-            android:textColor="@color/black"/>
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/museo_500"
+                    android:text="Date of Birth"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/app_secondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/dob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="08/06/1999"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-    <LinearLayout
-        android:id="@+id/program_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/gender_layout"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+            </LinearLayout>
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/program"
-            android:layout_marginLeft="40dp"/>
+            <LinearLayout
+                android:id="@+id/gender_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dob_layout"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="170dp"
-            android:fontFamily="@font/museo_500"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="16sp"
-            android:text="Program"
-            android:textColorHint="@color/app_secondary"
-            android:textColor="@color/black"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="40dp"
+                    android:src="@drawable/gender" />
 
-        <TextView
-            android:id="@+id/program"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="16sp"
-            android:text="BH120"
-            android:textColor="@color/black"/>
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/museo_500"
+                    android:text="Gender"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/app_secondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="M"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-    </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/program_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/gender_layout"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="40dp"
+                    android:src="@drawable/program" />
+
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/museo_500"
+                    android:text="Program"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/app_secondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/program"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="BH120"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
     </ScrollView>
 
     <Button
@@ -222,32 +224,31 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/gpa_card"
-        android:layout_width="150dp"
-        android:layout_height="170dp"
-        android:layout_marginTop="15dp"
+        android:layout_width="144dp"
+        android:layout_height="162dp"
         android:layout_below="@+id/name"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="15dp"
         app:cardCornerRadius="18dp"
         app:cardElevation="10dp">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:padding="16dp">
 
 
             <ProgressBar
                 android:id="@+id/progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:max="100"
                 android:layout_centerHorizontal="true"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:progress="70"
-                android:layoutDirection="rtl"
                 android:indeterminate="false"
-                android:progressDrawable="@drawable/circular_progress"
-                >
+                android:layoutDirection="rtl"
+                android:max="100"
+                android:progress="70"
+                android:progressDrawable="@drawable/circular_progress">
 
             </ProgressBar>
 
@@ -255,26 +256,25 @@
                 android:id="@+id/gpa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3.4/4"
-                android:textSize="20sp"
-                android:fontFamily="@font/museo_500"
-                android:textStyle="bold"
-                android:textColor="@color/app_primary"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="45dp"
-                />
+                android:fontFamily="@font/museo_500"
+                android:text="3.4/4"
+                android:textColor="@color/app_primary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="GPA"
-                android:textSize="20sp"
-                android:fontFamily="@font/museo_500"
-                android:textStyle="bold"
-                android:textColor="@color/app_secondary"
-                android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
-                />
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="-5dp"
+                android:fontFamily="@font/museo_500"
+                android:text="GPA"
+                android:textColor="@color/app_secondary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
@@ -282,12 +282,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/credits_card"
-        android:layout_width="150dp"
-        android:layout_height="170dp"
-        android:layout_marginTop="15dp"
+        android:layout_width="148dp"
+        android:layout_height="158dp"
         android:layout_below="@+id/name"
-        android:layout_marginRight="50dp"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="52dp"
         app:cardCornerRadius="18dp"
         app:cardElevation="10dp">
 
@@ -299,16 +299,15 @@
 
             <ProgressBar
                 android:id="@+id/credits_progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:max="100"
                 android:layout_centerHorizontal="true"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:progress="70"
-                android:layoutDirection="rtl"
                 android:indeterminate="false"
-                android:progressDrawable="@drawable/credits_circular_progress"
-                >
+                android:layoutDirection="rtl"
+                android:max="100"
+                android:progress="70"
+                android:progressDrawable="@drawable/credits_circular_progress">
 
             </ProgressBar>
 
@@ -316,26 +315,25 @@
                 android:id="@+id/credits"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="192/348"
-                android:textSize="17sp"
-                android:fontFamily="@font/museo_500"
-                android:textStyle="bold"
-                android:textColor="@color/app_primary"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="45dp"
-                />
+                android:fontFamily="@font/museo_500"
+                android:text="192/348"
+                android:textColor="@color/app_primary"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Credits"
-                android:textSize="20sp"
-                android:fontFamily="@font/museo_500"
-                android:textStyle="bold"
-                android:textColor="@color/app_secondary"
-                android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
-                />
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="-5dp"
+                android:fontFamily="@font/museo_500"
+                android:text="Credits"
+                android:textColor="@color/app_secondary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
