@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -186,7 +187,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                marker.showInfoWindow();
                 for (int i = 0; i < facilities.size(); i++) {
                     if (facilities.get(i).getTitle().equals(marker.getTitle())) {
                         viewPager.setCurrentItem(i);
@@ -216,6 +216,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 System.out.println("facilities size: " + facilities.size());
                 facilityCardAdapter.notifyDataSetChanged();
+
+                Intent intent = getIntent();
+                if (intent == null) {
+                    System.out.println("intent is null");
+                }
+                if (intent.getExtras() != null) {
+                    String location = intent.getExtras().getString("Location");
+                    for (int i = 0; i < facilities.size(); i ++) {
+                        if (facilities.get(i).getTitle().equals(location)) {
+                            viewPager.setCurrentItem(i);
+                            handleStroke(location);
+                            break;
+                        }
+                    }
+                }
             }
 
 

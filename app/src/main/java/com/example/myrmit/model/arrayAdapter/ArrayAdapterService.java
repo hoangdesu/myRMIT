@@ -11,6 +11,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.myrmit.MapsActivity;
 import com.example.myrmit.R;
 import com.example.myrmit.model.objects.RMITService;
 
@@ -91,7 +92,16 @@ public class ArrayAdapterService extends android.widget.ArrayAdapter<RMITService
         viewHolder.map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, MapsActivity.class);
+                String location = viewHolder.location.getText().toString();
+                if (location.charAt(10) == '1') {
+                    intent.putExtra("Location", "Building 1");
+                } else if (location.contains("Sport Hall")) {
+                    intent.putExtra("Location", "Sport Hall");
+                } else if (location.charAt(10) == '2') {
+                    intent.putExtra("Location", "Building 2");
+                }
+                context.startActivity(intent);
             }
         });
         return view;
