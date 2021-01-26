@@ -266,7 +266,7 @@ public class AllocationFragment extends Fragment {
     private void finalizeList(String programID, boolean isStudent, ArrayList<String> progressing){
         if (groups.size() == progressing.size()){
             try {
-                ArrayAdapter<Group> adapter = new GroupArrayAdapter(getActivity(), groups, true, programID);
+                ArrayAdapter<Group> adapter = new GroupArrayAdapter(getActivity(), groups, isStudent, programID);
                 listView.setAdapter(adapter);
                 if (isStudent) {
                     confirm.setVisibility(View.VISIBLE);

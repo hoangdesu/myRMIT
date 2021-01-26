@@ -30,9 +30,9 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
     private final FirebaseHandler firebaseHandler = new FirebaseHandler();
     private final List<Boolean> isJun;
     private final boolean isStudent;
-    private final ArrayList<String> progressingCourse;
+    private final ArrayList<Boolean> progressingCourse;
     private final List<Boolean> isOct;
-    public CoursesArrayAdapter(Activity context, List<Course> list, List<Boolean> isFeb, List<Boolean> isJun, List<Boolean> isOct, ArrayList<String> progressingCourse, boolean isStudent) {
+    public CoursesArrayAdapter(Activity context, List<Course> list, List<Boolean> isFeb, List<Boolean> isJun, List<Boolean> isOct, ArrayList<Boolean> progressingCourse, boolean isStudent) {
         super(context, R.layout.course_list, list);
         this.context = context;
         this.list = list;
@@ -127,7 +127,7 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
         }
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.id.setText(String.valueOf(position+1));
-        if (progressingCourse.get(position).equals("0")) {
+        if (!progressingCourse.get(position)) {
             if (!isFeb.get(position)) {
                 holder.feb.setVisibility(View.INVISIBLE);
                 holder.feb.setEnabled(false);
