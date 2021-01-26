@@ -30,7 +30,7 @@ public class FirebaseHandler {
         return db.collection("users").document(username);
     }
 
-    public DocumentReference getProgramOfStudent(String username){
+    public DocumentReference getProgramOfUser(String username){
         return db.collection("users").document(username).collection("programCode").document("program");
     }
 
