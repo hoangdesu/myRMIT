@@ -74,7 +74,7 @@ public class WelcomeActivity extends AppCompatActivity {
         @Override
         protected void onDraw(Canvas canvas) {
             canvas.scale(((float)super.getWidth() /(float)movie.width()) ,(float)super.getWidth() /(float)movie.width());
-            canvas.drawColor(Color.WHITE);
+            //canvas.drawColor(Color.WHITE);
             super.onDraw(canvas);
             long now=android.os.SystemClock.uptimeMillis();
             if (startTime == 0) { // first time

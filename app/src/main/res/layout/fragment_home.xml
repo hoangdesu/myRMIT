@@ -263,7 +263,7 @@
                         android:layout_marginTop="-26dp"
                         android:fontFamily="@font/museo_500"
                         android:gravity="bottom|center"
-                        android:text="Club"
+                        android:text="Clubs"
                         android:textColor="@color/app_secondary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
