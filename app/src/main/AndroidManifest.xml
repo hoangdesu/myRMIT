@@ -62,7 +62,7 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".OES_Fragment"
+            android:name=".coursesActivity.OES_Fragment"
             tools:ignore="Instantiatable" />
 
         <receiver
@@ -85,7 +85,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Courses" />
+        <activity android:name=".coursesActivity.Courses" />
         <activity android:name=".NewFeed" />
     </application>
 

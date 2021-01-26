@@ -1,4 +1,4 @@
-package com.example.myrmit;
+package com.example.myrmit.coursesActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.myrmit.R;
 import com.example.myrmit.model.objects.Course;
 
 

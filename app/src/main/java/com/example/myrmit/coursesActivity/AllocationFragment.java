@@ -1,4 +1,4 @@
-package com.example.myrmit;
+package com.example.myrmit.coursesActivity;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import com.example.myrmit.R;
 import com.example.myrmit.model.*;
 import com.example.myrmit.model.arrayAdapter.GroupArrayAdapter;
 import com.example.myrmit.model.objects.Group;

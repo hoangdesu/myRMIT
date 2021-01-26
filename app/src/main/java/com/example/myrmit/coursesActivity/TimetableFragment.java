@@ -1,4 +1,4 @@
-package com.example.myrmit;
+package com.example.myrmit.coursesActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -30,6 +30,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
+import com.example.myrmit.R;
 import com.example.myrmit.model.*;
 import com.example.myrmit.model.arrayAdapter.TimelineArrayAdapter;
 import com.example.myrmit.model.objects.Note;
