@@ -68,7 +68,7 @@ public class WelcomeActivity extends AppCompatActivity {
         private void init(Context context){
             setFocusable(true);
             InputStream is = context.getResources().openRawResource(R.drawable.giphy);
-            movie=Movie.decodeStream(is);
+            movie = Movie.decodeStream(is);
         }
 
         @Override
