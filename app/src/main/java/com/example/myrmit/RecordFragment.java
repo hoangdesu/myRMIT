@@ -1,6 +1,8 @@
 package com.example.myrmit;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -93,13 +95,18 @@ public class RecordFragment extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // TODO: Add sign out confirm dialog
-
-
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getActivity(), SignInActivity.class);
-                startActivity(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("Are you sure you want to log out?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                FirebaseAuth.getInstance().signOut();
+                                startActivity(new Intent(getContext(), SignInActivity.class));
+                                getActivity().finish();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
             }
         });
 
@@ -144,10 +151,10 @@ public class RecordFragment extends Fragment {
                     Double credits = user.getDouble("credits");
 
 
-                    if (firstName.equals("")) {
-                        tvUsername.setText(name);
-                    } else {
+                    if (firstName != null) {
                         tvUsername.setText(fullName);
+                    } else {
+                        tvUsername.setText(userEmail.substring(0, 8));
                     }
 
                     if ((dob != null) && (gpa != null)) {

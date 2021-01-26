@@ -135,7 +135,6 @@ public class HomeFragment extends Fragment {
 
         /* Set welcoming message to corresponding user */
         tvHelloUser = view.findViewById(R.id.tvHelloUser);
-        //String firstName = "";
         if (currentUser != null) {
             String userEmail = currentUser.getEmail();
             DocumentReference userRef = firebaseHandler.getAccount(userEmail);
@@ -143,13 +142,15 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onSuccess(DocumentSnapshot user) {
                     String firstName = user.getString("firstName");
-                    String message = "Hello, " + firstName + "!";
-                    tvHelloUser.setText(message);
+                    if (firstName != null) {
+                        String message = "Hello, " + firstName + "!";
+                        tvHelloUser.setText(message);
+                    } else {
+                        tvHelloUser.setText("Hello, " + userEmail.substring(0, 8) + "!");
+                    }
+
                 }
             });
-
-
-
         }
 
         return view;

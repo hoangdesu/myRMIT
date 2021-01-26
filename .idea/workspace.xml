@@ -5,6 +5,9 @@
       <config />
     </shared>
   </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
@@ -27,17 +30,19 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da164c8c-a112-4b82-813c-bc6aee1a590f" name="Default Changelist" comment="">
+    <list default="true" id="da164c8c-a112-4b82-813c-bc6aee1a590f" name="Default Changelist" comment="HomeFragment: includes username&#10;Interactive Record fragment&#10;Fix &quot;Guess&quot; -&gt; &quot;Guest&quot; typo&#10;Add extra user info">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/MapsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/arrayAdapter/ArrayAdapterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/arrayAdapter/ArrayAdapterService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/debug/res/values/google_maps_api.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/debug/res/values/google_maps_api.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/HomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/RecordFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/RecordFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R58M834F1QX]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[5ed6c33]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -70,16 +75,14 @@
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
     <property name="multi-representation-previewD:/Android App Dev/_myRMIT/app/src/main/java/com/example/myrmit/ClickableViewPager.java_selected" value="Custom views" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.996065418">
       <recent name="com.example.myrmit" />
     </key>
-    <key name="android.template.-78474298">
-      <recent name="com.example.myrmit" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.example.myrmit" />
+    <key name="android.template.548432242">
+      <recent name="com.example.myrmit.clubs" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Android App Dev\_myRMIT\app\src\main\res\drawable-v24" />
@@ -87,6 +90,12 @@
       <recent name="D:\Android App Dev\_myRMIT\app\src\main\res\layout" />
       <recent name="D:\myRMIT\app\src\main\res\drawable-v24" />
       <recent name="D:\myRMIT\app\src\main\res\layout" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.myrmit" />
+    </key>
+    <key name="android.template.-78474298">
+      <recent name="com.example.myrmit" />
     </key>
   </component>
   <component name="RunManager">
@@ -189,10 +198,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="172" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1610907739816" />
-    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1611473228760">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="580" y="184" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1611685760023">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1611473228760" />
+    <state x="580" y="184" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611685760023" />
     <state x="263" y="119" key="AndroidCreateResourceDirectoryDialog" timestamp="1611428802772">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -201,26 +211,42 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1611601986238" />
+    <state x="464" y="46" key="CommitChangelistDialog2" timestamp="1611694130418">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="464" y="46" key="CommitChangelistDialog2/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694130418" />
     <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1611472042473">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1611472042473" />
-    <state width="1322" height="200" key="GridCell.Tab.0.bottom" timestamp="1611680566602">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1860" height="224" key="GridCell.Tab.0.bottom" timestamp="1611694598927">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1322" height="200" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611680566602" />
-    <state width="1322" height="200" key="GridCell.Tab.0.center" timestamp="1611680566601">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1860" height="224" key="GridCell.Tab.0.bottom/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
+    <state width="1860" height="224" key="GridCell.Tab.0.center" timestamp="1611694598927">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1322" height="200" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611680566601" />
-    <state width="1322" height="200" key="GridCell.Tab.0.left" timestamp="1611680566601">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1860" height="224" key="GridCell.Tab.0.center/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
+    <state width="1860" height="224" key="GridCell.Tab.0.left" timestamp="1611694598926">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1322" height="200" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611680566601" />
-    <state width="1322" height="200" key="GridCell.Tab.0.right" timestamp="1611680566601">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1860" height="224" key="GridCell.Tab.0.left/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598926" />
+    <state width="1860" height="224" key="GridCell.Tab.0.right" timestamp="1611694598927">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1322" height="200" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611680566601" />
+    <state width="1860" height="224" key="GridCell.Tab.0.right/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
+    <state x="464" y="186" key="SettingsEditor" timestamp="1611694467207">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="464" y="186" key="SettingsEditor/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694467207" />
+    <state x="555" y="283" key="Vcs.Push.Dialog.v2" timestamp="1611694145222">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="555" y="283" key="Vcs.Push.Dialog.v2/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694145222" />
     <state x="499" y="142" key="chooseDestDirectoryDialog" timestamp="1611611126769">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -229,9 +255,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1611601806449" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1611513179852">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="552" y="328" key="git4idea.merge.GitPullDialog" timestamp="1611694180075">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="552" y="328" key="git4idea.merge.GitPullDialog/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694180075" />
+    <state x="486" y="94" width="945" height="985" key="search.everywhere.popup" timestamp="1611689095651">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1611513179852" />
+    <state x="486" y="94" width="945" height="985" key="search.everywhere.popup/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611689095651" />
   </component>
 </project>
