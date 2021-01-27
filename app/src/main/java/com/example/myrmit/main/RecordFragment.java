@@ -78,6 +78,7 @@ public class RecordFragment extends Fragment {
      * @param savedInstanceState Bundle
      * @return View
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,6 +92,7 @@ public class RecordFragment extends Fragment {
     /**
      * Set the behavior of the items
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void setItems(){
         if (currentUser != null) {              // If this is not a guest account
             String userEmail = currentUser.getEmail();
@@ -106,6 +108,7 @@ public class RecordFragment extends Fragment {
                     String studentID = userEmail.split("@")[0];
                     // Get the program ID of the user as well
                     user.getReference().collection("programCode").document("program").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @RequiresApi(api = Build.VERSION_CODES.N)
                         @SuppressLint("UseCompatLoadingForDrawables")
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
