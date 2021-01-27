@@ -405,7 +405,7 @@
             android:layout_gravity="center_vertical"
             android:fontFamily="@font/museo_500"
             android:gravity="center"
-            android:text="See History"
+            android:text="View History"
             android:textColor="@color/app_secondary"
             android:textSize="16sp"
             android:textStyle="bold" />
