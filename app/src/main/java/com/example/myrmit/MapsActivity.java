@@ -2,26 +2,31 @@ package com.example.myrmit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.myrmit.model.FirebaseHandler;
+import com.example.myrmit.model.arrayAdapter.FacilityCardAdapter;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -29,7 +34,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -37,22 +41,20 @@ import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private static final long UPDATE_INTERVAL = 1000;
+    protected FusedLocationProviderClient client;
+    protected LocationRequest mLocationRequest;
     private GoogleMap mMap;
     private static final String TAG = "MapsActivity";
     private FacilityCardAdapter facilityCardAdapter;
@@ -60,6 +62,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private List<Facility> facilities = new ArrayList<Facility>();
     private FirebaseHandler firebaseHandler = new FirebaseHandler();
     private Map<String,Polygon> polygonMap = new HashMap<>();
+    private Marker myMarker;
+    private Marker pastMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +86,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        requestPermission();
+        client = LocationServices.getFusedLocationProviderClient(MapsActivity.this);
         mMap = googleMap;
 
         try {
@@ -187,13 +193,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                for (int i = 0; i < facilities.size(); i++) {
-                    if (facilities.get(i).getTitle().equals(marker.getTitle())) {
-                        viewPager.setCurrentItem(i);
+                if (!marker.getTitle().equals("I'm Here")) {
+                    for (int i = 0; i < facilities.size(); i++) {
+                        if (facilities.get(i).getTitle().equals(marker.getTitle())) {
+                            viewPager.setCurrentItem(i);
+                        }
                     }
+                    handleStroke(marker.getTitle());
                 }
-
-                handleStroke(marker.getTitle());
 
                 return true;
             }
@@ -274,6 +281,63 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         });
+
+        startLocationUpdate();
+    }
+
+    private double radiansToDegrees(double x) {
+        return x * 180.0 / Math.PI;
+    }
+
+    public void onLocationChanged(Location location){
+        LatLng myLoc = new LatLng(location.getLatitude(), location.getLongitude());
+        if (myMarker != null) {
+            pastMarker = myMarker;
+            myMarker.remove();
+        }
+
+        double bearing;
+
+        BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.direction_cursor);
+        Bitmap b = bitmapdraw.getBitmap();
+        Bitmap smallMarker = Bitmap.createScaledBitmap(b, 50, 50, false);
+
+        myMarker = mMap.addMarker(new MarkerOptions().position(myLoc).title("I'm Here").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+
+        if (pastMarker != null) {
+            double fLat = (Math.PI * pastMarker.getPosition().latitude) / 180.0f;
+            double fLng = (Math.PI * pastMarker.getPosition().longitude) / 180.0f;
+            double tLat = (Math.PI * myMarker.getPosition().latitude) / 180.0f;
+            double tLng = (Math.PI * myMarker.getPosition().longitude) / 180.0f;
+
+            double degree = radiansToDegrees(Math.atan2(Math.sin(tLng - fLng) * Math.cos(tLat), Math.cos(fLat) * Math.sin(tLat) - Math.sin(fLat) * Math.cos(tLat) * Math.cos(tLng - fLng)));
+
+            if (degree >= 0) {
+                bearing = degree;
+            } else {
+                bearing = 360 + degree;
+            }
+
+            myMarker.setRotation((float) bearing);
+        }
+    }
+
+    @SuppressLint({"MissingPermission", "RestrictedApi"})
+    private void startLocationUpdate(){
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        client.requestLocationUpdates(mLocationRequest, new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult){
+                onLocationChanged(locationResult.getLastLocation());
+            }
+        }, null);
+    }
+
+    private void requestPermission(){
+        ActivityCompat.requestPermissions(MapsActivity.this, new String[]{
+                android.Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
     }
 
     private void handleStroke(String title) {

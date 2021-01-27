@@ -1,4 +1,4 @@
-package com.example.myrmit;
+package com.example.myrmit.model.arrayAdapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +18,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myrmit.news.News;
+import com.example.myrmit.news.NewsActivity;
+import com.example.myrmit.R;
+import com.example.myrmit.main.HomeFragment;
 import com.example.myrmit.model.FirebaseHandler;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

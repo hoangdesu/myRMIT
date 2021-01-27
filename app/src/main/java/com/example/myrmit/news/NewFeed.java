@@ -1,4 +1,4 @@
-package com.example.myrmit;
+package com.example.myrmit.news;
 
 
 import android.graphics.drawable.ColorDrawable;
@@ -15,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myrmit.R;
 import com.example.myrmit.model.FirebaseHandler;
+import com.example.myrmit.model.arrayAdapter.NewsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

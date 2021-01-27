@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,16 +14,14 @@ import java.util.ArrayList;
 
 import java.util.Objects;
 
-import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.myrmit.R;
-import com.example.myrmit.ViewPagerAdapter;
+import com.example.myrmit.model.arrayAdapter.ViewPagerAdapter;
 import com.example.myrmit.model.arrayAdapter.ArrayAdapterCourses;
 import com.example.myrmit.model.objects.CourseReview;
 import com.example.myrmit.model.FirebaseHandler;

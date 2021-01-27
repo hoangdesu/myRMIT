@@ -1,4 +1,4 @@
-package com.example.myrmit;
+package com.example.myrmit.news;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myrmit.R;
+import com.example.myrmit.main.HomeFragment;
 import com.example.myrmit.model.FirebaseHandler;
+import com.example.myrmit.model.arrayAdapter.NewsAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

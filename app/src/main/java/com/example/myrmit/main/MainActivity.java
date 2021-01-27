@@ -1,4 +1,4 @@
-package com.example.myrmit;
+package com.example.myrmit.main;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +24,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.myrmit.MapsActivity;
+import com.example.myrmit.news.NewFeed;
+import com.example.myrmit.R;
+import com.example.myrmit.Services;
+import com.example.myrmit.SignInActivity;
 import com.example.myrmit.clubs.ClubsActivity;
 import com.example.myrmit.coursesActivity.Courses;
 import com.example.myrmit.model.*;
@@ -113,8 +118,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSensorChanged(SensorEvent event) {
         System.out.println("sensor value: " + event.values[0]);
-        if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
-            if (event.values[0] < 3) {
+        if ( event.sensor.getType() == Sensor.TYPE_LIGHT) {
+            if (event.values[0] < 7) {
                 long currentTime = System.currentTimeMillis();
                 if (currentTime - lastMeasuredTime > 10000) {
                     lastMeasuredTime = currentTime;

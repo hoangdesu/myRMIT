@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecordFragment">
+    tools:context=".main.RecordFragment">
     <View
         android:layout_width="match_parent"
         android:layout_height="250dp"
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:fontFamily="@font/museo_500"
-                    android:text="Student ID"
+                    android:text="Account ID"
                     android:textColor="@color/black"
                     android:textColorHint="@color/app_secondary"
                     android:textSize="16sp"
@@ -93,12 +93,48 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/role_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/studentID_layout"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="40dp"
+                    android:src="@drawable/role" />
+
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/museo_500"
+                    android:text="Role"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/app_secondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/role"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="s3715271"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/dob_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/studentID_layout"
+                android:layout_below="@+id/role_layout"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
