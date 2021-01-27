@@ -3,17 +3,27 @@ package com.example.myrmit.clubs;
 public class Clubs {
     private String name;
     private String category;
-    private int createdDate;
+    private String createdDate;
     private String email;
-    private String description;
-    private int numberOfMembers;
 
-    public Clubs(String name, String category, int createdDate, String description) {
+    public Clubs(String name, String category, String createdDate) {
         this.name = name;
         this.category = category;
         this.createdDate = createdDate;
-        this.description = description;
     }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    private String description;
+    private int numberOfMembers;
+
+
 
     public String getName() {
         return name;
@@ -29,14 +39,6 @@ public class Clubs {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public int getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(int createdDate) {
-        this.createdDate = createdDate;
     }
 
     public String getEmail() {
