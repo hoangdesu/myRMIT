@@ -19,6 +19,8 @@ import com.example.myrmit.SignInActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.ArrayList;
+
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     static int id = 0;
@@ -44,41 +46,38 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String messageBody, String title) {
-        Intent intent = new Intent(this, SignInActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
-
-        String channelId = "Notification";
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this, channelId)
-                        .setSmallIcon(R.drawable.myrmit)
-                        .setPriority(Notification.PRIORITY_MAX)
-                        .setContentTitle(title)
-                        .setContentText(messageBody)
-                        .setAutoCancel(true)
-                        .setSound(defaultSoundUri)
-                        .setContentIntent(pendingIntent);
-
-        NotificationManager notificationManager =
+        NotificationManager mNotificationManager;
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(getApplicationContext(), "notify_001");
+        Intent ii = new Intent(getApplicationContext(), SignInActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(MyFirebaseMessagingService.this, 0, ii, 0);
+        mBuilder.setContentIntent(pendingIntent);
+        mBuilder.setSmallIcon(R.drawable.myrmit);
+        mBuilder.setContentTitle(title);
+        mBuilder.setContentText(messageBody);
+        mBuilder.setPriority(Notification.PRIORITY_MAX);
+        mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        // Since android Oreo notification channel is needed.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(channelId,
-                    "title",
+        mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            String channelId = "My_channel_id";
+            NotificationChannel channel = new NotificationChannel(
+                    channelId,
+                    "Bao's Channel",
                     NotificationManager.IMPORTANCE_HIGH);
-            notificationManager.createNotificationChannel(channel);
+            mNotificationManager.createNotificationChannel(channel);
+            mBuilder.setChannelId(channelId);
         }
-        notificationManager.notify(id, notificationBuilder.build());
+
+        mNotificationManager.notify(id, mBuilder.build());
         idHandler();
     }
 
     private void idHandler(){
         id++;
         if (id == 23){
-            id = 2;
+            id = 0;
         }
     }
 
