@@ -53,7 +53,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     String title = remoteMessage.getData().get("title");
                     String description = remoteMessage.getData().get("description");
                     sendNotification(description, title);
-                } else {
+                }
+                else {
                     String course = remoteMessage.getData().get("course");
                     firebaseHandler.getProgressingCourse(FirebaseAuth.getInstance().getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
