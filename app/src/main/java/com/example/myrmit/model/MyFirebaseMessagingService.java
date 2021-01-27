@@ -12,18 +12,27 @@ import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import com.example.myrmit.R;
 import com.example.myrmit.SignInActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     static int id = 0;
+    FirebaseHandler firebaseHandler = new FirebaseHandler();
 
     @Override
     public void onNewToken(String token) {
@@ -31,17 +40,29 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     @Override
-    public void onMessageReceived(RemoteMessage remoteMessage) {
+    public void onMessageReceived(@NotNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        String type = remoteMessage.getData().get("type");
-        if (type.equals("news")) {
-            String title = remoteMessage.getData().get("title");
-            String description = remoteMessage.getData().get("description");
-            sendNotification(description, title);
-        } else {
-            String course = remoteMessage.getData().get("course");
-            sendNotification(course + " schedule has been updated", "Course Schedule Update");
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            String type = remoteMessage.getData().get("type");
+            assert type != null;
+            if (type.equals("news")) {
+                String title = remoteMessage.getData().get("title");
+                String description = remoteMessage.getData().get("description");
+                sendNotification(description, title);
+            } else {
+                String course = remoteMessage.getData().get("course");
+                firebaseHandler.getProgressingCourse(FirebaseAuth.getInstance().getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        ArrayList<String> list = (ArrayList<String>) task.getResult().get("list");
+                        assert list != null;
+                        if (list.contains(course)) {
+                            sendNotification(course + " schedule has been updated", "Course Schedule Update");
+                        }
+                    }
+                });
+            }
         }
     }
 
