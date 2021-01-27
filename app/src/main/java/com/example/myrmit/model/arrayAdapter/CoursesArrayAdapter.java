@@ -56,33 +56,24 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
     @SuppressLint({"InflateParams", "SetTextI18n"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = null;
-        if (convertView == null) {
-            LayoutInflater inflator = context.getLayoutInflater();
-            view = inflator.inflate(R.layout.course_list, null);
-            final ViewHolder viewHolder = new ViewHolder();
-            // Initial setting for all components
-            viewHolder.id = (TextView) view.findViewById(R.id.id);
-            viewHolder.name = (TextView) view.findViewById(R.id.description);
-            viewHolder.oct = (CheckBox) view.findViewById(R.id.checkBox3);
-            viewHolder.jun = (CheckBox) view.findViewById(R.id.checkBox2);
-            viewHolder.feb = (CheckBox) view.findViewById(R.id.checkBox);
-            viewHolder.finish = view.findViewById(R.id.imageView3);
-            viewHolder.progressing = view.findViewById(R.id.imageView4);
-            // Set Listener for checkboxs
-            checkBoxListeners(viewHolder);
-            // Set tag for view
-            view.setTag(viewHolder);
-            viewHolder.feb.setTag(list.get(position));
-            viewHolder.oct.setTag(list.get(position));
-            viewHolder.jun.setTag(list.get(position));
-        } else {
-            view = convertView;
-            ((ViewHolder) view.getTag()).feb.setTag(list.get(position));
-            ((ViewHolder) view.getTag()).jun.setTag(list.get(position));
-            ((ViewHolder) view.getTag()).oct.setTag(list.get(position));
-        }
-
+        LayoutInflater inflator = context.getLayoutInflater();
+        View view = inflator.inflate(R.layout.course_list, null);
+        final ViewHolder viewHolder = new ViewHolder();
+        // Initial setting for all components
+        viewHolder.id = (TextView) view.findViewById(R.id.id);
+        viewHolder.name = (TextView) view.findViewById(R.id.description);
+        viewHolder.oct = (CheckBox) view.findViewById(R.id.checkBox3);
+        viewHolder.jun = (CheckBox) view.findViewById(R.id.checkBox2);
+        viewHolder.feb = (CheckBox) view.findViewById(R.id.checkBox);
+        viewHolder.finish = view.findViewById(R.id.imageView3);
+        viewHolder.progressing = view.findViewById(R.id.imageView4);
+        // Set Listener for checkboxs
+        checkBoxListeners(viewHolder);
+        // Set tag for view
+        view.setTag(viewHolder);
+        viewHolder.feb.setTag(list.get(position));
+        viewHolder.oct.setTag(list.get(position));
+        viewHolder.jun.setTag(list.get(position));
         // Get view holder from tag
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.id.setText(String.valueOf(position+1));
