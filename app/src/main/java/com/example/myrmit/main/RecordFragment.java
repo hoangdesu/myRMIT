@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
@@ -143,7 +145,7 @@ public class RecordFragment extends Fragment {
         tvProgram = view.findViewById(R.id.tvProgram);
         progressBarGPA = view.findViewById(R.id.progressBarGPA);
         credits_progress_bar = view.findViewById(R.id.credits_progress_bar);
-        progressBarGPA.setMax(4);
+        progressBarGPA.setMax(40);
         progressBarGPA.setProgress((int) (0));
         credits_progress_bar.setMax(0);
         credits_progress_bar.setProgress(0);
@@ -201,6 +203,7 @@ public class RecordFragment extends Fragment {
                 int credits = gradeList.size() * 12;
                 //
                 firebaseHandler.getProgram(program).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @SuppressLint({"DefaultLocale", "UseCompatLoadingForDrawables"})
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -263,6 +266,7 @@ public class RecordFragment extends Fragment {
      * @param program String
      * @param size int
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
     private void setItems(String role, String gender, String name, String studentID, String dob, double gpa, int credits, String program, int size){
         if (!role.equals("guest")){                     // If this is not a guest
@@ -275,8 +279,8 @@ public class RecordFragment extends Fragment {
                 credits_progress_bar.setMax(size * 12);
                 tvRole.setText("Student");
                 tvGPA.setText(String.format("%.2f", gpa));
-                progressBarGPA.setProgress((int) (gpa * 10));
-                credits_progress_bar.setProgress((int) credits);
+                progressBarGPA.setProgress((int) (gpa * 10), true);
+                credits_progress_bar.setProgress((int) credits, true);
                 tvCredits.setText(credits + "/" + (size * 12));
             }
 
