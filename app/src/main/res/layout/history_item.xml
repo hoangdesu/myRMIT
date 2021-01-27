@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF">
 
     <TextView
         android:id="@+id/gparecord"
@@ -15,8 +16,9 @@
         android:layout_marginRight="1dp"
         android:gravity="center"
         android:text="gpa"
-        android:textColor="#000000"
-        android:textSize="10sp" />
+        android:textColor="#C30606"
+        android:textSize="10sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/idnumber"
@@ -36,7 +38,7 @@
     <TextView
         android:id="@+id/space2"
         android:layout_width="1dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="2dp"
@@ -44,14 +46,13 @@
         android:layout_toStartOf="@+id/gparecord"
         android:layout_toLeftOf="@+id/gparecord"
         android:background="#DCDCDC"
-        android:text="\n\n"
         android:textColor="#575656"
         android:textSize="12sp" />
 
     <TextView
         android:id="@+id/space3"
         android:layout_width="1dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -59,7 +60,6 @@
         android:layout_marginLeft="29dp"
         android:layout_marginTop="0dp"
         android:background="#DCDCDC"
-        android:text="\n\n"
         android:textColor="#575656"
         android:textSize="12sp" />
 
