@@ -31,7 +31,7 @@ import java.util.Objects;
 
 public class NewFeed extends AppCompatActivity {
 
-    private List<News> newsList;
+    private List<News> newsList = new ArrayList<>();
     private RecyclerView recyclerView;
     private NewsAdapter newsAdapter;
     private SearchView searchView;
@@ -45,58 +45,8 @@ public class NewFeed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
 
-        newsList = new ArrayList<>();
-
-        searchView = findViewById(R.id.search);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (filterOptions == 1) {
-                    newsAdapter.getFilter().filter(newText + "/liked");
-                } else {
-                    newsAdapter.getFilter().filter(newText);
-                }
-                return false;
-            }
-        });
-
-        firebaseHandler.getNews().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                String title, description, thumbnail;
-                boolean isLike = false;
-                List<String> likes = new ArrayList<>();
-                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                    title = Objects.requireNonNull(documentSnapshot.getData().get("title")).toString();
-                    description = Objects.requireNonNull(documentSnapshot.getData().get("description")).toString().replace("\\n","\n\n");
-                    thumbnail = Objects.requireNonNull(documentSnapshot.getData().get("thumbnail")).toString();
-                    likes = (ArrayList<String>) documentSnapshot.get("likes");
-                    if (currentUser != null) {
-                        for (int i = 0 ; i < likes.size(); i++) {
-                            if (likes.get(i).equals(currentUser.getEmail())) {
-                                isLike = true;
-                                break;
-                            }
-                        }
-                    }
-                    System.out.println("like: " + isLike);
-                    newsList.add(new News(thumbnail,title,description,"RMIT",isLike));
-                    isLike = false;
-                }
-
-                System.out.println("NewsList size: " + newsList.size());
-                recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-                newsAdapter = new NewsAdapter(NewFeed.this, newsList);
-                recyclerView.setLayoutManager(new GridLayoutManager(NewFeed.this, 1));
-                recyclerView.setAdapter(newsAdapter);
-                updateFlag = true;
-            }
-        });
+        initializeSearchView();
+        retrieveData();
     }
 
     @Override
@@ -142,6 +92,74 @@ public class NewFeed extends AppCompatActivity {
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
         alertDialog.show();
+    }
+
+    /**
+     * Set up search view for searching news title
+     */
+    private void initializeSearchView() {
+        searchView = findViewById(R.id.search);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (filterOptions == 1) { //Search when in liked mode
+                    newsAdapter.getFilter().filter(newText + "/liked");
+                } else { //Search when in all mode
+                    newsAdapter.getFilter().filter(newText);
+                }
+                return false;
+            }
+        });
+    }
+
+    /**
+     * retrieve news's data (title, description, thumbnail, likes) from database
+     */
+    private void retrieveData() {
+        firebaseHandler.getNews().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                String title, description, thumbnail;
+                boolean isLike = false;
+                List<String> likes = new ArrayList<>();
+                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                    title = Objects.requireNonNull(documentSnapshot.getData().get("title")).toString();
+                    description = Objects.requireNonNull(documentSnapshot.getData().get("description")).toString().replace("\\n","\n\n");
+                    thumbnail = Objects.requireNonNull(documentSnapshot.getData().get("thumbnail")).toString();
+                    likes = (ArrayList<String>) documentSnapshot.get("likes");
+                    if (currentUser != null) {
+                        for (int i = 0 ; i < likes.size(); i++) {
+                            if (likes.get(i).equals(currentUser.getEmail())) {
+                                isLike = true;
+                                break;
+                            }
+                        }
+                    }
+                    System.out.println("like: " + isLike);
+                    newsList.add(new News(thumbnail,title,description,"RMIT",isLike));
+                    isLike = false;
+                }
+
+                //when all data is fetched populate view
+                populateView();
+            }
+        });
+    }
+
+    /**
+     * Populating news by setting recyclerview adapter
+     */
+    private void populateView() {
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        newsAdapter = new NewsAdapter(NewFeed.this, newsList);
+        recyclerView.setLayoutManager(new GridLayoutManager(NewFeed.this, 1));
+        recyclerView.setAdapter(newsAdapter);
+        updateFlag = true;
     }
 
 }
