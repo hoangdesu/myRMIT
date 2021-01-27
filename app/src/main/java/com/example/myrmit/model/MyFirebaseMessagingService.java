@@ -49,15 +49,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationManager mNotificationManager;
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(getApplicationContext(), "notify_001");
-        Intent ii = new Intent(getApplicationContext(), SignInActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(MyFirebaseMessagingService.this, 0, ii, 0);
+        Intent intent = new Intent(this, SignInActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                PendingIntent.FLAG_ONE_SHOT);
         mBuilder.setContentIntent(pendingIntent);
         mBuilder.setSmallIcon(R.drawable.myrmit);
         mBuilder.setContentTitle(title);
         mBuilder.setContentText(messageBody);
         mBuilder.setPriority(Notification.PRIORITY_MAX);
-        mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
         {

@@ -63,19 +63,6 @@
             android:name=".coursesActivity.OES_Fragment"
             tools:ignore="Instantiatable" />
 
-        <receiver
-            android:name=".model.RestartService"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="restartservice" />
-            </intent-filter>
-        </receiver>
-
-        <service
-            android:name=".model.MyService"
-            android:enabled="true" />
-
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
