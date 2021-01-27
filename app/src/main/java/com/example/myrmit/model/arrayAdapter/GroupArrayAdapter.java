@@ -160,7 +160,6 @@ public class GroupArrayAdapter extends android.widget.ArrayAdapter<Group> {
                                     // Get the data from firebase
                                     ArrayList<String> day = (ArrayList<String>) task.getResult().get("day");
                                     ArrayList<String> time = (ArrayList<String>) task.getResult().get("time");
-                                    String isChange = task.getResult().getString("change");
                                     // Check whether it is the first group or second group in firebase
                                     // Then remove replace the chosen one by the new data
                                     if (day.get(0).equals(getDay) && time.get(0).equals(getTime)){
@@ -175,14 +174,18 @@ public class GroupArrayAdapter extends android.widget.ArrayAdapter<Group> {
                                         day.add(1, revert(spinner1.getSelectedItem().toString(), true));
                                         time.add(1, revert(spinner.getSelectedItem().toString(), false));
                                     }
-                                    if (isChange.equals("0")){
-                                        isChange = "1";
-                                    }
-                                    else isChange = "0";
                                     // Update new data to the firebase
                                     task.getResult().getReference().update("day", day);
                                     task.getResult().getReference().update("time", time);
-                                    task.getResult().getReference().update("change", isChange);
+                                    task.getResult().getReference().collection("data").document("change").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            String isChange = task.getResult().getString("change");
+                                            if (isChange.equals("0")) isChange = "1";
+                                            else isChange = "0";
+                                            task.getResult().getReference().update("change", isChange);
+                                        }
+                                    });
                                     // Refresh the page to get the new data
                                     Toast.makeText(context, "Change successful! Reload the page!", Toast.LENGTH_SHORT).show();
                                     alert.dismiss();
