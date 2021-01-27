@@ -25,19 +25,19 @@
             android:background="@drawable/ic_wave_bg_header" />
 
         <TextView
-            android:id="@+id/x"
+            android:id="@+id/tvHelloUser"
             android:layout_width="wrap_content"
             android:layout_height="52dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
-            android:layout_marginStart="22dp"
-            android:layout_marginLeft="22dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="34dp"
             android:fontFamily="@font/museo_500"
             android:padding="10dp"
-            android:text="Hello, Ovilee! "
+            android:text="Hello, Guest!"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -46,13 +46,13 @@
             android:id="@+id/t"
             android:layout_width="86dp"
             android:layout_height="32dp"
-            android:layout_below="@+id/x"
+            android:layout_below="@+id/tvHelloUser"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="38dp"
             android:layout_marginLeft="38dp"
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/museo_500"
             android:text="Events"
             android:textColor="@color/app_secondary"
@@ -239,7 +239,8 @@
                 android:layout_marginRight="281dp"
                 android:layout_marginBottom="15dp"
                 app:cardCornerRadius="18dp"
-                app:cardElevation="10dp">
+                app:cardElevation="10dp"
+                android:onClick="onClubsClick">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -262,7 +263,7 @@
                         android:layout_marginTop="-26dp"
                         android:fontFamily="@font/museo_500"
                         android:gravity="bottom|center"
-                        android:text="Club"
+                        android:text="Clubs"
                         android:textColor="@color/app_secondary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -377,7 +378,7 @@
             android:layout_width="match_parent"
             android:layout_height="247dp"
             android:layout_above="@+id/a"
-            android:layout_below="@+id/x"
+            android:layout_below="@+id/tvHelloUser"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"

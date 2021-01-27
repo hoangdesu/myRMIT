@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.myrmit.clubs.ClubsActivity;
 import com.example.myrmit.coursesActivity.Courses;
 import com.example.myrmit.model.*;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TabLayout tabLayout;
     private HomeFragment homeFragment;
     private RecordFragment recordFragment;
-    private ClubsFragment clubsFragment;
+
     private SensorManager sensorManager;
     private Sensor sensor;
     private long lastMeasuredTime = System.currentTimeMillis();
@@ -62,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         // addClubs();
         homeFragment = new HomeFragment();
         recordFragment = new RecordFragment();
-        clubsFragment = new ClubsFragment();
 
         tabLayout.setupWithViewPager(viewPager);
 
@@ -183,6 +183,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     public void onServicesClick(View view){
         Intent intent = new Intent(MainActivity.this, Services.class);
+        startActivity(intent);
+    }
+
+    public void onClubsClick(View view) {
+        Intent intent = new Intent(MainActivity.this, ClubsActivity.class);
         startActivity(intent);
     }
 
@@ -605,17 +610,3 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
 }
-
-//    createdDate
-//"1/1/2021"
-//        (string)
-//    description
-//""
-//    event
-//            host
-//"s3740819@rmit.edu.vn"
-//    numberOfMembers
-//"0"
-//    vote
-//"****"
-//}

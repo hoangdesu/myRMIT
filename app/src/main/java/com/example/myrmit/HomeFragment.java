@@ -9,16 +9,22 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myrmit.model.FirebaseHandler;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -42,7 +48,7 @@ public class HomeFragment extends Fragment {
     CardView fragment_home_cardview_clubs;
     FirebaseHandler firebaseHandler = new FirebaseHandler();
     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
+    static TextView tvHelloUser;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -123,21 +129,29 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
-                fragment_home_cardview_clubs = view.findViewById(R.id.fragment_home_cardview_clubs);
-                fragment_home_cardview_clubs.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Fragment clubsFragment = new ClubsFragment();
-                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.fragment_home, clubsFragment)
-                                .addToBackStack(null)
-                                .commit();
-                    }
-                });
-
             }
 
         });
+
+        /* Set welcoming message to corresponding user */
+        tvHelloUser = view.findViewById(R.id.tvHelloUser);
+        if (currentUser != null) {
+            String userEmail = currentUser.getEmail();
+            DocumentReference userRef = firebaseHandler.getAccount(userEmail);
+            userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot user) {
+                    String firstName = user.getString("firstName");
+                    if (firstName != null) {
+                        String message = "Hello, " + firstName + "!";
+                        tvHelloUser.setText(message);
+                    } else {
+                        tvHelloUser.setText("Hello, " + userEmail.substring(0, 8) + "!");
+                    }
+
+                }
+            });
+        }
 
         return view;
     }
@@ -149,5 +163,8 @@ public class HomeFragment extends Fragment {
             }
         }
     }
+
+
+
 
 }

@@ -30,16 +30,16 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/tv_fragment_record_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:fontFamily="@font/museo_500"
-        android:text="Ovilee May"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="190dp">
+        android:layout_marginTop="190dp"
+        android:fontFamily="@font/museo_500"
+        android:text="Guest"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold">
 
     </TextView>
 
@@ -83,7 +83,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/student_ID"
+                    android:id="@+id/tvStudent_ID"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -120,7 +120,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/dob"
+                    android:id="@+id/tvDOB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -156,7 +156,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/gender"
+                    android:id="@+id/tvGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -192,7 +192,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/program"
+                    android:id="@+id/tvProgram"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -225,10 +225,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/gpa_card"
         android:layout_width="135dp"
-        android:layout_height="160dp"
-        android:layout_below="@+id/name"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
+        android:layout_height="145dp"
+        android:layout_below="@+id/tv_fragment_record_username"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="15dp"
@@ -242,10 +240,10 @@
 
 
             <ProgressBar
-                android:id="@+id/progress_bar"
+                android:id="@+id/progressBarGPA"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="102dp"
+                android:layout_height="106dp"
                 android:layout_centerHorizontal="true"
                 android:indeterminate="false"
                 android:layoutDirection="rtl"
@@ -256,11 +254,11 @@
             </ProgressBar>
 
             <TextView
-                android:id="@+id/gpa"
+                android:id="@+id/tvGPA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="45dp"
                 android:fontFamily="@font/museo_500"
                 android:text="3.4/4"
                 android:textColor="@color/app_primary"
@@ -276,7 +274,7 @@
                 android:fontFamily="@font/museo_500"
                 android:text="GPA"
                 android:textColor="@color/app_secondary"
-                android:textSize="18sp"
+                android:textSize="17sp"
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -286,12 +284,12 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/credits_card"
         android:layout_width="135dp"
-        android:layout_height="160dp"
-        android:layout_below="@+id/name"
+        android:layout_height="145dp"
+        android:layout_below="@+id/tv_fragment_record_username"
         android:layout_alignParentRight="true"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginRight="42dp"
         app:cardCornerRadius="18dp"
         app:cardElevation="10dp">
 
@@ -304,8 +302,8 @@
             <ProgressBar
                 android:id="@+id/credits_progress_bar"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="102dp"
+                android:layout_height="106dp"
                 android:layout_centerHorizontal="true"
                 android:indeterminate="false"
                 android:layoutDirection="rtl"
@@ -316,11 +314,11 @@
             </ProgressBar>
 
             <TextView
-                android:id="@+id/credits"
+                android:id="@+id/tvCredits"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="45dp"
                 android:fontFamily="@font/museo_500"
                 android:text="192/348"
                 android:textColor="@color/app_primary"
@@ -336,7 +334,7 @@
                 android:fontFamily="@font/museo_500"
                 android:text="Credits"
                 android:textColor="@color/app_secondary"
-                android:textSize="18sp"
+                android:textSize="17sp"
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -345,11 +343,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/history_card"
-        android:layout_width="163dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/gpa_card"
+        android:layout_width="178dp"
+        android:layout_height="34dp"
+        android:layout_below="@+id/credits_card"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="21dp"
         app:cardCornerRadius="40dp"
         app:cardElevation="10dp">
 
@@ -362,7 +360,7 @@
             android:gravity="center"
             android:text="See History"
             android:textColor="@color/app_secondary"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>

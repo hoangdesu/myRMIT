@@ -77,7 +77,7 @@ public class SignInActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     public void signIn(View view){
         if (!username.getText().toString().matches("([s]|[S])(\\d{7})+@rmit.edu.vn$")){
-            status.setText("Invalid Email! Please Enter RMIT Email!");
+            status.setText("Invalid Email! Please enter an RMIT Email!");
         }
         else {
             if (!username.getText().toString().equals("") && !password.getText().toString().equals("")) {
@@ -97,7 +97,7 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
-    public void guessLogin(View view){
+    public void guestLogin(View view){
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
         startActivity(intent);
     }
