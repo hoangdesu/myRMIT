@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         System.out.println("sensor value: " + event.values[0]);
         if ( event.sensor.getType() == Sensor.TYPE_LIGHT) {
-            if (event.values[0] < 3) {
+            if (event.values[0] < 7) {
                 long currentTime = System.currentTimeMillis();
                 if (currentTime - lastMeasuredTime > 10000) {
                     lastMeasuredTime = currentTime;

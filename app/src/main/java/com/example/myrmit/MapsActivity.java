@@ -61,8 +61,7 @@ import java.util.Set;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    private static final long UPDATE_INTERVAL = 10*1000 ;
-    private static final long FASTEST_INTERVAL = 5000 ;
+    private static final long UPDATE_INTERVAL = 1000;
     protected FusedLocationProviderClient client;
     protected LocationRequest mLocationRequest;
     private GoogleMap mMap;
@@ -73,6 +72,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FirebaseHandler firebaseHandler = new FirebaseHandler();
     private Map<String,Polygon> polygonMap = new HashMap<>();
     private Marker myMarker;
+    private Marker pastMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,13 +202,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                for (int i = 0; i < facilities.size(); i++) {
-                    if (facilities.get(i).getTitle().equals(marker.getTitle())) {
-                        viewPager.setCurrentItem(i);
+                if (!marker.getTitle().equals("I'm Here")) {
+                    for (int i = 0; i < facilities.size(); i++) {
+                        if (facilities.get(i).getTitle().equals(marker.getTitle())) {
+                            viewPager.setCurrentItem(i);
+                        }
                     }
+                    handleStroke(marker.getTitle());
                 }
-
-                handleStroke(marker.getTitle());
 
                 return true;
             }
@@ -293,22 +294,48 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startLocationUpdate();
     }
 
+    private double radiansToDegrees(double x) {
+        return x * 180.0 / Math.PI;
+    }
+
     public void onLocationChanged(Location location){
         LatLng myLoc = new LatLng(location.getLatitude(), location.getLongitude());
         if (myMarker != null) {
+            pastMarker = myMarker;
             myMarker.remove();
         }
 
-        BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.location);
+        double bearing;
+
+        BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.direction_cursor);
         Bitmap b = bitmapdraw.getBitmap();
         Bitmap smallMarker = Bitmap.createScaledBitmap(b, 50, 50, false);
+
         myMarker = mMap.addMarker(new MarkerOptions().position(myLoc).title("I'm Here").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+
+        if (pastMarker != null) {
+            double fLat = (Math.PI * pastMarker.getPosition().latitude) / 180.0f;
+            double fLng = (Math.PI * pastMarker.getPosition().longitude) / 180.0f;
+            double tLat = (Math.PI * myMarker.getPosition().latitude) / 180.0f;
+            double tLng = (Math.PI * myMarker.getPosition().longitude) / 180.0f;
+
+            double degree = radiansToDegrees(Math.atan2(Math.sin(tLng - fLng) * Math.cos(tLat), Math.cos(fLat) * Math.sin(tLat) - Math.sin(fLat) * Math.cos(tLat) * Math.cos(tLng - fLng)));
+
+            if (degree >= 0) {
+                bearing = degree;
+            } else {
+                bearing = 360 + degree;
+            }
+
+            myMarker.setRotation((float) bearing);
+        }
     }
 
     @SuppressLint({"MissingPermission", "RestrictedApi"})
     private void startLocationUpdate(){
         mLocationRequest = new LocationRequest();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
         client.requestLocationUpdates(mLocationRequest, new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult){
