@@ -72,6 +72,7 @@ public class RecordFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+    
     /**
      * On create view function
      * @param inflater LayoutInflater

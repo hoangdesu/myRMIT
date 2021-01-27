@@ -220,16 +220,19 @@ public class OES_Fragment extends Fragment {
                                                     teachingCourses.add(course);
                                                 }
                                             }
-                                            if (counter[0] == taskk.getResult().size()){                        // Update to the firebase and reload a list again
+                                            if (counter[0] == taskk.getResult().size()){                        // Update to the firebase and reload the list again
                                                 firebaseHandler.getProgressingCourse(user).update("list", teachingCourses);
-                                                setList();
+                                                Toast.makeText(getActivity(), "Update new data Successful! Reloading!", Toast.LENGTH_SHORT).show();
+                                                getActivity().recreate();
                                             }
                                         }
                                     });
                                 }
+                                else counter[0]++;
                             }
                         });
-                    } else counter[0]++;
+                    }
+                    else counter[0]++;
                 }
             }
         });
