@@ -84,13 +84,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private void initialSetting() {
         SignInActivity.activity.finish();
-        NotificationManager nMgr = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        nMgr.cancelAll();
-        MyService myService = new MyService();
-        if (!isMyServiceRunning(myService.getClass())) {
-            mServiceIntent = new Intent(this, myService.getClass());
-            startService(mServiceIntent);
-        }
+
     }
 
     private boolean isMyServiceRunning(Class<?> serviceClass) {
