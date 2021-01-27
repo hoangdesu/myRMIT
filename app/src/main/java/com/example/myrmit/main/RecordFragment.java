@@ -49,6 +49,7 @@ public class RecordFragment extends Fragment {
     TextView tvDOB;
     TextView tvProgram;
     TextView tvGender;
+    TextView tvRole;
     private Button logout;
 
     public RecordFragment() {
@@ -93,6 +94,7 @@ public class RecordFragment extends Fragment {
         tvCredits = view.findViewById(R.id.tvCredits);
         tvStudent_ID = view.findViewById(R.id.tvStudent_ID);
         tvDOB = view.findViewById(R.id.tvDOB);
+        tvRole = view.findViewById(R.id.role);
         tvGender = view.findViewById(R.id.tvGender);
         tvProgram = view.findViewById(R.id.tvProgram);
         progressBarGPA = view.findViewById(R.id.progressBarGPA);
@@ -112,27 +114,31 @@ public class RecordFragment extends Fragment {
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void onSuccess(DocumentSnapshot user) {
+                    String role = user.getString("role");
                     String name = user.getString("name");
                     String dob = user.getString("dob");
                     String gender = user.getString("gender");
+                    String studentID = userEmail.split("@")[0];
+                    assert role != null;
                     userRef.collection("programCode").document("program").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             String program = (String) task.getResult().get("code");
+                            if (role.equals("student")) {
                                 task.getResult().getReference().collection("data").document("finishCourses").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         ArrayList<String> gradeList = (ArrayList<String>) task.getResult().get("grade");
                                         assert gradeList != null;
                                         int credits = gradeList.size() * 12;
-                                        String studentID = userEmail.split("@")[0];
                                         firebaseHandler.getProgram(program).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @SuppressLint("DefaultLocale")
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                                 ArrayList<String> list = (ArrayList<String>) task.getResult().get("courses");
                                                 assert list != null;
                                                 double gpa = 0;
-                                                for (String grade: gradeList){
+                                                for (String grade : gradeList) {
                                                     switch (grade) {
                                                         case "PA":
                                                             gpa += 1;
@@ -146,29 +152,43 @@ public class RecordFragment extends Fragment {
                                                         case "HD":
                                                             gpa += 4;
                                                             break;
-                                                        default: break;
+                                                        default:
+                                                            break;
                                                     }
                                                 }
-                                                gpa = gpa/gradeList.size();
-                                                credits_progress_bar.setMax(list.size()*12);
+                                                gpa = gpa / gradeList.size();
+                                                credits_progress_bar.setMax(list.size() * 12);
                                                 tvUsername.setText(name);
-                                                if ((dob != null)) {
-                                                    tvGPA.setText(String.valueOf(gpa));
-                                                    progressBarGPA.setProgress((int) (gpa * 10));
-                                                    credits_progress_bar.setProgress((int) credits);
-                                                    tvCredits.setText(credits + "/" + (list.size()*12));
-                                                    tvStudent_ID.setText(studentID);
-                                                    tvDOB.setText(dob);
-                                                    tvGender.setText(gender);
-                                                    tvProgram.setText(program);
-                                                }
+                                                tvRole.setText("Student");
+                                                tvGPA.setText(String.format("%.2f", gpa));
+                                                progressBarGPA.setProgress((int) (gpa * 10));
+                                                credits_progress_bar.setProgress((int) credits);
+                                                tvCredits.setText(credits + "/" + (list.size() * 12));
+                                                tvStudent_ID.setText(studentID);
+                                                tvDOB.setText(dob);
+                                                tvGender.setText(gender);
+                                                tvProgram.setText(program);
                                             }
                                         });
                                     }
                                 });
+                            }
+                            else {
+                                progressBarGPA.setMax(0);
+                                progressBarGPA.setProgress((int) (0));
+                                credits_progress_bar.setMax(0);
+                                credits_progress_bar.setProgress(0);
+                                tvUsername.setText(name);
+                                tvRole.setText("Lecturer");
+                                tvGPA.setText("N/A");
+                                tvCredits.setText("N/A");
+                                tvStudent_ID.setText(studentID);
+                                tvDOB.setText(dob);
+                                tvGender.setText(gender);
+                                tvProgram.setText(program);
+                            }
                         }
                     });
-
                 }
             });
         }
@@ -178,9 +198,10 @@ public class RecordFragment extends Fragment {
             credits_progress_bar.setMax(0);
             credits_progress_bar.setProgress(0);
             tvGPA.setText("N/A");
-            tvUsername.setText("Guess");
+            tvUsername.setText("Guest");
+            tvRole.setText("Guest");
             tvCredits.setText("N/A");
-            tvStudent_ID.setText("Guess Account");
+            tvStudent_ID.setText("N/A");
             tvDOB.setText("N/A");
             tvGender.setText("N/A");
             tvProgram.setText("N/A");
