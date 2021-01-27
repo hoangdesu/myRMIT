@@ -8,6 +8,9 @@ import android.view.View;
 
 import androidx.viewpager.widget.ViewPager;
 
+/**
+ * Clickable version of viewpager
+ */
 public class ClickableViewPager extends ViewPager {
 
     private OnItemClickListener mOnItemClickListener;

@@ -51,6 +51,7 @@ public class NewsActivity extends AppCompatActivity {
         aDescription = (TextView) findViewById(R.id.description);
         aLike = (ImageView) findViewById(R.id.like_btn);
 
+        //Getting data to populate view
         Intent intent = getIntent();
         String title = intent.getExtras().getString("Title");
         String author = intent.getExtras().getString("Author");
@@ -64,15 +65,16 @@ public class NewsActivity extends AppCompatActivity {
             aLike.setColorFilter(Color.parseColor("#FF000000"));
         }
 
+        //Setting like icon on click event
         aLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (currentUser != null) {
                     if (!like) {
-                        firebaseHandler.updatePostLike(currentUser.getEmail(), title, true);
-                        aLike.setColorFilter(Color.parseColor("#FFE60028"));
-                        NewsAdapter.updateData(title, true);
-                        HomeFragment.updateData(title, true);
+                        firebaseHandler.updatePostLike(currentUser.getEmail(), title, true); //update like to database
+                        aLike.setColorFilter(Color.parseColor("#FFE60028")); //Set like icon color
+                        NewsAdapter.updateData(title, true); //update local data in NewsAdapter
+                        HomeFragment.updateData(title, true); //update local data in home fragment
                         like = true;
                     } else {
                         firebaseHandler.updatePostLike(currentUser.getEmail(), title, false);
@@ -85,9 +87,23 @@ public class NewsActivity extends AppCompatActivity {
             }
         });
 
+        populateView(title, author, description, image);
+    }
+
+
+    /**
+     * Display news
+     * @param title
+     * @param author
+     * @param description
+     * @param image
+     */
+    private  void populateView(String title, String author, String description, String image) {
         aTitle.setText(title);
         aAuthor.setText(author);
         aDescription.setText(description);
+
+        //Getting image from database
         StorageReference storageReference = storage.getReference().child(image);
         try {
             final File file = File.createTempFile("image","jpg");
@@ -106,8 +122,6 @@ public class NewsActivity extends AppCompatActivity {
         } catch  (IOException e){
             e.printStackTrace();
         }
-
     }
-
 
 }

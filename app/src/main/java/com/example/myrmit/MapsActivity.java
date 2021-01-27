@@ -50,7 +50,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnCameraIdleListener {
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private static final long UPDATE_INTERVAL = 1000;
     protected FusedLocationProviderClient client;
@@ -96,7 +96,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             boolean success = googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
                             this, R.raw.map_style));
-
             if (!success) {
                 Log.e(TAG, "Style parsing failed.");
             }
@@ -104,42 +103,96 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.e(TAG, "Can't find style. Error: ", e);
         }
 
-        // Add a marker in Sydney and move the camera
+        initCamera();
 
+        drawLandMarks();
+
+        initMarkers();
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                if (!marker.getTitle().equals("I'm Here")) {
+                    for (int i = 0; i < facilities.size(); i++) {
+                        if (facilities.get(i).getTitle().equals(marker.getTitle())) {
+                            viewPager.setCurrentItem(i);
+                        }
+                    }
+                    handleStroke(marker.getTitle());
+                }
+
+                return true;
+            }
+        });
+
+        //Retrieve facilities data
+        retrieveData();
+
+        //Display swipe card with image and info
+        populateSwipeCard();
+
+        //Update Location
+        startLocationUpdate();
+    }
+
+    /**
+     * Retrieve facilities data from database
+     * */
+    private void retrieveData() {
+        firebaseHandler.getFacilities().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                String title, openHour, image;
+                double rating;
+                List<String> subfacilities;
+                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                    title = Objects.requireNonNull(documentSnapshot.getData().get("title")).toString();
+                    openHour = Objects.requireNonNull(documentSnapshot.getData().get("open")).toString();
+                    image = Objects.requireNonNull(documentSnapshot.getData().get("image")).toString();
+                    rating = Objects.requireNonNull(documentSnapshot.getDouble("rating"));
+                    subfacilities = (List<String>) documentSnapshot.getData().get("subfacility");
+                    facilities.add(new Facility(image,title,openHour,rating,subfacilities));
+                }
+
+                System.out.println("facilities size: " + facilities.size());
+                facilityCardAdapter.notifyDataSetChanged();
+
+                Intent intent = getIntent();
+                if (intent.getExtras() != null) {
+                    String location = intent.getExtras().getString("Location");
+                    for (int i = 0; i < facilities.size(); i ++) {
+                        if (facilities.get(i).getTitle().equals(location)) {
+                            viewPager.setCurrentItem(i);
+                            handleStroke(location);
+                            break;
+                        }
+                    }
+                }
+            }
+
+        });
+    }
+
+    /**
+     * Setting Camera to RMIT location and rotate map to display it vertically
+     * */
+    private void initCamera() {
         LatLng rmitLoc = new LatLng(10.7296, 106.693);
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(rmitLoc).bearing(90).zoom((float) 16.8).build();
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(rmitLoc).bearing(90).zoom((float) 16.8).build(); //rotate map by 90 degree
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        mMap.getUiSettings().setScrollGesturesEnabled(false);
-        mMap.getUiSettings().setRotateGesturesEnabled(false);
-        mMap.getUiSettings().setCompassEnabled(false);
-        mMap.setMaxZoomPreference((float) 16.8);
+        mMap.getUiSettings().setRotateGesturesEnabled(false);  //Not allowing user to rotate map
+        mMap.getUiSettings().setCompassEnabled(false); //Disable this feature to avoid map from rotating when compass pressed
+        mMap.setMinZoomPreference((float) 16.8); //User cannot zoom out any further than 16.8
+        mMap.setOnCameraIdleListener(this);
+    }
 
-        PolygonOptions building2 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.72948, 106.6959), new LatLng(10.72948, 106.6967), new LatLng(10.72915, 106.6967), new LatLng(10.72915, 106.6959)).strokeWidth(0);
-        PolygonOptions building1 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7294, 106.6946), new LatLng(10.7294, 106.6957), new LatLng(10.7291, 106.6957), new LatLng(10.7291, 106.6946)).strokeWidth(0);
-        PolygonOptions parkingLot1 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7299, 106.6961), new LatLng(10.7299, 106.6968), new LatLng(10.72965, 106.6968), new LatLng(10.72965, 106.6961)).strokeWidth(0);
-        PolygonOptions parkingLot2 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7298, 106.6949), new LatLng(10.7298, 106.69567), new LatLng(10.72957, 106.69567), new LatLng(10.72957, 106.6949)).strokeWidth(0);
-        PolygonOptions cafeteria = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7298, 106.6944), new LatLng(10.7298, 106.6948), new LatLng(10.72957, 106.6948), new LatLng(10.72957, 106.6944)).strokeWidth(0);
-        PolygonOptions basketballCourt = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.72975, 106.69415), new LatLng(10.72975, 106.6943), new LatLng(10.72954, 106.6943), new LatLng(10.72954, 106.69415)).strokeWidth(0);
-        PolygonOptions building9 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7298, 106.6933), new LatLng(10.7298, 106.6937), new LatLng(10.72965, 106.6937), new LatLng(10.72965, 106.6935), new LatLng(10.72955, 106.6935), new LatLng(10.72955, 106.6933)).strokeWidth(0);
-        PolygonOptions building8 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7294, 106.6933), new LatLng(10.7294, 106.6935), new LatLng(10.72925, 106.6935), new LatLng(10.72925, 106.6937), new LatLng(10.7291, 106.6937), new LatLng(10.7291, 106.6933)).strokeWidth(0);
-        PolygonOptions sportHall = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.72965, 106.6923), new LatLng(10.72965, 106.6924), new LatLng(10.72975, 106.6924), new LatLng(10.72975, 106.693), new LatLng(10.72965, 106.693), new LatLng(10.72965, 106.6931),new LatLng(10.7292, 106.6931), new LatLng(10.7292, 106.6930), new LatLng(10.7291, 106.6930), new LatLng(10.7291, 106.6924), new LatLng(10.7292, 106.6924), new LatLng(10.7292, 106.6923)).strokeWidth(0);
-        PolygonOptions footballField = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7303, 106.6912), new LatLng(10.7303, 106.6922), new LatLng(10.7293, 106.6922), new LatLng(10.7293, 106.6912)).strokeWidth(0);
-        PolygonOptions tennisCourt = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7307, 106.69225), new LatLng(10.7307, 106.69267), new LatLng(10.7303, 106.69267), new LatLng(10.7303, 106.69225)).strokeWidth(0);
-        polygonMap.put("Building 1", mMap.addPolygon(building1));
-        polygonMap.put("Building 2", mMap.addPolygon(building2));
-        polygonMap.put("Building 8", mMap.addPolygon(building8));
-        polygonMap.put("Building 9", mMap.addPolygon(building9));
-        polygonMap.put("Parking Lot 1", mMap.addPolygon(parkingLot1));
-        polygonMap.put("Parking Lot 2", mMap.addPolygon(parkingLot2));
-        polygonMap.put("Cafeteria", mMap.addPolygon(cafeteria));
-        polygonMap.put("Basketball Court", mMap.addPolygon(basketballCourt));
-        polygonMap.put("Sport Hall", mMap.addPolygon(sportHall));
-        polygonMap.put("Football Field", mMap.addPolygon(footballField));
-        polygonMap.put("Tennis Court", mMap.addPolygon(tennisCourt));
+    /**
+     * Init marker at corresponding facilities (landmarks) location
+     * */
+    private void initMarkers() {
+        int height = 70; //marker height
+        int width = 70; //marker width
 
-
-        int height = 70;
-        int width = 70;
         BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.marker);
         Bitmap b = bitmapdraw.getBitmap();
         Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
@@ -189,60 +242,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
         MarkerOptions cafeteriaMarker = new MarkerOptions().position(new LatLng(10.72965, 106.6946)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).title("Cafeteria");
         mMap.addMarker(cafeteriaMarker);
-
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                if (!marker.getTitle().equals("I'm Here")) {
-                    for (int i = 0; i < facilities.size(); i++) {
-                        if (facilities.get(i).getTitle().equals(marker.getTitle())) {
-                            viewPager.setCurrentItem(i);
-                        }
-                    }
-                    handleStroke(marker.getTitle());
-                }
-
-                return true;
-            }
-        });
-
-        firebaseHandler.getFacilities().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                String title, openHour, image;
-                double rating;
-                List<String> subfacilities;
-                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                    title = Objects.requireNonNull(documentSnapshot.getData().get("title")).toString();
-                    openHour = Objects.requireNonNull(documentSnapshot.getData().get("open")).toString();
-                    image = Objects.requireNonNull(documentSnapshot.getData().get("image")).toString();
-                    rating = Objects.requireNonNull(documentSnapshot.getDouble("rating"));
-                    subfacilities = (List<String>) documentSnapshot.getData().get("subfacility");
-                    facilities.add(new Facility(image,title,openHour,rating,subfacilities));
-                }
-
-                System.out.println("facilities size: " + facilities.size());
-                facilityCardAdapter.notifyDataSetChanged();
-
-                Intent intent = getIntent();
-                if (intent == null) {
-                    System.out.println("intent is null");
-                }
-                if (intent.getExtras() != null) {
-                    String location = intent.getExtras().getString("Location");
-                    for (int i = 0; i < facilities.size(); i ++) {
-                        if (facilities.get(i).getTitle().equals(location)) {
-                            viewPager.setCurrentItem(i);
-                            handleStroke(location);
-                            break;
-                        }
-                    }
-                }
-            }
+    }
 
 
-        });
+    /**
+     * Drawing landmarks
+     * */
+    private void drawLandMarks() {
+        PolygonOptions building2 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.72948, 106.6959), new LatLng(10.72948, 106.6967), new LatLng(10.72915, 106.6967), new LatLng(10.72915, 106.6959)).strokeWidth(0);
+        PolygonOptions building1 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7294, 106.6946), new LatLng(10.7294, 106.6957), new LatLng(10.7291, 106.6957), new LatLng(10.7291, 106.6946)).strokeWidth(0);
+        PolygonOptions parkingLot1 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7299, 106.6961), new LatLng(10.7299, 106.6968), new LatLng(10.72965, 106.6968), new LatLng(10.72965, 106.6961)).strokeWidth(0);
+        PolygonOptions parkingLot2 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7298, 106.6949), new LatLng(10.7298, 106.69567), new LatLng(10.72957, 106.69567), new LatLng(10.72957, 106.6949)).strokeWidth(0);
+        PolygonOptions cafeteria = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7298, 106.6944), new LatLng(10.7298, 106.6948), new LatLng(10.72957, 106.6948), new LatLng(10.72957, 106.6944)).strokeWidth(0);
+        PolygonOptions basketballCourt = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.72975, 106.69415), new LatLng(10.72975, 106.6943), new LatLng(10.72954, 106.6943), new LatLng(10.72954, 106.69415)).strokeWidth(0);
+        PolygonOptions building9 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7298, 106.6933), new LatLng(10.7298, 106.6937), new LatLng(10.72965, 106.6937), new LatLng(10.72965, 106.6935), new LatLng(10.72955, 106.6935), new LatLng(10.72955, 106.6933)).strokeWidth(0);
+        PolygonOptions building8 = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7294, 106.6933), new LatLng(10.7294, 106.6935), new LatLng(10.72925, 106.6935), new LatLng(10.72925, 106.6937), new LatLng(10.7291, 106.6937), new LatLng(10.7291, 106.6933)).strokeWidth(0);
+        PolygonOptions sportHall = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.72965, 106.6923), new LatLng(10.72965, 106.6924), new LatLng(10.72975, 106.6924), new LatLng(10.72975, 106.693), new LatLng(10.72965, 106.693), new LatLng(10.72965, 106.6931),new LatLng(10.7292, 106.6931), new LatLng(10.7292, 106.6930), new LatLng(10.7291, 106.6930), new LatLng(10.7291, 106.6924), new LatLng(10.7292, 106.6924), new LatLng(10.7292, 106.6923)).strokeWidth(0);
+        PolygonOptions footballField = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7303, 106.6912), new LatLng(10.7303, 106.6922), new LatLng(10.7293, 106.6922), new LatLng(10.7293, 106.6912)).strokeWidth(0);
+        PolygonOptions tennisCourt = new PolygonOptions().fillColor(R.color.land_mark).add(new LatLng(10.7307, 106.69225), new LatLng(10.7307, 106.69267), new LatLng(10.7303, 106.69267), new LatLng(10.7303, 106.69225)).strokeWidth(0);
 
+        //Mapping facilities (polygon) to their names
+        polygonMap.put("Building 1", mMap.addPolygon(building1));
+        polygonMap.put("Building 2", mMap.addPolygon(building2));
+        polygonMap.put("Building 8", mMap.addPolygon(building8));
+        polygonMap.put("Building 9", mMap.addPolygon(building9));
+        polygonMap.put("Parking Lot 1", mMap.addPolygon(parkingLot1));
+        polygonMap.put("Parking Lot 2", mMap.addPolygon(parkingLot2));
+        polygonMap.put("Cafeteria", mMap.addPolygon(cafeteria));
+        polygonMap.put("Basketball Court", mMap.addPolygon(basketballCourt));
+        polygonMap.put("Sport Hall", mMap.addPolygon(sportHall));
+        polygonMap.put("Football Field", mMap.addPolygon(footballField));
+        polygonMap.put("Tennis Court", mMap.addPolygon(tennisCourt));
+    }
+
+    /**
+     * Display facilities data on swipe card
+     */
+    private void populateSwipeCard() {
         facilityCardAdapter = new FacilityCardAdapter(facilities, MapsActivity.this);
         viewPager = (ClickableViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(facilityCardAdapter);
@@ -276,19 +312,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                     }
                     alertDialog.show();
-                } else {
-                    System.out.println("bleh bleh");
                 }
             }
         });
-
-        startLocationUpdate();
     }
 
+    /**"
+     * Changing radians to degree to rotate user's location marker
+     * */
     private double radiansToDegrees(double x) {
         return x * 180.0 / Math.PI;
     }
 
+    /**
+     * Update user's location marker position and rotate the marker in response to user's direction
+     * */
     public void onLocationChanged(Location location){
         LatLng myLoc = new LatLng(location.getLatitude(), location.getLongitude());
         if (myMarker != null) {
@@ -303,6 +341,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Bitmap smallMarker = Bitmap.createScaledBitmap(b, 50, 50, false);
 
         myMarker = mMap.addMarker(new MarkerOptions().position(myLoc).title("I'm Here").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+
 
         if (pastMarker != null) {
             double fLat = (Math.PI * pastMarker.getPosition().latitude) / 180.0f;
@@ -340,6 +379,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 android.Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
     }
 
+
+    /**
+     * Set stroke to landmarks
+     * @param title
+     */
     private void handleStroke(String title) {
         Polygon polygon;
         for (Map.Entry mapElement: polygonMap.entrySet()) {
@@ -348,5 +392,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         polygonMap.get(title).setStrokeWidth(5);
         polygonMap.get(title).setStrokeColor(Color.rgb(252,186,3));
+    }
+
+    /**
+     * Relocate camera's center position when zoomed out
+     */
+    @Override
+    public void onCameraIdle() {
+        float zoom = mMap.getCameraPosition().zoom;
+        if (zoom < 17 ) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(10.7296, 106.693), zoom));
+        }
     }
 }

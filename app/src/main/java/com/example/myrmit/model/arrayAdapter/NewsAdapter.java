@@ -144,6 +144,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
         return filter;
     }
 
+    /**
+     * Handle filter action from mode (liked/all) and query from search view
+     */
     Filter filter = new Filter() {
 
         //Run on background thread
@@ -191,18 +194,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
             newsList.clear();
             newsList.addAll((Collection<? extends News>) results.values);
             notifyDataSetChanged();
-        }
-    };
-
-    Filter filter2 = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            return null;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-
         }
     };
 
