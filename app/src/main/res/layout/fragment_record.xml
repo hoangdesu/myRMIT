@@ -69,6 +69,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginTop="7dp"
                     android:src="@drawable/id" />
 
                 <TextView
@@ -98,13 +99,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/studentID_layout"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginTop="7dp"
                     android:src="@drawable/role" />
 
                 <TextView
@@ -142,6 +144,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginTop="7dp"
                     android:src="@drawable/dob" />
 
                 <TextView
@@ -178,6 +181,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginTop="7dp"
                     android:src="@drawable/gender" />
 
                 <TextView
@@ -214,6 +218,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginTop="7dp"
                     android:src="@drawable/program" />
 
                 <TextView
@@ -306,7 +311,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="-5dp"
+                android:layout_marginBottom="-3dp"
                 android:fontFamily="@font/museo_500"
                 android:text="GPA"
                 android:textColor="@color/app_secondary"
@@ -366,7 +371,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="-5dp"
+                android:layout_marginBottom="-3dp"
                 android:fontFamily="@font/museo_500"
                 android:text="Credits"
                 android:textColor="@color/app_secondary"
