@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -39,6 +41,8 @@ public class SignInActivity extends AppCompatActivity {
         username = findViewById(R.id.email);
         password = findViewById(R.id.password);
         FirebaseMessaging.getInstance().subscribeToTopic("notification");
+        NotificationManager nMgr = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        nMgr.cancelAll();
         System.out.println("Firebase messaging subscribed");
         if (FirebaseAuth.getInstance().getCurrentUser() != null){
             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
