@@ -19,8 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myrmit.model.FirebaseHandler;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -28,6 +30,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +46,7 @@ public class RecordFragment extends Fragment {
     ProgressBar credits_progress_bar;
     TextView tvGPA;
     TextView tvCredits;
+    FirebaseHandler firebaseHandler = new FirebaseHandler();
     TextView tvStudent_ID;
     TextView tvDOB;
     TextView tvProgram;
@@ -86,6 +91,7 @@ public class RecordFragment extends Fragment {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -122,56 +128,92 @@ public class RecordFragment extends Fragment {
         progressBarGPA = view.findViewById(R.id.progressBarGPA);
         credits_progress_bar = view.findViewById(R.id.credits_progress_bar);
 
-        progressBarGPA.setMax(4 * 10);
-        progressBarGPA.setProgress((int) (3.4 * 10));
-        credits_progress_bar.setMax(384);
-        credits_progress_bar.setProgress(192);
 
-        CollectionReference users = FirebaseFirestore.getInstance().collection("users");
 
         if (currentUser != null) {
+            progressBarGPA.setMax(4 * 10);
+            progressBarGPA.setProgress((int) (0));
+            credits_progress_bar.setMax(384);
+            credits_progress_bar.setProgress(0);
             String userEmail = currentUser.getEmail();
-            //Log.i("EMAIL", userEmail);
             assert userEmail != null;
-            DocumentReference userRef = users.document(userEmail);
+            DocumentReference userRef = firebaseHandler.getAccount(userEmail);
             userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void onSuccess(DocumentSnapshot user) {
-                    String firstName = user.getString("firstName");
-                    String lastName = user.getString("lastName");
-                    String fullName = firstName + " " + lastName;
                     String name = user.getString("name");
-
                     String dob = user.getString("dob");
                     String gender = user.getString("gender");
-                    Double gpa = user.getDouble("gpa");
-                    String program = user.getString("program");
-                    String studentID = user.getString("studentID");
-                    Double credits = user.getDouble("credits");
-
-
-                    if (firstName != null) {
-                        tvUsername.setText(fullName);
-                    } else {
-                        tvUsername.setText(userEmail.substring(0, 8));
-                    }
-
-                    if ((dob != null) && (gpa != null)) {
-                        tvGPA.setText(String.valueOf(gpa));
-                        progressBarGPA.setProgress((int) (gpa * 10));
-                        credits_progress_bar.setProgress(credits.intValue());
-
-                        tvCredits.setText(credits.intValue() + "/384");
-
-                        tvStudent_ID.setText(studentID);
-                        tvDOB.setText(dob);
-                        tvGender.setText(gender);
-                        tvProgram.setText(program);
-                    }
+                    userRef.collection("programCode").document("program").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            String program = (String) task.getResult().get("code");
+                                task.getResult().getReference().collection("data").document("finishCourses").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        ArrayList<String> gradeList = (ArrayList<String>) task.getResult().get("grade");
+                                        assert gradeList != null;
+                                        int credits = gradeList.size() * 12;
+                                        String studentID = userEmail.split("@")[0];
+                                        firebaseHandler.getProgram(program).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                ArrayList<String> list = (ArrayList<String>) task.getResult().get("courses");
+                                                assert list != null;
+                                                double gpa = 0;
+                                                for (String grade: gradeList){
+                                                    switch (grade) {
+                                                        case "PA":
+                                                            gpa += 1;
+                                                            break;
+                                                        case "CR":
+                                                            gpa += 2;
+                                                            break;
+                                                        case "DI":
+                                                            gpa += 3;
+                                                            break;
+                                                        case "HD":
+                                                            gpa += 4;
+                                                            break;
+                                                        default: break;
+                                                    }
+                                                }
+                                                gpa = gpa/gradeList.size();
+                                                credits_progress_bar.setMax(list.size()*12);
+                                                tvUsername.setText(name);
+                                                if ((dob != null)) {
+                                                    tvGPA.setText(String.valueOf(gpa));
+                                                    progressBarGPA.setProgress((int) (gpa * 10));
+                                                    credits_progress_bar.setProgress((int) credits);
+                                                    tvCredits.setText(credits + "/" + (list.size()*12));
+                                                    tvStudent_ID.setText(studentID);
+                                                    tvDOB.setText(dob);
+                                                    tvGender.setText(gender);
+                                                    tvProgram.setText(program);
+                                                }
+                                            }
+                                        });
+                                    }
+                                });
+                        }
+                    });
 
                 }
             });
+        }
+        else {
+            progressBarGPA.setMax(0);
+            progressBarGPA.setProgress((int) (0));
+            credits_progress_bar.setMax(0);
+            credits_progress_bar.setProgress(0);
+            tvGPA.setText("N/A");
+            tvUsername.setText("Guess");
+            tvCredits.setText("N/A");
+            tvStudent_ID.setText("Guess Account");
+            tvDOB.setText("N/A");
+            tvGender.setText("N/A");
+            tvProgram.setText("N/A");
         }
 
 
