@@ -177,7 +177,7 @@ public class GroupArrayAdapter extends android.widget.ArrayAdapter<Group> {
                                     // Update new data to the firebase
                                     task.getResult().getReference().update("day", day);
                                     task.getResult().getReference().update("time", time);
-                                    task.getResult().getReference().collection("data").document("change").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    task.getResult().getReference().collection("data").document(list.get(position).getCourseName()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                             String isChange = task.getResult().getString("change");
