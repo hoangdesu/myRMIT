@@ -44,11 +44,10 @@ import java.util.Objects;
 public class HomeFragment extends Fragment {
     ClickableViewPager viewPager;
     SwipeCardAdapter swipeCardAdapter;
-    static List<News> newsList = new ArrayList<News>();;
-    CardView fragment_home_cardview_clubs;
+    static List<News> newsList = new ArrayList<News>();
     FirebaseHandler firebaseHandler = new FirebaseHandler();
     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-    static TextView tvHelloUser;
+    TextView tvHelloUser;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

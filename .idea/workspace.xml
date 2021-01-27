@@ -6,6 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="clubs" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="AutoImportSettings">
@@ -30,8 +31,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da164c8c-a112-4b82-813c-bc6aee1a590f" name="Default Changelist" comment="">
+    <list default="true" id="da164c8c-a112-4b82-813c-bc6aee1a590f" name="Default Changelist" comment="fix minor bugs">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/ClubsRecyclerAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/HomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/RecordFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/RecordFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/Clubs.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/Clubs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/ClubsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/ClubsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/FirebaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/FirebaseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_clubs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_clubs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_record.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_record.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,12 +57,18 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="layoutResourceFile" />
-        <option value="Class" />
         <option value="resourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="ho" />
+        <option value="Hoang Nguyen &lt;hoangdesu@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1mniC9k5H46AUX9gf3FDonB1lmg" />
@@ -191,7 +206,21 @@
       <option name="project" value="LOCAL" />
       <updated>1611699700173</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fix minor bugs">
+      <created>1611700610803</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1611700610803</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix minor bugs">
+      <created>1611700838832</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1611700838832</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -219,17 +248,20 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Logout confirm alert" />
     <MESSAGE value="Fix splash art bug&#10;Transparent app icon&#10;Clubs UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix splash art bug&#10;Transparent app icon&#10;Clubs UI" />
+    <MESSAGE value="fix typo" />
+    <MESSAGE value="fix minor bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix minor bugs" />
   </component>
   <component name="WindowStateProjectService">
     <state x="480" y="285" key="#PSD" timestamp="1611700033881">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="480" y="285" key="#PSD/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611700033881" />
-    <state x="488" y="70" key="#com.intellij.ide.util.MemberChooser" timestamp="1611513657019">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="514" y="107" key="#com.intellij.ide.util.MemberChooser" timestamp="1611735786028">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="488" y="70" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1611513657019" />
+    <state x="514" y="107" key="#com.intellij.ide.util.MemberChooser/0.23.1440.877@0.23.1440.877" timestamp="1611735786028" />
     <state x="172" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1610907739816">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -248,42 +280,47 @@
     </state>
     <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1611601986238" />
     <state x="370" y="196" key="AndroidCreateResourceFileDialog/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611696838000" />
-    <state x="464" y="23" width="1066" height="1057" key="CommitChangelistDialog2" timestamp="1611699700030">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="348" y="23" width="828" height="877" key="CommitChangelistDialog2" timestamp="1611738137766">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="464" y="23" width="1066" height="1057" key="CommitChangelistDialog2/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611699700030" />
+    <state x="348" y="23" width="828" height="877" key="CommitChangelistDialog2/0.23.1440.877@0.23.1440.877" timestamp="1611738137766" />
+    <state x="464" y="23" width="1066" height="1057" key="CommitChangelistDialog2/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611700913959" />
     <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1611472042473">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1611472042473" />
-    <state width="1860" height="224" key="GridCell.Tab.0.bottom" timestamp="1611694598927">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state width="1396" height="210" key="GridCell.Tab.0.bottom" timestamp="1611736352226">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1322" height="200" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611680566602" />
+    <state width="1396" height="210" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1611736352226" />
     <state width="1860" height="224" key="GridCell.Tab.0.bottom/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
-    <state width="1860" height="224" key="GridCell.Tab.0.center" timestamp="1611694598927">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state width="1396" height="210" key="GridCell.Tab.0.center" timestamp="1611736352226">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1322" height="200" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611680566601" />
+    <state width="1396" height="210" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1611736352226" />
     <state width="1860" height="224" key="GridCell.Tab.0.center/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
-    <state width="1860" height="224" key="GridCell.Tab.0.left" timestamp="1611694598926">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state width="1396" height="210" key="GridCell.Tab.0.left" timestamp="1611736352225">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1322" height="200" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611680566601" />
+    <state width="1396" height="210" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1611736352225" />
     <state width="1860" height="224" key="GridCell.Tab.0.left/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598926" />
-    <state width="1860" height="224" key="GridCell.Tab.0.right" timestamp="1611694598927">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state width="1396" height="210" key="GridCell.Tab.0.right" timestamp="1611736352226">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1322" height="200" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611680566601" />
+    <state width="1396" height="210" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1611736352226" />
     <state width="1860" height="224" key="GridCell.Tab.0.right/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
-    <state x="464" y="186" key="SettingsEditor" timestamp="1611700564909">
+    <state x="464" y="186" key="SettingsEditor" timestamp="1611700674980">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="464" y="186" key="SettingsEditor/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611700564909" />
-    <state x="555" y="283" key="Vcs.Push.Dialog.v2" timestamp="1611699703251">
+    <state x="464" y="186" key="SettingsEditor/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611700674980" />
+    <state x="555" y="283" key="Vcs.Push.Dialog.v2" timestamp="1611700906638">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="555" y="283" key="Vcs.Push.Dialog.v2/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611699703251" />
+    <state x="555" y="283" key="Vcs.Push.Dialog.v2/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611700906638" />
     <state x="499" y="142" key="chooseDestDirectoryDialog" timestamp="1611611126769">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

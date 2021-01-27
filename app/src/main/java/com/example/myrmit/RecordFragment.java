@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -135,6 +137,7 @@ public class RecordFragment extends Fragment {
             assert userEmail != null;
             DocumentReference userRef = users.document(userEmail);
             userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void onSuccess(DocumentSnapshot user) {
@@ -159,8 +162,8 @@ public class RecordFragment extends Fragment {
 
                     if ((dob != null) && (gpa != null)) {
                         tvGPA.setText(String.valueOf(gpa));
-                        progressBarGPA.setProgress((int) (gpa * 10));
-                        credits_progress_bar.setProgress(credits.intValue());
+                        progressBarGPA.setProgress((int) (gpa * 10), true);
+                        credits_progress_bar.setProgress(credits.intValue(), true);
 
                         tvCredits.setText(credits.intValue() + "/384");
 

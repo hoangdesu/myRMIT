@@ -152,4 +152,8 @@ public class FirebaseHandler {
     public CollectionReference getRMITPrograms(){
         return db.collection("rmitprograms");
     }
+
+    public CollectionReference getAllClubs() {
+        return db.collection("clubs");
+    }
 }
