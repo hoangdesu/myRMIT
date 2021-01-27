@@ -132,6 +132,7 @@ public class RecordFragment extends Fragment {
                     String studentID = userEmail.split("@")[0];
                     assert role != null;
                     userRef.collection("programCode").document("program").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @SuppressLint("UseCompatLoadingForDrawables")
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             String program = (String) task.getResult().get("code");
@@ -206,6 +207,9 @@ public class RecordFragment extends Fragment {
                                 tvDOB.setText(dob);
                                 tvGender.setText(gender);
                                 tvProgram.setText(program);
+                                if (gender.equals("Male")){
+                                    avatar.setImageDrawable(getResources().getDrawable(R.drawable.man));
+                                } else avatar.setImageDrawable(getResources().getDrawable(R.drawable.temp_avatar));
                             }
                         }
                     });
