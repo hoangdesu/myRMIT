@@ -29,11 +29,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        System.out.println("Firebabse Messaging is triggered");
-        String title = remoteMessage.getData().get("title");
-        String description = remoteMessage.getData().get("description");
-
-        sendNotification(description, title);
+        String type = remoteMessage.getData().get("type");
+        if (type.equals("news")) {
+            String title = remoteMessage.getData().get("title");
+            String description = remoteMessage.getData().get("description");
+            sendNotification(description, title);
+        } else {
+            sendNotification("new hour", "Course Schedule Update");
+        }
     }
 
     private void sendNotification(String messageBody, String title) {

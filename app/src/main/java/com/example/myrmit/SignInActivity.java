@@ -38,7 +38,7 @@ public class SignInActivity extends AppCompatActivity {
         status = findViewById(R.id.textView13);
         username = findViewById(R.id.email);
         password = findViewById(R.id.password);
-        FirebaseMessaging.getInstance().subscribeToTopic("news_notification");
+        FirebaseMessaging.getInstance().subscribeToTopic("notification");
         System.out.println("Firebase messaging subscribed");
         if (FirebaseAuth.getInstance().getCurrentUser() != null){
             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
