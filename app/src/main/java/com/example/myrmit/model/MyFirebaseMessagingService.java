@@ -35,7 +35,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String description = remoteMessage.getData().get("description");
             sendNotification(description, title);
         } else {
-            sendNotification("new hour", "Course Schedule Update");
+            String course = remoteMessage.getData().get("course");
+            sendNotification(course + " schedule has been updated", "Course Schedule Update");
         }
     }
 
