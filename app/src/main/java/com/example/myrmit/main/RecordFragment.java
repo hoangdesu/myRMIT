@@ -236,7 +236,6 @@ public class RecordFragment extends Fragment {
                 alert.show();
             }
         });
-
     }
 
     private History get(String name, String gpa){
