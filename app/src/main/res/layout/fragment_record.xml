@@ -69,6 +69,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginTop="7dp"
                     android:src="@drawable/id" />
 
                 <TextView
@@ -105,6 +106,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginTop="7dp"
                     android:src="@drawable/role" />
 
                 <TextView
@@ -142,6 +144,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginTop="7dp"
                     android:src="@drawable/dob" />
 
                 <TextView
@@ -178,6 +181,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginTop="7dp"
                     android:src="@drawable/gender" />
 
                 <TextView
@@ -214,6 +218,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginTop="7dp"
                     android:src="@drawable/program" />
 
                 <TextView
