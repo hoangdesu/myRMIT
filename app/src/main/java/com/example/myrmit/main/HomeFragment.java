@@ -1,5 +1,6 @@
 package com.example.myrmit.main;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -70,6 +71,7 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -127,6 +129,7 @@ public class HomeFragment extends Fragment {
                 }
             });
         }
+        else tvHelloUser.setText("Hello, My Guest!");
 
         return view;
     }

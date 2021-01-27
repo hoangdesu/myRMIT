@@ -15,9 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.myrmit.R;
@@ -30,10 +30,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -56,6 +54,7 @@ public class RecordFragment extends Fragment {
     CardView history;
     TextView tvDOB;
     TextView tvProgram;
+    ImageView avatar;
     TextView tvGender;
     TextView tvRole;
     private Button logout;
@@ -77,29 +76,34 @@ public class RecordFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_record, container, false);
         logout = view.findViewById(R.id.log_out_btn);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("Are you sure you want to log out?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                FirebaseAuth.getInstance().signOut();
-                                startActivity(new Intent(getContext(), SignInActivity.class));
-                                getActivity().finish();
-                            }
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
-            }
-        });
-
-
+        if (FirebaseAuth.getInstance().getCurrentUser()!= null) {
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setMessage("Are you sure you want to log out?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    FirebaseAuth.getInstance().signOut();
+                                    startActivity(new Intent(getContext(), SignInActivity.class));
+                                    getActivity().finish();
+                                }
+                            })
+                            .setNegativeButton("No", null)
+                            .show();
+                }
+            });
+        }
+        else {
+            startActivity(new Intent(getContext(), SignInActivity.class));
+            getActivity().finish();
+        }
         // Display user's information
         tvUsername = view.findViewById(R.id.tv_fragment_record_username);
         tvGPA = view.findViewById(R.id.tvGPA);
         tvCredits = view.findViewById(R.id.tvCredits);
+        avatar = view.findViewById(R.id.avatar);
         history = view.findViewById(R.id.history_card);
         tvStudent_ID = view.findViewById(R.id.tvStudent_ID);
         tvDOB = view.findViewById(R.id.tvDOB);
@@ -140,7 +144,7 @@ public class RecordFragment extends Fragment {
                                         assert gradeList != null;
                                         int credits = gradeList.size() * 12;
                                         firebaseHandler.getProgram(program).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                            @SuppressLint("DefaultLocale")
+                                            @SuppressLint({"DefaultLocale", "UseCompatLoadingForDrawables"})
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                                 ArrayList<String> list = (ArrayList<String>) task.getResult().get("courses");
@@ -181,6 +185,9 @@ public class RecordFragment extends Fragment {
                                                 tvDOB.setText(dob);
                                                 tvGender.setText(gender);
                                                 tvProgram.setText(program);
+                                                if (gender.equals("Male")){
+                                                    avatar.setImageDrawable(getResources().getDrawable(R.drawable.man));
+                                                } else avatar.setImageDrawable(getResources().getDrawable(R.drawable.temp_avatar));
                                             }
                                         });
                                     }

@@ -21,10 +21,11 @@
         app:cardElevation="0dp">
 
         <ImageView
+            android:id="@+id/avatar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/temp_avatar" />
+            android:src="@drawable/guest" />
 
 
     </androidx.cardview.widget.CardView>
