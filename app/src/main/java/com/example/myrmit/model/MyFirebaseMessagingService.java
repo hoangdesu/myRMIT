@@ -1,5 +1,6 @@
 package com.example.myrmit.model;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -20,6 +21,8 @@ import com.google.firebase.messaging.RemoteMessage;
 
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+    static int id = 0;
+
     @Override
     public void onNewToken(String token) {
         Log.d("TAG", "Refreshed token: " + token);
@@ -50,8 +53,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
-                        .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.myrmit))
-                        .setSmallIcon(R.drawable.rmit_logo)
+                        .setSmallIcon(R.drawable.myrmit)
+                        .setPriority(Notification.PRIORITY_MAX)
                         .setContentTitle(title)
                         .setContentText(messageBody)
                         .setAutoCancel(true)
@@ -65,11 +68,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channelId,
                     "title",
-                    NotificationManager.IMPORTANCE_DEFAULT);
+                    NotificationManager.IMPORTANCE_HIGH);
             notificationManager.createNotificationChannel(channel);
         }
+        notificationManager.notify(id, notificationBuilder.build());
+        idHandler();
+    }
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    private void idHandler(){
+        id++;
+        if (id == 23){
+            id = 2;
+        }
     }
 
 }
