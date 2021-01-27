@@ -45,15 +45,6 @@ public class HomeFragment extends Fragment {
     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
     TextView tvHelloUser;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -70,8 +61,6 @@ public class HomeFragment extends Fragment {
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -79,10 +68,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -136,14 +121,9 @@ public class HomeFragment extends Fragment {
             userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot user) {
-                    String firstName = user.getString("firstName");
-                    if (firstName != null) {
-                        String message = "Hello, " + firstName + "!";
-                        tvHelloUser.setText(message);
-                    } else {
-                        tvHelloUser.setText("Hello, " + userEmail.substring(0, 8) + "!");
-                    }
-
+                    String name = user.getString("name");
+                    String message = "Hello, " + name + "!";
+                    tvHelloUser.setText(message);
                 }
             });
         }

@@ -28,13 +28,10 @@
             android:id="@+id/tvHelloUser"
             android:layout_width="wrap_content"
             android:layout_height="52dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="34dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/museo_500"
             android:padding="10dp"
             android:text="Hello, Guest!"
@@ -50,14 +47,33 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="38dp"
-            android:layout_marginLeft="38dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="41dp"
+            android:layout_marginLeft="41dp"
+            android:layout_marginTop="19dp"
             android:fontFamily="@font/museo_500"
             android:text="Events"
             android:textColor="@color/app_secondary"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+        <com.example.myrmit.ClickableViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="269dp"
+            android:layout_above="@+id/a"
+            android:layout_below="@+id/t"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="-5dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="1dp"
+            android:clipToPadding="false"
+            android:foregroundGravity="center"
+            android:overScrollMode="never">
+
+        </com.example.myrmit.ClickableViewPager>
 
         <RelativeLayout
             android:id="@+id/a"
@@ -373,24 +389,6 @@
 
         </RelativeLayout>
 
-        <com.example.myrmit.ClickableViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="247dp"
-            android:layout_above="@+id/a"
-            android:layout_below="@+id/tvHelloUser"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="62dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginBottom="2dp"
-            android:clipToPadding="false"
-            android:foregroundGravity="center"
-            android:overScrollMode="never">
-
-        </com.example.myrmit.ClickableViewPager>
     </RelativeLayout>
 
 </RelativeLayout>
