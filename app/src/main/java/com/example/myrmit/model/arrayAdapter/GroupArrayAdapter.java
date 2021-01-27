@@ -202,8 +202,8 @@ public class GroupArrayAdapter extends android.widget.ArrayAdapter<Group> {
         // Set the information about 2 groups
         holder.id.setText(String.valueOf(position + 1));
         holder.name.setText(list.get(position).getCourseName());
-        holder.group1.setText("Lecturer: " + list.get(position).getLecturer() + " - Time: " + list.get(position).getTime1() + ":00 -> " + (Integer.parseInt(list.get(position).getTime1()) + 3) + ":00" + " (" + convertDay(list.get(position).getDay1()) + ")");
-        holder.group2.setText("Lecturer: " + list.get(position).getLecturer() + " - Time: " + list.get(position).getTime2() + ":00 -> " + (Integer.parseInt(list.get(position).getTime2()) + 3) + ":00" + " (" + convertDay(list.get(position).getDay2()) + ")");
+        holder.group1.setText("- Lecturer: " + list.get(position).getLecturer() + "\n- Time: " + list.get(position).getTime1() + ":00 -> " + (Integer.parseInt(list.get(position).getTime1()) + 3) + ":00" + " (" + convertDay(list.get(position).getDay1()) + ")");
+        holder.group2.setText("- Lecturer: " + list.get(position).getLecturer() + "\n- Time: " + list.get(position).getTime2() + ":00 -> " + (Integer.parseInt(list.get(position).getTime2()) + 3) + ":00" + " (" + convertDay(list.get(position).getDay2()) + ")");
         holder.checkBox1.setChecked(list.get(position).isGroup1());
         holder.checkBox2.setChecked(list.get(position).isGroup2());
         holder.setTime1.setEnabled(false);
