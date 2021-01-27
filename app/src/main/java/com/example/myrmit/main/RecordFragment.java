@@ -7,18 +7,24 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.myrmit.R;
 import com.example.myrmit.SignInActivity;
 import com.example.myrmit.model.FirebaseHandler;
+import com.example.myrmit.model.arrayAdapter.HistoryArrayAdapter;
+import com.example.myrmit.model.objects.History;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -30,6 +36,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,9 +53,11 @@ public class RecordFragment extends Fragment {
     TextView tvCredits;
     FirebaseHandler firebaseHandler = new FirebaseHandler();
     TextView tvStudent_ID;
+    CardView history;
     TextView tvDOB;
     TextView tvProgram;
     TextView tvGender;
+    TextView tvRole;
     private Button logout;
 
     public RecordFragment() {
@@ -91,14 +100,14 @@ public class RecordFragment extends Fragment {
         tvUsername = view.findViewById(R.id.tv_fragment_record_username);
         tvGPA = view.findViewById(R.id.tvGPA);
         tvCredits = view.findViewById(R.id.tvCredits);
+        history = view.findViewById(R.id.history_card);
         tvStudent_ID = view.findViewById(R.id.tvStudent_ID);
         tvDOB = view.findViewById(R.id.tvDOB);
+        tvRole = view.findViewById(R.id.role);
         tvGender = view.findViewById(R.id.tvGender);
         tvProgram = view.findViewById(R.id.tvProgram);
         progressBarGPA = view.findViewById(R.id.progressBarGPA);
         credits_progress_bar = view.findViewById(R.id.credits_progress_bar);
-
-
 
         if (currentUser != null) {
             progressBarGPA.setMax(4 * 10);
@@ -112,27 +121,36 @@ public class RecordFragment extends Fragment {
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void onSuccess(DocumentSnapshot user) {
+                    String role = user.getString("role");
                     String name = user.getString("name");
                     String dob = user.getString("dob");
                     String gender = user.getString("gender");
+                    String studentID = userEmail.split("@")[0];
+                    assert role != null;
                     userRef.collection("programCode").document("program").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             String program = (String) task.getResult().get("code");
+                            if (role.equals("student")) {
                                 task.getResult().getReference().collection("data").document("finishCourses").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         ArrayList<String> gradeList = (ArrayList<String>) task.getResult().get("grade");
+                                        ArrayList<String> courseList = (ArrayList<String>) task.getResult().get("courseList");
                                         assert gradeList != null;
                                         int credits = gradeList.size() * 12;
-                                        String studentID = userEmail.split("@")[0];
                                         firebaseHandler.getProgram(program).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @SuppressLint("DefaultLocale")
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                                 ArrayList<String> list = (ArrayList<String>) task.getResult().get("courses");
+                                                ArrayList<History> histories = new ArrayList<>();
+                                                for (int i = 0; i < Objects.requireNonNull(courseList).size(); i++){
+                                                    histories.add(get(courseList.get(i), gradeList.get(i)));
+                                                }
                                                 assert list != null;
                                                 double gpa = 0;
-                                                for (String grade: gradeList){
+                                                for (String grade : gradeList) {
                                                     switch (grade) {
                                                         case "PA":
                                                             gpa += 1;
@@ -146,29 +164,44 @@ public class RecordFragment extends Fragment {
                                                         case "HD":
                                                             gpa += 4;
                                                             break;
-                                                        default: break;
+                                                        default:
+                                                            break;
                                                     }
                                                 }
-                                                gpa = gpa/gradeList.size();
-                                                credits_progress_bar.setMax(list.size()*12);
+                                                setHistoryClick(histories);
+                                                gpa = gpa / gradeList.size();
+                                                credits_progress_bar.setMax(list.size() * 12);
                                                 tvUsername.setText(name);
-                                                if ((dob != null)) {
-                                                    tvGPA.setText(String.valueOf(gpa));
-                                                    progressBarGPA.setProgress((int) (gpa * 10));
-                                                    credits_progress_bar.setProgress((int) credits);
-                                                    tvCredits.setText(credits + "/" + (list.size()*12));
-                                                    tvStudent_ID.setText(studentID);
-                                                    tvDOB.setText(dob);
-                                                    tvGender.setText(gender);
-                                                    tvProgram.setText(program);
-                                                }
+                                                tvRole.setText("Student");
+                                                tvGPA.setText(String.format("%.2f", gpa));
+                                                progressBarGPA.setProgress((int) (gpa * 10));
+                                                credits_progress_bar.setProgress((int) credits);
+                                                tvCredits.setText(credits + "/" + (list.size() * 12));
+                                                tvStudent_ID.setText(studentID);
+                                                tvDOB.setText(dob);
+                                                tvGender.setText(gender);
+                                                tvProgram.setText(program);
                                             }
                                         });
                                     }
                                 });
+                            }
+                            else {
+                                progressBarGPA.setMax(0);
+                                progressBarGPA.setProgress((int) (0));
+                                credits_progress_bar.setMax(0);
+                                credits_progress_bar.setProgress(0);
+                                tvUsername.setText(name);
+                                tvRole.setText("Lecturer");
+                                tvGPA.setText("N/A");
+                                tvCredits.setText("N/A");
+                                tvStudent_ID.setText(studentID);
+                                tvDOB.setText(dob);
+                                tvGender.setText(gender);
+                                tvProgram.setText(program);
+                            }
                         }
                     });
-
                 }
             });
         }
@@ -178,14 +211,35 @@ public class RecordFragment extends Fragment {
             credits_progress_bar.setMax(0);
             credits_progress_bar.setProgress(0);
             tvGPA.setText("N/A");
-            tvUsername.setText("Guess");
+            tvUsername.setText("Guest");
+            tvRole.setText("Guest");
             tvCredits.setText("N/A");
-            tvStudent_ID.setText("Guess Account");
+            tvStudent_ID.setText("N/A");
             tvDOB.setText("N/A");
             tvGender.setText("N/A");
             tvProgram.setText("N/A");
         }
-        
         return view;
     }
+
+    private void setHistoryClick(ArrayList<History> histories){
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                View view = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.dialog_view_history, null);
+                dialog.setView(view);
+                final AlertDialog alert = dialog.create();
+                ListView listView = view.findViewById(R.id.historylist);
+                ArrayAdapter<History> adapter = new HistoryArrayAdapter(getActivity(), histories);
+                listView.setAdapter(adapter);
+                alert.show();
+            }
+        });
+    }
+
+    private History get(String name, String gpa){
+        return new History(name, gpa);
+    }
+
 }
