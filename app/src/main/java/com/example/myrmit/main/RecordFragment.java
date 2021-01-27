@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -46,6 +47,7 @@ public class RecordFragment extends Fragment {
     TextView tvCredits;
     FirebaseHandler firebaseHandler = new FirebaseHandler();
     TextView tvStudent_ID;
+    CardView history;
     TextView tvDOB;
     TextView tvProgram;
     TextView tvGender;
@@ -92,6 +94,7 @@ public class RecordFragment extends Fragment {
         tvUsername = view.findViewById(R.id.tv_fragment_record_username);
         tvGPA = view.findViewById(R.id.tvGPA);
         tvCredits = view.findViewById(R.id.tvCredits);
+        history = view.findViewById(R.id.history_card);
         tvStudent_ID = view.findViewById(R.id.tvStudent_ID);
         tvDOB = view.findViewById(R.id.tvDOB);
         tvRole = view.findViewById(R.id.role);
@@ -99,8 +102,6 @@ public class RecordFragment extends Fragment {
         tvProgram = view.findViewById(R.id.tvProgram);
         progressBarGPA = view.findViewById(R.id.progressBarGPA);
         credits_progress_bar = view.findViewById(R.id.credits_progress_bar);
-
-
 
         if (currentUser != null) {
             progressBarGPA.setMax(4 * 10);
@@ -207,7 +208,12 @@ public class RecordFragment extends Fragment {
             tvProgram.setText("N/A");
         }
 
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 
 
         return view;
