@@ -27,6 +27,7 @@ public class HistoryArrayAdapter extends android.widget.ArrayAdapter<History> {
     }
     static class ViewHolder {
         protected TextView name;
+        protected TextView id;
         protected TextView gpa;
     }
 
@@ -39,8 +40,10 @@ public class HistoryArrayAdapter extends android.widget.ArrayAdapter<History> {
         // Initial setting for all components
         viewHolder.gpa = (TextView) view.findViewById(R.id.gparecord);
         viewHolder.name = (TextView) view.findViewById(R.id.coursename1);
+        viewHolder.id = view.findViewById(R.id.idnumber);
         view.setTag(viewHolder);
         ViewHolder holder = (ViewHolder) view.getTag();
+        holder.id.setText(String.valueOf(position+1));
         holder.gpa.setText(list.get(position).getGpa());
         holder.name.setText(list.get(position).getCourseName());
         return view;

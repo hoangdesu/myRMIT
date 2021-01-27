@@ -6,7 +6,7 @@
     <TextView
         android:id="@+id/gparecord"
         android:layout_width="40dp"
-        android:layout_height="45dp"
+        android:layout_height="42dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
@@ -19,11 +19,26 @@
         android:textSize="10sp" />
 
     <TextView
+        android:id="@+id/idnumber"
+        android:layout_width="30dp"
+        android:layout_height="42dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="1dp"
+        android:gravity="center"
+        android:text="id"
+        android:textColor="#000000"
+        android:textSize="10sp" />
+
+    <TextView
         android:id="@+id/space2"
         android:layout_width="1dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
         android:layout_toStartOf="@+id/gparecord"
@@ -34,20 +49,35 @@
         android:textSize="12sp" />
 
     <TextView
-        android:id="@+id/coursename1"
-        android:layout_width="330dp"
-        android:layout_height="45dp"
+        android:id="@+id/space3"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="0dp"
+        android:background="#DCDCDC"
+        android:text="\n\n"
+        android:textColor="#575656"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/coursename1"
+        android:layout_width="352dp"
+        android:layout_height="42dp"
+        android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="14dp"
-        android:layout_marginLeft="14dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="1dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
         android:layout_toStartOf="@+id/gparecord"
         android:layout_toLeftOf="@+id/gparecord"
+        android:layout_toEndOf="@+id/idnumber"
+        android:layout_toRightOf="@+id/idnumber"
         android:gravity="center_vertical"
         android:text="name"
         android:textColor="#000000"
