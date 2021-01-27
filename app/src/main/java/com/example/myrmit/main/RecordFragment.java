@@ -76,10 +76,10 @@ public class RecordFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_record, container, false);
         logout = view.findViewById(R.id.log_out_btn);
-        if (FirebaseAuth.getInstance().getCurrentUser()!= null) {
-            logout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (FirebaseAuth.getInstance().getCurrentUser()!= null) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setMessage("Are you sure you want to log out?")
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -93,12 +93,12 @@ public class RecordFragment extends Fragment {
                             .setNegativeButton("No", null)
                             .show();
                 }
-            });
-        }
-        else {
-            startActivity(new Intent(getContext(), SignInActivity.class));
-            getActivity().finish();
-        }
+                else {
+                    startActivity(new Intent(getContext(), SignInActivity.class));
+                    getActivity().finish();
+                }
+            }
+        });
         // Display user's information
         tvUsername = view.findViewById(R.id.tv_fragment_record_username);
         tvGPA = view.findViewById(R.id.tvGPA);
