@@ -13,13 +13,18 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.myrmit.R;
 import com.example.myrmit.SignInActivity;
 import com.example.myrmit.model.FirebaseHandler;
+import com.example.myrmit.model.arrayAdapter.HistoryArrayAdapter;
+import com.example.myrmit.model.objects.History;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -31,6 +36,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -130,6 +136,7 @@ public class RecordFragment extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         ArrayList<String> gradeList = (ArrayList<String>) task.getResult().get("grade");
+                                        ArrayList<String> courseList = (ArrayList<String>) task.getResult().get("courseList");
                                         assert gradeList != null;
                                         int credits = gradeList.size() * 12;
                                         firebaseHandler.getProgram(program).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -137,6 +144,10 @@ public class RecordFragment extends Fragment {
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                                 ArrayList<String> list = (ArrayList<String>) task.getResult().get("courses");
+                                                ArrayList<History> histories = new ArrayList<>();
+                                                for (int i = 0; i < Objects.requireNonNull(courseList).size(); i++){
+                                                    histories.add(get(courseList.get(i), gradeList.get(i)));
+                                                }
                                                 assert list != null;
                                                 double gpa = 0;
                                                 for (String grade : gradeList) {
@@ -157,6 +168,7 @@ public class RecordFragment extends Fragment {
                                                             break;
                                                     }
                                                 }
+                                                setHistoryClick(histories);
                                                 gpa = gpa / gradeList.size();
                                                 credits_progress_bar.setMax(list.size() * 12);
                                                 tvUsername.setText(name);
@@ -207,15 +219,28 @@ public class RecordFragment extends Fragment {
             tvGender.setText("N/A");
             tvProgram.setText("N/A");
         }
+        return view;
+    }
 
+    private void setHistoryClick(ArrayList<History> histories){
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                View view = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.dialog_view_history, null);
+                dialog.setView(view);
+                final AlertDialog alert = dialog.create();
+                ListView listView = view.findViewById(R.id.historylist);
+                ArrayAdapter<History> adapter = new HistoryArrayAdapter(getActivity(), histories);
+                listView.setAdapter(adapter);
+                alert.show();
             }
         });
 
-
-        return view;
     }
+
+    private History get(String name, String gpa){
+        return new History(name, gpa);
+    }
+
 }
