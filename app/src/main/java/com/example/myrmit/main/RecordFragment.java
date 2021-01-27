@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -127,6 +129,7 @@ public class RecordFragment extends Fragment {
                                         int credits = gradeList.size() * 12;
                                         String studentID = userEmail.split("@")[0];
                                         firebaseHandler.getProgram(program).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @RequiresApi(api = Build.VERSION_CODES.N)
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                                 ArrayList<String> list = (ArrayList<String>) task.getResult().get("courses");
@@ -154,8 +157,8 @@ public class RecordFragment extends Fragment {
                                                 tvUsername.setText(name);
                                                 if ((dob != null)) {
                                                     tvGPA.setText(String.valueOf(gpa));
-                                                    progressBarGPA.setProgress((int) (gpa * 10));
-                                                    credits_progress_bar.setProgress((int) credits);
+                                                    progressBarGPA.setProgress((int) (gpa * 10), true);
+                                                    credits_progress_bar.setProgress((int) credits, true);
                                                     tvCredits.setText(credits + "/" + (list.size()*12));
                                                     tvStudent_ID.setText(studentID);
                                                     tvDOB.setText(dob);
