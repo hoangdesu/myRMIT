@@ -270,7 +270,7 @@ public class RecordFragment extends Fragment {
      * @param size int
      */
     @RequiresApi(api = Build.VERSION_CODES.N)
-    @SuppressLint({"SetTextI18n", "DefaultLocale"})
+    @SuppressLint({"SetTextI18n", "DefaultLocale", "UseCompatLoadingForDrawables"})
     private void setItems(String role, String gender, String name, String studentID, String dob, double gpa, int credits, String program, int size){
         if (!role.equals("guest")){                     // If this is not a guest
             if (role.equals("lecturer")){               // If there is a lecturer

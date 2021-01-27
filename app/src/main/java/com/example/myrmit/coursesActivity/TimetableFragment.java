@@ -147,6 +147,7 @@ public class TimetableFragment extends Fragment {
         firebaseHandler.getCurrentCalendar(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                Toast.makeText(getActivity(), "Please wait! Loading!", Toast.LENGTH_SHORT).show();
                 ArrayList<String> dates = (ArrayList<String>) task.getResult().get("date");
                 if (dates == null || dates.size() == 0){        // If this is a new user
                     dates = new ArrayList<>();
@@ -163,13 +164,19 @@ public class TimetableFragment extends Fragment {
                             for (String date : dates) {                 // Keep setting up the data structure for note in calendar
                                 task.getResult().getReference().collection("data").document(date).set(new Note());
                             }
+                            // Finalize the calendar
+                            add.setVisibility(View.VISIBLE);
+                            calendar[0].goToday(true);
+                            setOnClick();
                         }
                     });
                 }
-                // Finalize the calendar
-                add.setVisibility(View.VISIBLE);
-                calendar[0].goToday(true);
-                setOnClick();
+                else {
+                    // Finalize the calendar
+                    add.setVisibility(View.VISIBLE);
+                    calendar[0].goToday(true);
+                    setOnClick();
+                }
             }
         });
     }
