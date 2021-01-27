@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,6 +38,8 @@ public class Courses extends AppCompatActivity {
     private TabLayout tabLayout;
     private ImageView canvas;
     private OES_Fragment oes_fragment;
+    @SuppressLint("StaticFieldLeak")
+    public static Activity activity;
     private ListView listview;
     private TimetableFragment timetableFragment;
     private int endX;
@@ -46,6 +49,7 @@ public class Courses extends AppCompatActivity {
     @SuppressLint("ClickableViewAccessibility")
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = this;
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             accountView();
         }

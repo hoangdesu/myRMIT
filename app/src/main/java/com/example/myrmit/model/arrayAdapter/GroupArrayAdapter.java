@@ -184,7 +184,7 @@ public class GroupArrayAdapter extends android.widget.ArrayAdapter<Group> {
                                 }
                             });
                         }
-                        else Toast.makeText(context, "It is the same! Failure!", Toast.LENGTH_SHORT).show();   // If the new change is the same with the old one
+                        else Toast.makeText(context, "There is no change! Failure!", Toast.LENGTH_SHORT).show();   // If the new change is the same with the old one
                     }
                 });
                 alert.show();

@@ -40,10 +40,10 @@ import org.jetbrains.annotations.NotNull;
  *              * progressing course of lecturer based on the progressing courses of student
  */
 public class AllocationFragment extends Fragment {
-    FirebaseHandler firebaseHandler = new FirebaseHandler();
+    private final FirebaseHandler firebaseHandler = new FirebaseHandler();
     private ListView listView;
     private ArrayList<Group> groups;
-    ImageView nothing;
+    private ImageView nothing;
     private Button confirm;
     private ImageView loading;
     private View view;

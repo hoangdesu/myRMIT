@@ -11,12 +11,15 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import com.example.myrmit.R;
 import com.example.myrmit.SignInActivity;
+import com.example.myrmit.coursesActivity.Courses;
+import com.example.myrmit.model.objects.Course;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,9 +60,21 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             ArrayList<String> list = (ArrayList<String>) task.getResult().get("list");
                             assert list != null;
-                            if (list.contains(course)) {
-                                sendNotification(course + " schedule has been updated", "Course Schedule Update");
-                            }
+                            firebaseHandler.getAccount(FirebaseAuth.getInstance().getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    String role = task.getResult().getString("role");
+                                    if (role.equals("student")){
+                                        if (list.contains(course)) {
+                                            sendNotification(course + " schedule has been updated", "Course Schedule Update");
+                                            if (Courses.activity != null){
+                                                Toast.makeText(Courses.activity, "New Change! Reloading Page!", Toast.LENGTH_SHORT).show();
+                                                Courses.activity.recreate();
+                                            }
+                                        }
+                                    }
+                                }
+                            });
                         }
                     });
                 }

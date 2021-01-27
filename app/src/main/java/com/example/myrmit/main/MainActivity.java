@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.myrmit.MapsActivity;
+import com.example.myrmit.model.objects.Course;
 import com.example.myrmit.news.NewFeed;
 import com.example.myrmit.R;
 import com.example.myrmit.Services;
@@ -82,20 +83,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
     }
 
+
     private void initialSetting() {
         SignInActivity.activity.finish();
 
     }
 
-    private boolean isMyServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     @Override
     protected void onPause() {
@@ -106,6 +99,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onResume() {
         super.onResume();
+        if (Courses.activity != null){
+            Courses.activity.finish();
+        }
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
