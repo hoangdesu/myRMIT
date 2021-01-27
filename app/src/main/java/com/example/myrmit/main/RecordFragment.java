@@ -185,10 +185,7 @@ public class RecordFragment extends Fragment {
             tvGender.setText("N/A");
             tvProgram.setText("N/A");
         }
-
-
-
-
+        
         return view;
     }
 }
