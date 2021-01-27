@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.myrmit.MainActivity;
+import com.example.myrmit.main.MainActivity;
 
 public class RestartService extends BroadcastReceiver {
     @Override

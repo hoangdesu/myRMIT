@@ -1,4 +1,4 @@
-package com.example.myrmit;
+package com.example.myrmit.model.arrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

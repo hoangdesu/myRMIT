@@ -1,4 +1,4 @@
-package com.example.myrmit;
+package com.example.myrmit.news;
 
 public class News {
     private String thumbnail;

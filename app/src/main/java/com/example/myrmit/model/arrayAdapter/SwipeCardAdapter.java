@@ -1,22 +1,20 @@
-package com.example.myrmit;
+package com.example.myrmit.model.arrayAdapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.example.myrmit.news.News;
+import com.example.myrmit.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -27,20 +25,20 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class FacilityCardAdapter extends PagerAdapter {
-    private List<Facility> facilityList;
+public class SwipeCardAdapter extends PagerAdapter {
+    private List<News> newsList;
     private LayoutInflater layoutInflater;
     private Context context;
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
-    public FacilityCardAdapter(List<Facility> facilityList, Context context) {
-        this.facilityList = facilityList;
+    public SwipeCardAdapter(List<News> newsList, Context context) {
+        this.newsList = newsList;
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return facilityList.size();
+        return newsList.size();
     }
 
     @Override
@@ -52,18 +50,16 @@ public class FacilityCardAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.facility_item, container, false);
+        View view = layoutInflater.inflate(R.layout.event_item, container, false);
 
-        ImageView facilityImage;
-        TextView title, openHour;
-        RatingBar ratingBar;
+        ImageView newsImage;
+        TextView title, description;
 
-        facilityImage = (ImageView) view.findViewById(R.id.image);
-        title = (TextView) view.findViewById(R.id.title);
-        openHour = (TextView) view.findViewById(R.id.open_hour);
-        ratingBar = (RatingBar) view.findViewById(R.id.rating);
+        newsImage = (ImageView) view.findViewById(R.id.news_image);
+        title = (TextView) view.findViewById(R.id.news_title);
+        description = (TextView) view.findViewById(R.id.description);
 
-        StorageReference storageReference = storage.getReference().child(facilityList.get(position).getImage());
+        StorageReference storageReference = storage.getReference().child(newsList.get(position).getThumbnail());
 
         try {
             final File file = File.createTempFile("image","jpg");
@@ -71,7 +67,7 @@ public class FacilityCardAdapter extends PagerAdapter {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                     Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-                    facilityImage.setImageBitmap(bitmap);
+                    newsImage.setImageBitmap(bitmap);
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -82,12 +78,10 @@ public class FacilityCardAdapter extends PagerAdapter {
         } catch  (IOException e){
             e.printStackTrace();
         }
-        title.setText(facilityList.get(position).getTitle());
-        openHour.setText(facilityList.get(position).getOpenHour());
-        ratingBar.setRating((float) facilityList.get(position).getRating());
+        title.setText(newsList.get(position).getTitle());
+        description.setText(newsList.get(position).getDescription());
 
         container.addView(view, 0);
-
 
         return view;
     }
@@ -96,5 +90,4 @@ public class FacilityCardAdapter extends PagerAdapter {
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
     }
-
 }
