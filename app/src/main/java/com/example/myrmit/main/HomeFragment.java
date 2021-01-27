@@ -134,15 +134,13 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    //update local data to display like
     public static void updateData(String title, boolean like) {
         for (News news : newsList) {
             if (news.getTitle().equals(title)) {
                 news.setLike(like);
+                break;
             }
         }
     }
-
-
-
-
 }
