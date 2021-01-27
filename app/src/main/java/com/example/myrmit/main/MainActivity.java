@@ -63,32 +63,33 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initialSetting();
+        setFragments();
+    }
+
+
+    private void initialSetting() {
+        // Setting components
+        SignInActivity.activity.finish();
         activity = this;
         viewPager = findViewById(R.id.pager);
         tabLayout = findViewById(R.id.tab_layout);
-        // addClubs();
         homeFragment = new HomeFragment();
         recordFragment = new RecordFragment();
-
         tabLayout.setupWithViewPager(viewPager);
 
+        // Setup sensor
+        sensorManager = (SensorManager) getSystemService(Service.SENSOR_SERVICE);
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+    }
+
+    private void setFragments(){
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         viewPagerAdapter.addFragment(homeFragment, "");
         viewPagerAdapter.addFragment(recordFragment, "");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_baseline_home_24);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_baseline_record_24);
-
-        sensorManager = (SensorManager) getSystemService(Service.SENSOR_SERVICE);
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
     }
-
-
-    private void initialSetting() {
-        SignInActivity.activity.finish();
-
-    }
-
 
     @Override
     protected void onPause() {
