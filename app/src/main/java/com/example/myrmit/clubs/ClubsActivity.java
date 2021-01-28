@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class ClubsActivity extends AppCompatActivity {
     List<String> clubLogos;
     RecyclerView clubsRecyclerView;
     ClubsRecyclerAdapter clubsRecyclerAdapter;
+    SearchView svClubs;
     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
 
@@ -52,6 +54,8 @@ public class ClubsActivity extends AppCompatActivity {
         clubCategories = new ArrayList<>();
         clubCreatedDates = new ArrayList<>();
         clubLogos = new ArrayList<>();
+
+        svClubs = (SearchView) findViewById(R.id.svClubs);
 
         // set up recycler view
         clubsRecyclerView = findViewById(R.id.clubsRecyclerView);
@@ -107,6 +111,18 @@ public class ClubsActivity extends AppCompatActivity {
             }
         });
 
+        // Filter club using search view
+        svClubs.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String s) {
+                clubsRecyclerAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
     }
 }
