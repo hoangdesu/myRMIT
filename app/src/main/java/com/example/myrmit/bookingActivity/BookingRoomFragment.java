@@ -193,11 +193,12 @@ public class BookingRoomFragment extends Fragment {
                                         boolean available = task.getResult().getBoolean("available");
                                         if (available) {
                                             firebaseHandler.updateRoomAvailability(false, roomCardAdapter.getRoomList().get(position).getName(),time,user);
+                                            roomLayout.setVisibility(View.VISIBLE);
+                                            ((TextView) view.findViewById(R.id.room_id_)).setText(roomCardAdapter.getRoomList().get(position).getName());
+                                            ((TextView) view.findViewById(R.id.time)).setText(time);
                                         }
+                                        else Toast.makeText(getContext(), "Room Not Available", Toast.LENGTH_SHORT).show();
                                         //refresh the card
-                                        roomLayout.setVisibility(View.VISIBLE);
-                                        ((TextView) view.findViewById(R.id.room_id_)).setText(roomCardAdapter.getRoomList().get(position).getName());
-                                        ((TextView) view.findViewById(R.id.time)).setText(time);
                                         roomCardAdapter.updateAvailability(false, position);
                                     }
                                 }
