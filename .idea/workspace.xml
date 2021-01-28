@@ -32,9 +32,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b371e0b9-cfef-4458-bb4f-a78d4e7b57b8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/facility.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/row.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/bookingActivity/BookingRoomFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/bookingActivity/BookingRoomFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/FirebaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/FirebaseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/MapsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/facility_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/facility_dialog.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,8 +53,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="resourceFile" />
-        <option value="layoutResourceFile" />
         <option value="Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -79,7 +81,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android-custom-view/Users/doroke/CLOUDY/Courses/Android_Development/Assignments/Group Assignment/myRMIT_6/app/src/main/java/com/example/myrmit/ClickableViewPager.java_SELECTED" value="ClickableViewPager" />
     <property name="android-custom-viewD:/Android App Dev/_myRMIT/app/src/main/java/com/example/myrmit/ClickableViewPager.java_SELECTED" value="ClickableViewPager" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
     <property name="multi-representation-preview/Users/doroke/CLOUDY/Courses/Android_Development/Assignments/Group Assignment/myRMIT_6/app/src/main/java/com/example/myrmit/ClickableViewPager.java_selected" value="Custom views" />
     <property name="multi-representation-previewD:/Android App Dev/_myRMIT/app/src/main/java/com/example/myrmit/ClickableViewPager.java_selected" value="Custom views" />
@@ -317,10 +319,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="263" y="119" key="AndroidCreateResourceDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1611428802772" />
-    <state x="278" y="167" key="AndroidCreateResourceFileDialog" timestamp="1611790290151">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state x="263" y="119" key="AndroidCreateResourceFileDialog" timestamp="1611849775717">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1611601986238" />
+    <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1611849775717" />
     <state x="278" y="167" key="AndroidCreateResourceFileDialog/0.23.1440.877@0.23.1440.877" timestamp="1611790290151" />
     <state x="370" y="196" key="AndroidCreateResourceFileDialog/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611696838000" />
     <state x="348" y="23" width="828" height="877" key="CommitChangelistDialog2" timestamp="1611838752746">
@@ -374,10 +376,10 @@
     </state>
     <state x="416" y="239" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1611838759587" />
     <state x="555" y="283" key="Vcs.Push.Dialog.v2/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611699703251" />
-    <state x="526" y="194" key="chooseDestDirectoryDialog" timestamp="1611795875872">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state x="499" y="142" key="chooseDestDirectoryDialog" timestamp="1611850009292">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="499" y="142" key="chooseDestDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1611611126769" />
+    <state x="499" y="142" key="chooseDestDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1611850009292" />
     <state x="526" y="194" key="chooseDestDirectoryDialog/0.23.1440.877@0.23.1440.877" timestamp="1611795875872" />
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1611601806449">
       <screen x="0" y="0" width="1366" height="728" />
