@@ -80,23 +80,13 @@
             android:textColorHint="#606060"
             android:textSize="14sp" />
 
-        <CheckBox
-            android:id="@+id/checkbox"
-            android:layout_width="338dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/password"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="52dp"
-            android:text="REMEMBER ME" />
-
         <ImageView
             android:id="@+id/signin"
             android:layout_width="252dp"
             android:layout_height="51dp"
-            android:layout_below="@+id/checkbox"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="20dp"
+            android:layout_below="@+id/textView13"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="59dp"
             android:background="@drawable/button_signin"
             android:onClick="signIn"
             android:src="@drawable/arr" />
