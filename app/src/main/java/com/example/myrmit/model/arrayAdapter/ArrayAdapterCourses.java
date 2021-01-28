@@ -21,7 +21,7 @@ public class ArrayAdapterCourses extends android.widget.ArrayAdapter<CourseRevie
     private final List<CourseReview> list;
     private final Activity context;
     public ArrayAdapterCourses(Activity context, List<CourseReview> list) {
-        super(context, R.layout.course_list_guess, list);
+        super(context, R.layout.course_list_guest, list);
         this.context = context;
         this.list = list;
     }
@@ -39,7 +39,7 @@ public class ArrayAdapterCourses extends android.widget.ArrayAdapter<CourseRevie
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
         LayoutInflater inflator = context.getLayoutInflater();
-        view = inflator.inflate(R.layout.course_list_guess, null);
+        view = inflator.inflate(R.layout.course_list_guest, null);
         final ViewHolder viewHolder = new ViewHolder();
         // Setup the components
         viewHolder.name = view.findViewById(R.id.textView36);
