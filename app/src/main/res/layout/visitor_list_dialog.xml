@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#44B0E1"
+    android:gravity="center">
+
+    <View
+        android:id="@+id/view11"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/visitors" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/view11"
+        android:layout_marginTop="1dp">
+
+        <TextView
+            android:id="@+id/textView48"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="false"
+            android:layout_marginTop="1dp"
+            android:gravity="center|center_vertical"
+            android:text="Name"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView49"
+            android:layout_width="400dp"
+            android:layout_height="1dp"
+            android:layout_below="@+id/textView48"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="1dp"
+            android:layout_toEndOf="@+id/textView59"
+            android:layout_toRightOf="@+id/textView59"
+            android:background="#DCDCDC" />
+
+        <TextView
+            android:id="@+id/textView47"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_below="@+id/textView49"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="1dp"
+            android:gravity="center|center_vertical"
+            android:text="Detail"
+            android:textColor="#000000"
+            android:textSize="12sp" />
+    </RelativeLayout>
+</RelativeLayout>

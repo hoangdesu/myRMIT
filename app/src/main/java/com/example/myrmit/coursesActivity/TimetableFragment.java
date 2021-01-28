@@ -45,6 +45,9 @@ import org.jetbrains.annotations.NotNull;
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
+/**
+ * For viewing timeline and notes
+ */
 public class TimetableFragment extends Fragment {
     private final FirebaseHandler firebaseHandler = new FirebaseHandler();
     @SuppressLint("SimpleDateFormat")

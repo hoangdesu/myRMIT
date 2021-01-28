@@ -34,11 +34,11 @@ public class NewsActivity extends AppCompatActivity {
     private TextView aAuthor;
     private ImageView aImage;
     private TextView aDescription;
-    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private final FirebaseStorage storage = FirebaseStorage.getInstance();
     private ImageView aLike;
-    private FirebaseHandler firebaseHandler = new FirebaseHandler();
+    private final FirebaseHandler firebaseHandler = new FirebaseHandler();
     private Boolean like = true;
-    private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    private final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,10 +93,10 @@ public class NewsActivity extends AppCompatActivity {
 
     /**
      * Display news
-     * @param title
-     * @param author
-     * @param description
-     * @param image
+     * @param title String
+     * @param author String
+     * @param description String
+     * @param image String
      */
     private  void populateView(String title, String author, String description, String image) {
         aTitle.setText(title);

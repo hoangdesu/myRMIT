@@ -33,6 +33,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+/**
+ * This activity contains OES page, Allocation page, and Timetable page
+ */
 public class Courses extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -54,7 +57,7 @@ public class Courses extends AppCompatActivity {
             accountView();
         }
         else {
-            guessView();
+            guestView();
         }
     }
 
@@ -101,6 +104,7 @@ public class Courses extends AppCompatActivity {
         canvas.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                // Allow user to drag this icon
                 if (!isStart) {
                     endX = (int) v.getX();
                     isStart = true;
@@ -116,10 +120,13 @@ public class Courses extends AppCompatActivity {
                         canvas.setY(0);
                     } else canvas.setY(viewPager.getHeight());
                 } else {
+                    // Format the position of the icon
                     if (event.getAction() != MotionEvent.ACTION_DOWN) {
                         if ((int) v.getX() < endX / 2) {
                             canvas.setX(0);
                         } else canvas.setX(endX);
+
+                        // Move to canvas application if there is a click instead of drag and move
                         if (isMove[0] < 4) {
                             Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.instructure.candroid");
                             if (launchIntent != null) {
@@ -143,12 +150,12 @@ public class Courses extends AppCompatActivity {
     }
 
     /**
-     * Setup for guess account to view available programs
+     * Setup for guest account to view available programs
      */
-    private void guessView(){
+    private void guestView(){
         // Initial setup
         FirebaseHandler firebaseHandler = new FirebaseHandler();
-        setContentView(R.layout.activity_courses_guess);
+        setContentView(R.layout.activity_courses_guest);
         listview = findViewById(R.id.courseView);
 
         // get all the undergraduate programs
@@ -186,7 +193,7 @@ public class Courses extends AppCompatActivity {
     }
 
     /**
-     * Get CourseView for guess account
+     * Get CourseView for guest account
      * @param code String
      * @param name String
      * @param description String

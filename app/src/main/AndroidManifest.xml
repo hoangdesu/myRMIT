@@ -40,7 +40,6 @@
         tools:ignore="HardcodedDebugMode"
         tools:targetApi="p">
         <activity android:name=".bookingActivity.BookingActivity"></activity>
-        <activity android:name=".booking.BookingActivity"></activity>
         <activity android:name=".clubs.ClubsActivity" />
         <activity android:name=".news.NewsActivity" />
         <activity android:name=".Services" />

@@ -14,16 +14,21 @@ import android.widget.ImageView;
 import java.util.Objects;
 
 public class BookingActivity extends AppCompatActivity {
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
+    /**
+     * On create function
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
-        viewPager = findViewById(R.id.pager2);
-        tabLayout = findViewById(R.id.tab_layout2);
+        // Configure all the components
+        ViewPager viewPager = findViewById(R.id.pager2);
+        TabLayout tabLayout = findViewById(R.id.tab_layout2);
+        // Get the instance of the fragments
         BookingRoomFragment room_fragment = new BookingRoomFragment();
         BookingLecturerFragment lecturer_fragment = new BookingLecturerFragment();
+        // Set the fragment
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         viewPagerAdapter.addFragment(room_fragment, "");
         viewPagerAdapter.addFragment(lecturer_fragment, "");

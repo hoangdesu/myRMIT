@@ -33,6 +33,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * For enrolling courses
+ */
 public class OES_Fragment extends Fragment {
     private final FirebaseHandler firebaseHandler = new FirebaseHandler();
     private final String user = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();

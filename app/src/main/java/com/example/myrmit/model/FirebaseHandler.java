@@ -15,56 +15,106 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+/**
+ * Work with firebase firestore
+ */
 public class FirebaseHandler {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-            .setPersistenceEnabled(true)
-            .setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
-            .build();
 
-    public FirebaseHandler() {
-        db.setFirestoreSettings(settings);
-    }
+    public FirebaseHandler() {}
 
+    /**
+     * Get Account from username
+     * @param username String
+     * @return DocumentReference
+     */
     public DocumentReference getAccount(String username){
         return db.collection("users").document(username);
     }
 
+    /**
+     * Get program ID of the user
+     * @param username  String
+     * @return DocumentReference
+     */
     public DocumentReference getProgramOfUser(String username){
         return db.collection("users").document(username).collection("programCode").document("program");
     }
 
+    /**
+     * Update data if the user confirm the enrollment
+     * @param username String
+     * @param list ArrayList<String>
+     * @param semester ArrayList<String>
+     */
     public void confirmEnrolment(String username, ArrayList<String> list, ArrayList<String> semester){
         db.collection("users").document(username).collection("programCode").document("program").collection("data").document("enrolledCourse").update("list", list);
         db.collection("users").document(username).collection("programCode").document("program").collection("data").document("enrolledCourse").update("semester", semester);
 
     }
 
+    /**
+     * Get current enrolled courses
+     * @param username String
+     * @return DocumentReference
+     */
     public DocumentReference getEnrolledCourses(String username){
         return db.collection("users").document(username).collection("programCode").document("program").collection("data").document("enrolledCourse");
     }
 
+    /**
+     * Get completed courses
+     * @param username String
+     * @return DocumentReference
+     */
     public DocumentReference getCompletedCourses(String username){
         return db.collection("users").document(username).collection("programCode").document("program").collection("data").document("finishCourses");
     }
 
+    /**
+     * Get list of courses and data of the given program
+     * @param programID String
+     * @return DocumentReference
+     */
     public DocumentReference getProgram(String programID){
         return db.collection("rmitprograms").document(programID);
     }
 
+    /**
+     * Get progressing courses
+     * @param username String
+     * @return DocumentReference
+     */
     public DocumentReference getProgressingCourse(String username){
         return db.collection("users").document(username).collection("programCode").document("program").collection("data").document("progressingCourse");
     }
 
+    /**
+     * Update new data after the user confirm the allocation
+     * @param username String
+     * @param day String
+     * @param time String
+     * @param courseName String
+     */
     public void confirmAllocation(String username, String day, String time, String courseName){
         db.collection("users").document(username).collection("programCode").document("program").collection("data").document("progressingCourse").collection("data").document(courseName).update("time", time);
         db.collection("users").document(username).collection("programCode").document("program").collection("data").document("progressingCourse").collection("data").document(courseName).update("day", day);
     }
 
+    /**
+     * Get current semester to creating a new calendar
+     * @return DocumentReference
+     */
     public DocumentReference getCurrentSemester(){
         return db.collection("semester").document("now");
     }
 
+    /**
+     * Get data (notes) from given date from calendar
+     * @param date String
+     * @param username String
+     * @return DocumentReference
+     */
     public DocumentReference getDateData(String date, String username){
         return db
                 .collection("users").document(username)
@@ -72,18 +122,44 @@ public class FirebaseHandler {
                 .collection("data").document(date);
     }
 
+    /**
+     * Get news list
+     * @return Task<QuerySnapshot>
+     */
     public Task<QuerySnapshot> getNews() {
         return db.collection("news").whereEqualTo("type", "news").get();
     }
 
+    /**
+     * Get event list
+     * @return Task<QuerySnapshot>
+     */
     public Task<QuerySnapshot> getEvents() {
         return db.collection("news").whereEqualTo("type", "event").get();
     }
 
+    /**
+     * Get facilities list
+     * @return Task<QuerySnapshot>
+     */
     public Task<QuerySnapshot> getFacilities() {
         return db.collection("facilities").get();
     }
+    
+    public Task<QuerySnapshot> getRooms() {
+        return db.collection("booking").document("rooms").collection("data").get();
+    }
 
+    public void updateRoomAvailability(boolean available, String document, String time, String user) {
+        db.collection("booking").document("rooms").collection("data").document(document).update("available",available);
+        db.collection("booking").document("rooms").collection("data").document(document).update("bookedBy",user);
+        db.collection("booking").document("rooms").collection("data").document(document).update("bookedAt",time);
+    }
+
+    /**
+     * Update new timetable after allocating
+     * @param username String
+     */
     public void updateTimetable(String username){
         db.collection("users").document(username).collection("programCode").document("calendar").collection("data").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -108,6 +184,12 @@ public class FirebaseHandler {
         });
     }
 
+    /**
+     * Update status of the post to firebase
+     * @param id String
+     * @param title String
+     * @param like String
+     */
     public void updatePostLike(String id, String title, boolean like) {
         if (like) {
             db.collection("news").document(title).update("likes", FieldValue.arrayUnion(id));
@@ -116,6 +198,13 @@ public class FirebaseHandler {
         }
     }
 
+    /**
+     * Add class time (note) to the given date after allocating
+     * @param username String
+     * @param dates  ArrayList<String>
+     * @param time ArrayList<String>
+     * @param notes ArrayList<String>
+     */
     public void addClassTime(String username, ArrayList<String> dates, ArrayList<String> time, ArrayList<String> notes) {
         for (String date : dates) {
             db.collection("users").document(username).collection("programCode").document("calendar").collection("data").document(date).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -137,22 +226,51 @@ public class FirebaseHandler {
         }
     }
 
+    /**
+     * Get current calendar of the user
+     * @param username String
+     * @return DocumentReference
+     */
     public DocumentReference getCurrentCalendar(String username){
         return  db.collection("users").document(username).collection("programCode").document("calendar");
     }
 
+    /**
+     * Get services of the RMIT
+     * @return CollectionReference
+     */
     public CollectionReference getRMITServices(){
         return db.collection("services");
     }
 
+    /**
+     * Get all accounts (students/lecturers) of the RMIT
+     * @return
+     */
     public CollectionReference getAllAccounts(){
         return db.collection("users");
     }
 
+    /**
+     * Get all the RMIT programs
+     * @return CollectionReference
+     */
     public CollectionReference getRMITPrograms(){
         return db.collection("rmitprograms");
     }
 
+    /**
+     * Get the list of tutor of the RMIT
+     * @return
+     */
+    public DocumentReference getTutorList(){
+        return db.collection("booking").document("tutors");
+    }
+
+    /**
+     * Get all Clubs of the RMIT
+     * @return
+     */
     public CollectionReference getAllClubs() {
         return db.collection("clubs");
     }
