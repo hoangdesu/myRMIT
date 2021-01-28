@@ -151,7 +151,7 @@ public class ArrayAdapterTutor extends android.widget.ArrayAdapter<TutorItem>{
             viewHolder.book.setEnabled(false);
         }
         if (list.get(position).getIsBook().equals("Available")) {
-            viewHolder.warn.setBackgroundColor(Color.WHITE);
+            viewHolder.warn.setBackgroundColor(Color.LTGRAY);
             viewHolder.status.setText("Status: " + list.get(position).getIsBook());
         }
         else {
