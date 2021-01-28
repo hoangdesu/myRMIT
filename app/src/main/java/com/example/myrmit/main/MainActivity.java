@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 import com.example.myrmit.MapsActivity;
 import com.example.myrmit.bookingActivity.BookingActivity;
-import com.example.myrmit.model.objects.Course;
 import com.example.myrmit.news.NewFeed;
 import com.example.myrmit.R;
 import com.example.myrmit.Services;
@@ -188,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         startActivity(intent);
     }
 
-    public void onBookingClick(View view){
+    public void onBookingClick(View view) {
         Intent intent = new Intent(MainActivity.this, BookingActivity.class);
         startActivity(intent);
     }

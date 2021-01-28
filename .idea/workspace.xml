@@ -31,14 +31,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da164c8c-a112-4b82-813c-bc6aee1a590f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/booking/BookingActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/booking/Rooms.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_booking.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/main/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/main/HomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/main/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/main/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
+>>>>>>> 91f0ce8eac56e369a57dcfd51eafc9f926673e32
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R58M834F1QX]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[5ed6c33]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -47,13 +57,18 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="resourceFile" />
         <option value="layoutResourceFile" />
         <option value="Class" />
-        <option value="resourceFile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Hoang Nguyen &lt;hoangdesu@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1mniC9k5H46AUX9gf3FDonB1lmg" />
@@ -69,9 +84,11 @@
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-01-27T09:49:20.733Z" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android-custom-view/Users/doroke/CLOUDY/Courses/Android_Development/Assignments/Group Assignment/myRMIT_6/app/src/main/java/com/example/myrmit/ClickableViewPager.java_SELECTED" value="ClickableViewPager" />
     <property name="android-custom-viewD:/Android App Dev/_myRMIT/app/src/main/java/com/example/myrmit/ClickableViewPager.java_SELECTED" value="ClickableViewPager" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
+    <property name="multi-representation-preview/Users/doroke/CLOUDY/Courses/Android_Development/Assignments/Group Assignment/myRMIT_6/app/src/main/java/com/example/myrmit/ClickableViewPager.java_selected" value="Custom views" />
     <property name="multi-representation-previewD:/Android App Dev/_myRMIT/app/src/main/java/com/example/myrmit/ClickableViewPager.java_selected" value="Custom views" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.17" />
@@ -79,14 +96,8 @@
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="android.template.996065418">
-      <recent name="com.example.myrmit" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
-    </key>
-    <key name="android.template.548432242">
-      <recent name="com.example.myrmit.clubs" />
+    <key name="android.template.-2002147519">
+      <recent name="com.example.myrmit.booking" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Android App Dev\_myRMIT\app\src\main\res\drawable-v24" />
@@ -95,7 +106,19 @@
       <recent name="D:\myRMIT\app\src\main\res\drawable-v24" />
       <recent name="D:\myRMIT\app\src\main\res\layout" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
+    </key>
+    <key name="android.template.548432242">
+      <recent name="com.example.myrmit.clubs" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.myrmit" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example.myrmit" />
+    </key>
+    <key name="android.template.996065418">
       <recent name="com.example.myrmit" />
     </key>
     <key name="android.template.-78474298">
@@ -193,7 +216,28 @@
       <option name="project" value="LOCAL" />
       <updated>1611699700173</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="record fragment">
+      <created>1611741434268</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1611741434268</updated>
+    </task>
+    <task id="LOCAL-00004" summary="record fragment">
+      <created>1611741637865</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1611741637865</updated>
+    </task>
+    <task id="LOCAL-00005" summary="clubs: data binded">
+      <created>1611795640807</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1611795640807</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -221,21 +265,32 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Logout confirm alert" />
     <MESSAGE value="Fix splash art bug&#10;Transparent app icon&#10;Clubs UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix splash art bug&#10;Transparent app icon&#10;Clubs UI" />
+    <MESSAGE value="record fragment" />
+    <MESSAGE value="clubs: data binded" />
+    <option name="LAST_COMMIT_MESSAGE" value="clubs: data binded" />
   </component>
   <component name="WindowStateProjectService">
     <state x="480" y="285" key="#PSD" timestamp="1611700033881">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="480" y="285" key="#PSD/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611700033881" />
-    <state x="488" y="70" key="#com.intellij.ide.util.MemberChooser" timestamp="1611780534174">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="514" y="107" key="#com.intellij.ide.util.MemberChooser" timestamp="1611794197271">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="488" y="70" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1611780534174" />
+    <state x="514" y="107" key="#com.intellij.ide.util.MemberChooser/0.23.1440.877@0.23.1440.877" timestamp="1611794197271" />
+    <state x="170" y="388" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1611795886792">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="170" y="388" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.23.1440.877@0.23.1440.877" timestamp="1611795886792" />
     <state x="466" y="233" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1611748813408">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="466" y="233" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1611748813408" />
+    <state x="489" y="340" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1611795888872">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="489" y="340" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.23.1440.877@0.23.1440.877" timestamp="1611795888872" />
     <state x="172" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1610907739816">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -249,19 +304,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="263" y="119" key="AndroidCreateResourceDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1611428802772" />
-    <state x="370" y="196" key="AndroidCreateResourceFileDialog" timestamp="1611696838000">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="278" y="167" key="AndroidCreateResourceFileDialog" timestamp="1611790290151">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1611601986238" />
+    <state x="278" y="167" key="AndroidCreateResourceFileDialog/0.23.1440.877@0.23.1440.877" timestamp="1611790290151" />
     <state x="370" y="196" key="AndroidCreateResourceFileDialog/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611696838000" />
-    <state x="464" y="23" width="1066" height="1057" key="CommitChangelistDialog2" timestamp="1611699700030">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="348" y="23" width="828" height="877" key="CommitChangelistDialog2" timestamp="1611795640687">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
+    <state x="348" y="23" width="828" height="877" key="CommitChangelistDialog2/0.23.1440.877@0.23.1440.877" timestamp="1611795640687" />
     <state x="464" y="23" width="1066" height="1057" key="CommitChangelistDialog2/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611699700030" />
     <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1611472042473">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1611472042473" />
+<<<<<<< HEAD
     <state width="1322" height="200" key="GridCell.Tab.0.bottom" timestamp="1611784030350">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -285,19 +343,54 @@
     </state>
     <state width="1322" height="200" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611784030350" />
     <state width="1396" height="208" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1611740967103" />
+=======
+    <state width="1396" height="208" key="GridCell.Tab.0.bottom" timestamp="1611795392654">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1322" height="200" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611781284165" />
+    <state width="1396" height="208" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1611795392654" />
+    <state width="1860" height="224" key="GridCell.Tab.0.bottom/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
+    <state width="1396" height="208" key="GridCell.Tab.0.center" timestamp="1611795392653">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1322" height="200" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611781284164" />
+    <state width="1396" height="208" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1611795392653" />
+    <state width="1860" height="224" key="GridCell.Tab.0.center/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
+    <state width="1396" height="208" key="GridCell.Tab.0.left" timestamp="1611795392653">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1322" height="200" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611781284164" />
+    <state width="1396" height="208" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1611795392653" />
+    <state width="1860" height="224" key="GridCell.Tab.0.left/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598926" />
+    <state width="1396" height="208" key="GridCell.Tab.0.right" timestamp="1611795392653">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1322" height="200" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611781284165" />
+    <state width="1396" height="208" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1611795392653" />
+>>>>>>> 91f0ce8eac56e369a57dcfd51eafc9f926673e32
     <state width="1860" height="224" key="GridCell.Tab.0.right/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
+    <state x="144" y="100" key="MergeDialog" timestamp="1611741456851">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="144" y="100" key="MergeDialog/0.23.1440.877@0.23.1440.877" timestamp="1611741456851" />
+    <state x="354" y="222" key="MultipleFileMergeDialog" timestamp="1611741456941">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="354" y="222" key="MultipleFileMergeDialog/0.23.1440.877@0.23.1440.877" timestamp="1611741456941" />
     <state x="464" y="186" key="SettingsEditor" timestamp="1611700564909">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="464" y="186" key="SettingsEditor/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611700564909" />
-    <state x="555" y="283" key="Vcs.Push.Dialog.v2" timestamp="1611699703251">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="416" y="239" key="Vcs.Push.Dialog.v2" timestamp="1611795648902">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
+    <state x="416" y="239" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1611795648902" />
     <state x="555" y="283" key="Vcs.Push.Dialog.v2/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611699703251" />
-    <state x="499" y="142" key="chooseDestDirectoryDialog" timestamp="1611611126769">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="526" y="194" key="chooseDestDirectoryDialog" timestamp="1611795875872">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="499" y="142" key="chooseDestDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1611611126769" />
+    <state x="526" y="194" key="chooseDestDirectoryDialog/0.23.1440.877@0.23.1440.877" timestamp="1611795875872" />
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1611601806449">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -310,10 +403,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1611750405553" />
-    <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1611738356235">
+    <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1611741439342">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.877@0.23.1440.877" timestamp="1611738356235" />
+    <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.877@0.23.1440.877" timestamp="1611741439342" />
     <state x="552" y="328" key="git4idea.merge.GitPullDialog" timestamp="1611694180075">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
