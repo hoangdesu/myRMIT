@@ -55,29 +55,22 @@ public class GroupArrayAdapter extends android.widget.ArrayAdapter<Group> {
     @SuppressLint({"InflateParams", "SetTextI18n"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = null;
-        if (convertView == null) {
-            LayoutInflater inflator = context.getLayoutInflater();
-            view = inflator.inflate(R.layout.time_list, null);
-            final ViewHolder viewHolder = new ViewHolder();
-            // Initial setting for all components
-            viewHolder.id = (TextView) view.findViewById(R.id.textView5);
-            viewHolder.name = (TextView) view.findViewById(R.id.textView7);
-            viewHolder.group1 = view.findViewById(R.id.textView10);
-            viewHolder.group2 = view.findViewById(R.id.textView12);
-            viewHolder.setTime1 = view.findViewById(R.id.imageView10);
-            viewHolder.setTime2 = view.findViewById(R.id.imageView11);
-            viewHolder.checkBox1 = view.findViewById(R.id.checkBox4);
-            viewHolder.checkBox2 = view.findViewById(R.id.checkBox5);
-            // Set tag
-            view.setTag(viewHolder);
-            viewHolder.checkBox1.setTag(list.get(position));
-            viewHolder.checkBox2.setTag(list.get(position));
-        } else {
-            view = convertView;
-            ((ViewHolder) view.getTag()).checkBox1.setTag(list.get(position));
-            ((ViewHolder) view.getTag()).checkBox2.setTag(list.get(position));
-        }
+        LayoutInflater inflator = context.getLayoutInflater();
+        View view = inflator.inflate(R.layout.time_list, null);
+        final ViewHolder viewHolder = new ViewHolder();
+        // Initial setting for all components
+        viewHolder.id = (TextView) view.findViewById(R.id.textView5);
+        viewHolder.name = (TextView) view.findViewById(R.id.textView7);
+        viewHolder.group1 = view.findViewById(R.id.textView10);
+        viewHolder.group2 = view.findViewById(R.id.textView12);
+        viewHolder.setTime1 = view.findViewById(R.id.imageView10);
+        viewHolder.setTime2 = view.findViewById(R.id.imageView11);
+        viewHolder.checkBox1 = view.findViewById(R.id.checkBox4);
+        viewHolder.checkBox2 = view.findViewById(R.id.checkBox5);
+        // Set tag
+        view.setTag(viewHolder);
+        viewHolder.checkBox1.setTag(list.get(position));
+        viewHolder.checkBox2.setTag(list.get(position));
 
         // Get view holder from the tag
         ViewHolder holder = (ViewHolder) view.getTag();
