@@ -101,6 +101,7 @@ public class Courses extends AppCompatActivity {
         canvas.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                // Allow user to drag this icon
                 if (!isStart) {
                     endX = (int) v.getX();
                     isStart = true;
@@ -116,10 +117,13 @@ public class Courses extends AppCompatActivity {
                         canvas.setY(0);
                     } else canvas.setY(viewPager.getHeight());
                 } else {
+                    // Format the position of the icon
                     if (event.getAction() != MotionEvent.ACTION_DOWN) {
                         if ((int) v.getX() < endX / 2) {
                             canvas.setX(0);
                         } else canvas.setX(endX);
+
+                        // Move to canvas application if there is a click instead of drag and move
                         if (isMove[0] < 4) {
                             Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.instructure.candroid");
                             if (launchIntent != null) {
