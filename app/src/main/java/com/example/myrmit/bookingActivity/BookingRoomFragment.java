@@ -1,7 +1,6 @@
 package com.example.myrmit.bookingActivity;
 
 
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,14 +18,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.myrmit.ClickableViewPager;
-import com.example.myrmit.Facility;
-import com.example.myrmit.MapsActivity;
 import com.example.myrmit.R;
 import com.example.myrmit.model.FirebaseHandler;
 import com.example.myrmit.model.arrayAdapter.RoomCardAdapter;
-import com.example.myrmit.model.arrayAdapter.SwipeCardAdapter;
-import com.example.myrmit.news.News;
-import com.example.myrmit.news.NewsActivity;
+import com.example.myrmit.model.objects.Room;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

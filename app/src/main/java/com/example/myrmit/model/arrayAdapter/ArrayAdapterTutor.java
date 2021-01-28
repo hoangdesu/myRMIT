@@ -161,6 +161,9 @@ public class ArrayAdapterTutor extends android.widget.ArrayAdapter<TutorItem>{
                 viewHolder.book.setText("Cancel");
                 viewHolder.status.setText("Status: In Booking");
             } else {
+                if (list.get(position).getIsBook().equals("Unavailable")){
+                    viewHolder.warn.setBackgroundColor(Color.LTGRAY);
+                }
                 viewHolder.book.setEnabled(false);
                 viewHolder.status.setText("Status: Unavailable");
             }
