@@ -33,14 +33,8 @@
   <component name="ChangeListManager">
     <list default="true" id="da164c8c-a112-4b82-813c-bc6aee1a590f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/bookingActivity/BookingActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/bookingActivity/BookingActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/Clubs.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/Clubs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/ClubsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/ClubsActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/ClubsRecyclerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/ClubsRecyclerAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_booking.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_booking.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_clubs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_clubs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/club_items.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/club_items.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +230,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611795640807</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="adding club logos">
+      <created>1611837018921</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1611837018921</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -266,18 +267,19 @@
     <MESSAGE value="Fix splash art bug&#10;Transparent app icon&#10;Clubs UI" />
     <MESSAGE value="record fragment" />
     <MESSAGE value="clubs: data binded" />
-    <option name="LAST_COMMIT_MESSAGE" value="clubs: data binded" />
+    <MESSAGE value="adding club logos" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding club logos" />
   </component>
   <component name="WindowStateProjectService">
     <state x="480" y="285" key="#PSD" timestamp="1611700033881">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="480" y="285" key="#PSD/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611700033881" />
-    <state x="514" y="107" key="#com.intellij.ide.util.MemberChooser" timestamp="1611794197271">
+    <state x="514" y="107" key="#com.intellij.ide.util.MemberChooser" timestamp="1611837501748">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="488" y="70" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1611780534174" />
-    <state x="514" y="107" key="#com.intellij.ide.util.MemberChooser/0.23.1440.877@0.23.1440.877" timestamp="1611794197271" />
+    <state x="514" y="107" key="#com.intellij.ide.util.MemberChooser/0.23.1440.877@0.23.1440.877" timestamp="1611837501748" />
     <state x="170" y="388" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1611795886792">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
@@ -309,10 +311,10 @@
     <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1611601986238" />
     <state x="278" y="167" key="AndroidCreateResourceFileDialog/0.23.1440.877@0.23.1440.877" timestamp="1611790290151" />
     <state x="370" y="196" key="AndroidCreateResourceFileDialog/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611696838000" />
-    <state x="348" y="23" width="828" height="877" key="CommitChangelistDialog2" timestamp="1611795640687">
+    <state x="348" y="23" width="828" height="877" key="CommitChangelistDialog2" timestamp="1611837018706">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="348" y="23" width="828" height="877" key="CommitChangelistDialog2/0.23.1440.877@0.23.1440.877" timestamp="1611795640687" />
+    <state x="348" y="23" width="828" height="877" key="CommitChangelistDialog2/0.23.1440.877@0.23.1440.877" timestamp="1611837018706" />
     <state x="464" y="23" width="1066" height="1057" key="CommitChangelistDialog2/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611699700030" />
     <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1611472042473">
       <screen x="0" y="0" width="1366" height="728" />
@@ -355,10 +357,10 @@
     </state>
     <state x="348" y="158" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1611822377376" />
     <state x="464" y="186" key="SettingsEditor/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611700564909" />
-    <state x="416" y="239" key="Vcs.Push.Dialog.v2" timestamp="1611795648902">
+    <state x="416" y="239" key="Vcs.Push.Dialog.v2" timestamp="1611837044901">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="416" y="239" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1611795648902" />
+    <state x="416" y="239" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1611837044901" />
     <state x="555" y="283" key="Vcs.Push.Dialog.v2/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611699703251" />
     <state x="526" y="194" key="chooseDestDirectoryDialog" timestamp="1611795875872">
       <screen x="0" y="23" width="1440" height="877" />
@@ -377,18 +379,19 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1611750405553" />
-    <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1611832744732">
+    <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1611837025892">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.877@0.23.1440.877" timestamp="1611832744732" />
+    <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.877@0.23.1440.877" timestamp="1611837025892" />
     <state x="552" y="328" key="git4idea.merge.GitPullDialog" timestamp="1611694180075">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="552" y="328" key="git4idea.merge.GitPullDialog/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694180075" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1611779021611">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="365" y="82" width="709" height="817" key="search.everywhere.popup" timestamp="1611836914128">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1611779021611" />
+    <state x="365" y="82" width="709" height="817" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1611836914128" />
     <state x="486" y="94" width="945" height="985" key="search.everywhere.popup/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611689095651" />
   </component>
 </project>
