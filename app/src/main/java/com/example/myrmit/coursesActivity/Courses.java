@@ -33,6 +33,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+/**
+ * This activity contains OES page, Allocation page, and Timetable page
+ */
 public class Courses extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;

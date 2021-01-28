@@ -8,14 +8,12 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myrmit.R;
-import com.example.myrmit.coursesActivity.Courses;
 import com.example.myrmit.model.FirebaseHandler;
 import com.example.myrmit.model.objects.TutorItem;
 import com.google.firebase.auth.FirebaseAuth;
