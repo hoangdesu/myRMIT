@@ -32,29 +32,43 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-
+/**
+ * The listener of the firebase, get the change and send to the user
+ */
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     static int id = 0;
     FirebaseHandler firebaseHandler = new FirebaseHandler();
 
+    /**
+     * Refresh the change listener
+     * @param token String
+     */
     @Override
     public void onNewToken(String token) {
         Log.d("TAG", "Refreshed token: " + token);
     }
 
+    /**
+     * Trigger if there is a change
+     * @param remoteMessage RemoteMessage
+     */
     @Override
     public void onMessageReceived(@NotNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-
+        // If there is not a guest
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             String type = remoteMessage.getData().get("type");
+            // If there is a new change
             if (type!= null) {
+                // If the change is from "news"
                 if (type.equals("news")) {
+                    // Get data and send notification to the user
                     String title = remoteMessage.getData().get("title");
                     String description = remoteMessage.getData().get("description");
                     sendNotification(description, title);
-                } else {
+                } else {        // If the change is from "courses"
                     String course = remoteMessage.getData().get("course");
+                    // Get data from change
                     firebaseHandler.getProgressingCourse(FirebaseAuth.getInstance().getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -64,10 +78,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     String role = task.getResult().getString("role");
-                                    if (role.equals("student")){
-                                        if (list.contains(course)) {
+                                    if (role.equals("student")){        // Check if there is the student
+                                        if (list.contains(course)) {    // And he/she is taking this course
+                                            // Send notification
                                             sendNotification(course + " schedule has been updated", "Course Schedule Update");
-                                            if (Courses.activity != null){
+                                            if (Courses.activity != null){              // If he/she currently in the allocation page, the app will reload it
                                                 Toast.makeText(Courses.activity, "New Change! Reloading Page!", Toast.LENGTH_SHORT).show();
                                                 Courses.activity.recreate();
                                             }
@@ -82,6 +97,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
     }
 
+    /**
+     * Send notification with the given data
+     * @param messageBody String
+     * @param title String
+     */
     private void sendNotification(String messageBody, String title) {
         NotificationManager mNotificationManager;
         NotificationCompat.Builder mBuilder =
@@ -107,11 +127,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             mNotificationManager.createNotificationChannel(channel);
             mBuilder.setChannelId(channelId);
         }
-
         mNotificationManager.notify(id, mBuilder.build());
         idHandler();
     }
 
+    /**
+     *  Set the id for the notification
+     */
     private void idHandler(){
         id++;
         if (id == 23){
