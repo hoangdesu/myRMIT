@@ -17,14 +17,8 @@ import java.util.ArrayList;
 
 public class FirebaseHandler {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-            .setPersistenceEnabled(true)
-            .setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
-            .build();
 
-    public FirebaseHandler() {
-        db.setFirestoreSettings(settings);
-    }
+    public FirebaseHandler() {}
 
     public DocumentReference getAccount(String username){
         return db.collection("users").document(username);
@@ -155,6 +149,10 @@ public class FirebaseHandler {
 
     public CollectionReference getRMITPrograms(){
         return db.collection("rmitprograms");
+    }
+
+    public DocumentReference getTutorList(){
+        return db.collection("booking").document("tutors");
     }
 
     public CollectionReference getAllClubs() {

@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <View
+        android:id="@+id/view12"
+        android:layout_width="match_parent"
+        android:layout_height="97dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="false"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/a" />
+
+    <ListView
+        android:id="@+id/lecturer_list"
+        android:layout_width="match_parent"
+        android:layout_height="513dp"
+        android:layout_above="@+id/booking_card"
+        android:layout_below="@+id/view12"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="6dp">
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/textView44"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/booking_card"
+        android:layout_marginBottom="6dp"
+        android:background="#DCDCDC" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/booking_card"
+        android:layout_width="178dp"
+        android:layout_height="34dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:visibility="invisible"
+        app:cardCornerRadius="40dp"
+        app:cardElevation="10dp">
+
+        <TextView
+            android:id="@+id/booking_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/museo_500"
+            android:gravity="center"
+            android:text="View Visitor"
+            android:textColor="@color/app_secondary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>
