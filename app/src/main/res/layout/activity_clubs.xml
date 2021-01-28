@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recyclerView_clubs"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?attr/selectableItemBackground">
 
     <TextView
         android:id="@+id/textView30_background"
@@ -27,7 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/museo_500"
         android:text="Student Clubs"
         android:textColor="#FFFFFF"
         android:textSize="30dp"
@@ -35,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="@+id/textView30_background"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView35" />
 
     <TextView
         android:id="@+id/textView35"
@@ -45,7 +47,7 @@
         android:layout_marginLeft="32dp"
         android:text="_"
         android:textColor="#ED0707"
-        android:textSize="45dp"
+        android:textSize="50dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -68,8 +70,13 @@
     </SearchView>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/clubsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="470dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="188dp" />
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svClubs" />
 </androidx.constraintlayout.widget.ConstraintLayout>
