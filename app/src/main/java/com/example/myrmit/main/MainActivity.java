@@ -36,6 +36,7 @@ import com.example.myrmit.model.*;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -188,8 +189,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void onBookingClick(View view) {
-        Intent intent = new Intent(MainActivity.this, BookingActivity.class);
-        startActivity(intent);
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            Intent intent = new Intent(MainActivity.this, BookingActivity.class);
+            startActivity(intent);
+        }
+        else Toast.makeText(this, "Access Denied!", Toast.LENGTH_SHORT).show();
     }
 
     // Call once to add 14 clubs to "clubs" collection
