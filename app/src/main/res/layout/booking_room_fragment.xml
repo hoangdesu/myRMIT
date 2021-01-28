@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -50,8 +51,8 @@
 
     <com.example.myrmit.ClickableViewPager
         android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
         android:layout_above="@+id/a"
         android:layout_below="@+id/tvHelloUser"
         android:layout_alignParentTop="true"
@@ -80,73 +81,70 @@
 
     <LinearLayout
         android:id="@+id/book_room_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="443dp"
+        android:layout_height="136dp"
+        android:orientation="horizontal"
         android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@id/book_room_text"
-        android:orientation="horizontal">
+        app:layout_constraintTop_toBottomOf="@id/book_room_text">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="20dp"
-            android:textColor="@color/black"
-            android:textSize="18sp"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/museo_500"
-            android:textStyle="bold"
-            android:text="Room">
-        </TextView>
+            android:text="Room"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"></TextView>
 
         <TextView
             android:id="@+id/room_id_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/black"
-            android:textSize="18sp"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/museo_500"
-            android:textStyle="bold"
-            android:text="1.1.5">
-        </TextView>
+            android:text="1.1.5"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"></TextView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/black"
-            android:textSize="18sp"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/museo_500"
-            android:textStyle="bold"
-            android:text="booked at">
-        </TextView>
+            android:text="booked at"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"></TextView>
 
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/black"
-            android:textSize="18sp"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/museo_500"
-            android:textStyle="bold"
-            android:text="12:00">
-        </TextView>
+            android:text="12:00"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"></TextView>
+
         <Button
             android:id="@+id/cancel_button"
             android:layout_width="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="20dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Cancel"
-            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_round"
             android:fontFamily="@font/museo_500"
-            android:background="@drawable/bg_round">
-        </Button>
+            android:text="Cancel"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:textStyle="bold"></Button>
 
     </LinearLayout>
 
