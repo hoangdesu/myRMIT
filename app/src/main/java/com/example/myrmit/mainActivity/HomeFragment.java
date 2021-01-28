@@ -39,7 +39,7 @@ import java.util.Objects;
 public class HomeFragment extends Fragment {
     private ClickableViewPager viewPager;
     private SwipeCardAdapter swipeCardAdapter;
-    private static final List<News> newsList = new ArrayList<News>();
+    private static List<News> newsList;
     private final FirebaseHandler firebaseHandler = new FirebaseHandler();
     private final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
     private TextView tvHelloUser;
@@ -52,6 +52,7 @@ public class HomeFragment extends Fragment {
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        newsList = new ArrayList<News>();
         super.onCreate(savedInstanceState);
     }
 
