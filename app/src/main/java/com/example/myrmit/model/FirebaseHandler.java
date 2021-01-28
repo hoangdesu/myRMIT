@@ -11,9 +11,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Work with firebase firestore
@@ -150,6 +152,10 @@ public class FirebaseHandler {
         return db.collection("booking").document("rooms").collection("data").get();
     }
 
+    public DocumentReference getRoomData(String document) {
+        return db.collection("booking").document("rooms").collection("data").document(document);
+    }
+
     public void updateRoomAvailability(boolean available, String document, String time, String user) {
         db.collection("booking").document("rooms").collection("data").document(document).update("available",available);
         db.collection("booking").document("rooms").collection("data").document(document).update("bookedBy",user);
@@ -278,8 +284,4 @@ public class FirebaseHandler {
     public DocumentReference getClub(String name){
         return db.collection("Clubs").document(name);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> c68771bfc7869fcc97b7d28b464a991c649d42fe

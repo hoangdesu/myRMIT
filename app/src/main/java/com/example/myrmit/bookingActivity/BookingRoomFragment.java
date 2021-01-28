@@ -25,6 +25,7 @@ import com.example.myrmit.model.objects.Room;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -185,13 +186,22 @@ public class BookingRoomFragment extends Fragment {
                             String time = spinner.getSelectedItem().toString();
                             String user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                             // Then book the room if this is available one
-                            firebaseHandler.updateRoomAvailability(false, roomCardAdapter.getRoomList().get(position).getName(),time,user);
-                            // Refresh the card
-                            roomCardAdapter.updateAvailability(false, position);
-                            roomLayout.setVisibility(View.VISIBLE);
-                            ((TextView) view.findViewById(R.id.room_id_)).setText(roomCardAdapter.getRoomList().get(position).getName());
-                            ((TextView) view.findViewById(R.id.time)).setText(time);
-                            System.out.println("Room name: " + roomCardAdapter.getRoomList().get(position).getName());
+                            firebaseHandler.getRoomData(roomCardAdapter.getRoomList().get(position).getName()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        boolean available = task.getResult().getBoolean("available");
+                                        if (available) {
+                                            firebaseHandler.updateRoomAvailability(false, roomCardAdapter.getRoomList().get(position).getName(),time,user);
+                                        }
+                                        //refresh the card
+                                        roomLayout.setVisibility(View.VISIBLE);
+                                        ((TextView) view.findViewById(R.id.room_id_)).setText(roomCardAdapter.getRoomList().get(position).getName());
+                                        ((TextView) view.findViewById(R.id.time)).setText(time);
+                                        roomCardAdapter.updateAvailability(false, position);
+                                    }
+                                }
+                            });
                         } else {
                             Toast.makeText(getContext(), "You Already Booked A Room", Toast.LENGTH_SHORT).show();
                         }
