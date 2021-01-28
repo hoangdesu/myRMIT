@@ -10,17 +10,26 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myrmit.R;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
 public class ClubsRecyclerAdapter extends RecyclerView.Adapter<ClubsRecyclerAdapter.ClubsViewHolder> {
 
+    List<String> clubLogos;
     List<String> clubNames;
     List<String> clubCategories;
     List<String> clubCreatedDates;
+    View view;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    //StorageReference storageReference = FirebaseStorage.getInstance().getReference("gs://myrmit-c2020.appspot.com/Basketball.png");
 
-    public ClubsRecyclerAdapter(List<String> clubNames, List<String> clubCategories, List<String> clubCreatedDates) {
+
+    public ClubsRecyclerAdapter(List<String> clubLogos, List<String> clubNames, List<String> clubCategories, List<String> clubCreatedDates) {
+        this.clubLogos = clubLogos;
         this.clubNames = clubNames;
         this.clubCategories = clubCategories;
         this.clubCreatedDates = clubCreatedDates;
@@ -30,21 +39,27 @@ public class ClubsRecyclerAdapter extends RecyclerView.Adapter<ClubsRecyclerAdap
     @Override
     public ClubsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.club_items, parent, false);
+        view = layoutInflater.inflate(R.layout.club_items, parent, false);
         ClubsViewHolder viewHolder = new ClubsViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ClubsViewHolder holder, int position) {
+        String folderPath = "gs://myrmit-c2020.appspot.com/";
+        String logo = clubLogos.get(position);
+
+        Glide.with(view.getContext()).load(logo).into(holder.ivClubLogo);
+
         holder.tvClubTitle.setText(clubNames.get(position));
         holder.tvClubCategory.setText(clubCategories.get(position));
         holder.tvClubCreatedDate.setText(clubCreatedDates.get(position));
+
     }
 
     @Override
     public int getItemCount() {
-        return 12;
+        return clubNames.size();
     }
 
     class ClubsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

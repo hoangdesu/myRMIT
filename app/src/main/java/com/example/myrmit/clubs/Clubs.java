@@ -5,6 +5,9 @@ public class Clubs {
     private String category;
     private String createdDate;
     private String email;
+    private String description;
+    private int numberOfMembers;
+
 
     public Clubs(String name, String category, String createdDate) {
         this.name = name;
@@ -19,9 +22,6 @@ public class Clubs {
     public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
     }
-
-    private String description;
-    private int numberOfMembers;
 
 
 

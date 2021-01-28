@@ -6,6 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="logo" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="AutoImportSettings">
@@ -31,17 +32,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da164c8c-a112-4b82-813c-bc6aee1a590f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/booking/BookingActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/booking/Rooms.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_booking.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< HEAD
-=======
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/main/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/main/HomeFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/main/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/main/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
->>>>>>> 91f0ce8eac56e369a57dcfd51eafc9f926673e32
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/bookingActivity/BookingActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/bookingActivity/BookingActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/Clubs.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/Clubs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/ClubsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/ClubsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/ClubsRecyclerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/ClubsRecyclerAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_booking.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_booking.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_clubs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_clubs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/club_items.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/club_items.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +92,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.-2002147519">
@@ -319,55 +318,29 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1611472042473" />
-<<<<<<< HEAD
-    <state width="1322" height="200" key="GridCell.Tab.0.bottom" timestamp="1611784030350">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1322" height="200" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611784030350" />
-    <state width="1396" height="208" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1611740967104" />
-    <state width="1860" height="224" key="GridCell.Tab.0.bottom/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
-    <state width="1322" height="200" key="GridCell.Tab.0.center" timestamp="1611784030350">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1322" height="200" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611784030350" />
-    <state width="1396" height="208" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1611740967102" />
-    <state width="1860" height="224" key="GridCell.Tab.0.center/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
-    <state width="1322" height="200" key="GridCell.Tab.0.left" timestamp="1611784030349">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1322" height="200" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611784030349" />
-    <state width="1396" height="208" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1611740967100" />
-    <state width="1860" height="224" key="GridCell.Tab.0.left/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598926" />
-    <state width="1322" height="200" key="GridCell.Tab.0.right" timestamp="1611784030350">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1322" height="200" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611784030350" />
-    <state width="1396" height="208" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1611740967103" />
-=======
-    <state width="1396" height="208" key="GridCell.Tab.0.bottom" timestamp="1611795392654">
+    <state width="1396" height="251" key="GridCell.Tab.0.bottom" timestamp="1611836351268">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1322" height="200" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611781284165" />
-    <state width="1396" height="208" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1611795392654" />
+    <state width="1396" height="251" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1611836351268" />
     <state width="1860" height="224" key="GridCell.Tab.0.bottom/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
-    <state width="1396" height="208" key="GridCell.Tab.0.center" timestamp="1611795392653">
+    <state width="1396" height="251" key="GridCell.Tab.0.center" timestamp="1611836351268">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1322" height="200" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611781284164" />
-    <state width="1396" height="208" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1611795392653" />
+    <state width="1396" height="251" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1611836351268" />
     <state width="1860" height="224" key="GridCell.Tab.0.center/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
-    <state width="1396" height="208" key="GridCell.Tab.0.left" timestamp="1611795392653">
+    <state width="1396" height="251" key="GridCell.Tab.0.left" timestamp="1611836351267">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1322" height="200" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611781284164" />
-    <state width="1396" height="208" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1611795392653" />
+    <state width="1396" height="251" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1611836351267" />
     <state width="1860" height="224" key="GridCell.Tab.0.left/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598926" />
-    <state width="1396" height="208" key="GridCell.Tab.0.right" timestamp="1611795392653">
+    <state width="1396" height="251" key="GridCell.Tab.0.right" timestamp="1611836351268">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1322" height="200" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611781284165" />
-    <state width="1396" height="208" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1611795392653" />
->>>>>>> 91f0ce8eac56e369a57dcfd51eafc9f926673e32
+    <state width="1396" height="251" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1611836351268" />
     <state width="1860" height="224" key="GridCell.Tab.0.right/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
     <state x="144" y="100" key="MergeDialog" timestamp="1611741456851">
       <screen x="0" y="23" width="1440" height="877" />
@@ -377,9 +350,10 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="354" y="222" key="MultipleFileMergeDialog/0.23.1440.877@0.23.1440.877" timestamp="1611741456941" />
-    <state x="464" y="186" key="SettingsEditor" timestamp="1611700564909">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="348" y="158" key="SettingsEditor" timestamp="1611822377376">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
+    <state x="348" y="158" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1611822377376" />
     <state x="464" y="186" key="SettingsEditor/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611700564909" />
     <state x="416" y="239" key="Vcs.Push.Dialog.v2" timestamp="1611795648902">
       <screen x="0" y="23" width="1440" height="877" />
@@ -403,10 +377,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1611750405553" />
-    <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1611741439342">
+    <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1611832744732">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.877@0.23.1440.877" timestamp="1611741439342" />
+    <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.877@0.23.1440.877" timestamp="1611832744732" />
     <state x="552" y="328" key="git4idea.merge.GitPullDialog" timestamp="1611694180075">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
