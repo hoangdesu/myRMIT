@@ -31,17 +31,18 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b371e0b9-cfef-4458-bb4f-a78d4e7b57b8" name="Default Changelist" comment="">
+    <list default="true" id="da164c8c-a112-4b82-813c-bc6aee1a590f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/bookingActivity/BookingRoomFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/bookingActivity/BookingRoomFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/FirebaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/FirebaseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/ClubInfoActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/clubs/ClubInfoActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_club_info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_club_info.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/booking_room_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/booking_room_fragment.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R58M834F1QX]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[5ed6c33]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -92,8 +93,12 @@
     <key name="android.template.-2002147519">
       <recent name="com.example.myrmit.booking" />
     </key>
-    <key name="android.template.-450328342">
-      <recent name="com.example.myrmit.clubs" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Android App Dev\_myRMIT\app\src\main\res\drawable-v24" />
+      <recent name="D:\Android App Dev\_myRMIT\app\src\main\res\drawable" />
+      <recent name="D:\Android App Dev\_myRMIT\app\src\main\res\layout" />
+      <recent name="D:\myRMIT\app\src\main\res\drawable-v24" />
+      <recent name="D:\myRMIT\app\src\main\res\layout" />
     </key>
     <key name="android.template.548432242">
       <recent name="com.example.myrmit.clubs" />
@@ -101,15 +106,11 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
     </key>
+    <key name="android.template.-450328342">
+      <recent name="com.example.myrmit.clubs" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.myrmit" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Android App Dev\_myRMIT\app\src\main\res\drawable-v24" />
-      <recent name="D:\Android App Dev\_myRMIT\app\src\main\res\drawable" />
-      <recent name="D:\Android App Dev\_myRMIT\app\src\main\res\layout" />
-      <recent name="D:\myRMIT\app\src\main\res\drawable-v24" />
-      <recent name="D:\myRMIT\app\src\main\res\layout" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.example.myrmit" />
@@ -332,28 +333,28 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1611472042473" />
-    <state width="1323" height="178" key="GridCell.Tab.0.bottom" timestamp="1611848720555">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1396" height="210" key="GridCell.Tab.0.bottom" timestamp="1611843188259">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611848720555" />
+    <state width="1322" height="200" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611781284165" />
     <state width="1396" height="210" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1611843188259" />
     <state width="1860" height="224" key="GridCell.Tab.0.bottom/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
-    <state width="1323" height="178" key="GridCell.Tab.0.center" timestamp="1611848720555">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1396" height="210" key="GridCell.Tab.0.center" timestamp="1611843188258">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611848720555" />
+    <state width="1322" height="200" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611781284164" />
     <state width="1396" height="210" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1611843188258" />
     <state width="1860" height="224" key="GridCell.Tab.0.center/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
-    <state width="1323" height="178" key="GridCell.Tab.0.left" timestamp="1611848720555">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1396" height="210" key="GridCell.Tab.0.left" timestamp="1611843188258">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611848720555" />
+    <state width="1322" height="200" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611781284164" />
     <state width="1396" height="210" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1611843188258" />
     <state width="1860" height="224" key="GridCell.Tab.0.left/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598926" />
-    <state width="1323" height="178" key="GridCell.Tab.0.right" timestamp="1611848720555">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1396" height="210" key="GridCell.Tab.0.right" timestamp="1611843188258">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611848720555" />
+    <state width="1322" height="200" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611781284165" />
     <state width="1396" height="210" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1611843188258" />
     <state width="1860" height="224" key="GridCell.Tab.0.right/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694598927" />
     <state x="144" y="100" key="MergeDialog" timestamp="1611741456851">
@@ -395,18 +396,14 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.877@0.23.1440.877" timestamp="1611837025892" />
-    <state x="390" y="97" width="585" height="534" key="find.popup" timestamp="1611847269423">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="390" y="97" width="585" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1611847269423" />
     <state x="552" y="328" key="git4idea.merge.GitPullDialog" timestamp="1611694180075">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="552" y="328" key="git4idea.merge.GitPullDialog/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611694180075" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1611848508098">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="365" y="82" width="709" height="817" key="search.everywhere.popup" timestamp="1611836914128">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1611848508098" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1611779021611" />
     <state x="365" y="82" width="709" height="817" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1611836914128" />
     <state x="486" y="94" width="945" height="985" key="search.everywhere.popup/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611689095651" />
   </component>
