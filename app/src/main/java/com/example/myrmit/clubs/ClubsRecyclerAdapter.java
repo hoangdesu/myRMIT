@@ -1,5 +1,6 @@
 package com.example.myrmit.clubs;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,7 +8,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.myrmit.R;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -122,7 +121,19 @@ public class ClubsRecyclerAdapter extends RecyclerView.Adapter<ClubsRecyclerAdap
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(view.getContext(), clubNames.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+            // Toast.makeText(view.getContext(), clubNames.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+
+            String clubLogo = clubLogos.get(getAdapterPosition());
+            String clubName = clubNames.get(getAdapterPosition());
+            String clubCategory = clubCategories.get(getAdapterPosition());
+            String clubCreatedDate = clubCreatedDates.get(getAdapterPosition());
+
+            Intent intent = new Intent(view.getContext(), ClubInfoActivity.class);
+            intent.putExtra("logo", clubLogo);
+            intent.putExtra("name", clubName);
+            intent.putExtra("category", clubCategory);
+            intent.putExtra("createdDate", clubCreatedDate);
+            view.getContext().startActivity(intent);
         }
     }
 }

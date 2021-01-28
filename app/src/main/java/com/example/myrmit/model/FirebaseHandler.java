@@ -274,4 +274,8 @@ public class FirebaseHandler {
     public CollectionReference getAllClubs() {
         return db.collection("clubs");
     }
+
+    public DocumentReference getClub(String name){
+        return db.collection("Clubs").document(name);
+    }
 }

@@ -124,5 +124,6 @@ public class ClubsActivity extends AppCompatActivity {
                 return false;
             }
         });
+
     }
 }

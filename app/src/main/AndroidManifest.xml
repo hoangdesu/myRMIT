@@ -39,7 +39,11 @@
         android:theme="@style/Theme.MyRMIT"
         tools:ignore="HardcodedDebugMode"
         tools:targetApi="p">
-        <activity android:name=".bookingActivity.BookingActivity"></activity>
+        <activity
+            android:name=".clubs.ClubInfoActivity"
+            android:label="@string/title_activity_club_info"
+            android:theme="@style/Theme.MyRMIT.NoActionBar"></activity>
+        <activity android:name=".bookingActivity.BookingActivity" />
         <activity android:name=".clubs.ClubsActivity" />
         <activity android:name=".news.NewsActivity" />
         <activity android:name=".Services" />
