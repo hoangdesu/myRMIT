@@ -8,6 +8,7 @@ import com.example.myrmit.model.arrayAdapter.ViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import java.util.Objects;
 
@@ -35,5 +36,6 @@ public class BookingActivity extends AppCompatActivity {
         // Set icon for all fragments
         Objects.requireNonNull(tabLayout.getTabAt(0)).setIcon(R.drawable.bookroom);
         Objects.requireNonNull(tabLayout.getTabAt(1)).setIcon(R.drawable.booklecturer);
+
     }
 }

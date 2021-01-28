@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.myrmit.main.MainActivity;
+import com.example.myrmit.mainActivity.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -35,23 +35,32 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        // Initial setting
         WelcomeActivity.activity.finish();
         activity = this;
         status = findViewById(R.id.textView13);
         username = findViewById(R.id.email);
         password = findViewById(R.id.password);
+        ImageView signIn = (ImageView)findViewById(R.id.signin);
+
+        // Delete all notification
         FirebaseMessaging.getInstance().subscribeToTopic("notification");
         NotificationManager nMgr = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nMgr.cancelAll();
-        System.out.println("Firebase messaging subscribed");
+
+        // Check if there is already an account
         if (FirebaseAuth.getInstance().getCurrentUser() != null){
             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
             startActivity(intent);
         }
+
+        // Clear all previous activity
         if (MainActivity.activity!= null){
             MainActivity.activity.finish();
         }
-        ImageView signIn = (ImageView)findViewById(R.id.signin);
+
+        // Set onclick for signin button
         signIn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -63,7 +72,6 @@ public class SignInActivity extends AppCompatActivity {
                         view.invalidate();
                         break;
                     }
-                    case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL: {
                         ImageView view = (ImageView) v;
                         //clear the overlay
@@ -72,14 +80,18 @@ public class SignInActivity extends AppCompatActivity {
                         break;
                     }
                 }
-
                 return false;
             }
         });
     }
 
+    /**
+     * Checker and Signin function
+     * @param view View
+     */
     @SuppressLint("SetTextI18n")
     public void signIn(View view){
+        // Check if there must be the rmit's account
         if (!username.getText().toString().matches("([s]|[S])(\\d{7})+@rmit.edu.vn$")){
             status.setText("Invalid Email! Please enter an RMIT Email!");
         }
@@ -101,6 +113,10 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Guest login
+     * @param view View
+     */
     public void guestLogin(View view){
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
         startActivity(intent);

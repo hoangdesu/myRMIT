@@ -39,12 +39,16 @@
         android:theme="@style/Theme.MyRMIT"
         tools:ignore="HardcodedDebugMode"
         tools:targetApi="p">
-        <activity android:name=".bookingActivity.BookingActivity"></activity>
+        <activity
+            android:name=".clubs.ClubInfoActivity"
+            android:label="@string/title_activity_club_info"
+            android:theme="@style/Theme.MyRMIT.NoActionBar"></activity>
+        <activity android:name=".bookingActivity.BookingActivity" />
         <activity android:name=".clubs.ClubsActivity" />
         <activity android:name=".news.NewsActivity" />
-        <activity android:name=".Services" />
+        <activity android:name=".ServicesActivity" />
         <activity android:name=".SignInActivity" />
-        <activity android:name=".main.MainActivity" />
+        <activity android:name=".mainActivity.MainActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

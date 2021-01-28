@@ -186,8 +186,12 @@ public class BookingLecturerFragment extends Fragment {
                                     isBooked[0] = true;
                                 }
                                 else if (!sdf.format(Calendar.getInstance().getTime()).equals(date)){
-                                    isBook = "Available";
+                                    if (day.contains(getToday())) {
+                                        isBook = "Available";
+                                    }
+                                    else isBook = "Unavailable";
                                 }
+
                                 // Store item
                                 items.add(get(name, mail, major, phone, role, isBook, day, time));
                                 // show to the list
@@ -199,6 +203,15 @@ public class BookingLecturerFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private String getToday(){
+        String[] days = {"Sunday","Monday","Tuesday", "Wednesday","Thursday","Friday", "Saturday"};
+
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+
+        return days[day];
     }
 
     /**

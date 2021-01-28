@@ -123,13 +123,16 @@ public class GroupArrayAdapter extends android.widget.ArrayAdapter<Group> {
                 View view = context.getLayoutInflater().inflate(R.layout.dialog_change_time, null);
                 dialog.setView(view);
                 final AlertDialog alert = dialog.create();
+
                 // Setup all the needed components
                 Button confirm = view.findViewById(R.id.button9);
                 Spinner spinner = view.findViewById(R.id.spinner2);
                 Spinner spinner1 = view.findViewById(R.id.spinner3);
+
                 // Setup the spinner
                 setSpinner(spinner, view, false);
                 setSpinner(spinner1,view, true);
+
                 // Get time and date of chosen group
                 String getTime;
                 String getDay;
@@ -141,6 +144,7 @@ public class GroupArrayAdapter extends android.widget.ArrayAdapter<Group> {
                     getDay = list.get(position).getDay2();
                     getTime = list.get(position).getTime2();
                 }
+
                 // confirm change on click
                 confirm.setOnClickListener(new View.OnClickListener() {
                     @Override

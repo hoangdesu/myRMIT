@@ -278,4 +278,8 @@ public class FirebaseHandler {
     public DocumentReference getClub(String name){
         return db.collection("Clubs").document(name);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c68771bfc7869fcc97b7d28b464a991c649d42fe

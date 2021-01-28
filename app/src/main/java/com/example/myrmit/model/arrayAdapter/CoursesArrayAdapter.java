@@ -59,6 +59,7 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
         LayoutInflater inflator = context.getLayoutInflater();
         View view = inflator.inflate(R.layout.course_list, null);
         final ViewHolder viewHolder = new ViewHolder();
+
         // Initial setting for all components
         viewHolder.id = (TextView) view.findViewById(R.id.id);
         viewHolder.name = (TextView) view.findViewById(R.id.description);
@@ -67,16 +68,20 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
         viewHolder.feb = (CheckBox) view.findViewById(R.id.checkBox);
         viewHolder.finish = view.findViewById(R.id.imageView3);
         viewHolder.progressing = view.findViewById(R.id.imageView4);
+
         // Set Listener for checkboxs
         checkBoxListeners(viewHolder);
+
         // Set tag for view
         view.setTag(viewHolder);
         viewHolder.feb.setTag(list.get(position));
         viewHolder.oct.setTag(list.get(position));
         viewHolder.jun.setTag(list.get(position));
+
         // Get view holder from tag
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.id.setText(String.valueOf(position+1));
+
         // Set behavior of components based on given data
         if (!progressingCourse.get(position)) { // If this is not a progressing course
             // Set the available semester for each course
@@ -101,6 +106,7 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
                 holder.oct.setVisibility(View.VISIBLE);
                 holder.oct.setEnabled(true);
             }
+
             // Check whether there is the finished course or not
             if (!isFeb.get(position) && !isOct.get(position) && !isJun.get(position) && isStudent) {    // If there is the finished course
                 holder.finish.setVisibility(View.VISIBLE);
@@ -116,6 +122,7 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
             holder.oct.setEnabled(false);
             holder.progressing.setVisibility(View.VISIBLE);
         }
+
         // Check the role and set the check box following the role of the user
         firebaseHandler.getAccount(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -134,6 +141,7 @@ public class CoursesArrayAdapter extends android.widget.ArrayAdapter<Course> {
                 }
             }
         });
+
         // Update status of the check boxes
         holder.name.setText(list.get(position).getName());
         holder.feb.setChecked(list.get(position).isFeb());

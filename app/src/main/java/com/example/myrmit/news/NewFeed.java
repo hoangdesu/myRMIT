@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myrmit.R;
 import com.example.myrmit.model.FirebaseHandler;
 import com.example.myrmit.model.arrayAdapter.NewsAdapter;
+import com.example.myrmit.model.objects.News;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,20 +32,19 @@ import java.util.Objects;
 
 public class NewFeed extends AppCompatActivity {
 
-    private List<News> newsList = new ArrayList<>();
-    private RecyclerView recyclerView;
+    private final List<News> newsList = new ArrayList<>();
     private NewsAdapter newsAdapter;
-    private SearchView searchView;
     private int filterOptions = 2;
     private boolean updateFlag = false;
-    FirebaseHandler firebaseHandler = new FirebaseHandler();
-    private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    private final FirebaseHandler firebaseHandler = new FirebaseHandler();
+    private final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
 
+        // Setting
         initializeSearchView();
         retrieveData();
     }
@@ -57,23 +57,30 @@ public class NewFeed extends AppCompatActivity {
         }
     }
 
+    /**
+     * Setup the filter for news
+     * @param view View
+     */
     public void filter(View view) {
+        // Start setting dialog view
         View dialogView = LayoutInflater.from(NewFeed.this).inflate(R.layout.filter_dialog,null);
         RadioButton allBtn = ((RadioButton) dialogView.findViewById(R.id.all_btn));
         RadioButton likedBtn = ((RadioButton) dialogView.findViewById(R.id.like_btn));
 
+        // Set up dialog button
         if (filterOptions == 2) {
             allBtn.setChecked(true);
         } else {
             likedBtn.setChecked(true);
         }
-
         Button applyBtn = dialogView.findViewById(R.id.apply_button);
 
+        // Start dialog builder for choosing
         AlertDialog.Builder builder = new AlertDialog.Builder(NewFeed.this,R.style.AlertDialogTheme);
         builder.setView(dialogView);
         AlertDialog alertDialog = builder.create();
 
+        // Filter by like
         applyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +105,7 @@ public class NewFeed extends AppCompatActivity {
      * Set up search view for searching news title
      */
     private void initializeSearchView() {
-        searchView = findViewById(R.id.search);
+        SearchView searchView = findViewById(R.id.search);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -155,7 +162,7 @@ public class NewFeed extends AppCompatActivity {
      * Populating news by setting recyclerview adapter
      */
     private void populateView() {
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         newsAdapter = new NewsAdapter(NewFeed.this, newsList);
         recyclerView.setLayoutManager(new GridLayoutManager(NewFeed.this, 1));
         recyclerView.setAdapter(newsAdapter);
