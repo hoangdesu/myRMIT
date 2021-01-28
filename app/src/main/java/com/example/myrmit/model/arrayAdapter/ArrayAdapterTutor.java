@@ -151,12 +151,12 @@ public class ArrayAdapterTutor extends android.widget.ArrayAdapter<TutorItem>{
             viewHolder.book.setEnabled(false);
         }
         if (list.get(position).getIsBook().equals("Available")) {
-            viewHolder.warn.setBackgroundColor(Color.LTGRAY);
+            viewHolder.warn.setBackgroundColor(Color.parseColor("#56970A"));
             viewHolder.status.setText("Status: " + list.get(position).getIsBook());
         }
         else {
             if (list.get(position).getIsBook().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
-                viewHolder.warn.setBackgroundColor(Color.YELLOW);
+                viewHolder.warn.setBackgroundColor(Color.parseColor("#E8D425"));
                 viewHolder.book.setEnabled(true);
                 viewHolder.book.setText("Cancel");
                 viewHolder.status.setText("Status: In Booking");
