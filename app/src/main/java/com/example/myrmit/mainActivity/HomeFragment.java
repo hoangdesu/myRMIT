@@ -1,4 +1,4 @@
-package com.example.myrmit.main;
+package com.example.myrmit.mainActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;

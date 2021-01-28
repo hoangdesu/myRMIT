@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myrmit.model.objects.News;
 import com.example.myrmit.news.NewsActivity;
 import com.example.myrmit.R;
-import com.example.myrmit.main.HomeFragment;
+import com.example.myrmit.mainActivity.HomeFragment;
 import com.example.myrmit.model.FirebaseHandler;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

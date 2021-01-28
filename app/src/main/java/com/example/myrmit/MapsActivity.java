@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.example.myrmit.model.FirebaseHandler;
 import com.example.myrmit.model.arrayAdapter.FacilityCardAdapter;
+import com.example.myrmit.model.objects.Facility;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;

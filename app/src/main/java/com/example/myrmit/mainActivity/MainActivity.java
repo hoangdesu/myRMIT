@@ -1,4 +1,4 @@
-package com.example.myrmit.main;
+package com.example.myrmit.mainActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,17 +10,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.NotificationManager;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -28,22 +24,15 @@ import com.example.myrmit.MapsActivity;
 import com.example.myrmit.bookingActivity.BookingActivity;
 import com.example.myrmit.news.NewFeed;
 import com.example.myrmit.R;
-import com.example.myrmit.Services;
+import com.example.myrmit.ServicesActivity;
 import com.example.myrmit.SignInActivity;
 import com.example.myrmit.clubs.ClubsActivity;
 import com.example.myrmit.coursesActivity.Courses;
-import com.example.myrmit.model.*;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
     private ViewPager viewPager;
@@ -212,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
      * @param view View
      */
     public void onServicesClick(View view){
-        Intent intent = new Intent(MainActivity.this, Services.class);
+        Intent intent = new Intent(MainActivity.this, ServicesActivity.class);
         startActivity(intent);
     }
 

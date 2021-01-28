@@ -16,7 +16,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class Services extends AppCompatActivity {
+public class ServicesActivity extends AppCompatActivity {
     ListView listView;
     FirebaseHandler firebaseHandler = new FirebaseHandler();
     @Override
@@ -44,7 +44,7 @@ public class Services extends AppCompatActivity {
                     }
                     list.add(get((String) documentSnapshot.get("name"), (String) documentSnapshot.get("time"), (String) documentSnapshot.get("location"), (String) documentSnapshot.get("phone"), description));
                 }
-                ArrayAdapterService adapter = new ArrayAdapterService(Services.this, list);
+                ArrayAdapterService adapter = new ArrayAdapterService(ServicesActivity.this, list);
                 listView.setAdapter(adapter);
             }
         });

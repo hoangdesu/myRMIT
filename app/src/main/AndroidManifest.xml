@@ -42,9 +42,9 @@
         <activity android:name=".bookingActivity.BookingActivity"></activity>
         <activity android:name=".clubs.ClubsActivity" />
         <activity android:name=".news.NewsActivity" />
-        <activity android:name=".Services" />
+        <activity android:name=".ServicesActivity" />
         <activity android:name=".SignInActivity" />
-        <activity android:name=".main.MainActivity" />
+        <activity android:name=".mainActivity.MainActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
