@@ -26,9 +26,9 @@ import java.util.Calendar;
 public class ArrayAdapterTutor extends android.widget.ArrayAdapter<TutorItem>{
     @SuppressLint("SimpleDateFormat")
     private final SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
-    ArrayList<TutorItem> list;
-    FirebaseHandler firebaseHandler = new FirebaseHandler();
-    Activity context;
+    private final ArrayList<TutorItem> list;
+    private final FirebaseHandler firebaseHandler = new FirebaseHandler();
+    private final Activity context;
     boolean isBooked;
     public ArrayAdapterTutor(Activity context, ArrayList<TutorItem> list, boolean isBooked) {
         super(context, R.layout.list_lecturer_booking, list);
@@ -67,42 +67,23 @@ public class ArrayAdapterTutor extends android.widget.ArrayAdapter<TutorItem>{
         viewHolder.email = view.findViewById(R.id.imageView16);
         viewHolder.major = view.findViewById(R.id.textView61);
         viewHolder.book = view.findViewById(R.id.button10);
-        // Set their behavior based on given data
-        viewHolder.id.setText(String.valueOf(position+1));
-        viewHolder.phone.setText("Phone: " + list.get(position).getPhone());
-        viewHolder.mail.setText("Mail: " +list.get(position).getMail());
-        if (isBooked){
-            viewHolder.book.setEnabled(false);
-        }
-        if (list.get(position).getIsBook().equals("Available")) {
-            viewHolder.warn.setBackgroundColor(Color.WHITE);
-            viewHolder.status.setText("Status: " + list.get(position).getIsBook());
-        }
-        else {
-            if (list.get(position).getIsBook().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
-                viewHolder.warn.setBackgroundColor(Color.YELLOW);
-                viewHolder.book.setEnabled(true);
-                viewHolder.book.setText("Cancel");
-                viewHolder.status.setText("Status: In Booking");
-            }
-            else {
-                viewHolder.book.setEnabled(false);
-                viewHolder.status.setText("Status: Unavailable");
-            }
-        }
-        viewHolder.major.setText("Major: " + list.get(position).getMajor());
-        viewHolder.name.setText(list.get(position).getName());
-        String startTime = list.get(position).getTime().get(0);
-        String endTime = list.get(position).getTime().get(1);
-        String day = "";
-        for (int i = 0; i < list.get(position).getDay().size(); i++){
-            if (i < list.get(position).getDay().size() - 1 ){
-                day += list.get(position).getDay().get(i) + ", ";
-            }
-            else day += list.get(position).getDay().get(i);
-        }
-        viewHolder.time.setText("Available Time: " + startTime + " -> " + endTime + " ("+ day +")");
 
+        // Set Behavior for all components
+        setBehaviorForItems(viewHolder, position);
+
+        // Set listener for all buttons
+        setButtonListeners(viewHolder, position);
+
+        return view;
+    }
+
+    /**
+     * Set listener for all buttons
+     * @param viewHolder ViewHolder
+     * @param position int
+     */
+    private void setButtonListeners(ViewHolder viewHolder, int position){
+        // Go to call application with selected phone number
         viewHolder.call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +93,7 @@ public class ArrayAdapterTutor extends android.widget.ArrayAdapter<TutorItem>{
             }
         });
 
+        // Go to outlook for contacting with tutor/lecturer
         viewHolder.email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,16 +112,17 @@ public class ArrayAdapterTutor extends android.widget.ArrayAdapter<TutorItem>{
             }
         });
 
+        // Set book button onclick
         viewHolder.book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (viewHolder.book.getText().equals("Book")){
+                if (viewHolder.book.getText().equals("Book")){ // Book with the selected lecturer/tutor
                     firebaseHandler.getTutorList().collection("data").document(list.get(position).getMail()).update("date", sdf.format(Calendar.getInstance().getTime()));
                     firebaseHandler.getTutorList().collection("data").document(list.get(position).getMail()).update("isBook", FirebaseAuth.getInstance().getCurrentUser().getEmail());
                     Toast.makeText(context, "Book successful! Reloading page!", Toast.LENGTH_LONG).show();
                     context.recreate();
                 }
-                else if (viewHolder.book.getText().equals("Cancel")){
+                else if (viewHolder.book.getText().equals("Cancel")){ // Cancel booking
                     firebaseHandler.getTutorList().collection("data").document(list.get(position).getMail()).update("date", "");
                     firebaseHandler.getTutorList().collection("data").document(list.get(position).getMail()).update("isBook", "");
                     Toast.makeText(context, "Cancel successful! Reloading page!", Toast.LENGTH_LONG).show();
@@ -147,7 +130,52 @@ public class ArrayAdapterTutor extends android.widget.ArrayAdapter<TutorItem>{
                 }
             }
         });
+    }
 
-        return view;
+    /**
+     * Setup all items with the given data
+     * @param viewHolder ViewHolder
+     * @param position int
+     */
+    @SuppressLint("SetTextI18n")
+    private void setBehaviorForItems(ViewHolder viewHolder, int position){
+        // Set their behavior based on given data
+        viewHolder.id.setText(String.valueOf(position+1));
+        viewHolder.phone.setText("Phone: " + list.get(position).getPhone());
+        viewHolder.mail.setText("Mail: " +list.get(position).getMail());
+        viewHolder.major.setText("Major: " + list.get(position).getMajor());
+        viewHolder.name.setText(list.get(position).getName());
+
+        // Set button's state
+        if (isBooked){
+            viewHolder.book.setEnabled(false);
+        }
+        if (list.get(position).getIsBook().equals("Available")) {
+            viewHolder.warn.setBackgroundColor(Color.WHITE);
+            viewHolder.status.setText("Status: " + list.get(position).getIsBook());
+        }
+        else {
+            if (list.get(position).getIsBook().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+                viewHolder.warn.setBackgroundColor(Color.YELLOW);
+                viewHolder.book.setEnabled(true);
+                viewHolder.book.setText("Cancel");
+                viewHolder.status.setText("Status: In Booking");
+            } else {
+                viewHolder.book.setEnabled(false);
+                viewHolder.status.setText("Status: Unavailable");
+            }
+        }
+
+        // Set available time
+        String startTime = list.get(position).getTime().get(0);
+        String endTime = list.get(position).getTime().get(1);
+        String day = "";
+        for (int i = 0; i < list.get(position).getDay().size(); i++){
+            if (i < list.get(position).getDay().size() - 1 ){
+                day += list.get(position).getDay().get(i) + ", ";
+            }
+            else day += list.get(position).getDay().get(i);
+        }
+        viewHolder.time.setText("Available Time: " + startTime + " -> " + endTime + " ("+ day +")");
     }
 }
