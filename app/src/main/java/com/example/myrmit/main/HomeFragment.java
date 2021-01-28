@@ -110,9 +110,7 @@ public class HomeFragment extends Fragment {
                         startActivity(intent);
                     }
                 });
-
             }
-
         });
 
         /* Set welcoming message to corresponding user */
