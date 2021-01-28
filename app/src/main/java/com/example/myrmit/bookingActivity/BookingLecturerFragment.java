@@ -195,8 +195,11 @@ public class BookingLecturerFragment extends Fragment {
                                 // Store item
                                 items.add(get(name, mail, major, phone, role, isBook, day, time));
                                 // show to the list
-                                ArrayAdapter<TutorItem> arrayAdapter = new ArrayAdapterTutor(getActivity(), items, isBooked[0]);
-                                listView.setAdapter(arrayAdapter);
+                                try {
+                                    ArrayAdapter<TutorItem> arrayAdapter = new ArrayAdapterTutor(getActivity(), items, isBooked[0]);
+                                    listView.setAdapter(arrayAdapter);
+                                }
+                                catch (Exception ignored){}
                             }
                         });
                     }
