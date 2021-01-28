@@ -105,7 +105,7 @@ public class ClubInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ClubInfoActivity.this, "Successfully joined " + name, Toast.LENGTH_SHORT).show();
-                btnJoinClub.setBackgroundColor(Color.RED);
+                btnJoinClub.setBackgroundColor(Color.BLUE);
                 btnJoinClub.setText("Joined");
             }
         });

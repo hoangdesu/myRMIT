@@ -31,17 +31,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b371e0b9-cfef-4458-bb4f-a78d4e7b57b8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/bookingActivity/BookingRoomFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/bookingActivity/BookingRoomFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/FirebaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myrmit/model/FirebaseHandler.java" afterDir="false" />
-    </list>
+    <list default="true" id="b371e0b9-cfef-4458-bb4f-a78d4e7b57b8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R58M834F1QX]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[5ed6c33]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -89,20 +85,20 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="android.template.-2002147519">
-      <recent name="com.example.myrmit.booking" />
-    </key>
     <key name="android.template.-450328342">
       <recent name="com.example.myrmit.clubs" />
     </key>
+    <key name="android.template.996065418">
+      <recent name="com.example.myrmit" />
+    </key>
+    <key name="android.template.-78474298">
+      <recent name="com.example.myrmit" />
+    </key>
+    <key name="android.template.-2002147519">
+      <recent name="com.example.myrmit.booking" />
+    </key>
     <key name="android.template.548432242">
       <recent name="com.example.myrmit.clubs" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.example.myrmit" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Android App Dev\_myRMIT\app\src\main\res\drawable-v24" />
@@ -111,14 +107,14 @@
       <recent name="D:\myRMIT\app\src\main\res\drawable-v24" />
       <recent name="D:\myRMIT\app\src\main\res\layout" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example.myrmit" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.example.myrmit" />
     </key>
-    <key name="android.template.996065418">
-      <recent name="com.example.myrmit" />
-    </key>
-    <key name="android.template.-78474298">
-      <recent name="com.example.myrmit" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
     </key>
   </component>
   <component name="RunManager">
@@ -247,7 +243,21 @@
       <option name="project" value="LOCAL" />
       <updated>1611838752894</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Join club">
+      <created>1611852261475</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1611852261475</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Join club">
+      <created>1611852280919</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1611852280919</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -279,7 +289,8 @@
     <MESSAGE value="clubs: data binded" />
     <MESSAGE value="adding club logos" />
     <MESSAGE value="filter club function" />
-    <option name="LAST_COMMIT_MESSAGE" value="filter club function" />
+    <MESSAGE value="Join club" />
+    <option name="LAST_COMMIT_MESSAGE" value="Join club" />
   </component>
   <component name="WindowStateProjectService">
     <state x="480" y="285" key="#PSD" timestamp="1611700033881">
@@ -369,10 +380,10 @@
     </state>
     <state x="348" y="158" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1611822377376" />
     <state x="464" y="186" key="SettingsEditor/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611700564909" />
-    <state x="416" y="239" key="Vcs.Push.Dialog.v2" timestamp="1611838759587">
+    <state x="416" y="239" key="Vcs.Push.Dialog.v2" timestamp="1611852352037">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="416" y="239" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1611838759587" />
+    <state x="416" y="239" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1611852352037" />
     <state x="555" y="283" key="Vcs.Push.Dialog.v2/1920.57.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1611699703251" />
     <state x="526" y="194" key="chooseDestDirectoryDialog" timestamp="1611795875872">
       <screen x="0" y="23" width="1440" height="877" />
@@ -391,10 +402,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1611750405553" />
-    <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1611837025892">
+    <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1611852342164">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.877@0.23.1440.877" timestamp="1611837025892" />
+    <state x="510" y="378" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.877@0.23.1440.877" timestamp="1611852342164" />
     <state x="390" y="97" width="585" height="534" key="find.popup" timestamp="1611847269423">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
