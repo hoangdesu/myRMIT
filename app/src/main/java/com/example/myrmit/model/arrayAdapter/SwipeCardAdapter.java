@@ -26,9 +26,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class SwipeCardAdapter extends PagerAdapter {
-    private List<News> newsList;
-    private LayoutInflater layoutInflater;
-    private Context context;
+    private final List<News> newsList;
+    private final Context context;
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
     public SwipeCardAdapter(List<News> newsList, Context context) {
@@ -49,7 +48,7 @@ public class SwipeCardAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        layoutInflater = LayoutInflater.from(context);
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
         // Configure all the components
         View view = layoutInflater.inflate(R.layout.event_item, container, false);
         ImageView newsImage = (ImageView) view.findViewById(R.id.news_image);
