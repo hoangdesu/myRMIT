@@ -50,15 +50,31 @@ public class SwipeCardAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         layoutInflater = LayoutInflater.from(context);
+        // Configure all the components
         View view = layoutInflater.inflate(R.layout.event_item, container, false);
+        ImageView newsImage = (ImageView) view.findViewById(R.id.news_image);
+        TextView title = (TextView) view.findViewById(R.id.news_title);
+        TextView description = (TextView) view.findViewById(R.id.description);
 
-        ImageView newsImage;
-        TextView title, description;
+        // Start setting up
+        setupCard(newsImage, title,  description, position);
+        container.addView(view, 0);
+        return view;
+    }
 
-        newsImage = (ImageView) view.findViewById(R.id.news_image);
-        title = (TextView) view.findViewById(R.id.news_title);
-        description = (TextView) view.findViewById(R.id.description);
+    @Override
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        container.removeView((View) object);
+    }
 
+    /**
+     * Setup the card (image, details)
+     * @param newsImage ImageView
+     * @param title TextView
+     * @param description TextView
+     * @param position int
+     */
+    private void setupCard(ImageView newsImage, TextView title, TextView description, int position){
         StorageReference storageReference = storage.getReference().child(newsList.get(position).getThumbnail());
 
         try {
@@ -80,14 +96,5 @@ public class SwipeCardAdapter extends PagerAdapter {
         }
         title.setText(newsList.get(position).getTitle());
         description.setText(newsList.get(position).getDescription());
-
-        container.addView(view, 0);
-
-        return view;
-    }
-
-    @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((View) object);
     }
 }

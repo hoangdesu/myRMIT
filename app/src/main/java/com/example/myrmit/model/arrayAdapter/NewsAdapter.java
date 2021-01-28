@@ -41,10 +41,10 @@ import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> implements Filterable {
     private static List<News> newsList;
     private static List<News> newsListAll;
-    private Context context;
-    private FirebaseStorage storage = FirebaseStorage.getInstance();
-    private FirebaseHandler firebaseHandler = new FirebaseHandler();
-    private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    private final Context context;
+    private final FirebaseStorage storage = FirebaseStorage.getInstance();
+    private final FirebaseHandler firebaseHandler = new FirebaseHandler();
+    private final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
     public NewsAdapter(Context context, List<News> newsList) {
         this.context = context;
@@ -52,6 +52,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
         this.newsListAll = new ArrayList<>(newsList);
     }
 
+    /**
+     * Update behavior of the news
+     * @param title String
+     * @param like boolean
+     */
     public static void updateData(String title, boolean like) {
         if (newsListAll != null) {
             for (News news : newsListAll) {
@@ -62,6 +67,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
         }
     }
 
+    /**
+     * on create function
+     * @param viewGroup ViewGroup
+     * @param viewType int
+     * @return  MyHolder
+     */
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
@@ -71,19 +82,27 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
         return new MyHolder(view);
     }
 
+    /**
+     * Set binding for view holder
+     * @param holder MyHolder
+     * @param position int
+     */
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         //Set title, thumnail for the main activity
         holder.newsTitle.setText(newsList.get(position).getTitle());
         holder.newsDescription.setText(newsList.get(position).getDescription());
+        // Check the behavior of the post
         if (newsList.get(position).isLiked()) {
             System.out.println("YESS");
             holder.likeIcon.setColorFilter(Color.parseColor("#FFE60028"));
         } else {
             holder.likeIcon.setColorFilter(Color.parseColor("#FF000000"));
         }
+        // Get data
         StorageReference storageReference = storage.getReference().child(newsList.get(position).getThumbnail());
         try {
+            // Set the received data to the view
             final File file = File.createTempFile("image","jpg");
             storageReference.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
@@ -101,7 +120,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
             e.printStackTrace();
         }
 
-        holder.likeIcon.setOnClickListener(new View.OnClickListener() {
+
+        // Set onclick for adapter
+        holder.likeIcon.setOnClickListener(new View.OnClickListener() {         // Like behavior
             @Override
             public void onClick(View v) {
                 if (currentUser != null) {
@@ -120,6 +141,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
             }
         });
 
+        // To read full news
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,7 +219,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyHolder> impl
         }
     };
 
-    public class MyHolder extends RecyclerView.ViewHolder {
+    public static class MyHolder extends RecyclerView.ViewHolder {
         TextView newsTitle;
         TextView newsDescription;
         CardView cardView;

@@ -21,21 +21,28 @@ public class ArrayCoursesView extends android.widget.ArrayAdapter<String> {
     private final Activity context;
     public ArrayCoursesView(Activity context, ArrayList<String> list) {
         super(context, R.layout.list_courses_guess, list);
-        System.out.println(Arrays.toString(list.toArray()));
         this.list = list;
         this.context = context;
     }
+
     static class ViewHolder {
         protected TextView name;
         protected TextView id;
         protected TextView space;
     }
+
+    /**
+     * Get View
+     * @param position int
+     * @param convertView View
+     * @param parent ViewGroup
+     * @return  View
+     */
     @SuppressLint({"InflateParams", "SetTextI18n", "ViewHolder"})
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View view = null;
         LayoutInflater inflator = context.getLayoutInflater();
-        view = inflator.inflate(R.layout.list_courses_guess, null);
+        View view = inflator.inflate(R.layout.list_courses_guess, null);
         final ViewHolder viewHolder = new ViewHolder();
         // Initial setting for all components
         viewHolder.name = view.findViewById(R.id.textView42);

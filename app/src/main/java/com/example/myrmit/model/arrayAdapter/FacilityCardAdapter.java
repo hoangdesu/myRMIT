@@ -30,48 +30,67 @@ import java.io.IOException;
 import java.util.List;
 
 public class FacilityCardAdapter extends PagerAdapter {
-    private List<Facility> facilityList;
-    private LayoutInflater layoutInflater;
-    private Context context;
-    FirebaseStorage storage = FirebaseStorage.getInstance();
+    private final List<Facility> facilityList;
+    private final Context context;
+    private final FirebaseStorage storage = FirebaseStorage.getInstance();
 
     public FacilityCardAdapter(List<Facility> facilityList, Context context) {
         this.facilityList = facilityList;
         this.context = context;
     }
 
+    /**
+     * Get size
+     * @return int
+     */
     @Override
     public int getCount() {
         return facilityList.size();
     }
 
+    /**
+     * check view
+     * @param view View
+     * @param object Object
+     * @return boolean
+     */
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view.equals(object);
     }
 
+    /**
+     * Set instantiate item
+     * @param container ViewGroup
+     * @param position int
+     * @return Object
+     */
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        layoutInflater = LayoutInflater.from(context);
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.facility_item, container, false);
 
+        // Setup all the components
         ImageView facilityImage;
         TextView title, openHour;
         RatingBar ratingBar;
-
+        // Configurations
         facilityImage = (ImageView) view.findViewById(R.id.image);
         title = (TextView) view.findViewById(R.id.title);
         openHour = (TextView) view.findViewById(R.id.open_hour);
         ratingBar = (RatingBar) view.findViewById(R.id.rating);
 
+        // Store the image to fire store
         StorageReference storageReference = storage.getReference().child(facilityList.get(position).getImage());
 
         try {
+            // Get image from firebase
             final File file = File.createTempFile("image","jpg");
             storageReference.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    // Set image
                     Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
                     facilityImage.setImageBitmap(bitmap);
                 }
@@ -84,6 +103,8 @@ public class FacilityCardAdapter extends PagerAdapter {
         } catch  (IOException e){
             e.printStackTrace();
         }
+
+        // Set behavior based on given data
         title.setText(facilityList.get(position).getTitle());
         openHour.setText(facilityList.get(position).getOpenHour());
         ratingBar.setRating((float) facilityList.get(position).getRating());
@@ -94,6 +115,12 @@ public class FacilityCardAdapter extends PagerAdapter {
         return view;
     }
 
+    /**
+     * Destroy item function
+     * @param container ViewGroup
+     * @param position int
+     * @param object Object
+     */
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
