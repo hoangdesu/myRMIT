@@ -82,6 +82,12 @@ public class FirebaseHandler {
         return db.collection("booking").document("rooms").collection("data").get();
     }
 
+    public void updateRoomAvailability(boolean available, String document, String time, String user) {
+        db.collection("booking").document("rooms").collection("data").document(document).update("available",available);
+        db.collection("booking").document("rooms").collection("data").document(document).update("bookedBy",user);
+        db.collection("booking").document("rooms").collection("data").document(document).update("bookedAt",time);
+    }
+
     public void updateTimetable(String username){
         db.collection("users").document(username).collection("programCode").document("calendar").collection("data").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

@@ -36,9 +36,27 @@ public class RoomCardAdapter extends PagerAdapter {
     private Context context;
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
+    ImageView roomImage, availableImage;
+    TextView name, capacity;
+    RatingBar ratingBar;
+
     public RoomCardAdapter(List<Room> roomList, Context context) {
         this.roomList = roomList;
         this.context = context;
+    }
+
+    public List<Room> getRoomList() {
+        return roomList;
+    }
+
+    public void updateAvailability(boolean available, int index) {
+        roomList.get(index).setAvailable(available);
+        if (available) {
+            availableImage.setImageResource(R.drawable.tick);
+        } else {
+            availableImage.setImageResource(R.drawable.cross);
+        }
+        notifyDataSetChanged();
     }
 
     @Override
@@ -51,15 +69,16 @@ public class RoomCardAdapter extends PagerAdapter {
         return view.equals(object);
     }
 
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return POSITION_NONE;
+    }
+
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.room_item, container, false);
-
-        ImageView roomImage, availableImage;
-        TextView name, capacity;
-        RatingBar ratingBar;
 
         roomImage = (ImageView) view.findViewById(R.id.image);
         name = (TextView) view.findViewById(R.id.room_id);

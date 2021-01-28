@@ -29,17 +29,35 @@
 
         </TextView>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/room_id"
-            android:layout_marginTop="40dp"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/museo_500"
-            android:gravity="center"
-            android:text="Are you sure you want to book this room?"/>
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/room_id">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/room_id"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="40dp"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/museo_500"
+                android:gravity="center"
+                android:text="Book this room at">
+            </TextView>
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"/>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -53,7 +71,7 @@
         android:textColor="@color/white"
         android:textSize="15sp"
         android:fontFamily="@font/museo_500"
-        android:text="No"
+        android:text="dismiss"
         app:layout_constraintBottom_toBottomOf="@id/layout_dialog"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_dialog">
@@ -69,7 +87,7 @@
         android:textColor="@color/white"
         android:textSize="15sp"
         android:fontFamily="@font/museo_500"
-        android:text="Yes"
+        android:text="Confirm"
         app:layout_constraintBottom_toBottomOf="@id/layout_dialog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_dialog">
