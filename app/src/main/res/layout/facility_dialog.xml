@@ -29,24 +29,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
         </TextView>
-
-        <ScrollView
+        
+        <ListView
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            app:layout_constraintTop_toBottomOf="@id/title">
+            app:layout_constraintTop_toBottomOf="@id/title"
+            android:id="@+id/listView">
 
-            <TextView
-                android:id="@+id/facilities"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/museo_500"
-                android:textSize="14sp"
-                android:textStyle="bold">
-            </TextView>
-
-        </ScrollView>
+        </ListView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

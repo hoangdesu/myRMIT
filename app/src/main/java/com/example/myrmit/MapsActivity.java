@@ -1,11 +1,13 @@
 package com.example.myrmit;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -17,7 +19,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.myrmit.model.FirebaseHandler;
@@ -289,14 +294,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (facilities.get(viewPager.getCurrentItem()).getFacilities() != null) {
                     View dialogView = LayoutInflater.from(MapsActivity.this).inflate(R.layout.facility_dialog, null);
                     Button closeBtn = dialogView.findViewById(R.id.close_button);
-                    TextView facilityTextView = dialogView.findViewById(R.id.facilities);
+                    ListView listView = dialogView.findViewById(R.id.listView);
 
-                    StringBuilder stringBuilder = new StringBuilder("");
-                    for (int i = 0; i < facilities.get(viewPager.getCurrentItem()).getFacilities().size(); i++) {
-                        stringBuilder.append(facilities.get(viewPager.getCurrentItem()).getFacilities().get(i) + "\n");
-                    }
-
-                    facilityTextView.setText(stringBuilder);
+                    DialogAdapter adapter = new DialogAdapter(MapsActivity.this, facilities.get(viewPager.getCurrentItem()).getFacilities());
+                    listView.setAdapter(adapter);
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this, R.style.AlertDialogTheme);
                     builder.setView(dialogView);
@@ -403,6 +404,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         float zoom = mMap.getCameraPosition().zoom;
         if (zoom < 17 ) {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(10.7296, 106.693), zoom));
+        }
+    }
+
+    class DialogAdapter extends ArrayAdapter<String> {
+
+        Context context;
+        List<String> facilityName;
+
+        DialogAdapter(Context c, List<String> title) {
+            super(c, R.layout.row, R.id.facility_name, title);
+            this.context = c;
+            this.facilityName = title;
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            LayoutInflater layoutInflater = (LayoutInflater)getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+            View row = layoutInflater.inflate(R.layout.row, parent, false);
+            TextView title = row.findViewById(R.id.facility_name);
+
+            title.setText(facilityName.get(position));
+
+            return super.getView(position, convertView, parent);
         }
     }
 }
