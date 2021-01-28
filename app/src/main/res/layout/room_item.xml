@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="381dp"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="30dp"
@@ -24,7 +24,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -33,12 +33,12 @@
                     android:layout_height="150dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="0dp"
-                    android:layout_marginBottom="6dp"
+                    android:layout_marginBottom="0dp"
                     android:scaleType="centerCrop" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -51,11 +51,11 @@
                             android:layout_height="wrap_content"
                             android:layout_above="@+id/description"
                             android:layout_alignParentLeft="true"
-                            android:layout_marginTop="10dp"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
                             android:fontFamily="@font/museo_500"
-                            android:textColor="@color/app_secondary"
                             android:text="Room"
+                            android:textColor="@color/app_secondary"
                             android:textSize="18sp"
                             android:textStyle="bold"></TextView>
 
@@ -65,11 +65,11 @@
                             android:layout_height="wrap_content"
                             android:layout_above="@+id/description"
                             android:layout_alignParentLeft="true"
-                            android:layout_marginTop="10dp"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
                             android:fontFamily="@font/museo_500"
-                            android:textColor="@color/app_secondary"
                             android:text="Room"
+                            android:textColor="@color/app_secondary"
                             android:textSize="18sp"
                             android:textStyle="bold"></TextView>
                     </LinearLayout>
@@ -82,12 +82,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Capacity"
                             android:layout_margin="10dp"
-                            android:textColor="@color/black"
                             android:fontFamily="@font/museo_500"
-                            android:textStyle="bold"
-                            >
+                            android:text="Capacity"
+                            android:textColor="@color/black"
+                            android:textStyle="bold">
 
                         </TextView>
 
@@ -111,21 +110,19 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Availability"
                             android:layout_margin="10dp"
-                            android:textColor="@color/black"
                             android:fontFamily="@font/museo_500"
-                            android:textStyle="bold"
-                            >
+                            android:text="Availability"
+                            android:textColor="@color/black"
+                            android:textStyle="bold">
 
                         </TextView>
 
                         <ImageView
                             android:id="@+id/availability_image"
                             android:layout_width="20dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_height="20dp">
-                        </ImageView>
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"></ImageView>
 
                     </LinearLayout>
 
@@ -138,23 +135,21 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Rating:"
                             android:layout_margin="10dp"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
                             android:fontFamily="@font/museo_500"
-                            >
-                        </TextView>
+                            android:text="Rating:"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"></TextView>
+
                         <RatingBar
                             android:id="@+id/rating"
-                            android:layout_width="wrap_content"
-                            android:progressTint="@color/gold"
-                            android:layout_height="20dp"
                             style="?android:attr/ratingBarStyleSmall"
-                            android:isIndicator="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_margin="10dp"
-                            android:stepSize="0.5"
-                            />
+                            android:isIndicator="true"
+                            android:progressTint="@color/gold"
+                            android:stepSize="0.5" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

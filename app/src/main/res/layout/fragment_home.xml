@@ -30,13 +30,12 @@
             android:layout_height="52dp"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
             android:fontFamily="@font/museo_500"
             android:padding="10dp"
             android:text="Hello, Guest!"
             android:textColor="@color/white"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -49,7 +48,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginStart="47dp"
             android:layout_marginLeft="47dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/museo_500"
             android:text="Events"
             android:textColor="@color/app_secondary"
