@@ -13,6 +13,7 @@
     <color name="progress">#00c1c4</color>
     <color name="progress_light">#ebfffe</color>
     <color name="credits">#ffa200</color>
+    <color name="gold">#ffd700</color>
     <color name="credits_light">#ffebc7</color>
     <color name="clubs_title">#010553</color>
 </resources>

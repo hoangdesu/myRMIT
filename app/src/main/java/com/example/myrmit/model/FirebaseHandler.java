@@ -84,6 +84,10 @@ public class FirebaseHandler {
         return db.collection("facilities").get();
     }
 
+    public Task<QuerySnapshot> getRooms() {
+        return db.collection("booking").document("rooms").collection("data").get();
+    }
+
     public void updateTimetable(String username){
         db.collection("users").document(username).collection("programCode").document("calendar").collection("data").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
