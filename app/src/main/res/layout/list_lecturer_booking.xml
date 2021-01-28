@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF">
 
     <TextView
         android:id="@+id/textView76"
@@ -31,15 +32,15 @@
         android:textSize="10sp" />
 
     <ImageView
-        android:id="@+id/imageView17"
+        android:id="@+id/imageView15"
         android:layout_width="26dp"
         android:layout_height="25dp"
         android:layout_below="@+id/textView70"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="1dp"
-        android:layout_toEndOf="@+id/textView69"
-        android:layout_toRightOf="@+id/textView69"
+        android:layout_alignStart="@+id/textView76"
+        android:layout_alignLeft="@+id/textView76"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
         app:srcCompat="@drawable/phonecall" />
 
     <ImageView
@@ -47,52 +48,40 @@
         android:layout_width="26dp"
         android:layout_height="25dp"
         android:layout_below="@+id/textView76"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
+        android:layout_alignStart="@+id/textView76"
+        android:layout_alignLeft="@+id/textView76"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
         android:layout_marginTop="3dp"
-        android:layout_toEndOf="@+id/textView72"
-        android:layout_toRightOf="@+id/textView72"
         app:srcCompat="@drawable/mail" />
 
     <TextView
-        android:id="@+id/textView72"
-        android:layout_width="130dp"
+        android:id="@+id/textView69"
+        android:layout_width="wrap_content"
         android:layout_height="25dp"
-        android:layout_below="@+id/textView76"
-        android:layout_marginStart="7dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginTop="3dp"
-        android:layout_toEndOf="@+id/textView67"
-        android:layout_toRightOf="@+id/textView67"
+        android:layout_below="@+id/textView70"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@+id/imageView15"
+        android:layout_toRightOf="@+id/imageView15"
         android:gravity="center_vertical"
-        android:text="Mail: s3740819@rmit.edu.vn"
+        android:text="Phone: 0123456789100000"
         android:textColor="#000000"
         android:textSize="10sp" />
 
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="26dp"
-        android:layout_height="25dp"
-        android:layout_below="@+id/textView70"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="3dp"
-        android:layout_toEndOf="@+id/textView69"
-        android:layout_toRightOf="@+id/textView69"
-        app:srcCompat="@drawable/phonecall" />
-
     <TextView
-        android:id="@+id/textView69"
-        android:layout_width="130dp"
+        android:id="@+id/textView72"
+        android:layout_width="wrap_content"
         android:layout_height="25dp"
-        android:layout_below="@+id/textView70"
-        android:layout_marginStart="7dp"
-        android:layout_marginLeft="7dp"
+        android:layout_below="@+id/textView76"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="3dp"
-        android:layout_toEndOf="@+id/textView67"
-        android:layout_toRightOf="@+id/textView67"
+        android:layout_toEndOf="@+id/imageView16"
+        android:layout_toRightOf="@+id/imageView16"
         android:gravity="center_vertical"
-        android:text="Phone: 0123456789100000"
+        android:text="Mail: s3740819@rmit.edu.vn"
         android:textColor="#000000"
         android:textSize="10sp" />
 
@@ -283,12 +272,12 @@
 
     <Button
         android:id="@+id/button10"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
+        android:layout_width="75dp"
+        android:layout_height="32dp"
         android:layout_below="@+id/textView68"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="-2dp"
+        android:layout_marginTop="-3dp"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
         android:text="Book"

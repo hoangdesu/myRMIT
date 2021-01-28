@@ -33,6 +33,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+/**
+ * This activity contains OES page, Allocation page, and Timetable page
+ */
 public class Courses extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -54,7 +57,7 @@ public class Courses extends AppCompatActivity {
             accountView();
         }
         else {
-            guessView();
+            guestView();
         }
     }
 
@@ -147,12 +150,12 @@ public class Courses extends AppCompatActivity {
     }
 
     /**
-     * Setup for guess account to view available programs
+     * Setup for guest account to view available programs
      */
-    private void guessView(){
+    private void guestView(){
         // Initial setup
         FirebaseHandler firebaseHandler = new FirebaseHandler();
-        setContentView(R.layout.activity_courses_guess);
+        setContentView(R.layout.activity_courses_guest);
         listview = findViewById(R.id.courseView);
 
         // get all the undergraduate programs
@@ -190,7 +193,7 @@ public class Courses extends AppCompatActivity {
     }
 
     /**
-     * Get CourseView for guess account
+     * Get CourseView for guest account
      * @param code String
      * @param name String
      * @param description String

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#44B0E1"
     android:gravity="center">
 
     <View
@@ -9,11 +10,12 @@
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="0dp"
         android:background="@drawable/visitors" />
 
     <RelativeLayout
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@+id/view11"
         android:layout_marginTop="1dp">

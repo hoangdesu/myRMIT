@@ -35,52 +35,44 @@ import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
-    ClickableViewPager viewPager;
-    SwipeCardAdapter swipeCardAdapter;
-    static List<News> newsList = new ArrayList<News>();
-    FirebaseHandler firebaseHandler = new FirebaseHandler();
-    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-    TextView tvHelloUser;
+    private ClickableViewPager viewPager;
+    private SwipeCardAdapter swipeCardAdapter;
+    private static final List<News> newsList = new ArrayList<News>();
+    private final FirebaseHandler firebaseHandler = new FirebaseHandler();
+    private final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    private TextView tvHelloUser;
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
+    public HomeFragment() {}
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
+     * On create function
+     * @param savedInstanceState Bundle
      */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * On create view function
+     * @param inflater LayoutInflater
+     * @param container ViewGroup
+     * @param savedInstanceState Bundle
+     * @return View
+     */
     @SuppressLint("SetTextI18n")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
+        viewPager = view.findViewById(R.id.viewPager);
+        // Set event swipe cards
         firebaseHandler.getEvents().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                // Get data and store all needed data
                 String title, description, thumbnail;
                 boolean isLike = false;
                 List<String> likes = new ArrayList<>();
@@ -95,8 +87,8 @@ public class HomeFragment extends Fragment {
                     newsList.add(new News(thumbnail,title,description,"RMIT",isLike));
                 }
 
+                // Store the data and set adapter for the card view
                 swipeCardAdapter = new SwipeCardAdapter(newsList, getContext());
-                viewPager = view.findViewById(R.id.viewPager);
                 viewPager.setAdapter(swipeCardAdapter);
                 viewPager.setOnItemClickListener(new ClickableViewPager.OnItemClickListener() {
                     @Override
@@ -132,7 +124,11 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    //update local data to display like
+    /**
+     * update local data to display like
+     * @param title String
+     * @param like boolean
+     */
     public static void updateData(String title, boolean like) {
         for (News news : newsList) {
             if (news.getTitle().equals(title)) {
