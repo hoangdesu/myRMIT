@@ -145,7 +145,7 @@ public class FirebaseHandler {
     public Task<QuerySnapshot> getFacilities() {
         return db.collection("facilities").get();
     }
-    
+
     public Task<QuerySnapshot> getRooms() {
         return db.collection("booking").document("rooms").collection("data").get();
     }
@@ -245,7 +245,7 @@ public class FirebaseHandler {
 
     /**
      * Get all accounts (students/lecturers) of the RMIT
-     * @return
+     * @return CollectionReference
      */
     public CollectionReference getAllAccounts(){
         return db.collection("users");
@@ -261,7 +261,7 @@ public class FirebaseHandler {
 
     /**
      * Get the list of tutor of the RMIT
-     * @return
+     * @return DocumentReference
      */
     public DocumentReference getTutorList(){
         return db.collection("booking").document("tutors");
@@ -269,9 +269,13 @@ public class FirebaseHandler {
 
     /**
      * Get all Clubs of the RMIT
-     * @return
+     * @return CollectionReference
      */
     public CollectionReference getAllClubs() {
         return db.collection("clubs");
+    }
+
+    public DocumentReference getClub(String name){
+        return db.collection("Clubs").document(name);
     }
 }
