@@ -1,4 +1,4 @@
-package com.example.myrmit.news;
+package com.example.myrmit.model.objects;
 
 public class News {
     private String thumbnail;

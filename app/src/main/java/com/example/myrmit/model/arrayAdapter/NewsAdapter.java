@@ -18,7 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myrmit.news.News;
+import com.example.myrmit.model.objects.News;
 import com.example.myrmit.news.NewsActivity;
 import com.example.myrmit.R;
 import com.example.myrmit.main.HomeFragment;

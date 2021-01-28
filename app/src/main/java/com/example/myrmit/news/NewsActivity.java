@@ -40,11 +40,16 @@ public class NewsActivity extends AppCompatActivity {
     private Boolean like = true;
     private final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+    /**
+     * On create function
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
 
+        // Setting stuffs
         aTitle =  (TextView) findViewById(R.id.title);
         aAuthor = (TextView) findViewById(R.id.author);
         aImage = (ImageView) findViewById(R.id.image);
