@@ -23,6 +23,10 @@ public class WelcomeActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
     public static Activity activity;
 
+    /**
+     * On create function
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +55,6 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         }, 4000);
     }
-
 
     /**
      * Setup gif image for displaying
