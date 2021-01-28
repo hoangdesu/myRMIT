@@ -3,7 +3,6 @@ package com.example.myrmit.bookingActivity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.bumptech.glide.Glide;
 import com.example.myrmit.R;
 import com.example.myrmit.model.arrayAdapter.ViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;

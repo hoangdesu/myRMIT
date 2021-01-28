@@ -27,24 +27,30 @@ import java.io.IOException;
 import java.util.List;
 
 public class RoomCardAdapter extends PagerAdapter {
-    private List<Room> roomList;
-    private LayoutInflater layoutInflater;
-    private Context context;
-    FirebaseStorage storage = FirebaseStorage.getInstance();
+    private final List<Room> roomList;
+    private final Context context;
+    private final FirebaseStorage storage = FirebaseStorage.getInstance();
 
-    ImageView roomImage, availableImage;
-    TextView name, capacity;
-    RatingBar ratingBar;
+    private ImageView roomImage, availableImage;
 
     public RoomCardAdapter(List<Room> roomList, Context context) {
         this.roomList = roomList;
         this.context = context;
     }
 
+    /**
+     * Get room list
+     * @return List<Room>
+     */
     public List<Room> getRoomList() {
         return roomList;
     }
 
+    /**
+     * Update the status of the room
+     * @param available boolean
+     * @param index int
+     */
     public void updateAvailability(boolean available, int index) {
         roomList.get(index).setAvailable(available);
         if (available) {
@@ -73,22 +79,25 @@ public class RoomCardAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        layoutInflater = LayoutInflater.from(context);
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.room_item, container, false);
-
+        // Setup all components
         roomImage = (ImageView) view.findViewById(R.id.image);
-        name = (TextView) view.findViewById(R.id.room_id);
-        capacity = (TextView) view.findViewById(R.id.capacity);
-        ratingBar = (RatingBar) view.findViewById(R.id.rating);
+        TextView name = (TextView) view.findViewById(R.id.room_id);
+        TextView capacity = (TextView) view.findViewById(R.id.capacity);
+        RatingBar ratingBar = (RatingBar) view.findViewById(R.id.rating);
         availableImage = (ImageView) view.findViewById(R.id.availability_image);
 
+        // Get data's reference
         StorageReference storageReference = storage.getReference().child(roomList.get(position).getImage());
 
         try {
+            // Get image from firebase
             final File file = File.createTempFile("image","jpg");
             storageReference.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    // Set the received image
                     Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
                     roomImage.setImageBitmap(bitmap);
                 }
@@ -102,10 +111,12 @@ public class RoomCardAdapter extends PagerAdapter {
             e.printStackTrace();
         }
 
+        // Set behavior for all items
         name.setText(roomList.get(position).getName());
         capacity.setText(String.valueOf(roomList.get(position).getCapacity()));
         ratingBar.setRating((float) roomList.get(position).getRating());
 
+        // Set availability fo the room
         if (roomList.get(position).isAvailable()) {
             availableImage.setImageResource(R.drawable.tick);
         } else {
@@ -113,10 +124,15 @@ public class RoomCardAdapter extends PagerAdapter {
         }
 
         container.addView(view, 0);
-
         return view;
     }
 
+    /**
+     * Destroy item
+     * @param container ViewGroup
+     * @param position int
+     * @param object Object
+     */
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);

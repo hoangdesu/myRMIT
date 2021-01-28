@@ -18,7 +18,7 @@
         android:layout_marginBottom="-2dp"
         android:layout_toEndOf="@+id/textView34"
         android:layout_toRightOf="@+id/textView34"
-        android:background="#FFC107" />
+        android:background="#EFB70C" />
 
     <TextView
         android:id="@+id/textView38"

@@ -22,14 +22,22 @@ import java.io.InputStream;
 public class WelcomeActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
     public static Activity activity;
-    View view;
+
+    /**
+     * On create function
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        // Initial setting
         activity = this;
         Handler handler = new Handler();
-        view = findViewById(R.id.view2);
+        View view = findViewById(R.id.view2);
+
+        // Allow user to skip the gif
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,6 +46,8 @@ public class WelcomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Set time, will move to next activity after the gif run
         handler.postDelayed(new Runnable() {
             public void run() {
                 Intent intent = new Intent(WelcomeActivity.this, SignInActivity.class);
@@ -46,6 +56,9 @@ public class WelcomeActivity extends AppCompatActivity {
         }, 4000);
     }
 
+    /**
+     * Setup gif image for displaying
+     */
     public static class MYGIFView extends View {
         private Movie movie;
         long startTime;
@@ -71,10 +84,13 @@ public class WelcomeActivity extends AppCompatActivity {
             movie = Movie.decodeStream(is);
         }
 
+        /**
+         * Draw the gif image
+         * @param canvas Canvas
+         */
         @Override
         protected void onDraw(Canvas canvas) {
             canvas.scale(((float)super.getWidth() /(float)movie.width()) ,(float)super.getWidth() /(float)movie.width());
-            //canvas.drawColor(Color.WHITE);
             super.onDraw(canvas);
             long now = android.os.SystemClock.uptimeMillis();
             if (startTime == 0) { // first time
