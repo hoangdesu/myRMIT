@@ -212,8 +212,10 @@ public class BookingLecturerFragment extends Fragment {
         String[] days = {"Sunday","Monday","Tuesday", "Wednesday","Thursday","Friday", "Saturday"};
 
         Calendar calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_WEEK);
-
+        int day = calendar.get(Calendar.DAY_OF_WEEK)-1;
+        if (day == -1){
+            day = 6;
+        }
         return days[day];
     }
 
