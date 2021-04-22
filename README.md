@@ -21,7 +21,7 @@
 
 <a name="screenshots"></a>
 ## App screenshots
-![](./screenshots/home.jpg)
+![](./screenshots/home.png)
 <p align="center">Home screen</p>
 
 <p align="center"><img src="./screenshots/5.jpg" width="200"></p>
