@@ -24,16 +24,16 @@
 ![](./screenshots/home.jpg)
 <p align="center">Home screen</p>
 
-![](./screenshots/5.jpg)
+<p align="center"><img src="./screenshots/5.jpg" width="200"></p>
 <p align="center">Map service</p>
 
-![](./screenshots/8.jpg)
+<p align="center"><img src="./screenshots/8.jpg" width="200"></p>
 <p align="center">Course allocation</p>
 
-![](./screenshots/11.jpg)
+<p align="center"><img src="./screenshots/11.jpg" width="200"></p>
 <p align="center">Club information</p>
 
-![](./screenshots/15.jpg)
+<p align="center"><img src="./screenshots/15.jpg" width="200"></p>
 <p align="center">News feed</p>
 
 <a name="credits"></a>
